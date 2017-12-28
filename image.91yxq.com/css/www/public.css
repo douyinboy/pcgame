@@ -1,0 +1,136 @@
+﻿@charset "utf-8";
+/* CSS Document */
+/***********
+	*@Description: 公共css样式
+	*@Author:poqi
+	*@Update:
+	*@time:(2015-09)
+***********/
+.red{color:#dc5562}
+.blue{color:#398de3}
+.green{color:#2dcc70}
+.imgpq{background-image:url(../images/imgpq.png); background-repeat:no-repeat}
+
+.m_box{background:#FFF; border:1px solid #e6e6e6; box-shadow:0 2px 4px rgba(0,0,0,0.05)}
+.m_box2{background:#FFF; box-shadow:0 2px 4px rgba(0,0,0,0.05)}
+
+.input_t{border:1px solid #ededed; border-radius:3px; font-size:14px; font-family:"微软雅黑"; color:#666; line-height:20px; padding:9px 15px; margin:0; transition:border-color 0.3s linear 0s}
+.input_error{border-color:#dc5562}.input_yes{border-color:#2dcc70}
+/*下拉列表*/
+.select_down * {margin:0; padding: 0}
+.select_down {float:left; display:inline; border:1px solid #e8e8e8; box-shadow:0 2px 0 rgba(0,0,0,0.03) inset; border-radius:3px;  padding:9px 15px}
+.select_down div{float:left}
+/* 子选择器，在FF等非IE浏览器中识别 */
+.select_down>div {min-width:120px; height:20px; overflow:hidden}
+
+/* 通配选择符，只在IE浏览器中识别 */
+*html .select_down div select {display:block; float:left; margin:-2px}
+.select_down div>select {display:block; border:none; font-size:14px; font-family:"微软雅黑"; color:#666; height:20px; min-width:120px; margin:0; padding:0px}
+.select_down:hover{border:1px solid #CCC}
+.select_down select>option {text-indent:2px; //option在FF等非IE浏览器缩进2px}
+
+/*按钮*/
+.btn1, .btn2{display:inline-block; background:rgba(0,187,144,0.05); border:1px solid rgba(0,187,144,0.3); border-radius:3px; font-size:13px; font-family:"微软雅黑"; color:#00bb90; line-height:28px; height:28px; padding:0 20px; cursor:pointer; transition:all 0.3s linear}
+.btn2{ background:rgba(255,119,0,0.05); border:1px solid rgba(255,119,0,0.3); color:#ff7700}
+.btn1:hover, .btn_on1{background:#00bb90; color:rgba(255,255,255,0.9)}
+.btn2:hover, .btn_on2{background:#ff7700; color:rgba(255,255,255,0.9)}
+
+.game_btn1, .game_btn2, .game_btn3{display:inline-block; background:#dc5562; border:none; border-radius:3px; font-size:18px; font-family:"微软雅黑"; color:rgba(255, 255, 255, 0.9)!important; color:#FFF; text-align:center; text-shadow:0 0 2px rgba(0,0,0,0.2); min-width:150px; line-height:45px; height:45px; cursor:pointer; transition:background 0.2s linear 0s}
+.game_btn2{background:#398de3}.game_btn3{background:#80bd2b}
+.game_btn1:hover{background:#d03b44}
+
+/*图标*/
+.min_ic_hot, .min_ic_new{display:inline-block; background-position:-170px -5px; width:11px; height:11px}
+.min_ic_hot{background-position:-170px -18px}
+.icon_yes, .icon_sigh{display:inline-block; background-position:-130px -166px; width:25px; height:25px; vertical-align:middle}
+.icon_yes{background-position:-130px -131px}
+.icon_yes2, .icon_on{display:inline-block; background-position:-175px -101px; width:15px; height:15px; vertical-align:middle}
+.icon_on{background-position:-175px -121px}
+
+/*标题*/
+.hd_title{background:linear-gradient(to bottom, #FFF, #F1F1F1); filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#F1F1F1'); border-bottom:1px solid #e6e6e6; height:40px; line-height:40px; box-shadow:0 2px 4px rgba(0,0,0,0.06); padding:0 20px}
+.hd_title h2{display:inline-block; font-size:16px; font-weight:100; color:#666}
+.hd_title .more{display:block; float:right; font-family:"宋体"}
+.inner_title{border-bottom:1px dotted #CCC; font-size:20px; color:#666; line-height:25px; padding:0 20px 20px; margin-bottom:20px}
+
+/*提示*/
+.msg{background:#F5F5F5; line-height:25px; padding:20px}
+.msg h3{font-size:16px; color:#333; padding-bottom:15px}
+
+/*翻页*/
+.page{text-align:center; line-height:25px}
+.page a, .page span{display:inline-block; font-size:14px; color:#666; line-height:25px; width:25px; vertical-align:middle}
+.page a:hover, .page .on{color:#dc5562}
+.page .updow{background:#CCC; border-radius:3px; font-family:"宋体"; color:#FFF; margin:0 5px; transition:background 0.3s linear}
+.page .updow:hover{background:#515666; color:#FFF}
+
+/*翻页2*/
+.page2{text-align:center; line-height:25px}
+.page2 a, .page2 span{display:inline-block; font-size:14px; color:#666; line-height:25px; padding:0 10px; vertical-align:middle}
+.page2 a:hover, .page2 span{color:#dc5562}
+.page2 b a{background:#CCC; border-radius:3px; font-weight:100; color:#FFF; transition:background 0.3s linear}
+.page2 b a:hover{background:#515666; color:#FFF}
+
+/*弹出层*/
+.popup_box{background:#FFF; position:fixed; top:50%; left:50%; _position:absolute; z-index:998}
+.popup_box .popup_close{display:block; background:url(../images/x_but.png) no-repeat; width:18px; height:18px; position:absolute; top:10px; right:20px; transition:all 0.2s linear}
+.popup_box .popup_close:hover{transform:rotate(180deg)}
+.popup_bg{display:none; background:rgba(0,0,0,0.5); width:100%; height:100vh; position:fixed; _position:absolute; z-index:997}
+	/*用户登录*/
+	.login_box{width:450px; height:308px; margin:-154px 0 0 -225px; _top:expression(documentElement.scrollTop + 100 + "px");}
+	.login_m{padding:30px 50px}
+		.login_m .input_box{background:#F8F8F8; border:1px solid #ededed; height:30px; width:100%; padding:4px 0; margin-top:-1px}
+		.login_m .input_box label{float:left; display:block; width:30px; height:30px; margin-right:10px}
+		.login_m .input_box .user{background-position:-280px -101px}
+		.login_m .input_box .cipher{background-position:-280px -131px}
+		.login_m .text{background:none; border:none; font-size:14px; font-family:"微软雅黑"; color:#666; line-height:30px; height:30px; width:280px; margin:0}
+
+/*头部*/
+.head{background:linear-gradient(to bottom, #FFF 60%, #F1F1F1); filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#F1F1F1'); box-shadow:0 2px 4px rgba(0,0,0,0.1); min-width:1200px; height:80px}
+	.head .logo{display:block; float:left; background:url(../images/logo.png) no-repeat; width:120px; height:54px; margin:13px 50px 0 0}
+	.head .title{border-left:1px solid #CCC; font-size:20px; color:#666; line-height:30px; padding-left:20px; margin-top:25px}
+	/*导航*/
+	.nav{float:left; line-height:80px; height:80px}
+	.nav a{display:block; float:left; border-width:2px; font-size:16px; color:#666; padding:0 20px; position:relative; transition:all 0.2s ease-in-out}
+	.nav .line{background:#00bb90; height:3px; width:0; position:absolute; bottom:0; right:0; transition:all 0.3s ease-in-out}
+	.nav a:hover .line, .nav .on .line{right:0; width:100%}
+	.nav .on, .nav .on:hover{color:#3f3f3f}
+	/*按钮*/
+	.head .login{padding:25px 10px 0 0}
+	.head .login a{display:block; float:left; background:rgba(0,187,144,0.05); border:1px solid rgba(0,187,144,0.3); border-radius:3px; font-size:14px; color:#00bb90; text-align:center; line-height:28px; padding:0 20px; transition:all 0.3s linear}
+	.head .login a:hover{background:#00bb90; color:rgba(255,255,255,0.9)}
+	.head .login .reg_btn{background:#FFF; border-color:#ededed; color:#666; margin-left:10px}
+	.head .login .reg_btn:hover{background:#ededed; border-color:#ededed; color:#666}
+	/*信息*/
+	.head .min_user_info{font-size:14px; color:#666; line-height:80px; padding-right:10px}
+	.head .min_user_info .back{color:#dc5562; padding-left:10px}
+
+	/*信息*/
+	.min_game_down{float:right; position:relative}
+	.min_game_down .menu_hd{display:block; background:#515666; font-size:14px; color:#FFF; line-height:80px; height:80px; padding:0 25px}
+	.min_game_down .menu_hd .arrow{display:inline-block; border-top:5px solid #cbcdd1; border-left:5px solid transparent; border-right:5px solid transparent; height:0; line-height:0; margin-left:10px; transition:all 0.2s linear}
+	.min_game_down .menu_hd_on .arrow{transform:rotate(180deg)}
+
+		/*游戏名称*/
+		.min_game_list{display:none; background:rgba(81,86,102,0.9); width:550px; padding:15px 0 15px 30px; position:absolute; top:80px; right:0; z-index:99}
+		.min_game_list li{float:left; width:20%;}
+		.min_game_list li a{display:block; font-size:12px; font-family:"微软雅黑"; color:#f0f4ff; line-height:30px}
+		.min_game_list li a:hover{color:#FFF}
+		.min_game_list .name{display:inline-block; padding-right:5px}
+
+/*页脚*/
+.foot{background:#515666; min-width:1200px; padding:30px 0; margin-top:40px}
+	/*版权*/
+	.foot_copy{color:#93959e; line-height:25px}
+	.foot_copy a{color:#93959e}
+	.foot_copy a:hover{color:#d5d6d9}
+	.foot_copy .copy{font-size:14px; padding:10px 0}
+	.foot_copy .copy .line{display:inline-block; color:#6f727f; padding:0 15px}
+	
+	/*证明*/
+	.foot_prove{height:40px}
+	.foot_prove a{display:inline-block; background-image:url(../images/prove_icon.png); width:40px; height:40px; margin:0 10px; vertical-align:middle}
+	.foot_prove .prove_ic2{background-position:-45px 0}
+	.foot_prove .prove_ic3{background-position:-90px 0}
+	.foot_prove .prove_ic4{background-position:-135px 0}
+	.foot_prove .prove_ic5{background-position:-175px 0}

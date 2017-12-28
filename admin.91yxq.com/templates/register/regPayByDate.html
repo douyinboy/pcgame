@@ -1,0 +1,110 @@
+<form id="pagerForm" action="" method="post">
+    <input type="hidden" name="access" value="1"/>
+    <input type="hidden" name="orderField" value="<{$smarty.post.orderField}>"/>
+    <input type="hidden" name="orderDirection" value="<{$smarty.post.orderDirection}>"/>
+    <input type="hidden" name="agentid" value="<{$smarty.post.agentid}>"/>
+    <input type="hidden" name="game_id" value="<{$smarty.post.game_id}>"/>
+    <input type="hidden" name="server_id" value="<{$smarty.post.server_id}>"/>
+    <input type="hidden" name="start_date" value="<{$start_date}>"/>
+    <input type="hidden" name="end_date" value="<{$end_date}>"/>
+    <input type="hidden" name="start_date_2" value="<{$start_date_2}>"/>
+    <input type="hidden" name="end_date_2" value="<{$end_date_2}>"/>
+</form>
+<div class="pageHeader">
+    <form onsubmit="return navTabSearch(this);" action="" method="post">
+    <input type="hidden" name="access" value="1"/>    
+    <div class="searchBar">
+        <ul class="searchContent">
+            <li><label>公会：</label>
+                <select class="combox" name="agentid" id="agentid4444">
+                    <option value="0">请选择</option>
+                    <{foreach item=v from =$guildlist}>
+                    <option value="<{$v.id}>" <{if $smarty.post.agentid==$v.id}> selected <{/if}> ><{$v.agentname}></option>
+                    <{/foreach}>
+                </select>
+                <input type="text" id="search_key4444" size="10" class="" value="输入关键字"/>
+            </li>
+            <li>  
+                <label>注册起始：</label>
+                <input type="text" name="start_date" class="date" value="<{$start_date}>" readonly="true"/>
+                            <a class="inputDateButton" href="javascript:;">选择</a>
+            </li>
+            <li>
+                <label>注册结束：</label>
+                <input type="text" name="end_date" class="date" value="<{$end_date}>" readonly="true"/>
+                            <a class="inputDateButton" href="javascript:;">选择</a>
+            </li>
+        </ul>
+        <ul class="searchContent">
+            <li><label>注册游戏：</label>
+                     <select class="combox" name="game_id" id="game_id"  ref="server_id_222777wan_443284" refUrl="?action=sysmanage&opt=getServers&game_id={value}">
+                <option value="0">请选择</option>
+                <{foreach item=v from =$gamelist}>
+                     <option value="<{$v.id}>" <{if $smarty.post.game_id==$v.id}> selected <{/if}> ><{$v.name}></option>
+                     <{/foreach}>
+                 </select>  <select class="combox" name="server_id" id="server_id_222777wan_443284">
+                <option value="0">请选择</option>
+                <{foreach item=v from =$serverlist}>
+                     <option value="<{$v.server_id}>" <{if $smarty.post.server_id==$v.server_id}> selected <{/if}> ><{$v.name}></option>
+                     <{/foreach}>
+                 </select>
+            </li>
+            <li>  
+                <label>充值起始：</label>
+                <input type="text" name="start_date_2" class="date" value="<{$start_date_2}>" readonly="true"/>
+                            <a class="inputDateButton" href="javascript:;">选择</a>
+            </li>
+            <li>
+                <label>充值结束：</label>
+                <input type="text" name="end_date_2" class="date" value="<{$end_date_2}>" readonly="true"/>
+                            <a class="inputDateButton" href="javascript:;">选择</a>
+            </li>
+        </ul>
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%"  layoutH="107">
+        <thead>
+            <tr>
+                <th width="130">公会ID</th>
+                <th width="130">公会名</th>
+                <th width="200">游戏</th>
+                <th>服区</th>
+                <th orderField="total_ip" class="<{if $smarty.post.orderField==''||$smarty.post.orderField=='total_ip'}><{$smarty.post.orderDirection|default:'desc'}><{/if}>">注册人数</th>
+                <th orderField="total_pay" class="<{if $smarty.post.orderField=='total_pay'}><{$smarty.post.orderDirection}><{/if}>">充值金额</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <{foreach item=vo from=$data}>
+            <tr target="sid" rel="1">
+                <td><{$vo['agent_id']|default:"--"}></td>
+                <td><{$vo['agent']|default:"---"}></td>
+                <td><{$vo['game']|default:"--- ---"}></td>
+                <td>S<{$vo['server_id']|default:"---"}></td>
+                <td><{$vo['total_ip']|default:"0"}></td>
+                <td><{$vo['total_pay']|default:"0"}></td>
+               
+            </tr>
+            <{/foreach}>
+            <tr target="sid" rel="1">
+                <td>合计：</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><{$heji2}></td>
+                <td><{$heji}></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    var pro_str={ <{foreach item=v from =$guildlist}> "<{$v.id}>":"<{$v.agentname}>", <{/foreach}> };
+    search_pro('search_key4444','agentid4444');
+</script>

@@ -1,0 +1,126 @@
+<form id="pagerForm" action="" method="post">
+     <input type="hidden" name="access" value="1"/>
+    <input type="hidden" name="pageNum" value="<{$currentpage}>"/>
+    <input type="hidden" name="numPerPage" value="<{$numperpage}>"/>
+    <input type="hidden" name="agentid" value="<{$smarty.post.agentid}>"/>
+    <input type="hidden" name="state" value="<{$smarty.post.state}>"/>
+    <input type="hidden" name="start_date" value="<{$smarty.post.start_date}>"/>
+    <input type="hidden" name="end_date" value="<{$smarty.post.end_date}>"/>
+</form>
+<div class="pageHeader">
+    <form onsubmit="return navTabSearch(this);" action="" method="post">
+    <input type="hidden" name="access" value="1"/>    
+    <div class="searchBar">
+        <ul class="searchContent">
+            <li>  
+                    <label>起始日期：</label>
+                    <input type="text" name="start_date" class="date" value="<{$smarty.post.start_date}>" readonly="true"/>
+				<a class="inputDateButton" href="javascript:;">选择</a></li>
+            <li>  
+                    <label>结束日期：</label>
+                    <input type="text" name="end_date" class="date" value="<{$smarty.post.end_date}>" readonly="true"/>
+				<a class="inputDateButton" href="javascript:;">选择</a></li>
+            <li>
+                    <label>状态：</label>
+                    <select   name="state">
+                        <option value="0">请选择</option>
+                        <option value="-1" <{if $smarty.post.state==-1}>selected<{/if}> >未结算</option>
+                        <option value="1" <{if $smarty.post.state==1}> selected<{/if}> >已结算</option>
+                    </select> 
+            </li>
+        </ul>
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="add" title="结算" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=add&navTabId=<{$smarty.get.navTabId}>" target="navTab" rel="editMoviePage"><span>结算</span></a></li>
+        </ul>
+    </div>
+    <table class="table" width="100%"  layoutH="138">
+                    <thead>
+                        <tr>
+                            <th width="40">周期</th>
+                            <th width="120">起始--截止(日期)</th>
+                            <th width="80">公会名称</th>
+                            <th width="80">平台充值</th>
+                            <th width="80">平台充值流水</th>
+                            <th width="50">首充</th>
+                            <th width="50">内充</th>
+                            <th width="50">V充</th>
+                            <th width="80">结算金额</th>
+                            <th width="50">审核人</th>
+                            <th width="100">审核时间</th>
+                            <th width="50">打款人</th>
+                            <th width="100">打款时间</th>
+                             <th width="50">状态</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <volist id="vo" name="list">
+                            <{foreach item=vo from=$data}>
+                            <tr target="sid" rel="1">
+                                <td>第<{$vo['weekth']}>周</td>
+                                <td><{$vo['starttime']}> --<{$vo['endtime']}></td>
+                                <td><{$vo['agentname']}></td>
+                                <td><{$vo['pay_money']}></td>
+                                <td><{$vo['pay_amount']}></td>
+                                <td><{$vo['pay_first']}></td>
+                                <td><{$vo['pay_inner']}></td>
+                                <td><{$vo['pay_vip']}></td>
+                                <td>
+                                    <{if $vo['pstate']==1}>
+                                        <a  title="明细" style="color:red;" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=detail&wsdate=<{$vo.wsdate}>&wedate=<{$vo.wedate}>"  height="300" width="700" target="dialog" ><{$vo['pay_jie']}></a>
+                                    <{else}>
+                                    <{$vo['pay_jie']}>
+                                    <{/if}>
+                                </td>
+                                <td><{$vo['cname']}></td>
+                                <td><{if $vo['ctime'] >0}><{$vo['ctime']|date_format:"%Y-%m-%d %H:%I:%S"}><{else}>---<{/if}></td>
+                                <td><{$vo['uidname']|default:"---"}></td>
+                                <td><{if $vo['ptime'] >0}><{$vo['ptime']|date_format:"%Y-%m-%d %H:%I:%S"}><{else}>---<{/if}></td>
+                                <td><{if $vo['pstate']==0}>未结算
+                                    <{elseif $vo['cuid']==0}>未审核
+                                    <{elseif $vo['puid']==0}>未打款
+                                    <{elseif $vo['pstate']==1 && $vo['cuid']>0 && $vo['puid']>0}>已打款
+                                    <{/if}>
+                                </td>
+                            </tr>
+                            <{/foreach}>
+                             <tr target="sid" rel="1">
+                                <td>合计：</td>
+                                <td>---</td>
+                                <td>---</td>
+                                <td><{$heji['allmoney']|default:"0"}></td>
+                                <td><{$heji['payaccount']|default:"0"}></td>
+                                <td><{$heji['payfirst']|default:"0"}></td>
+                                <td><{$heji['payinner']|default:"0"}></td>
+                                <td><{$heji['vmoney']|default:"0"}></td>
+                                <td><{$heji['jiemoney']|default:"0"}></td>
+                                <td>---</td>
+                                <td>---</td>
+                                <td>---</td>
+                                <td>---</td>
+                                <td>---</td>
+                            </tr>
+                        </volist>
+                    </tbody>
+    </table>
+    <div class="panelBar">
+        <div class="pages"><span>显示</span>
+            <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                <option <{if $smarty.post.numPerPage==20}>selected<{/if}>  value="20">20</option>
+                <option <{if $smarty.post.numPerPage==50}>selected<{/if}> value="50">50</option>
+                <option <{if $smarty.post.numPerPage==100}>selected<{/if}> value="100">100</option>
+                <option <{if $smarty.post.numPerPage==200}>selected<{/if}> value="200">200</option>
+            </select><span>条，共<{$totalcount}>条</span> <span>&nbsp;&nbsp;结算总金额：<{$totalMoney}>&nbsp;元</span>
+        </div>
+        <div class="pagination" targetType="navTab" totalCount="<{$totalcount}>" numPerPage="<{$numperpage}>" pageNumShown="10" currentPage="<{$currentpage}>"></div>
+    </div>
+</div>

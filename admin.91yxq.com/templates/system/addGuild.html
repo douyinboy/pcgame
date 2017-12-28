@@ -1,0 +1,97 @@
+<div class="pageContent">
+    <form method="post" action="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=add&callbackType=closeCurrent&navTabId=<{$smarty.get.navTabId}>" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <input name="sub" type="hidden" value="1" />
+        <input name="id" type="hidden" value="<{$gInfo.id}>" />
+        <div class="pageFormContent" layoutH="68">
+        <div class="unit">
+                <label>公会名称：</label>
+                <input type="text" class="required"  value="<{$gInfo.agentname}>" name="agentname">
+                <span class="info"></span>
+        </div>
+        <div class="unit">
+                <label>管理账号：</label>
+                <input type="text" class="required"   value="<{$gInfo.user_name}>" name="user_name">
+                <span class="info"></span>
+        </div>
+        <div class="unit">
+                <label>管理密码：</label>
+                <input type="text" class="required"  value="<{$gInfo.user_pwd}>" name="user_pwd">
+                <span class="info"></span>
+        </div>
+        <div class="unit">
+                <label>联系QQ：</label>
+                <input type="text" class=""  value="<{$gInfo.qq}>" name="qq">
+                <span class="info"></span>
+        </div> 
+        <div class="unit">
+                <label>公会YY号：</label>
+                <input type="text" class=""  value="<{$gInfo.yy}>" name="yy">
+                <span class="info"></span>
+        </div>
+        <div class="unit">
+                <label>联系电话：</label>
+                <input type="text" class=""  value="<{$gInfo.mobel}>" name="mobel">
+                <span class="info"></span>
+        </div>
+        <div class="unit">
+                <label>银行账号：</label>
+                <input type="text" class=""   value="<{$gInfo.account}>"  name="account">
+                <span class="info"></span>
+        </div>
+        <div class="unit">
+                <label>开户行：</label>
+                <textarea rows="1" cols="50" name="bank"   class="textInput readonly"  placeholder="请使用银行标准名称（全称）如：中国农业银行"><{$gInfo.bank}></textarea>
+                <span class="info"></span>
+        </div> 
+        <div class="unit">
+                <label>支行：</label>
+                <textarea rows="1" cols="50" name="bank_son"   class="textInput readonly"  placeholder="银行标准名称+支行名称 如：中国农业银行唐山市丰润支行"><{$gInfo.bank_son}></textarea>
+                <span class="info"></span>
+        </div>
+        <div class="unit" >
+            <label>选择城市：</label>
+            <select  class="combox" name="provice"  ref="city12" refUrl="?action=sysmanage&opt=get_citiess&provice_id={value}">
+                <option value ="0">请选择</option>
+                <{foreach from=$provices item=v key=k}>
+                <option value="<{$k}>" <{if $gInfo.province==$v}>selected<{/if}> ><{$v}></option>
+                <{/foreach}>
+            </select>
+            <select  class="combox" name="city" id="city12">
+                <option value ="0">请选择</option>
+                <{foreach item=v from=$cities key=k}>
+                <option value="<{$v}>" <{if $gInfo.city ==$v}>selected<{/if}>><{$v}></option>
+                <{/foreach}>
+            </select>
+        </div>
+        <div class="unit">
+                <label>开户人：</label>
+                <input type="text" class=""  value="<{$gInfo.account_name}>"  name="account_name">
+                <span class="info"></span>
+        </div> 
+        <div class="unit">
+            <label>状态：</label>
+            <select  class="combox" name="state">
+                <option value="0" >暂不启用</option>
+                <option value="1" <{if $gInfo.state==1}>selected<{/if}>>正常启用</option>
+            </select>                       
+        </div>
+    </div>
+    <div class="formBar">
+        <ul>
+            <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+            <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+        </ul>
+    </div>
+    </form>
+</div>
+<script>  
+$("#btnEdit1").click(function(){   //修改
+    $("#h_city").hide();
+    $("#e_city").show();
+    $("#type_city").val(1);
+ }); 
+ $("#btnEdit2").click(function(){ //取消
+    $("#h_city").show();
+    $("#e_city").hide();
+ }); 
+</script>

@@ -1,0 +1,66 @@
+<div class="pageContent">
+    <div class="page unitBox" style="display: block;">
+
+    
+    <div layouth="60" class="pageFormContent" style="height: 215px; overflow: auto;">
+	<fieldset>
+		<legend>公会信息</legend>
+                <dl>
+			<dt>公会名：</dt>
+                        <dd><input type="text" name="furl" value="<{$info.agentname}>" readonly="true" class="required textInput readonly"></dd>
+		</dl>
+		<dl>
+			<dt>公会登录账号：</dt>
+                        <dd><input type="text" name="field1"  value="<{$info.user_name}>" readonly="true" size="35" class="required textInput readonly"></dd>
+		</dl>
+		<dl>
+			<dt>联系人姓名：</dt>
+			<dd><input type="text" name="field2"  value="<{$info.person}>" readonly="true"  class=" textInput readonly" size="35"></dd>
+		</dl>
+		<dl>
+			<dt>邮箱：</dt>
+			<dd><input type="text" name="field3"  value="<{$info.email}>" readonly="true"  class=" textInput readonly"  size="35"></dd>
+		</dl>
+		
+		<dl>
+			<dt>QQ号：</dt>
+			<dd><input type="text" name="field6"   value="<{$info.qq}>" readonly="true"  class="textInput readonly" size="35"></dd>
+		</dl>
+                <dl>
+			<dt>YY号：</dt>
+			<dd><input type="text" name="field7"  value="<{$info.yy}>" readonly="true"  class=" textInput readonly" size="35"></dd>
+		</dl>
+                <dl>
+			<dt>最后登录日期：</dt>
+			<dd><input type="text" name="field5"  value="<{$info.lastdate}>" readonly="true" class="textInput readonly"></dd>
+		</dl>
+                 <dl>
+			<dt>最后登录地区：</dt>
+			<dd><input type="text" name="field5"  value="<{$info.loginaddress}>" readonly="true" class="textInput readonly"></dd>
+		</dl>
+                
+	</fieldset>
+	
+	<fieldset>
+		<legend>打款信息</legend>
+                <dl>
+			<dt>打款银行：</dt>
+			<dd><input type="text" name="field8" value="<{$info.bank}>-<{$info.bank_son}>"  readonly="true"  size="35" class="required textInput"></dd>
+		</dl>
+		<dl class="nowrap">
+			<dt>银行账号：</dt>
+			<dd><input type="text" name="field9"  value="<{$info.account}>"  disabled="true" size="50" class="required textInput readonly"></dd>
+		</dl>
+                <dl>
+			<dt>开户人：</dt>
+			<dd><input type="text" name="field8" value="<{$info.account_name}>"  readonly="true"  size="35" class="required textInput"></dd>
+		</dl>
+
+		<dl>
+			<dt>联系电话：</dt>
+			<dd><input type="text" name="field5"  value="<{$info.mobel}>" readonly="true" class="textInput readonly"></dd>
+		</dl>
+	</fieldset>
+</div>
+</div>
+</div>

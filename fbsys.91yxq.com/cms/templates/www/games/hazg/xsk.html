@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<title>[$Title] - [$NodeInfo.Name] - [$91yxq_platform_title]黑暗之光官网 - [$91yxq_platform_title]游戏</title> 
+<meta name="keywords" content="[$Title],[$NodeInfo.Name],[$91yxq_platform_title]黑暗之光官网,[$91yxq_platform_title]游戏" /> 
+<meta name="description" content="[$91yxq_platform_title]黑暗之光官网，更多资料尽在[$91yxq_platform_title]黑暗之光官网。" /> 
+<link type="text/css" rel="stylesheet" href="[$91yxq_resource]/games/hazg/css/main.css" /> 
+<script type="text/javascript" src="[$91yxq_resource]/newvossion/js/jquery-1.4.4.min.js"></script> 
+
+</head>
+
+<body>
+
+<!-- 公用顶部通栏 --> 
+<script type="text/javascript" src="[$91yxq_resource]/gameTop/js/gameTop.js?login=1"></script> 
+<div style="background:url([$91yxq_resource]/games/hazg/img/m_bg.jpg) no-repeat top center; overflow:hidden">
+
+    <include file="header.html" />
+
+<script type="text/javascript">
+    function xsk(){
+        <CMS action="LIST" return="List" NodeID="56" Num="" where="c.ServerStatus IN (3,4) AND c.ServerShow IN (1,3)" returnKey="GameId" />
+        <LOOP name="List" var="var" key="key">
+            var game=[$var.GameId];
+        </LOOP>
+        var server=$('#select_server').val();
+        var type=1;
+        var url = '[$91yxq_url]/api/get_game_card.php?game_id='+game+'&server_id='+server+'&type='+type;
+        var xskCode='';
+        $.get(url + '&callback=1',function(data){
+            switch(data){
+                case 'nologin':
+                alert('还没有登录,请先登录在领取卡号');
+                window.login.open();
+                break;
+                case 'paramerror':
+                alert('主要参数错误');
+                break;
+                case 'no':
+                alert('新手卡已赠送完');
+                break;
+                case 'empty':
+                alert('新手卡已赠送完');
+                break;
+                default :
+                $('#xsk_not_login').hide();
+                $('#hasLoginDiv_on').show();
+                $("#card").html(data).show();
+                break;
+            }
+        });
+    }
+
+    $(function(){
+        var url="[$91yxq_url]/api/login_user_status.php?state=1";
+        $.ajax({
+            type:"POST",
+            url:url,
+            dataType : 'json',
+            success: function(data)
+            {
+                switch(data.code){
+                    case 1://已登录
+                        //$("#TopBar").find('#TopH_UserName').html(data.msg);
+                        $('#xsk_not_login').hide();
+                        $('#hasLoginDiv_on').hide();
+                        $('#card').show();
+                        break;
+                    default :
+                        $('#xsk_not_login').show();
+                        $('#hasLoginDiv_on').hide();
+                        $('#card').hide();
+                        break;
+                }
+            },
+            error:function()
+            {
+                return false;
+            }
+        });
+    });
+</script>
+
+    <!--主内容-->
+    <div class="w980">
+        <div class="inside_tit">
+            <h2><i class="pqimg"></i>[$NodeInfo.Name]</h2>
+            <div class="location fr">
+                您当前的位置：<a href="[$91yxq_url]/hazg/index.html">黑暗之光</a>
+                <span class="arrow"> &gt; </span>[$NodeInfo.Name]
+            </div>
+        </div>
+        <div class="inner_box pt30 pb30 pl50 pr50">
+            <div class="detit">
+                <h1>[$91yxq_platform_title]黑暗之光 新手卡领取</h1>
+            </div>
+            <div class="m_text">
+                <style>
+                /*新手卡 */
+                .xsk_server{width:383px; height:105px; padding:48px 0 0 104px; margin:0 auto; background:url([$91yxq_resource]/gameTop/img/bg_xsk.png) no-repeat}
+                .xsk_server #select_server{width:202px;margin:0 5px; padding:5px 0;display:inline-block}
+                .xsk_server button{width:112px; height:43px; line-height:50px; overflow:hidden; border:0; padding:0; background:none; margin-left:12px; cursor:pointer; font-size: 0px;}
+                .xsk_server p{margin-top:4px;color:#fff;padding:0;}
+                .mod-pbd-con p{font-size:14px;}
+                .mod-pbd-con .user{color:#000;font-weight:bold;margin-top:40px;}
+                #enterNew{clear:both;margin-left:58px;}
+                #enterNew a,#enterNew span{color:#fff43e;}
+                #enterNew a:hover{color:red;}
+                </style>
+
+                <div class="xsk_server" style="margin-top:30px">
+
+                    <select name="select_server" id="select_server" >
+                        <option value="">请选择服务器</option>
+                        <CMS action="LIST" return="List" NodeID="56" Num="" where="c.ServerStatus IN (3,4) AND c.ServerShow IN (1,3)" returnKey="ServerId,ServerName" />
+                        <LOOP name="List" var="var" key="key">
+                        <option value="[$var.ServerId]">[$var.ServerName]</option>
+                        </loop>
+                    </select>
+                    <button id="drawCardBtn" onclick="xsk();">领取新手卡</button>
+                    <p>
+                        <span style="display: none;" id="xsk_not_login">你还未登录，请登录后再领取号码</span>
+                        <span id="hasLoginDiv_on" style="float: left;display:none;">卡号：</span><span id="card" style="float: left;">请选择服务器点击“领取新手卡”领取号码</span>
+                    </p>
+                    <div id="enterNew" ><span>&gt;&gt;</span><a href="../list/index.html" target="_blank">进入最新服玩玩</a><span>&lt;&lt;</span></div>
+                </div>
+
+                <div class="mod-pbd-con" id="text">
+
+                    <p class="user"><span>尊敬的玩家：</span></p>
+                    <p><span> 为了帮助新玩家在[$91yxq_platform_title]黑暗之光的世界里更好地成长，也为了感谢新老玩家对我们的支持和厚爱，所有玩家只要进入游戏即可获得我们送出的<strong>[$91yxq_platform_title]</strong><strong>黑暗之光新手卡</strong>~~不可错过哦~~</span></p>
+                    <strong>
+
+                    <p><span style="color: rgb(255, 0, 0); "><strong>新手卡注意事项：</strong></span></p>
+                    <p><span>1、一个新手卡激活码只能使用一次；</span></p>
+                    <p><span>2、同一个帐号只能在一个服使用一次新手卡。</span><span>每个帐号只能兑换一次奖励。</span></p>
+                    <p><span style="color: rgb(255, 0, 0); "><strong>温馨提示</strong>：</span><span>请直接只用复制（ctrl+c）和粘贴（ctrl+v）的快捷方式，将新手卡复制然后进入游戏兑换</span></p>
+                    <p style="text-align: right;margin:10px 0 50px 0"> [$91yxq_platform_title]运营团队</p>
+                    </strong>
+
+                    <p> </p>
+                    <p> </p>
+
+
+                </div>
+
+             </div>
+        </div>
+
+    </div>
+
+    <!--页脚-->
+    <include file="../public/footer.html" />
+
+</div>
+</body>
+</html>

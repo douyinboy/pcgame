@@ -1,0 +1,38 @@
+<?php include("../sysdata/templates_c/%%c_^@skin@admin@header.html");?>
+
+<table width="98%" border="0" align="center" cellspacing="1" cellpadding="4" class="table_border">
+ 
+  <tr class="table_header"> 
+    <td height="25" colspan="5" ><strong><?php echo $_LANG_SKIN['keywords_list'];?></strong></td>
+  </tr>
+  <tr  align=center class="table_td1"> 
+    <td><?php echo $_LANG_SKIN['keywords'];?></td>
+    <td><?php echo $_LANG_SKIN['replace'];?></td>
+     <td><?php echo $_LANG_SKIN['is_global'];?></td>
+   <td><?php echo $_LANG_SKIN_GLOBAL['operation'];?></td>
+  </tr>
+<?php if(!empty($this->_tpl_vars['_keywords'] )): 
+ foreach ($this->_tpl_vars['_keywords'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+  <tr><td class="table_td1" align=center><?php echo htmlspecialchars($this->_tpl_vars["var"]["keyword"]);?></td><td  class="table_td2" align=center><?php echo htmlspecialchars($this->_tpl_vars["var"]["kReplace"]);?></td>
+  <td  class="table_td2" align=center>
+<?php if($this->_tpl_vars["var"]["IsGlobal"] == 1): ?>
+<?php echo $_LANG_SKIN_GLOBAL['yes'];?>
+<?php else: ?>
+-
+<?php endif;?>
+
+</td>
+  <td   class="table_td2" align=center>[<a href="<?php echo $this->_tpl_vars["base_url"];?>o=edit&kId=<?php echo $this->_tpl_vars["var"]["kId"];?>"><?php echo $_LANG_SKIN_GLOBAL['edit'];?></a>] [<a href="<?php echo $this->_tpl_vars["base_url"];?>o=del&kId=<?php echo $this->_tpl_vars["var"]["kId"];?>" onclick="return confirm('<?php echo $_LANG_SKIN_GLOBAL['confirm_del'];?>')"><?php echo $_LANG_SKIN_GLOBAL['del'];?></a>]</td></tr>
+<?php endforeach; endif;?>
+
+   <tr  align=center class="table_td2"> 
+    <td colspan=4><?php echo $this->_tpl_vars["pagelist"];?></td>
+  </tr>
+  <tr  align=center class="Tablecontentbg"> 
+<form action="<?php echo $this->_tpl_vars["base_url"];?>o=add_submit" method="post" name="add_subject" id="add_subject">
+    <td colspan=4 bgcolor=ffffff> <input name="submit" type=button class=button value="<?php echo $_LANG_SKIN['new_keywords'];?>" onclick="document.location='<?php echo $this->_tpl_vars["base_url"];?>o=add'">
+                </TD>
+	</form>
+  </tr>
+</table>
+<?php include("../sysdata/templates_c/%%c_^@skin@admin@footer.html");?>

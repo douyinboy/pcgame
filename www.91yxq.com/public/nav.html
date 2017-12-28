@@ -1,0 +1,56 @@
+<style>
+    /*弹出层*/
+    .popup_box{background:#FFF; position:fixed; top:50%; left:50%; _position:absolute; z-index:998}
+    .popup_box .popup_close{display:block; background:url(http://image.91yxq.com/css/images/x_but.png) no-repeat; width:18px; height:18px; position:absolute; top:10px; right:20px; transition:all 0.2s linear}
+    .popup_box .popup_close:hover{transform:rotate(180deg)}
+    .popup_bg{display:none; background:rgba(0,0,0,0.5); width:100%; height:100vh; position:fixed; _position:absolute; z-index:997}
+
+    /*头部*/
+    .head{background:linear-gradient(to bottom, #FFF 60%, #F1F1F1); filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#F1F1F1'); box-shadow:0 2px 4px rgba(0,0,0,0.1); min-width:1200px; height:40px}
+    .head .logo{display:block; float:left; background:url(http://image.91yxq.com/css/images/logo.png) no-repeat; width:120px; height:54px; margin:13px 50px 0 0}
+    .head .title{border-left:1px solid #CCC; font-size:20px; color:#666; line-height:30px; padding-left:20px; margin-top:25px}
+
+    /*按钮*/
+    .head .login a{display:block; float:left; background:rgba(0,187,144,0.05); border:1px solid rgba(0,187,144,0.3); border-radius:3px; font-size:14px; color:#00bb90; text-align:center; line-height:28px; margin-top: 5px; padding:0 20px; transition:all 0.3s linear}
+    .head .login a:hover{background:#00bb90; color:rgba(255,255,255,0.9)}
+    .head .login .reg_btn{background:#FFF; border-color:#ededed; color:#666; margin-left:10px; margin-right: 10px;}
+    .head .login .reg_btn:hover{background:#ededed; border-color:#ededed; color:#666}
+
+    /*信息*/
+    .min_game_down{float:right; position:relative}
+    .min_game_down .menu_hd{display:block; background:#515666; font-size:14px; color:#FFF; line-height:40px; height:40px; padding:0 25px}
+    .min_game_down .menu_hd .arrow{display:inline-block; border-top:5px solid #cbcdd1; border-left:5px solid transparent; border-right:5px solid transparent; height:0; line-height:0; margin-left:10px; transition:all 0.2s linear}
+    .min_game_down .menu_hd_on .arrow{transform:rotate(180deg)}
+
+    /*游戏名称*/
+    .min_game_list{display:none; background:rgba(81,86,102,0.9); width:550px; padding:15px 0 15px 30px; position:absolute; top:40px; right:0; z-index:99}
+    .min_game_list li{float:left; width:20%;}
+    .min_game_list li a{display:block; font-size:12px; font-family:"微软雅黑"; color:#f0f4ff; line-height:30px}
+    .min_game_list li a:hover{color:#FFF}
+    .min_game_list .name{display:inline-block; padding-right:5px}
+
+    .ul li{float: left; height: 40px; line-height: 40px; font-size: 14px; margin: 0 0 0 5px;}
+    .ul li a{margin: 0 5px 0 0; color: #666; font-family: Arial, Helvetica, sans-serif;}
+
+    ._logo{float: left; display: block; width: 150px; height: 40px; margin-right: 20px; background:url(http://image.91yxq.com/css/images/_logo.png) no-repeat;}
+    .index{float: left; font-size: 14px; height: 40px; line-height: 40px; margin-right: 100px;}
+</style>
+<div class="head">
+    <div id="platform_top_div" style="width: 90%; margin: 0 auto;">
+        <a class="_logo" href="http://www.91yxq.com/"></a>
+        <a class="index" href="http://www.91yxq.com">返回首页</a>
+        <ul class="ul">
+            <li><a href="http://www.91yxq.com/rxhw/" target="_blank">热血虎卫</a>|</li>
+            <li><a href="http://www.91yxq.com/dpsc/" target="_blank">斗破沙城</a>|</li>
+            <li><a href="http://www.91yxq.com/wszzl/" target="_blank">武神赵子龙</a>|</li>
+            <li><a href="http://www.91yxq.com/dyjd/" target="_blank">第一舰队</a>|</li>
+            <li><a href="http://www.91yxq.com/qyz/" target="_blank">青云志</a>|</li>
+            <li><a href="http://www.91yxq.com/rxsg3/" target="_blank">热血三国3</a></li>
+        </ul>
+
+        <!--游戏列表;登录注册按钮或登录后用户名js-->
+        <script src="[$91yxq_url]/public/www_top.js"></script>
+
+    </div>
+
+</div>

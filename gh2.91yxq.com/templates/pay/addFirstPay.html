@@ -1,0 +1,43 @@
+<div class="pageContent">
+    <form method="post" action="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=add&callbackType=closeCurrent&navTabId=<{$smarty.get.navTabId}>" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+    <input name="sub" type="hidden" value="1" />
+    <div class="pageFormContent" layoutH="68"> 
+        <div class="unit">
+                <label>账号列表：</label>
+                 <textarea rows="20" cols="25" name="account_list" class="textInput required readonly"></textarea>
+        </div>
+        <div class="unit">
+                <label>游戏：</label>
+            <select class="combox" name="game_id" id="game_id" ref="gameasfassfsddd" refUrl="?action=sysmanage&opt=getServers&game_id={value}">
+                <option value="0">请选择</option>
+                <{foreach item=v from =$gamelist}>
+                     <option value="<{$v.id}>" <{if $smarty.get.game_id==$v.id}> selected <{/if}> ><{$v.name}></option>
+                     <{/foreach}>
+                 </select> 
+                <select class="combox" name="server_id" id="gameasfassfsddd">
+                <option value="0">请选择</option>
+                <{foreach item=v from =$serverlist}>
+                     <option value="<{$v.server_id}>" <{if $smarty.get.server_id==$v.server_id}> selected <{/if}> ><{$v.name}></option>
+                     <{/foreach}>
+                 </select>  
+        </div>
+        <div class="unit">
+                <label>公会团长：</label>
+                    <select class="combox" name="agentid">
+                        <option value="<{$smarty.session.member.agent_id}>" ><{$smarty.session.member.agentname}></option>
+                    </select>
+                    <select class="combox" name="placeid" >
+                        <option value="<{$smarty.session.member.uid}>"><{$smarty.session.member.sitename}>(<{$smarty.session.member.account}>)</option>
+                    </select>
+        </div>
+                                       
+        
+    </div>
+    <div class="formBar">
+        <ul>
+            <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+            <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+        </ul>
+    </div>
+    </form>
+</div>

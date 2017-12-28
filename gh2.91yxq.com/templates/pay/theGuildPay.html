@@ -1,0 +1,87 @@
+<form id="pagerForm" action="" method="post">
+     <input type="hidden" name="access" value="1"/>
+    <input type="hidden" name="pageNum" value="<{$currentpage}>"/>
+    <input type="hidden" name="numPerPage" value="<{$numperpage}>"/>
+    <input type="hidden" name="game_id" value="<{$smarty.post.game_id}>"/>
+    <input type="hidden" name="server_id" value="<{$smarty.post.server_id}>"/>
+    <input type="hidden" name="start_date" value="<{$smarty.post.start_date}>"/>
+    <input type="hidden" name="end_date" value="<{$smarty.post.end_date}>"/>
+    <input type="hidden" name="user_name" value="<{$smarty.post.user_name}>"/>
+</form>
+<div class="pageHeader">
+    <form onsubmit="return navTabSearch(this);" action="" method="post">
+    <input type="hidden" name="access" value="1"/>    
+    <div class="searchBar">
+        <ul class="searchContent">
+            <li><label>游戏服区：</label>
+            <select class="combox" name="game_id" id="game_id" ref="server_949465wa2n_24" refUrl="?action=sysmanage&opt=getServers&game_id={value}">
+                <option value="0">请选择</option>
+                <{foreach item=v from =$gamelist}>
+                     <option value="<{$v.id}>" <{if $smarty.post.game_id==$v.id}> selected <{/if}> ><{$v.name}></option>
+                     <{/foreach}>
+                 </select>
+                <select class="combox" name="server_id" id="server_949465wa2n_24">
+                <option value="0">请选择</option>
+                <{foreach item=v from =$serverlist}>
+                     <option value="<{$v.server_id}>" <{if $smarty.post.server_id==$v.server_id}> selected <{/if}> ><{$v.name}></option>
+                     <{/foreach}>
+                 </select>
+            </li>
+            <li><label>玩家账号：</label>
+            <input type="text" name="user_name" value="<{$smarty.post.user_name}>" class="textInput">
+            </li>
+            </ul>
+            <ul class="searchContent">
+                <li>  
+                    <label>起始日期：</label>
+                    <input type="text" name="start_date" class="date" value="<{$smarty.post.start_date}>" readonly="true"/>
+				<a class="inputDateButton" href="javascript:;">选择</a></li>
+                <li>  
+                    <label>结束日期：</label>
+                    <input type="text" name="end_date" class="date" value="<{$smarty.post.end_date}>" readonly="true"/>
+				<a class="inputDateButton" href="javascript:;">选择</a>
+                </li>
+            </ul>
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%"  layoutH="137">
+                    <thead>
+                        <tr>
+                            <th>充值账号</th>
+                            <th>玩家角色</th>
+                            <th>游戏</th>
+                            <th>充值金额(元)</th>
+                            <th>充值时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <{foreach item=vo from=$data}>
+                            <tr target="sid" rel="1">
+                                <td><{$vo['user_name']}></td>
+                                <td><{$vo['user_role']|default:"--"}></td>
+                                <td><{$vo['game']}><{$vo['server_id']}>区</td>
+                                <td><{$vo['paid_amount']}></td>
+                                <td><{$vo['pay_date']}></td>
+                            </tr>
+                            <{/foreach}>
+                    </tbody>
+    </table>
+    <div class="panelBar">
+        <div class="pages"><span>显示</span>
+            <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                <option <{if $smarty.post.numPerPage==20}>selected<{/if}>  value="20">20</option>
+                <option <{if $smarty.post.numPerPage==50}>selected<{/if}> value="50">50</option>
+                <option <{if $smarty.post.numPerPage==100}>selected<{/if}> value="100">100</option>
+                <option <{if $smarty.post.numPerPage==200}>selected<{/if}> value="200">200</option>
+            </select><span>条，共<{$totalcount}>条</span> <span style="margin-left: 10px;">共<b style="color: red;"><{$totalmoney}></b>元</span>
+        </div>
+        <div class="pagination" targetType="navTab" totalCount="<{$totalcount}>" numPerPage="<{$numperpage}>" pageNumShown="10" currentPage="<{$currentpage}>"></div>
+    </div>
+</div>

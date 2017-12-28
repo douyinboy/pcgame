@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{%$chinese_title%}-用户中心</title>
+<link type="text/css" rel="stylesheet" href="{%$image_url%}css/www/base.css" />
+<link type="text/css" rel="stylesheet" href="{%$image_url%}css/www/public.css" />
+<link type="text/css" rel="stylesheet" href="{%$image_url%}css/www/main_pq.css" />
+<script type="text/javascript" src="{%$image_url%}js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<!--导入公共头部文件-->
+{%include file='header.html'%}
+
+<!--主内容-->
+<div class="m1200">
+	<div class="m_box2 mt40 clearfix">
+        <!--左侧导航-->
+        {%include file='user_link.html'%}
+
+        <!--右侧-->
+        <div class="fr w980">
+        	<div class="p50">
+            	<div class="user_info">
+                    <div class="user_avatar">
+                    	<div class="pic"><img src="{%$image_url%}images/www/user_avatar.jpg" /></div>
+                    </div>
+                    <div style="padding-left:130px">
+                        <div class="name">尊敬的{%$username%}，您好~</div>
+                        <div class="text">当前游戏币：<span class="red">{%$users[30]%}</span></div>
+                        <div><a href="{%$pay_url%}" class="btn1 btn_on1" target="_blank">游戏充值</a>&nbsp;&nbsp;<a href="{%$root_url%}user.php?act=info" class="btn2 btn_on2">完善资料</a>&nbsp;&nbsp;&nbsp;&nbsp;资料完整度：<span class="progre_slider"><span class="goso" style="width:{%$users[28]%}0%"></span></span>&nbsp;&nbsp;<span class="red">{%$users[28]%}0%</span></div>
+                        <div class="time mt10">上次登录：{%$users[16]%}</div>
+                    </div>
+                </div>
+            
+                <div class="safe_list">
+                    <ul>
+                        <li class="clearfix">
+                            <div class="fl pic_icon"><i class="imgpq icon_yes"></i></div>
+                            <div class="fl name">用户密码</div>
+                            <div class="fl text">安全性高的密码可以使账户更安全，建议您定期更换密码。</div>
+                            <div class="fr safe_btn"><a href="{%$root_url%}user.php?act=passwd" class="green">修改</a></div>
+                        </li>
+                        <li class="clearfix">
+                            <div class="fl pic_icon"><i class="imgpq icon_{%if $users[23] ==0%}sigh{%else%}yes{%/if%}"></i></div>
+                            <div class="fl name">帐号保护<span class="{%if $users[23] ==0%}red">（未{%else%}green">（已{%/if%}设置）</span></div>
+                            <div class="fl text">在您遗忘账户密码时，可以通过回答安全保护问题找回。</div>
+                            <div class="fr safe_btn"><a href="{%$root_url%}user.php?act=security_question" class="{%if $users[23] ==0%}btn1">立即设置{%else%}green">重置{%/if%}</a></div>
+                        </li>
+                        <!--<li class="clearfix">
+                            <div class="fl pic_icon"><i class="imgpq icon_{%if $users[31] ==0%}sigh{%else%}yes{%/if%}"></i></div>
+                            <div class="fl name">平台币<span class="{%if $users[31] ==0%}red">（未{%else%}green">（已{%/if%}设置）</span></div>
+                            <div class="fl text"><span class="red">{%$users[30]%}</span>&nbsp;&nbsp;平台币</div>
+                            <div class="fr safe_btn">{%if $users[31] ==0%}<a href="{%$root_url%}user.php?act=payment_cipher" class="btn1">立即设置</a>{%/if%}</div>
+                        </li>
+                        <li class="clearfix">
+                            <div class="fl pic_icon"><i {%if $users[29]==""%}class="imgpq icon_sigh"{%else%}class="imgpq icon_yes"{%/if%}></i></div>
+                            <div class="fl name">支付密码<span {%if $users[29]==""%}class="red">（未{%else%}class="green">（已{%/if%}设置）</span></div>
+                            <div class="fl text">您可以设置、修改、找回支付密码，提高支付灵活性。</div>
+                            <div class="fr safe_btn"><a href="{%$root_url%}user.php?act=payment_cipher" {%if $users[29]==""%}class="btn1">立即设置{%else%}class="green">修改{%/if%}</a></div>
+                        </li>-->
+                        <li class="clearfix">
+                            <div class="fl pic_icon"><span class="imgpq icon_{%if $users[26] ==0%}sigh{%else%}yes{%/if%}"></span></div>
+                            <div class="fl name">证件信息<span class="{%if $users[26] ==0%}red">（未{%else%}green">（已{%/if%}设置）</span></div>
+                            <div class="fl text">用于帐号防沉迷认证和密码遗失时重置密码</div>
+                            <div class="fr safe_btn">{%if $users[26] ==0%}<a href="{%$root_url%}user.php?act=indulge" class="btn1">立即设置</a>{%/if%}</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--导入公共页脚文件-->
+{%include file='footer.html'%}
+</body>
+</html>

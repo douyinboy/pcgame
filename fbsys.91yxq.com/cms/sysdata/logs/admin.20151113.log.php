@@ -1,0 +1,19 @@
+<?php exit('Access Denied!'); ?>
+127.0.0.1 - - [2015-11-13 10:41:27] - - admin - -  admin_content_table.php::editfield_submit - - /cms/admin/admin_content_table.php?o=editfield_submit&TableID=7&ContentFieldID=54
+127.0.0.1 - - [2015-11-13 10:49:54] - - admin - -  admin_setting.php::clear_cache_submit - - /cms/admin/admin_setting.php?o=clear_cache_submit
+127.0.0.1 - - [2015-11-13 10:51:55] - - admin - -  admin_publish.php::add_submit - - /cms/admin/admin_publish.php?type=main&o=add_submit&NodeID=33&IndexID=
+127.0.0.1 - - [2015-11-13 10:59:58] - - admin - -  admin_content_table.php::editfield_submit - - /cms/admin/admin_content_table.php?o=editfield_submit&TableID=7&ContentFieldID=54
+127.0.0.1 - - [2015-11-13 11:00:48] - - admin - -  admin_content_table.php::editfield_submit - - /cms/admin/admin_content_table.php?o=editfield_submit&TableID=7&ContentFieldID=54
+127.0.0.1 - - [2015-11-13 11:01:45] - - admin - -  admin_content_table.php::editfield_submit - - /cms/admin/admin_content_table.php?o=editfield_submit&TableID=7&ContentFieldID=54
+127.0.0.1 - - [2015-11-13 11:15:39] - - admin - -  admin_content_table.php::editfield_submit - - /cms/admin/admin_content_table.php?o=editfield_submit&TableID=7&ContentFieldID=54
+127.0.0.1 - - [2015-11-13 11:19:16] - - admin - -  admin_content_table.php::editfield_submit - - /cms/admin/admin_content_table.php?o=editfield_submit&TableID=7&ContentFieldID=54
+127.0.0.1 - - [2015-11-13 11:19:38] - - admin - -  admin_content_table.php::editfield_submit - - /cms/admin/admin_content_table.php?o=editfield_submit&TableID=7&ContentFieldID=54
+127.0.0.1 - - [2015-11-13 11:20:44] - - admin - -  admin_setting.php::clear_cache_submit - - /cms/admin/admin_setting.php?o=clear_cache_submit
+127.0.0.1 - - [2015-11-13 11:39:20] - - admin - -  admin_content_table.php::editfield_submit - - /cms/admin/admin_content_table.php?o=editfield_submit&TableID=7&ContentFieldID=52
+127.0.0.1 - - [2015-11-13 11:56:31] - - admin - -  admin_content_table.php::editfield_submit - - /cms/admin/admin_content_table.php?o=editfield_submit&TableID=7&ContentFieldID=52
+127.0.0.1 - - [2015-11-13 14:13:54] - - admin - -  admin_setting.php::clear_cache_submit - - /cms/admin/admin_setting.php?o=clear_cache_submit
+127.0.0.1 - - [2015-11-13 17:40:18] - - admin - -  admin_setting.php::clear_cache_submit - - /cms/admin/admin_setting.php?o=clear_cache_submit
+127.0.0.1 - - [2015-11-13 17:45:59] - - admin - -  admin_setting.php::clear_cache_submit - - /cms/admin/admin_setting.php?o=clear_cache_submit
+127.0.0.1 - - [2015-11-13 17:47:33] - - admin - -  admin_setting.php::clear_cache_submit - - /cms/admin/admin_setting.php?o=clear_cache_submit
+127.0.0.1 - - [2015-11-13 19:14:09] - - admin - -  admin_publish.php::add_submit - - /cms/admin/admin_publish.php?type=main&o=add_submit&NodeID=11&IndexID=
+127.0.0.1 - - [2015-11-13 19:14:13] - - admin - -  admin_publish.php::publish - - /cms/admin/admin_publish.php?o=publish&type=main&IndexID=27&NodeID=11

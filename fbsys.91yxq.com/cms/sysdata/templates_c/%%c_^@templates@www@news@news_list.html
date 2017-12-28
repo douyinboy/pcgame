@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="<?php echo $this->_tpl_vars["91yxq_platform_keywords"];?>" />
+<meta name="description" content="<?php echo $this->_tpl_vars["91yxq_platform_desc"];?>" />
+<title><?php echo $this->_tpl_vars["91yxq_platform_title"];?>-[NodeInfo.Name]</title>
+<link type="text/css" rel="stylesheet" href="<?php echo $this->_tpl_vars["91yxq_image_url"];?>/css/www/base.css" />
+<link type="text/css" rel="stylesheet" href="<?php echo $this->_tpl_vars["91yxq_image_url"];?>/css/www/public.css" />
+<link type="text/css" rel="stylesheet" href="<?php echo $this->_tpl_vars["91yxq_image_url"];?>/css/www/main_pq.css" />
+<script type="text/javascript" src="<?php echo $this->_tpl_vars["91yxq_image_url"];?>/js/jquery-1.10.2.min.js"></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?40046e537679c6fcc02004afff9e4d2d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+
+<body>
+
+<!---头部-->
+<?php include("../sysdata/templates_c/%%c_^@templates@www@news@public@header.html");?>
+
+<!--主内容-->
+<div class="m1200 clearfix">
+	<div class="m_box2 p50 mt40">
+    	<!--切换-->
+        <div class="tab1 mb15">
+            <a class='<?php if($this->_tpl_vars["NodeInfo"]["NodeID"] == 11): ?>li_a<?php else: ?>li_o<?php endif;?>' href="<?php echo $this->_tpl_vars["91yxq_url"];?>/news/index.html" >新闻公告</a>
+            <a class='<?php if($this->_tpl_vars["NodeInfo"]["NodeID"] == 12): ?>li_a<?php else: ?>li_o<?php endif;?>' href="<?php echo $this->_tpl_vars["91yxq_url"];?>/news/activity.html" >推荐活动</a>
+            <a class='<?php if($this->_tpl_vars["NodeInfo"]["NodeID"] == 13): ?>li_a<?php else: ?>li_o<?php endif;?>' href="<?php echo $this->_tpl_vars["91yxq_url"];?>/news/maintain.html" >维护公告</a>
+        </div>
+        <div>
+            <ul class="new_item">
+				<?php
+ global $PageInfo,$params; 
+ $params = array ( 
+	'action' => "LIST",
+	'return' => "list",
+	'nodeid' => "self",
+	'num' => "page-5",
+ ); 
+;
+$this->_tpl_vars['list'] = CMS_LIST($params); 
+    $this->_tpl_vars['PageInfo'] = &$PageInfo;  
+?>
+				<?php if(!empty($this->_tpl_vars['list'] )): 
+   foreach ($this->_tpl_vars['list'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+				<li>
+					<div class="time">
+						<p class="date"><?php echo date('d', $this->_tpl_vars["var"]["PublishDate"]);?></p>
+						<p class="years"><?php echo date('Y-m', $this->_tpl_vars["var"]["PublishDate"]);?></p>
+					</div>
+					<div class="m_t">
+						<h2><a href="<?php echo $this->_tpl_vars["var"]["URL"];?>"><?php echo $this->_tpl_vars["var"]["Title"];?></a></h2>
+						<p class="text">
+							<?php echo CsubStr(strip_tags(trim($this->_tpl_vars["var"]["Content"])), 0, 140, '...');?>
+						</p>
+						<a href="<?php echo $this->_tpl_vars["var"]["URL"];?>" class="detail">【查看详情】</a>
+					</div>
+				</li>
+				<?php endforeach; endif;?>
+            </ul>
+        </div>
+		
+        <!--翻页-->
+		<?php if($this->_tpl_vars["PageInfo"]["TotalPage"]>1): ?>
+		<div class="page2 pt20">
+			<?php echo list_page($this->_tpl_vars["PageInfo"]["TotalPage"],$this->_tpl_vars["PageInfo"]["CurrentPage"],$this->_tpl_vars["PageInfo"]["URL"]);?>
+		</div>
+		<?php endif;?>
+    </div>
+</div>
+
+<!--页脚-->
+<div class="foot clearfix" id="footer_box">
+	<script src="<?php echo $this->_tpl_vars["91yxq_url"];?>/public/footer.js"></script>
+</div>
+
+</body>
+</html>

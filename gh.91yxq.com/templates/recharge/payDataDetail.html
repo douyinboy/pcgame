@@ -1,0 +1,24 @@
+<div class="pageContent">
+    <table class="table" width="100%"  layoutH="67">
+            <thead>
+                <tr>
+                    <th>充值订单</th>
+                    <th>充值游戏服区</th>
+                    <th>充值角色</th>
+                    <th>充值金额</th>
+                    <th>充值时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <{foreach item=vo from=$data}>
+                    <tr target="sid" rel="1">
+                        <td><{$vo['orderid']}></td>
+                        <td><{$vo['gamename']}>S<{$vo['server_id']}></td>
+                         <td><{$vo['user_role']}></td>
+                          <td><{$vo['paid_amount']}></td>
+                           <td><{$vo['pay_date']}></td>
+                       </tr>
+                    <{/foreach}>
+            </tbody>
+    </table>
+</div>

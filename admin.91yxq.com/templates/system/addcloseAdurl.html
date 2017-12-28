@@ -1,0 +1,39 @@
+<div class="pageContent">
+    <form method="post" action="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=add&callbackType=closeCurrent&navTabId=<{$smarty.get.navTabId}>" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+    <input name="sub" type="hidden" value="1" />
+    <input name="id" type="hidden" value="<{$close.id}>" />
+    <div class="pageFormContent" layoutH="68">
+        <div class="unit">
+                <label>游戏：</label>
+            <select class="combox" name="game_id" id="game_id11" >
+                <option value="0">请选择</option>
+                <{foreach item=v from =$gamelist}>
+                     <option value="<{$v.id}>" <{if $close.game_id ==$v.id}> selected <{/if}> ><{$v.name}></option>
+                     <{/foreach}>
+                 </select>
+                <input type="text" id="search_key3011" size="10" class="" value="输入关键字"/>
+         </div>
+          <div class="unit">
+            <label>公会ID（aid）:</label>
+            <input type="text" name="agent_id"  class="required digits"  value="<{$close.agent_id}>">
+         </div>
+        <div class="unit">
+            <label>区服ID（sid）:</label>
+            <input type="text" name="server_id" class="required textInput error" value="<{$close.server_id|default:"0"}>">
+            <span class="info"> 0 表示全服</span>
+        </div>
+                
+       
+    </div>
+    <div class="formBar">
+        <ul>
+            <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+            <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+        </ul>
+    </div>
+    </form>
+</div>
+<script>
+    var pro_str={ <{foreach item=v from =$gamelist}> "<{$v.id}>":"<{$v.name}>", <{/foreach}> };
+    search_pro('search_key3011','game_id11');
+</script>

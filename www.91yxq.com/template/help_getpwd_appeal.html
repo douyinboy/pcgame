@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>找回密码|国内网页游戏平台,国内优秀网页游戏,用心打造！</title>
+<meta name="keywords" content="网页游戏,网页游戏平台,6qwan网页游戏,优秀网页游戏平台">
+<meta name="description" content="6qwan网页游戏平台有最新网页游戏,好玩的网页游戏,汇聚2014年最新、最全、最好玩的网页游戏，打造最受玩家喜爱的游戏平台，让广大玩家尽情体验网页游戏带来的乐趣！" />
+<link rel="icon" href="http://image.6qwan.com/newvossion/images/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="http://image.6qwan.com/newvossion/images/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" href="http://image.6qwan.com/newvossion/css/main.css" />
+<link rel="stylesheet" type="text/css" href="http://image.6qwan.com/newvossion/css/style.css" />
+<link type="text/css" href="http://image.6qwan.com/css/style.css" rel="stylesheet" />
+<script src="http://image.6qwan.com/jsCommon/jquery-1.4.4.min.js" type="text/javascript"></script>
+<script src="http://image.6qwan.com/jsCommon/function.js" type="text/javascript"></script>
+<script type="text/javascript">
+function my_getpw(){
+	if(gID('passport').value==''){
+		alert('请填写通行证帐号！');
+		gID('passport').focus();
+		return false;
+   }
+   if(gID('pwd').value==''){
+		alert('请填写曾经使用过的密码！');
+		gID('pwd').focus();
+		return false;
+   }
+   if(gID('email').value==''){
+		alert('请填写注册邮箱！');
+		gID('email').focus();
+		return false;
+   }
+	if(gID('idcard').value==''){
+		alert('请填写身份证号码！');
+		gID('idcard').focus();
+		return false;
+   }
+	if(gID('truename').value==''){
+		alert('请填写真实姓名！');
+		gID('truename').focus();
+		return false;
+   }
+	if(gID('city').value==''){
+		alert('请填写居住城市！');
+		gID('city').focus();
+		return false;
+   }
+   if(gID('pemail').value==''){
+		alert('请填写个人邮箱！');
+		gID('pemail').focus();
+		return false;
+   }
+   if(gID('chkcode').value==''){
+		alert('请填写验证码！');
+		gID('chkcode').focus();
+		return false;
+   }
+   
+   if(gID('game_id').value==''){
+		alert('请选择游戏！');
+		gID('game_id').focus();
+		return false;
+   }
+   
+   if(gID('server_id').value<0){
+		alert('请选择服务器！');
+		gID('server_id').focus();
+		return false;
+   }
+   
+   gID('getpw').submit();
+}
+function get_server(game_id){
+	$.ajax({
+        type:"POST",
+        url:"/api/get_games.php",
+		data:"type=201&game_id="+game_id,
+        success: function(result){
+			$("#server").html(result);
+        },
+        error:function(){
+            return false;
+        }
+    });
+}
+
+
+function get_game(){
+	$.ajax({
+        type:"POST",
+        url:"/api/get_games.php",
+		data:"type=101",
+        success: function(result){
+			$("#game").html(result);
+        },
+        error:function(){
+            return false;
+        }
+    });
+}
+
+</script>
+</head>
+<body>
+
+<div class="all">
+    {%include file="help_header.html"%}
+   <!--头部结束-->     
+   <div class="center">
+      <div class="cz">
+      <div class="mainc">
+        {%include file="left_help_pwd.html"%}
+        <div class="cright">
+        
+          <div class="yh_kf_zhmm">您现在所在的位置： <a href="/">首页</a> > <a href="/kfzx/">客服中心</a> > 找回密码</div>
+          <div class="yh">
+            <div class="zhmm1">
+	
+      <div class="zhmm13">{%if $result%}
+          <span class="zhmm131">{%$result%}</span>
+          {%else%}
+          1.请选择密码的找回方式<br />
+      <span class="zhmm131">通过身份认证找回密码</span><br />
+      <a href="/help.php?act=getpwd">重新选择找回方式</a>
+      {%/if%}</div>
+	   	  <div class="zhmm14">
+	    <div class="zhmm141">　&nbsp;密码申诉</div>
+		<div class="zhmm142">
+		  <div class="cjwt111">
+            <b class="back">请认真详细的填写以下信息：</b><br />
+            在用户邮箱不能正常收到密码回执信件、邮箱、身份证忘记填写等情况下，可以通过提交相关注册初始信息来进行申诉从而找回密码。<br /><br />
+            <b class="back">密码申诉处理流程：</b><br />
+            <img src="images/zhmm_19.gif" width="476" height="33" /><br />
+            （3个工作日内进行处理或驳回，官方都会通过kf@6qwan.com客服邮箱或020-66675632进行告之结果）<br /><br />
+            <b class="back">申诉注意事项：</b><br />
+            1、 申诉基本资料填写越全面，越准确，申诉成功的几率也越大；<br />
+            2、 其他项如果记不清楚可以不填，认真填写带*号内容，切勿乱填！<br />
+            3、 "申诉基本资料"填写务必真实；<br /><br />
+            <a href="http://www.6qwan.com/media/5a%E7%9B%97%E5%8F%B7%E7%94%B3%E8%AF%89%E7%94%B3%E8%AF%B7%E8%A1%A8.rar"><img src="http://image.6qwan.com/images/zhmm_23.gif" width="181" height="53" /></a><br />
+          </div>
+		  <div class="zhmm141">　&nbsp;申诉需要填写的基本资料</div>
+		  <div class="cjwt111">
+
+<form name="getpw" id="getpw" action="" method="post">
+<input name="stage" type="hidden" value="yes">
+            <table cellpadding="0" cellspacing="0" border="0" class="cjwttab">
+            <tr>
+            <td>用户帐号：</td><td><input type="text" name="passport" id="passport" class="hyinput1" />
+              &copy;</td>
+            </tr>
+            <tr>
+            <td>使用过的密码：</td><td><textarea name="pwd" id="pwd" class="hyinput000"></textarea> *多个密码请换行并用逗号(",")分开</td>
+            </tr>
+            <tr>
+            <td>注册邮箱：</td><td><input type="text" name="email" id="email" class="hyinput1" /> *帐号注册后认证的邮箱</td>
+            </tr>
+            <tr>
+            <td>身份证号码：</td><td><input type="text" name="idcard" id="idcard" class="hyinput1" /> *</td>
+            </tr>
+            <tr>
+            <td>真实姓名：</td><td><input type="text" name="truename" id="truename" class="hyinput1" /> *</td>
+            </tr>
+            <tr>
+            <td>出生年月：</td><td><input type="text" name="birthday" id="birthday" class="hyinput1" />
+            </td>
+            </tr>
+            <tr>
+            <td>常登陆的城市：</td><td><input type="text" name="city" id="city" class="hyinput1" /> *</td>
+            </tr>
+            <tr>
+            <td>联系电话：</td><td><input type="text" name="tel" id="tel" class="hyinput1" /></td>
+            </tr>
+            <tr>
+            <td>注册时间：</td><td><input type="text" name="regtime" id="regtime" class="hyinput1" /></td>
+            </tr>
+            <tr>
+            <td>个人邮箱：</td><td><input type="text" name="pemail" id="pemail" class="hyinput1" /> *目前能够正常收到邮件的邮箱</td>
+            </tr>
+            <tr>
+            	<td>所在服务器：</td>
+           		<td>
+                    <span id="game"><select name="game_id" id="game_id" style="width:90px;"><option value="1">醉西游</option></select></span>&nbsp;&nbsp;
+                    <span id="server"><select name="server_id" id="server_id" style="width:120px;"><option value="0">请选择服务器</option></select></span>
+                </td>
+            </tr>
+            <tr>
+            <td>验证码：</td><td><input name="chkcode" type="text" class="tab33input" id="chkcode" size="5" maxlength="20" onBlur="reg_check('chk_code','&action=chkcode&chk_code='+this.value,'code_info','验证码不能为空！');" /><img border="0" style="margin-bottom: -2px; cursor: pointer;" alt="验证码,看不清楚?请点击刷新验证码" onClick="this.src='/include/chkcode.inc.php?t='+Math.random();" src="/include/chkcode.inc.php">
+            </td>
+            </tr>
+            <tr>
+              <td colspan="2"><div class="kfss11"><input type="checkbox" name="checkbox" id="checkbox" checked />我接受5a帐号申诉使用协议</div></td>
+              </tr>
+            <tr>
+              <td colspan="2"><div class="kfss11">
+            <a href="javascript:void(0);" onClick="my_getpw();"><img src="http://image.6qwan.com/images/kjzx_15.jpg" width="65" height="24" /></a>
+            <a href="/help.php?act=getpwd" ><img src="http://image.6qwan.com/images/kjzx_16.jpg" width="65" height="24" /></a></div></td>
+              </tr>
+            </table>
+<script type="text/javascript">
+$(function(){
+$('#birthday').simpleDatepicker();
+get_game();
+});
+</script>
+          </div>
+		</div>
+ 	  </div>
+	  
+              
+     	  
+            </div>
+        </div><!--cright-->      
+      </div>       
+      </div>     
+   </div>  
+   {%include file="copyright.html"%}
+</div>
+
+
+</body>
+</html>

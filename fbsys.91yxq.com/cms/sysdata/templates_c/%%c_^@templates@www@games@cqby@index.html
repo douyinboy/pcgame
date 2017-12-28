@@ -1,0 +1,653 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><?php echo $this->_tpl_vars["NodeInfo"]["Name"];?> - <?php echo $this->_tpl_vars["91yxq_platform_title"];?>传奇霸业官网 - <?php echo $this->_tpl_vars["91yxq_platform_title"];?></title>
+<meta name="keywords" content="<?php echo $this->_tpl_vars["NodeInfo"]["Name"];?>,<?php echo $this->_tpl_vars["91yxq_platform_title"];?>传奇霸业官网传奇霸业官网,<?php echo $this->_tpl_vars["91yxq_platform_title"];?>" />
+<meta name="description" content="<?php echo $this->_tpl_vars["91yxq_platform_title"];?>传奇霸业官网，更多资料尽在<?php echo $this->_tpl_vars["91yxq_platform_title"];?>传奇霸业官网。" />
+<link type="text/css" rel="stylesheet" href="<?php echo $this->_tpl_vars["91yxq_resource"];?>/games/cqby/css/main.css" />
+<script type="text/javascript" src="<?php echo $this->_tpl_vars["91yxq_resource"];?>/newvossion/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->_tpl_vars["91yxq_resource"];?>/games/public/js/jq.foshow.js"></script>
+<script type="text/javascript" src="<?php echo $this->_tpl_vars["91yxq_resource"];?>/games/public/js/jsScroll.js"></script>
+
+<script type="text/javascript" src="<?php echo $this->_tpl_vars["91yxq_resource"];?>/jsCommon/function.js"></script>
+<script type="text/javascript" src="<?php echo $this->_tpl_vars["91yxq_resource"];?>/jsCommon/login_tips.js"></script>
+<script type="text/javascript">
+
+function SaveLogin(thisElm){
+    if($(thisElm).is(":checked")){
+        setCookie('save_login',1,86400000*365);
+    }else{
+        setCookie('save_login',0,86400000*365);
+        setCookie('last_name','',0);
+    }
+}
+function CheckInput(){
+    var save_login = getCookie('save_login')=='1';
+    var user = unescape(getCookie('last_name')).replace("+"," ");
+    if( user && save_login){
+        $("#SaveLogin").attr("checked","checked");
+        setCookie('save_login',1,86400000*365);
+        $('#login_user').val( user );
+    }else{
+        $("#SaveLogin").removeAttr("checked");
+        setCookie('save_login',0,86400000*365);
+        $('#login_user').val('');
+        $('#login_pwd').val('');
+
+    }
+}
+
+//检测登录状态
+function CheckLogined(){
+    var login_name = unescape(getCookie('login_name'));
+    var user_info = unescape(getCookie('userinfo'));
+    var login_time = unescape(getCookie('login_time')).replace("+"," ");
+    if(login_name){
+        //登录名
+        var qq_nick=unescape(getCookie('qq_nick'));
+        if(qq_nick&&login_name.indexOf('@qq')>0){
+            $(".in_login_info").find('.name').html( '您好!'+qq_nick+' - '+login_name.replace("+"," ") );
+        }else{
+            $(".in_login_info").find('.name').html( "您好, "+login_name.replace("+"," ") );
+        }
+        //头像
+        var a = user_info.split('|');
+        var userid = a[0];
+        $('.in_login_info .avatar img').attr('src','<?php echo $this->_tpl_vars["91yxq_resource"];?>/images/www/noavatar_middle.gif');
+        //上次登录时间
+        $('.in_login_info').find('.time').html('上传登录时间：'+login_time);
+        $('.in_login_info').show();
+        $('.in_login').hide();
+        setCookie('last_name',login_name,86400000*365);
+    } else {
+        $('.in_login_info').hide();
+        $('.in_login').show();
+        CheckInput();
+    }
+}
+
+function Login(){
+    //var backUrl=$("#ref").val();
+    if(typeof(backUrl)=='undefined' || backUrl=='' ){
+        backUrl= window.location.href;
+    }
+    var login_user=$("#login_user").val();
+    var login_pwd=$("#login_pwd").val();
+    if( login_user == '' || login_user == '请输入<?php echo $this->_tpl_vars["91yxq_platform_title"];?>帐号'){
+        login_tips.show_msg('请输入账号！');
+        $("#login_user").focus();
+        return false;
+    }
+    if(login_pwd == '' || login_pwd == '1234'){
+        login_tips.show_msg('请输入密码！');
+        $("#login_pwd").focus();
+        return false;
+    }
+
+    var url="<?php echo $this->_tpl_vars["91yxq_url"];?>/api/check_login_user.php?act=login";
+    var paras={'login_user':login_user,'login_pwd':login_pwd};
+    $.ajax(
+    {
+    type:"POST",
+    url:url,
+    data:paras,
+    dataType : 'json',
+    success: function(data)
+    {
+        switch(data.code){
+            case '01':
+                login_tips.show_msg(data.msg);
+                break;
+            case '02':
+                login_tips.show_verify();
+                break;
+            case '11':
+                alert('已经登录,请勿重复登录');
+                location.href= backUrl;
+                break;
+            case '10':
+                /*window.location.reload();*/
+                location.href= backUrl;
+                break;
+        }
+    },
+    error:function()
+    {
+        login_tips.show_msg('网络故障，验证失败！');
+        return false;
+    }
+    });
+    return false;
+}
+
+
+function addFavorite(url,title)
+{
+    if (window.external && ("addFavorite" in window.external)){
+        window.external.addFavorite(url,title);
+        return false;
+    }
+    else if(window.sidebar ){
+        if("addPanel" in window.sidebar){
+            window.sidebar.addPanel(title, url, "customizeURL");
+            return false
+        }
+        else{
+            return true;
+        }
+    }
+    else{
+        alert("您的浏览器不支持此操作，请用快捷键Ctrl+D添加收藏夹。");
+        return false;
+    }
+}
+
+$(function(){
+    CheckLogined();
+});
+</script>
+</head>
+
+<body >
+
+<!-- 公用顶部通栏 -->
+<script type="text/javascript" src="<?php echo $this->_tpl_vars["91yxq_resource"];?>/gameTop/js/gameTop.js?login=1"></script>
+<div style="background:url(<?php echo $this->_tpl_vars["91yxq_resource"];?>/games/cqby/img/m_bg.jpg) no-repeat top center; overflow:hidden">
+    <?php include("../sysdata/templates_c/%%c_^@templates@www@games@cqby@header.html");?>
+    <!--主内容-->
+    <div class="w980">
+        <!--登录-->
+        <div class="fl in_login_box">
+            <!--登录前-->
+            <div class="in_login" id="loginform">
+                <div class="in_login_tit">用户登录</div>
+                <ul>
+                    <li class="mb5"><input name="login_user" type="text" id="login_user" placeholder="请输入的<?php echo $this->_tpl_vars["91yxq_platform_title"];?>账号" value="" class="text"></li>
+                    <li><input name="login_pwd" type="password" id="login_pwd" placeholder="请输入密码" value="" autocomplete="off" class="text"></li>
+                    <li class="mt10 mb10"><input name="" type="button" value="" class="pqimg btn_go" onclick="Login();"/></li>
+                    <li>
+                        <p class="fr"><a href="<?php echo $this->_tpl_vars["91yxq_url"];?>/help.php?act=getpwd_email" class="orange" target="_blank">忘记密码</a><span class="orange">&nbsp;&nbsp;/&nbsp;&nbsp;</span><a href="<?php echo $this->_tpl_vars["91yxq_url"];?>/main.php?act=reg" class="orange" target="_blank">注册帐号</a></p>
+                        <p><span class="pr10"><input name="checkbox" type="checkbox" id="SaveLogin" checked="checked" onclick="SaveLogin(this);"></span>记住账号</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!--登录后-->
+            <div class="in_login_info" style="display:none;">
+                <div class="in_login_tit">用户信息</div>
+                <dl class="clearfix">
+                    <dt><a class="avatar" href="<?php echo $this->_tpl_vars["91yxq_url"];?>/my.php" target="_blank"><img src="<?php echo $this->_tpl_vars["91yxq_resource"];?>/games/public/images/avatar_pic.gif" /></a></dt>
+                    <dd>
+                        <div class="name"></div>
+                        <p class="btn_login"><a href="<?php echo $this->_tpl_vars["91yxq_url"];?>/my.php"  target="_blank">个人中心</a><a href="<?php echo $this->_tpl_vars["91yxq_url"];?>/main.php?act=logout" class="ml5" style="background:#4e90ed">退出</a></p>
+                    </dd>
+                </dl>
+                <div class="tc">
+                    <div class="orange">最近登录的服区：<a id="last_server" class="orange" href="javascoript:void(0);"></a></div>
+                    <p class="time">上次登陆时间：</p>
+                </div>
+            </div>
+        </div>
+
+        <!--按钮-->
+        <div class="fl w280 pr10">
+            <!--微端下载-->
+            <a href="Javascript:void(0);" class="pqimg btn_xz" ></a>
+            <div class="blank10"></div>
+            <!--礼包-->
+            <a href="./xsk/index.html" class="pqimg btn_lb fl" target="_blank"></a>
+            <!--充值-->
+            <a href="<?php echo $this->_tpl_vars["91yxq_pay"];?>/?game_id=1" class="pqimg btn_cz fr" target="_blank"></a>
+        </div>
+
+        <!--服务器登录-->
+        <div class="fr in_server_box">
+            <?php
+ global $PageInfo,$params; 
+ $params = array ( 
+	'action' => "LIST",
+	'return' => "List",
+	'nodeid' => "38",
+	'where' => "c.ServerShow IN (1,3)",
+	'returnkey' => "ServerId,ServerName,GameId,ServerStatus",
+ ); 
+;
+$this->_tpl_vars['List'] = CMS_LIST($params); 
+    $this->_tpl_vars['PageInfo'] = &$PageInfo;  
+?>
+            <div class="top_tit">
+                <p class="fl">
+                    快速进入&nbsp;&nbsp;
+                    <?php if(empty($this->_tpl_vars['List'])): ?>
+                        <input name="textfield" type="text" id="textfield" value="" class="text" />
+                        <a title="进入游戏" class="btn" id="fast_play" href="" target="_blank">进入游戏</a>
+                    <?php else: ?>
+                        <?php if(!empty($this->_tpl_vars['List'] )): 
+   foreach ($this->_tpl_vars['List'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+                        <?php if($this->_tpl_vars['key'] == 0): ?>
+                        <input name="textfield" type="text" id="textfield" value="<?php echo $this->_tpl_vars["var"]["ServerId"];?>" class="text" />
+                        <a title="进入游戏" class="btn" id="fast_play" href="<?php echo $this->_tpl_vars["91yxq_url"];?>/main.php?act=gamelogin&game_id=<?php echo $this->_tpl_vars["var"]["GameId"];?>&server_id=<?php echo $this->_tpl_vars["var"]["ServerId"];?>" target="_blank">进入游戏</a>
+                        <?php endif;?>
+                        <?php endforeach; endif;?>
+                    <?php endif;?>
+                </p>
+                <a href="./list/index.html" target="_blank" class="fr more">更多 &gt;&gt;</a>
+            </div>
+            <script>
+                $("#textfield").keyup(function(){
+                    $("#fast_play").attr("href","<?php echo $this->_tpl_vars["91yxq_url"];?>/main.php?act=gamelogin&game_id=1&server_id="+$(this).val());
+                });
+            </script>
+            <div class="tit">所有服务器</div>
+            <div id="div1" class="server_scroll">
+                <ul class="server_list">
+                    <?php if(!empty($this->_tpl_vars['List'] )): 
+   foreach ($this->_tpl_vars['List'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+                    <li>
+                        <a href="<?php echo $this->_tpl_vars["91yxq_url"];?>/main.php?act=gamelogin&game_id=<?php echo $this->_tpl_vars["var"]["GameId"];?>&server_id=<?php echo $this->_tpl_vars["var"]["ServerId"];?>" target="_blank">
+                            <span class="orange"><?php echo $this->_tpl_vars["var"]["ServerName"];?></span>
+                            <span class="yellow"><?php if($this->_tpl_vars["var"]["ServerStatus"]==0): ?>停服<?php elseif($this->_tpl_vars["var"]["ServerStatus"]==1): ?>维护<?php elseif($this->_tpl_vars["var"]["ServerStatus"]==2): ?>待开<?php elseif($this->_tpl_vars["var"]["ServerStatus"]==3): ?>顺畅<?php elseif($this->_tpl_vars["var"]["ServerStatus"]==4): ?>火爆<?php elseif($this->_tpl_vars["var"]["ServerStatus"]==5): ?>爆满<?php endif;?></span>
+                        </a>
+                    </li>
+                    <?php endforeach; endif;?>
+                </ul>
+            </div>
+        </div>
+
+        <div class="blank20"></div>
+        <div class="blank20"></div>
+        <!--广告轮换-->
+        <div id="focus_box" class="fl">
+            <div class="prev"></div>
+            <div class="next"></div>
+            <?php
+ global $PageInfo,$params; 
+ $params = array ( 
+	'action' => "LIST",
+	'return' => "List",
+	'nodeid' => "46",
+ ); 
+;
+$this->_tpl_vars['List'] = CMS_LIST($params); 
+    $this->_tpl_vars['PageInfo'] = &$PageInfo;  
+?>
+            <ul class="focus_ad">
+                <?php if(!empty($this->_tpl_vars['List'] )): 
+   foreach ($this->_tpl_vars['List'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+                <li>
+                    <a href="<?php echo $this->_tpl_vars["var"]["URL"];?>" target="_blank">
+                        <img src="<?php echo $this->_tpl_vars["var"]["Photo"];?>" />
+                    </a>
+                </li>
+                <?php endforeach; endif;?>
+            </ul>
+            <ul class="focus_num">
+                <?php if(!empty($this->_tpl_vars['List'] )): 
+   foreach ($this->_tpl_vars['List'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+                <li <?php if($this->_tpl_vars['key'] == 0): ?>class="on"<?php endif;?> ></li>
+                <?php endforeach; endif;?>
+            </ul>
+        </div>
+        <script>
+        $("#focus_box").foShow({
+            mains:$("#focus_box").children(".focus_ad").children(),
+            navs:$("#focus_box").children(".focus_num").children(),
+            prev:$("#focus_box").children(".prev"),
+            next:$("#focus_box").children(".next"),
+            duration:500,
+            interval:3000,
+            curClass:"on",
+            hovering:true
+        });
+        </script>
+
+        <!--新闻-->
+        <div class="fl main_tab">
+            <div class="hd_tab" id="myTab1">
+                <div class="li_o li_a" >新闻</div>
+                <div class="li_o" >公告</div>
+                <div class="li_o" >活动</div>
+                <a href="./xwzx/index.html" target="_blank" class="fr more">更多 >></a>
+            </div>
+            <div class="in_news_list">
+                <ul>
+                    <?php
+ global $PageInfo,$params; 
+ $params = array ( 
+	'action' => "LIST",
+	'return' => "List",
+	'nodeid' => "43",
+	'num' => "6",
+ ); 
+;
+$this->_tpl_vars['List'] = CMS_LIST($params); 
+    $this->_tpl_vars['PageInfo'] = &$PageInfo;  
+?>
+                    <?php if(!empty($this->_tpl_vars['List'] )): 
+   foreach ($this->_tpl_vars['List'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+                        <li>
+                            <a href="<?php echo $this->_tpl_vars["var"]["URL"];?>" title="<?php echo $this->_tpl_vars["var"]["Title"];?>" target="_blank">[新闻] <?php echo $this->_tpl_vars["var"]["Title"];?></a>
+                            <span class="time"><?php echo date('m-d', $this->_tpl_vars["var"]["PublishDate"]);?></span>
+                        </li>
+                    <?php endforeach; endif;?>
+                </ul>
+            </div>
+            <div class="in_news_list" style="display:none">
+                <ul>
+                    <?php
+ global $PageInfo,$params; 
+ $params = array ( 
+	'action' => "LIST",
+	'return' => "List",
+	'nodeid' => "44",
+	'num' => "6",
+ ); 
+;
+$this->_tpl_vars['List'] = CMS_LIST($params); 
+    $this->_tpl_vars['PageInfo'] = &$PageInfo;  
+?>
+                    <?php if(!empty($this->_tpl_vars['List'] )): 
+   foreach ($this->_tpl_vars['List'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+                        <li>
+                            <a href="<?php echo $this->_tpl_vars["var"]["URL"];?>" title="<?php echo $this->_tpl_vars["var"]["Title"];?>" target="_blank">[公告] <?php echo $this->_tpl_vars["var"]["Title"];?></a>
+                            <span class="time"><?php echo date('m-d', $this->_tpl_vars["var"]["PublishDate"]);?></span>
+                        </li>
+                    <?php endforeach; endif;?>
+                </ul>
+            </div>
+            <div class="in_news_list" style="display:none">
+                <ul>
+                    <?php
+ global $PageInfo,$params; 
+ $params = array ( 
+	'action' => "LIST",
+	'return' => "List",
+	'nodeid' => "45 ",
+	'num' => "6",
+ ); 
+;
+$this->_tpl_vars['List'] = CMS_LIST($params); 
+    $this->_tpl_vars['PageInfo'] = &$PageInfo;  
+?>
+                    <?php if(!empty($this->_tpl_vars['List'] )): 
+   foreach ($this->_tpl_vars['List'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+                        <li>
+                            <a href="<?php echo $this->_tpl_vars["var"]["URL"];?>" title="<?php echo $this->_tpl_vars["var"]["Title"];?>" target="_blank">[活动] <?php echo $this->_tpl_vars["var"]["Title"];?></a>
+                            <span class="time"><?php echo date('m-d', $this->_tpl_vars["var"]["PublishDate"]);?></span>
+                        </li>
+                    <?php endforeach; endif;?>
+                </ul>
+            </div>
+        </div>
+        <script>
+        $(".main_tab").foShow({
+            mains:$(".main_tab .in_news_list"),
+            navs:$("#myTab1 .li_o"),
+            prev:null,
+            next:null,
+            duration:300,
+            interval:null,
+            curClass:"li_a",
+            hovering:false
+        });
+        </script>
+
+        <!--客服-->
+        <div class="fr"><a href="Javascript:void(0);" onclick="alert('敬请期待');" class="pqimg in_kf" target="_blank"></a></div>
+
+        <div class="blank15"></div>
+        <!--游戏指南-->
+        <div class="inner_box">
+            <div class="hd_tab">
+                <div class="li_a">游戏指南</div>
+                <a href="./yxzl/index.html" class="fr more">更多 >></a>
+            </div>
+            <div class="in_guide">
+                <ul class="clearfix">
+                    <li>
+                        <div class="fl"><i class="pqimg guide_ic01"></i></div>
+                        <div class="text">
+                            <h3>新手指南</h3>
+                            <div class="txt">
+                                <?php
+ global $PageInfo,$params; 
+ $params = array ( 
+	'action' => "LIST",
+	'return' => "List",
+	'nodeid' => "48",
+	'num' => "7",
+ ); 
+;
+$this->_tpl_vars['List'] = CMS_LIST($params); 
+    $this->_tpl_vars['PageInfo'] = &$PageInfo;  
+?>
+                                <?php if(!empty($this->_tpl_vars['List'] )): 
+   foreach ($this->_tpl_vars['List'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+                                    <?php if($this->_tpl_vars['key'] > 0 ): ?><span>|</span><?php endif;?>
+                                    <a href="<?php echo $this->_tpl_vars["var"]["URL"];?>"  target="_blank"><?php echo $this->_tpl_vars["var"]["Title"];?></a>
+                                <?php endforeach; endif;?>
+                                <span>|</span>
+                                <a href="./yxzl/xszn.html"  target="_blank">更多</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="fl"><i class="pqimg guide_ic02"></i></div>
+                        <div class="text">
+                            <h3>高手进阶</h3>
+                            <div class="txt">
+                                <?php
+ global $PageInfo,$params; 
+ $params = array ( 
+	'action' => "LIST",
+	'return' => "List",
+	'nodeid' => "49",
+	'num' => "7",
+ ); 
+;
+$this->_tpl_vars['List'] = CMS_LIST($params); 
+    $this->_tpl_vars['PageInfo'] = &$PageInfo;  
+?>
+                                <?php if(!empty($this->_tpl_vars['List'] )): 
+   foreach ($this->_tpl_vars['List'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+                                    <?php if($this->_tpl_vars['key'] > 0 ): ?><span>|</span><?php endif;?>
+                                    <a href="<?php echo $this->_tpl_vars["var"]["URL"];?>" target="_blank"><?php echo $this->_tpl_vars["var"]["Title"];?></a>
+                                <?php endforeach; endif;?>
+                                <span>|</span>
+                                <a href="./yxzl/gsjj.html" target="_blank">更多</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="clearfix">
+                    <li>
+                        <div class="fl"><i class="pqimg guide_ic03"></i></div>
+                        <div class="text">
+                            <h3>游戏系统</h3>
+                            <div class="txt">
+                                <?php
+ global $PageInfo,$params; 
+ $params = array ( 
+	'action' => "LIST",
+	'return' => "List",
+	'nodeid' => "50",
+	'num' => "7",
+ ); 
+;
+$this->_tpl_vars['List'] = CMS_LIST($params); 
+    $this->_tpl_vars['PageInfo'] = &$PageInfo;  
+?>
+                                <?php if(!empty($this->_tpl_vars['List'] )): 
+   foreach ($this->_tpl_vars['List'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+                                    <?php if($this->_tpl_vars['key'] > 0 ): ?><span>|</span><?php endif;?>
+                                    <a href="<?php echo $this->_tpl_vars["var"]["URL"];?>" target="_blank"><?php echo $this->_tpl_vars["var"]["Title"];?></a>
+                                <?php endforeach; endif;?>
+                                <span>|</span>
+                                <a href="./yxzl/yxxt.html" target="_blank">更多</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="fl"><i class="pqimg guide_ic04"></i></div>
+                        <div class="text">
+                            <h3>特色玩法</h3>
+                            <div class="txt">
+                                <?php
+ global $PageInfo,$params; 
+ $params = array ( 
+	'action' => "LIST",
+	'return' => "List",
+	'nodeid' => "51",
+	'num' => "7",
+ ); 
+;
+$this->_tpl_vars['List'] = CMS_LIST($params); 
+    $this->_tpl_vars['PageInfo'] = &$PageInfo;  
+?>
+                                <?php if(!empty($this->_tpl_vars['List'] )): 
+   foreach ($this->_tpl_vars['List'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+                                    <?php if($this->_tpl_vars['key'] > 0 ): ?><span>|</span><?php endif;?>
+                                    <a href="<?php echo $this->_tpl_vars["var"]["URL"];?>" target="_blank"><?php echo $this->_tpl_vars["var"]["Title"];?></a>
+                                <?php endforeach; endif;?>
+                                <span>|</span>
+                                <a href="./yxzl/tswf.html" target="_blank">更多</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="blank15"></div>
+        <!--游戏截图-->
+        <div class="fl w480">
+            <!--游戏载图-->
+            <div class="inner_box" style="min-height:230px">
+                <div class="hd_tab">
+                    <div class="li_a">游戏截图</div>
+                    <a href="./yxjt/index.html" class="fr more">更多 >></a>
+                </div>
+                <ul class="in_pic_list">
+                    <?php
+ global $PageInfo,$params; 
+ $params = array ( 
+	'action' => "LIST",
+	'return' => "List",
+	'nodeid' => "53",
+	'num' => "3",
+ ); 
+;
+$this->_tpl_vars['List'] = CMS_LIST($params); 
+    $this->_tpl_vars['PageInfo'] = &$PageInfo;  
+?>
+                    <?php if(!empty($this->_tpl_vars['List'] )): 
+   foreach ($this->_tpl_vars['List'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+                    <li>
+                        <a href="<?php echo $this->_tpl_vars["var"]["URL"];?>" target="_blank">
+                            <div class="pic"><img src="<?php echo $this->_tpl_vars["var"]["Photo"];?>" /></div>
+                            <div class="text"><?php echo $this->_tpl_vars["var"]["Title"];?></div>
+                        </a>
+                    </li>
+                    <?php endforeach; endif;?>
+                </ul>
+            </div>
+        </div>
+
+        <!--游戏攻略-->
+        <div class="fr w480">
+            <!--游戏载图-->
+            <div class="inner_box" style="min-height:230px">
+                <div class="hd_tab">
+                    <div class="li_a">游戏攻略</div>
+                    <a href="./yxgl/index.html" class="fr more">更多 >></a>
+                </div>
+                <ul class="in_news_list">
+                    <?php
+ global $PageInfo,$params; 
+ $params = array ( 
+	'action' => "LIST",
+	'return' => "List",
+	'nodeid' => "54",
+	'num' => "5",
+ ); 
+;
+$this->_tpl_vars['List'] = CMS_LIST($params); 
+    $this->_tpl_vars['PageInfo'] = &$PageInfo;  
+?>
+                    <?php if(!empty($this->_tpl_vars['List'] )): 
+   foreach ($this->_tpl_vars['List'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+                    <li>
+                        <span class="time"><?php echo date('m-d', $this->_tpl_vars["var"]["PublishDate"]);?></span>
+                        <a href="<?php echo $this->_tpl_vars["var"]["URL"];?>" target="_blank">[攻略] <?php echo $this->_tpl_vars["var"]["Title"];?></a>
+                    </li>
+                    <?php endforeach; endif;?>
+                </ul>
+            </div>
+        </div>
+
+        <div class="blank15"></div>
+        <!--友情链接-->
+        <!--
+        <div class="inner_box">
+            <div class="hd_tab"><div class="li_a">游戏链接</div></div>
+            <div class="links">
+                <?php
+ global $PageInfo,$params; 
+ $params = array ( 
+	'action' => "LIST",
+	'return' => "List",
+	'nodeid' => "6750",
+ ); 
+;
+$this->_tpl_vars['List'] = CMS_LIST($params); 
+    $this->_tpl_vars['PageInfo'] = &$PageInfo;  
+?>
+                <?php if(!empty($this->_tpl_vars['List'] )): 
+   foreach ($this->_tpl_vars['List'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+                <?php if($this->_tpl_vars['key']>0): ?><span class="line">|</span><?php endif;?>
+                <a href="<?php echo $this->_tpl_vars["var"]["friendlink"];?>" target="_blank"><?php echo $this->_tpl_vars["var"]["title"];?></a>
+                <?php endforeach; endif;?>
+            </div>
+        </div>
+        -->
+    </div>
+
+    <!--页脚-->
+    <?php include("../sysdata/templates_c/%%c_^@templates@www@games@cqby@public@footer.html");?>
+
+    <script type="text/javascript">
+    jsScroll(document.getElementById('div1'), 8, 'divScrollBar');
+    //最后登录游戏信息
+$(function(){
+
+    var login_game_info = unescape(getCookie('login_game_info'));
+    if(login_game_info != 0){
+        var gameList = login_game_info.split("<a");
+        if(gameList.length>0){
+            var i,gameinfo,game_id=0,href = '',server_name = '';
+            for(i in gameList){
+                gameinfo = gameList[i].split("_");
+                if(gameinfo[0] == 1){
+                    game_id = gameinfo[0];
+                    href = "<?php echo $this->_tpl_vars["91yxq_url"];?>/main.php?act=gamelogin&game_id="+game_id+"&server_id="+gameinfo[1];
+                    server_name = gameinfo[2];
+                    jQuery('#last_server').attr('href',href).html(server_name);
+                    jQuery('#enterGameBtn').attr('href',href);
+                    break;
+                }
+            }
+            if(game_id == 0){
+                jQuery('#enterGameBtn').hide();
+            }
+
+        }else{
+            jQuery('#enterGameBtn').hide();
+        }
+    }
+})
+    </script>
+
+</div>
+</body>
+</html>

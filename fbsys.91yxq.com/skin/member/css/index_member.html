@@ -1,0 +1,87 @@
+<include file="header.html">
+
+<div class="content">
+	<div class="left">
+        <!--左边样式1-->
+<!--这里调用频道下面的子结点区块，指定频道主结点号NodeID-->
+<CMS action="NODELIST" return="NodeList" NodeID="22" Type="sub" Ignore="39" />  
+<loop name="NodeList" var="NodeVar" key="NodeKey" start="1">
+<if test="$NodeKey %2 != 0">
+		
+		<div class="topside01">
+			<div class="topside01_l">&nbsp;</div>
+			<div class="topside01_c">&nbsp;</div>
+			<div class="topside01_r">&nbsp;</div>
+		</div>
+		<div class="center01" id="newsfocus">
+			<div class="focus"><a href="[$NodeVar.NodeURL]">[$NodeVar.NodeName]</a></div>
+			<div class="morefocuslink">[<a href="[$NodeVar.NodeURL]">更多信息</a>]</div>
+          	<div class="sonfocus">
+			
+<!--这里面是调用频道结点下的子结点的区块内容，每区块调10条，这里是区块1，无背景色-->	
+		
+<CMS action="LIST" return="List" NodeID="{$NodeVar.NodeID}" Num="10" />
+<loop name="List" var="var" key="key" start="1">
+<div id="xxfb_list"> 
+<div id="xxfb_list_l"><A title="[$var.Title]" href="[$var.URL]" target=_blank>[$var.Title]</A></div>
+<div id="xxfb_list_member">发布会员:[$var.UserName]</div>
+<div id="xxfb_list_edit"><a target="_self" href="[$PUBLISH_URL]xxfb.php/51,0,[$var.IndexID].html">编辑</a></div>
+<div id="xxfb_list_del"><a target="_self" href="[$PUBLISH_URL]xxfb.php/52,0,[$var.IndexID].html">删除</a></div>
+<div id="xxfb_list_r">[[@date('Y-m-d', $var.PublishDate)]]</div>
+</div>
+</loop>
+  	  	    </div>
+			</div>
+		<div class="bottomside01">
+			<div class="bottomside01_l">&nbsp;</div>
+			<div class="bottomside01_c">&nbsp;</div>
+			<div class="bottomside01_r">&nbsp;</div>
+		</div>
+		
+<else>
+
+        <!--左边样式2-->
+        <div class="topside02">
+			<div class="topside02_l">&nbsp;</div>
+			<div class="topside02_c">&nbsp;</div>
+			<div class="topside02_r">&nbsp;</div>
+		</div> 
+		<div class="center02">
+        <div class="focus"><a href="[$NodeVar.NodeURL]">[$NodeVar.NodeName]</a></div>
+        <div class="morefocuslink">[<a href="[$NodeVar.NodeURL]">更多信息</a>]</div>
+        <div class="sonfocus">
+
+<!--这里面是调用频道结点下的子结点的区块内容，每区块调10条，这里是区块2，背景灰色-->
+
+<CMS action="LIST" return="List" where="UserName='{$UserInfo.UserName}" NodeID="{$NodeVar.NodeID}" Num="10" />
+<loop name="List" var="var" key="key" start="1">
+<div id="xxfb_list"> 
+<div id="xxfb_list_l"><A title="[$var.Title]" href="[$var.URL]" target=_blank>[$var.Title]</A></div>
+<div id="xxfb_list_member">发布会员:[$var.UserName]</div>
+<div id="xxfb_list_edit"><a target="_self" href="[$PUBLISH_URL]xxfb.php/51,0,[$var.IndexID].html">编辑</a></div>
+<div id="xxfb_list_del"><a target="_self" href="[$PUBLISH_URL]xxfb.php/52,0,[$var.IndexID].html">删除</a></div>
+<div id="xxfb_list_r">[[@date('Y-m-d', $var.PublishDate)]]</div>
+</div>
+</loop>
+  	  	    </div>
+		</div>
+		<div class="bottomside02">
+			<div class="bottomside02_l">&nbsp;</div>
+			<div class="bottomside02_c">&nbsp;</div>
+			<div class="bottomside02_r">&nbsp;</div>
+		</div>
+</if>
+</loop>	
+
+</div>
+
+
+	<!--右边列开始-->
+	<include file="right_list.html">
+	
+</div>
+
+<div class="content"></div>
+
+
+<include file="footer.html">

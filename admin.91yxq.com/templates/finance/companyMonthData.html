@@ -1,0 +1,68 @@
+<form id="pagerForm" action="" method="post">
+    <input type="hidden" name="access" value="1"/>
+    <input type="hidden" name="game_id" value="<{$smarty.post.game_id}>"/>
+    <input type="hidden" name="start_date" value="<{$smarty.post.start_date}>"/>
+</form>
+<div class="pageHeader">
+    <form onsubmit="return navTabSearch(this);" action="" method="post">
+    <input type="hidden" name="access" value="1"/>    
+    <div class="searchBar">
+        <ul class="searchContent">
+            <li>  
+                <label>研发公司：</label>
+                    <select class="combox" name="id" id="id" >
+                        <option value="0">请选择</option>
+                        <{foreach item=v from =$companyname}>
+                        <option value="<{$v.id}>" <{if $smarty.post.id==$v.id}> selected <{/if}> ><{$v.name}></option>
+                        <{/foreach}>
+                    </select>
+            </li>
+            <li>  
+                    <label>统计月份：</label>
+                    <input type="text" name="start_date" class="date" dateFmt="yyyy-MM" minDate="2014-05" maxDate="<{$maxmonth}>" value="<{$tmonth}>" readonly="true"/>
+				<a class="inputDateButton" href="javascript:;">选择</a></li>
+        </ul>
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+
+        </ul>
+    </div>
+    <table class="table" width="100%"  layoutH="107">
+        <thead>
+        <tr>
+            <th>研发公司</th>
+            <th>游戏</th>
+            <th>接口订单金额</th>
+            <th>充值总流水</th>
+            <th>研发分成</th>
+        </tr>
+        </thead>
+        <tbody>
+            <{foreach item=vo from=$data}>
+            <tr target="id" rel="<{$vo.id}>" style=" <{if $vo.gamename=='--'}> color:red; <{/if}>">
+                <td><{$vo.company}></td>
+                <td><{$vo.gamename}></td>
+                <td><{$vo.api_success_money}></td>
+                <td><{$vo.game_api_money}></td>
+                <td><{$vo.game_pay}></td>
+            </tr>
+            <{/foreach}>
+            <tr target="id" rel="hj" style="color:#F80C11;">
+                <td>合计：</td>
+                <td>---</td>
+                <td><{$hj['api_success_money']}></td>
+                <td ><{$hj['game_api_money']}></td>
+                <td><{$hj['game_pay']}></td>       
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,71 @@
+<form id="pagerForm" action="?action=management&opt=searchActorBringBack" >
+	<input type="hidden" name="pageNum" value="1" />
+	
+</form>
+<div class="pageContent">
+    <form method="post" action="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=add&callbackType=closeCurrent&navTabId=<{$smarty.get.navTabId}>" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone)">
+	<input name="sub" type="hidden" value="1" />
+	<div class="pageFormContent" layoutH="68">
+	
+            <table class="table" width="100%"  layoutH="150">
+                    <thead>
+                        <tr>
+                            <th width="40">周期</th>
+                            <th width="120">起始--截止(日期)</th>
+                            <th width="80">公会名称</th>
+                            <th width="80">平台充值</th>
+                            <th width="80">平台充值流水</th>
+                            <th width="50">首充</th>
+                            <th width="50">内充</th>
+                            <th width="50">V充</th>
+                            <th width="80">打款金额</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <volist id="vo" name="list">
+                            <{foreach item=vo from=$info}>
+                            <tr target="sid" rel="1">
+                                <td>第<{$vo['weekth']}>周</td>
+                                <td><{$vo['starttime']}> --<{$vo['endtime']}></td>
+                                <td><{$vo['agentname']}></td>
+                                <td><{$vo['pay_money']}></td>
+                                <td><{$vo['pay_amount']}></td>
+                                <td><{$vo['pay_first']}></td>
+                                <td><{$vo['pay_inner']}></td>
+                                <td><{$vo['pay_vip']}></td>
+                                <td>
+                                     <a style="color:red;" href="?action=<{$smarty.get.action}>&opt=detail&wsdate=<{$vo.wsdate}>&wedate=<{$vo.wedate}>&navTabId=<{$smarty.get.navTabId}>"  target="dialog" lookupGroup="movie" suffix="[]" height="385" width='700'><{$vo['pay_jie']}></a>
+                                </td>
+                            </tr>
+                            <{/foreach}>
+                             <tr target="sid" rel="1">
+                                <td>合计：</td>
+                                <td>---</td>
+                                <td>---</td>
+                                <td><{$heji['allmoney']|default:"0"}></td>
+                                <td><{$heji['payaccount']|default:"0"}></td>
+                                <td><{$heji['payfirst']|default:"0"}></td>
+                                <td><{$heji['payinner']|default:"0"}></td>
+                                <td><{$heji['vmoney']|default:"0"}></td>
+                                <td><{$heji['jiemoney']|default:"0"}></td>
+                        </volist>
+                    </tbody>
+    </table>
+        <div class="unit">
+            <label style="width: 50px;">密码:</label>
+            <input type="password" name="pass" size="20" value=""/>
+            <span class="info">必需输入密码才可以提交</span>
+        </div>
+        <div class="unit">
+            <span style='color: red;display: block;float: left;line-height: 21px;'>*如信息有误请找运营确认后再操作*</span>
+        </div>
+    </div>
+    <div class="formBar">
+        <ul>
+           
+            <li><div class="buttonActive"><div class="buttonContent"><button type="submit" >提交</button></div></div></li>
+            <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+        </ul>
+    </div>
+    </form>
+</div>

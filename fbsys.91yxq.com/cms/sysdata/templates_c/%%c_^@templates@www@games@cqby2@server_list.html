@@ -1,0 +1,82 @@
+
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<title><?php echo $this->_tpl_vars["Title"];?> - <?php echo $this->_tpl_vars["NodeInfo"]["Name"];?> - <?php echo $this->_tpl_vars["91yxq_platform_title"];?>传奇霸业官网 - <?php echo $this->_tpl_vars["91yxq_platform_title"];?>游戏</title> 
+<meta name="keywords" content="<?php echo $this->_tpl_vars["Title"];?>,<?php echo $this->_tpl_vars["NodeInfo"]["Name"];?>,<?php echo $this->_tpl_vars["91yxq_platform_title"];?>传奇霸业官网,<?php echo $this->_tpl_vars["91yxq_platform_title"];?>游戏" /> 
+<meta name="description" content="<?php echo $this->_tpl_vars["91yxq_platform_title"];?>传奇霸业官网，更多资料尽在<?php echo $this->_tpl_vars["91yxq_platform_title"];?>传奇霸业官网。" /> 
+<link type="text/css" rel="stylesheet" href="<?php echo $this->_tpl_vars["91yxq_resource"];?>/games/cqby/css/main.css" /> 
+<script type="text/javascript" src="<?php echo $this->_tpl_vars["91yxq_resource"];?>/newvossion/js/jquery-1.4.4.min.js"></script> 
+
+</head>
+
+<body >
+
+<!-- 公用顶部通栏 --> 
+<script type="text/javascript" src="<?php echo $this->_tpl_vars["91yxq_resource"];?>/gameTop/js/gameTop.js?login=1"></script> 
+<div style="background:url(<?php echo $this->_tpl_vars["91yxq_resource"];?>/games/cqby/img/m_bg.jpg) no-repeat top center; overflow:hidden">
+
+    <?php include("../sysdata/templates_c/%%c_^@templates@www@games@cqby2@header.html");?>
+
+    <!--主内容-->
+    <div class="w980">
+        <div class="inside_tit">
+            <h2><i class="pqimg"></i><?php echo $this->_tpl_vars["NodeInfo"]["Name"];?></h2>
+            <div class="location fr">
+                您当前的位置：<a href="<?php echo $this->_tpl_vars["91yxq_url"];?>/cqby/index.html">传奇霸业</a>
+                <span class="arrow"> &gt; </span><?php echo $this->_tpl_vars["NodeInfo"]["Name"];?>
+            </div>
+        </div>
+        <div class="inner_box p20">
+            <div class="detit">
+                <h1><?php echo $this->_tpl_vars["91yxq_platform_title"];?>传奇霸业 服务器列表</h1>
+            </div>
+            <div class="m_text pt30 pb30 pl50 pr50">
+                <style>
+                .m_text ul{margin:12px 0 0 24px;}
+                .m_text li{margin:0 12px 20px 0;padding:0 2px;width:128px;height:28px;line-height:28px;background:#306060;float:left;text-align:center}
+                </style>
+                <ul class="clearfix">
+                    <?php
+ global $PageInfo,$params; 
+ $params = array ( 
+	'action' => "LIST",
+	'return' => "List",
+	'nodeid' => "self",
+	'num' => "page-60",
+	'where' => "c.ServerShow IN (1,3)",
+	'returnkey' => "ServerId,ServerName,GameId,ServerStatus",
+ ); 
+;
+$this->_tpl_vars['List'] = CMS_LIST($params); 
+    $this->_tpl_vars['PageInfo'] = &$PageInfo;  
+?>
+                    <?php if(!empty($this->_tpl_vars['List'] )): 
+   foreach ($this->_tpl_vars['List'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+                    <li class="fl" >
+                        <a target="_blank" class="server_btn" href="<?php echo $this->_tpl_vars["91yxq_url"];?>/main.php?act=gamelogin&amp;game_id=<?php echo $this->_tpl_vars["var"]["GameId"];?>&amp;server_id=<?php echo $this->_tpl_vars["var"]["ServerId"];?>" style="color:#fff;">
+                            <i class="color<?php echo $this->_tpl_vars["var"]["ServerStatus"];?>">
+                                [<?php if($this->_tpl_vars["var"]["ServerStatus"]==0): ?>停服<?php endif;?><?php if($this->_tpl_vars["var"]["ServerStatus"]==1): ?>维护<?php endif;?><?php if($this->_tpl_vars["var"]["ServerStatus"]==2): ?>待开<?php endif;?><?php if($this->_tpl_vars["var"]["ServerStatus"]==3): ?>顺畅<?php endif;?><?php if($this->_tpl_vars["var"]["ServerStatus"]==4): ?>火爆<?php endif;?><?php if($this->_tpl_vars["var"]["ServerStatus"]==5): ?>爆满<?php endif;?>]
+                            </i>
+                            <?php echo $this->_tpl_vars["var"]["ServerName"];?>
+                        </a>
+                    </li>
+                    <?php endforeach; endif;?>
+                </ul>
+
+            </div>
+            <!--翻页-->
+            <div class="page">
+                <?php echo list_page($this->_tpl_vars["PageInfo"]["TotalPage"],$this->_tpl_vars["PageInfo"]["CurrentPage"],$this->_tpl_vars["PageInfo"]["URL"]);?>
+            </div>
+        </div>
+
+    </div>
+
+    <!--页脚-->
+    <?php include("../sysdata/templates_c/%%c_^@templates@www@games@cqby2@public@footer.html");?>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,915 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="蛮荒之怒2官网,蛮荒之怒2攻略,蛮荒之怒2礼包,蛮荒之怒2开服表,蛮荒之怒2下载" />
+<meta name="description" content="91游戏圈蛮荒之怒2网页游戏官网为您提供蛮荒之怒2最新开服,最新的蛮荒之怒2官网资讯、活动，最全面的蛮荒之怒2攻略,游戏截图和游戏视频,还有蛮荒之怒2新手卡、礼包、激活码等等,找蛮荒之怒2网页游戏就上91游戏圈。" />
+<title>蛮荒之怒2 - 蛮荒之怒2官网-91游戏圈蛮荒之怒2网页游戏开服表|攻略|礼包|下载</title>
+<link type="text/css" rel="stylesheet" href="http://image.91yxq.com/games/mhzn2/css/main.css" />
+<script type="text/javascript" src="http://image.91yxq.com/newvossion/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="http://image.91yxq.com/games/public/js/jq.foshow.js"></script>
+<script type="text/javascript" src="http://image.91yxq.com/games/public/js/jsScroll.js"></script>
+
+<script type="text/javascript" src="http://image.91yxq.com/jsCommon/function.js"></script>
+<script type="text/javascript" src="http://image.91yxq.com/jsCommon/login_tips.js"></script>
+<script type="text/javascript">
+
+function SaveLogin(thisElm){
+    if($(thisElm).is(":checked")){
+        setCookie('save_login',1,86400000*365);
+    }else{
+        setCookie('save_login',0,86400000*365);
+        setCookie('last_name','',0);
+    }
+}
+function CheckInput(){
+    var save_login = getCookie('save_login')=='1';
+    var user = unescape(getCookie('last_name')).replace("+"," ");
+    if( user && save_login){
+        $("#SaveLogin").attr("checked","checked");
+        setCookie('save_login',1,86400000*365);
+        $('#login_user').val( user );
+    }else{
+        $("#SaveLogin").removeAttr("checked");
+        setCookie('save_login',0,86400000*365);
+        $('#login_user').val('');
+        $('#login_pwd').val('');
+
+    }
+}
+
+//检测登录状态
+function CheckLogined(){
+    var login_name = unescape(getCookie('login_name'));
+    var user_info = unescape(getCookie('userinfo'));
+    var login_time = unescape(getCookie('login_time')).replace("+"," ");
+    if(login_name){
+        //登录名
+        var qq_nick=unescape(getCookie('qq_nick'));
+        if(qq_nick&&login_name.indexOf('@qq')>0){
+            $(".in_login_info").find('.name').html( '您好!'+qq_nick+' - '+login_name.replace("+"," ") );
+        }else{
+            $(".in_login_info").find('.name').html( "您好, "+login_name.replace("+"," ") );
+        }
+        //头像
+        var a = user_info.split('|');
+        var userid = a[0];
+        $('.in_login_info .avatar img').attr('src','http://image.91yxq.com/images/www/noavatar_middle.gif');
+        //上次登录时间
+        $('.in_login_info').find('.time').html('上传登录时间：'+login_time);
+        $('.in_login_info').show();
+        $('.in_login').hide();
+        setCookie('last_name',login_name,86400000*365);
+    } else {
+        $('.in_login_info').hide();
+        $('.in_login').show();
+        CheckInput();
+    }
+}
+
+function Login(){
+    //var backUrl=$("#ref").val();
+    if(typeof(backUrl)=='undefined' || backUrl=='' ){
+        backUrl= window.location.href;
+    }
+    var login_user=$("#login_user").val();
+    var login_pwd=$("#login_pwd").val();
+    if( login_user == '' || login_user == '请输入网页游戏_网页游戏大全|开服|排行榜_91游戏平台帐号'){
+        login_tips.show_msg('请输入账号！');
+        $("#login_user").focus();
+        return false;
+    }
+    if(login_pwd == '' || login_pwd == '1234'){
+        login_tips.show_msg('请输入密码！');
+        $("#login_pwd").focus();
+        return false;
+    }
+
+    var url="http://www.91yxq.com/api/check_login_user.php?act=login";
+    var paras={'login_user':login_user,'login_pwd':login_pwd};
+    $.ajax(
+    {
+    type:"POST",
+    url:url,
+    data:paras,
+    dataType : 'json',
+    success: function(data)
+    {
+        switch(data.code){
+            case '01':
+                login_tips.show_msg(data.msg);
+                break;
+            case '02':
+                login_tips.show_verify();
+                break;
+            case '11':
+                alert('已经登录,请勿重复登录');
+                location.href= backUrl;
+                break;
+            case '10':
+                /*window.location.reload();*/
+                location.href= backUrl;
+                break;
+        }
+    },
+    error:function()
+    {
+        login_tips.show_msg('网络故障，验证失败！');
+        return false;
+    }
+    });
+    return false;
+}
+
+
+function addFavorite(url,title)
+{
+    if (window.external && ("addFavorite" in window.external)){
+        window.external.addFavorite(url,title);
+        return false;
+    }
+    else if(window.sidebar ){
+        if("addPanel" in window.sidebar){
+            window.sidebar.addPanel(title, url, "customizeURL");
+            return false
+        }
+        else{
+            return true;
+        }
+    }
+    else{
+        alert("您的浏览器不支持此操作，请用快捷键Ctrl+D添加收藏夹。");
+        return false;
+    }
+}
+
+$(function(){
+    CheckLogined();
+});
+
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?40046e537679c6fcc02004afff9e4d2d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+
+<body >
+<style>
+    /*弹出层*/
+    .popup_box{background:#FFF; position:fixed; top:50%; left:50%; _position:absolute; z-index:998}
+    .popup_box .popup_close{display:block; background:url(http://image.91yxq.com/css/images/x_but.png) no-repeat; width:18px; height:18px; position:absolute; top:10px; right:20px; transition:all 0.2s linear}
+    .popup_box .popup_close:hover{transform:rotate(180deg)}
+    .popup_bg{display:none; background:rgba(0,0,0,0.5); width:100%; height:100vh; position:fixed; _position:absolute; z-index:997}
+
+       /*头部*/
+    .head{background:linear-gradient(to bottom, #FFF 60%, #F1F1F1); filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#F1F1F1'); box-shadow:0 2px 4px rgba(0,0,0,0.1); min-width:1200px; height:40px}
+    .head .logo{display:block; float:left; background:url(http://image.91yxq.com/css/images/logo.png) no-repeat; width:120px; height:54px; margin:13px 50px 0 0}
+    .head .title{border-left:1px solid #CCC; font-size:20px; color:#666; line-height:30px; padding-left:20px; margin-top:25px}
+
+    /*按钮*/
+    .head .login a{display:block; float:left; background:rgba(0,187,144,0.05); border:1px solid rgba(0,187,144,0.3); border-radius:3px; font-size:14px; color:#00bb90; text-align:center; line-height:28px; margin-top: 5px; padding:0 20px; transition:all 0.3s linear}
+    .head .login a:hover{background:#00bb90; color:rgba(255,255,255,0.9)}
+    .head .login .reg_btn{background:#FFF; border-color:#ededed; color:#666; margin-left:10px; margin-right: 10px;}
+    .head .login .reg_btn:hover{background:#ededed; border-color:#ededed; color:#666}
+
+    /*信息*/
+    .head .min_user_info{font-size:14px; color:#666; line-height:40px; padding-right:10px}
+    .head .min_user_info .back{color:#dc5562; padding-left:10px}
+
+    /*信息*/
+    .min_game_down{float:right; position:relative}
+    .min_game_down .menu_hd{display:block; background:#515666; font-size:14px; color:#FFF; line-height:40px; height:40px; padding:0 25px}
+    .min_game_down .menu_hd .arrow{display:inline-block; border-top:5px solid #cbcdd1; border-left:5px solid transparent; border-right:5px solid transparent; height:0; line-height:0; margin-left:10px; transition:all 0.2s linear}
+    .min_game_down .menu_hd_on .arrow{transform:rotate(180deg)}
+
+    /*游戏名称*/
+    .min_game_list{display:none; background:rgba(81,86,102,0.9); width:550px; padding:15px 0 15px 30px; position:absolute; top:40px; right:0; z-index:99}
+    .min_game_list li{float:left; width:20%;}
+    .min_game_list li a{display:block; font-size:12px; font-family:"微软雅黑"; color:#f0f4ff; line-height:30px}
+    .min_game_list li a:hover{color:#FFF}
+    .min_game_list .name{display:inline-block; padding-right:5px}
+
+    .ul li{float: left; height: 40px; line-height: 40px; font-size: 14px; margin: 0 0 0 5px;}
+    .ul li a{margin: 0 5px 0 0; color: #666; font-family: Arial, Helvetica, sans-serif;}
+
+    ._logo{float: left; display: block; width: 150px; height: 40px; margin-right: 20px; background:url(http://image.91yxq.com/css/images/_logo.png) no-repeat;}
+    .index{float: left; font-size: 14px; height: 40px; line-height: 40px; margin-right: 100px;}
+</style>
+<div class="head">
+    <div id="platform_top_div" style="width: 90%; margin: 0 auto;">
+        <a class="_logo" href="http://www.91yxq.com/"></a>
+        <a class="index" href="http://www.91yxq.com">返回首页</a>
+        <ul class="ul">
+            <li><a href="http://www.91yxq.com/cycs2/" target="_blank">赤月传说2</a>|</li>
+            <li><a href="http://www.91yxq.com/rxhw/" target="_blank">热血虎卫</a>|</li>
+            <li><a href="http://www.91yxq.com/dpsc/" target="_blank">斗破沙城</a>|</li>
+            <li><a href="http://www.91yxq.com/dyjd/" target="_blank">第一舰队</a>|</li>
+            <li><a href="http://www.91yxq.com/qyz/" target="_blank">青云志</a>|</li>
+            <li><a href="http://www.91yxq.com/rxsg3/" target="_blank">热血三国3</a></li>
+        </ul>
+
+        <!--游戏列表;登录注册按钮或登录后用户名js-->
+        <script src="http://www.91yxq.com/public/www_top.js"></script>
+
+    </div>
+
+</div>
+<div style="background:url(http://image.91yxq.com/games/mhzn2/img/m_bg.jpg) no-repeat top center; overflow:hidden">
+    
+<!--导航-->
+<div class="nav clearfix">
+    <div class="pq_nav w980">
+        <ul>
+            <li>
+                <a href="/mhzn2/" class="on" >
+                    <span class="y1">首页</span>
+                    <i></i>
+                </a>
+            </li >
+            <li>
+                <a href="/mhzn2/xwzx/"  >
+                    <span class="y2">新闻中心</span>
+                    <i></i>
+                </a>
+            </li>
+            <li>
+                <a href="/mhzn2/yxzl/"  >
+                    <span class="y3">游戏资料</span>
+                    <i></i>
+                </a>
+            </li>
+            <li class="logo"><a href="/mhzn2/"></a></li>
+            <li>
+                <a href="/mhzn2/yxgl/"  >
+                    <span class="y4">游戏攻略</span>
+                    <i></i>
+                </a>
+            </li>
+            <li>
+                <a href="http://pay.91yxq.com/?game_id=22" target="_blank">
+                    <span class="y5">充值中心</span>
+                    <i></i>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.91yxq.com/help/" target="_blank">
+                    <span class="y6">客服中心</span>
+                    <i></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!--中内广告-->
+<div class="w980 banner"></div>
+    <!--主内容-->
+    <div class="w980">
+        <!--登录-->
+        <div class="fl in_login_box">
+            <!--登录前-->
+            <div class="in_login" id="loginform">
+                <div class="in_login_tit">用户登录</div>
+                <ul>
+                    <li class="mb5"><input name="login_user" type="text" id="login_user" placeholder="请输入的网页游戏_网页游戏大全|开服|排行榜_91游戏平台账号" value="" class="text"></li>
+                    <li><input name="login_pwd" type="password" id="login_pwd" placeholder="请输入密码" value="" autocomplete="off" class="text"></li>
+                    <li class="mt10 mb10"><input name="" type="button" value="" class="pqimg btn_go" onclick="Login();"/></li>
+                    <li>
+                        <p class="fr"><a href="http://www.91yxq.com/help.php?act=getpwd_email" class="orange" target="_blank">忘记密码</a><span class="orange">&nbsp;&nbsp;/&nbsp;&nbsp;</span><a href="http://www.91yxq.com/main.php?act=reg" class="orange" target="_blank">注册帐号</a></p>
+                        <p><span class="pr10"><input name="checkbox" type="checkbox" id="SaveLogin" checked="checked" onclick="SaveLogin(this);"></span>记住账号</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!--登录后-->
+            <div class="in_login_info" style="display:none;">
+                <div class="in_login_tit">用户信息</div>
+                <dl class="clearfix">
+                    <dt><a class="avatar" href="http://www.91yxq.com/my.php" target="_blank"><img src="http://image.91yxq.com/games/public/images/avatar_pic.gif" /></a></dt>
+                    <dd>
+                        <div class="name"></div>
+                        <p class="btn_login"><a href="http://www.91yxq.com/my.php"  target="_blank">个人中心</a><a href="http://www.91yxq.com/main.php?act=logout" class="ml5" style="background:#4e90ed">退出</a></p>
+                    </dd>
+                </dl>
+                <div class="tc">
+                    <div class="orange">最近登录的服区：<a id="last_server" class="orange" href="javascoript:void(0);"></a></div>
+                    <p class="time">上次登陆时间：</p>
+                </div>
+            </div>
+        </div>
+
+        <!--按钮-->
+        <div class="fl w280 pr10">
+            <!--微端下载-->
+            <a href="./mhzn2.exe" class="pqimg btn_xz" ></a>
+            <div class="blank10"></div>
+            <!--礼包-->
+            <a href="./xsk/index.html" class="pqimg btn_lb fl" target="_blank"></a>
+            <!--充值-->
+            <a href="http://pay.91yxq.com/?game_id=3" class="pqimg btn_cz fr" target="_blank"></a>
+        </div>
+
+        <!--服务器登录-->
+        <div class="fr in_server_box">
+                        <div class="top_tit">
+                <p class="fl">
+                    快速进入&nbsp;&nbsp;
+                                                                                            <input name="textfield" type="text" id="textfield" value="9" class="text" />
+                        <a title="进入游戏" class="btn" id="fast_play" href="http://www.91yxq.com/main.php?act=gamelogin&game_id=22&server_id=9" target="_blank">进入游戏</a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </p>
+                <a href="./list/index.html" target="_blank" class="fr more">更多 &gt;&gt;</a>
+            </div>
+            <script>
+                $("#textfield").keyup(function(){
+                    $("#fast_play").attr("href","http://www.91yxq.com/main.php?act=gamelogin&game_id=17&server_id="+$(this).val());
+                });
+            </script>
+            <div class="tit">所有服务器</div>
+            <div id="div1" class="server_scroll">
+                <ul class="server_list">
+                                        <li>
+                        <a href="http://www.91yxq.com/main.php?act=gamelogin&game_id=22&server_id=9" target="_blank">
+                            <span class="orange">双线9服</span>
+                            <span class="yellow">顺畅</span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="http://www.91yxq.com/main.php?act=gamelogin&game_id=22&server_id=8" target="_blank">
+                            <span class="orange">双线8服</span>
+                            <span class="yellow">顺畅</span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="http://www.91yxq.com/main.php?act=gamelogin&game_id=22&server_id=7" target="_blank">
+                            <span class="orange">双线7服</span>
+                            <span class="yellow">顺畅</span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="http://www.91yxq.com/main.php?act=gamelogin&game_id=22&server_id=6" target="_blank">
+                            <span class="orange">双线6服</span>
+                            <span class="yellow">顺畅</span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="http://www.91yxq.com/main.php?act=gamelogin&game_id=22&server_id=5" target="_blank">
+                            <span class="orange">双线5服</span>
+                            <span class="yellow">顺畅</span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="http://www.91yxq.com/main.php?act=gamelogin&game_id=22&server_id=4" target="_blank">
+                            <span class="orange">双线4服</span>
+                            <span class="yellow">顺畅</span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="http://www.91yxq.com/main.php?act=gamelogin&game_id=22&server_id=3" target="_blank">
+                            <span class="orange">双线3服</span>
+                            <span class="yellow">顺畅</span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="http://www.91yxq.com/main.php?act=gamelogin&game_id=22&server_id=2" target="_blank">
+                            <span class="orange">双线2服</span>
+                            <span class="yellow">顺畅</span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="http://www.91yxq.com/main.php?act=gamelogin&game_id=22&server_id=1" target="_blank">
+                            <span class="orange">双线1服</span>
+                            <span class="yellow">顺畅</span>
+                        </a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+
+        <div class="blank20"></div>
+        <div class="blank20"></div>
+        <!--广告轮换-->
+        <div id="focus_box" class="fl">
+            <div class="prev"></div>
+            <div class="next"></div>
+                        <ul class="focus_ad">
+                                <li>
+                    <a href="http://www.91yxq.com/static/mhzn2_activity/index.html" target="_blank">
+                        <img src="http://www.91yxq.com/mhzn2/rsc/games/mhzn2/ad/h000/h00/img201710121550180.png" />
+                    </a>
+                </li>
+                            </ul>
+            <ul class="focus_num">
+                                <li class="on" ></li>
+                            </ul>
+        </div>
+        <script>
+        $("#focus_box").foShow({
+            mains:$("#focus_box").children(".focus_ad").children(),
+            navs:$("#focus_box").children(".focus_num").children(),
+            prev:$("#focus_box").children(".prev"),
+            next:$("#focus_box").children(".next"),
+            duration:500,
+            interval:3000,
+            curClass:"on",
+            hovering:true
+        });
+        </script>
+
+        <!--新闻-->
+        <div class="fl main_tab">
+            <div class="hd_tab" id="myTab1">
+                <div class="li_o li_a" >最新</div>
+                <div class="li_o" >新闻</div>
+                <div class="li_o" >公告</div>
+                <div class="li_o" >活动</div>
+                <a href="./xwzx/index.html" target="_blank" class="fr more">更多 >></a>
+            </div>
+            <div class="in_news_list">
+                <ul>
+                                                                <li>
+                            <a href="http://www.91yxq.com/mhzn2/xwzx/4403.html" title="蛮荒之怒2合区规则" target="_blank">[最新] 蛮荒之怒2合区规则</a>
+                            <span class="time">10-30</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/mhzn2/xwzx/4530.html" title="《蛮荒之怒2》双线10服11月10日14：00震撼开服" target="_blank">[最新] 《蛮荒之怒2》双线10服11月10日14：00震撼开服</a>
+                            <span class="time">11-08</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/mhzn2/xwzx/4525.html" title="《蛮荒之怒2》11月8日更新公告" target="_blank">[最新] 《蛮荒之怒2》11月8日更新公告</a>
+                            <span class="time">11-08</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/mhzn2/xwzx/4514.html" title="《蛮荒之怒2》双线9服11月8日14：00震撼开服" target="_blank">[最新] 《蛮荒之怒2》双线9服11月8日14：00震撼开服</a>
+                            <span class="time">11-07</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/mhzn2/xwzx/4460.html" title="91游戏圈《蛮荒之怒2》11月6日合服公告" target="_blank">[最新] 91游戏圈《蛮荒之怒2》11月6日合服公告</a>
+                            <span class="time">11-06</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/mhzn2/xwzx/4449.html" title="《蛮荒之怒2》双线8服11月3日14：00震撼开服" target="_blank">[最新] 《蛮荒之怒2》双线8服11月3日14：00震撼开服</a>
+                            <span class="time">11-02</span>
+                        </li>
+                                    </ul>
+            </div>
+            <div class="in_news_list" style="display:none">
+                <ul>
+                                                                <li>
+                            <a href="http://www.91yxq.com/mhzn2/xwzx/4530.html" title="《蛮荒之怒2》双线10服11月10日14：00震撼开服" target="_blank">[新闻] 《蛮荒之怒2》双线10服11月10日14：00震撼开服</a>
+                            <span class="time">11-08</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/mhzn2/xwzx/4514.html" title="《蛮荒之怒2》双线9服11月8日14：00震撼开服" target="_blank">[新闻] 《蛮荒之怒2》双线9服11月8日14：00震撼开服</a>
+                            <span class="time">11-07</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/mhzn2/xwzx/4449.html" title="《蛮荒之怒2》双线8服11月3日14：00震撼开服" target="_blank">[新闻] 《蛮荒之怒2》双线8服11月3日14：00震撼开服</a>
+                            <span class="time">11-02</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/mhzn2/xwzx/4434.html" title="《蛮荒之怒2》双线7服11月1日14：00震撼开服" target="_blank">[新闻] 《蛮荒之怒2》双线7服11月1日14：00震撼开服</a>
+                            <span class="time">11-02</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/mhzn2/xwzx/4421.html" title="《蛮荒之怒2》双线6服10月30日14：00震撼开服" target="_blank">[新闻] 《蛮荒之怒2》双线6服10月30日14：00震撼开服</a>
+                            <span class="time">11-02</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/mhzn2/xwzx/4350.html" title="《蛮荒之怒2》双线5服10月27日14：00震撼开服" target="_blank">[新闻] 《蛮荒之怒2》双线5服10月27日14：00震撼开服</a>
+                            <span class="time">10-26</span>
+                        </li>
+                                    </ul>
+            </div>
+            <div class="in_news_list" style="display:none">
+                <ul>
+                                                                <li>
+                            <a href="http://www.91yxq.com/mhzn2/xwzx/4403.html" title="蛮荒之怒2合区规则" target="_blank">[公告] 蛮荒之怒2合区规则</a>
+                            <span class="time">10-30</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/mhzn2/xwzx/4525.html" title="《蛮荒之怒2》11月8日更新公告" target="_blank">[公告] 《蛮荒之怒2》11月8日更新公告</a>
+                            <span class="time">11-08</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/mhzn2/xwzx/4460.html" title="91游戏圈《蛮荒之怒2》11月6日合服公告" target="_blank">[公告] 91游戏圈《蛮荒之怒2》11月6日合服公告</a>
+                            <span class="time">11-06</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/mhzn2/xwzx/4407.html" title="《蛮荒之怒2》11月1日更新公告" target="_blank">[公告] 《蛮荒之怒2》11月1日更新公告</a>
+                            <span class="time">10-31</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/mhzn2/xwzx/4395.html" title="91游戏圈《蛮荒之怒2》10月30日合服公告" target="_blank">[公告] 91游戏圈《蛮荒之怒2》10月30日合服公告</a>
+                            <span class="time">10-30</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/mhzn2/xwzx/4326.html" title="《蛮荒之怒2》10月25日更新公告" target="_blank">[公告] 《蛮荒之怒2》10月25日更新公告</a>
+                            <span class="time">10-24</span>
+                        </li>
+                                    </ul>
+            </div>
+            <div class="in_news_list" style="display:none">
+                <ul>
+                                                                <li>
+                            <a href="http://www.91yxq.com/mhzn2/xwzx/4232.html" title="《蛮荒之怒2》精彩开服活动" target="_blank">[活动] 《蛮荒之怒2》精彩开服活动</a>
+                            <span class="time">10-20</span>
+                        </li>
+                                    </ul>
+            </div>
+        </div>
+        <script>
+        $(".main_tab").foShow({
+            mains:$(".main_tab .in_news_list"),
+            navs:$("#myTab1 .li_o"),
+            prev:null,
+            next:null,
+            duration:300,
+            interval:null,
+            curClass:"li_a",
+            hovering:false
+        });
+        </script>
+
+        <!--客服-->
+        <div class="fr"><a href="Javascript:void(0);" onclick="alert('敬请期待');" class="pqimg in_kf" target="_blank"></a></div>
+
+        <div class="blank15"></div>
+        <!--游戏指南-->
+        <div class="inner_box">
+            <div class="hd_tab">
+                <div class="li_a">游戏指南</div>
+                <a href="./yxzl/index.html" class="fr more">更多 >></a>
+            </div>
+            <div class="in_guide">
+                <ul class="clearfix">
+                    <li>
+                        <div class="fl"><i class="pqimg guide_ic01"></i></div>
+                        <div class="text">
+                            <h3>新手指南</h3>
+                            <div class="txt">
+                                                                                                                                        <a href="http://www.91yxq.com/mhzn2/yxzl/x2229210/4236.html"  target="_blank">基本操作</a>
+                                                                    <span>|</span>                                    <a href="http://www.91yxq.com/mhzn2/yxzl/x5929210/4235.html"  target="_blank">游戏简介</a>
+                                                                    <span>|</span>                                    <a href="http://www.91yxq.com/mhzn2/yxzl/x4329210/4234.html"  target="_blank">职业介绍</a>
+                                                                    <span>|</span>                                    <a href="http://www.91yxq.com/mhzn2/yxzl/x1529210/4233.html"  target="_blank">装备提升</a>
+                                                                <span>|</span>
+                                <a href="./yxzl/xszn.html"  target="_blank">更多</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="fl"><i class="pqimg guide_ic02"></i></div>
+                        <div class="text">
+                            <h3>高手进阶</h3>
+                            <div class="txt">
+                                                                                                                                        <a href="http://www.91yxq.com/mhzn2/yxzl/11182020/4240.html" target="_blank">比武大会</a>
+                                                                    <span>|</span>                                    <a href="http://www.91yxq.com/mhzn2/yxzl/11592020/4239.html" target="_blank">个人BOSS</a>
+                                                                    <span>|</span>                                    <a href="http://www.91yxq.com/mhzn2/yxzl/11382020/4238.html" target="_blank">BOSS积分</a>
+                                                                    <span>|</span>                                    <a href="http://www.91yxq.com/mhzn2/yxzl/11202020/4237.html" target="_blank">BOSS之家</a>
+                                                                <span>|</span>
+                                <a href="./yxzl/gsjj.html" target="_blank">更多</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="clearfix">
+                    <li>
+                        <div class="fl"><i class="pqimg guide_ic03"></i></div>
+                        <div class="text">
+                            <h3>游戏系统</h3>
+                            <div class="txt">
+                                                                                                                                        <a href="http://www.91yxq.com/mhzn2/yxzl/17xx31/4244.html" target="_blank">技能系统</a>
+                                                                    <span>|</span>                                    <a href="http://www.91yxq.com/mhzn2/yxzl/17xx31/4243.html" target="_blank">合成系统</a>
+                                                                    <span>|</span>                                    <a href="http://www.91yxq.com/mhzn2/yxzl/17xx31/4242.html" target="_blank">帝城争霸</a>
+                                                                    <span>|</span>                                    <a href="http://www.91yxq.com/mhzn2/yxzl/17xx31/4241.html" target="_blank">尸王殿</a>
+                                                                <span>|</span>
+                                <a href="./yxzl/yxxt.html" target="_blank">更多</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="fl"><i class="pqimg guide_ic04"></i></div>
+                        <div class="text">
+                            <h3>特色玩法</h3>
+                            <div class="txt">
+                                                                                                                                        <a href="http://www.91yxq.com/mhzn2/yxzl/31115f/4248.html" target="_blank">夜袭王城</a>
+                                                                    <span>|</span>                                    <a href="http://www.91yxq.com/mhzn2/yxzl/31505f/4247.html" target="_blank">九层妖塔</a>
+                                                                    <span>|</span>                                    <a href="http://www.91yxq.com/mhzn2/yxzl/31305f/4246.html" target="_blank">膜拜城主</a>
+                                                                    <span>|</span>                                    <a href="http://www.91yxq.com/mhzn2/yxzl/31065f/4245.html" target="_blank">通天塔</a>
+                                                                <span>|</span>
+                                <a href="./yxzl/tswf.html" target="_blank">更多</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="blank15"></div>
+        <!--游戏截图-->
+        <div class="fl w480">
+            <!--游戏载图-->
+            <div class="inner_box" style="min-height:230px">
+                <div class="hd_tab">
+                    <div class="li_a">游戏截图</div>
+                    <a href="./yxjt/index.html" class="fr more">更多 >></a>
+                </div>
+                <ul class="in_pic_list">
+                                                            <li>
+                        <a href="http://www.91yxq.com/mhzn2/yxjt/4259.html" target="_blank">
+                            <div class="pic"><img src="http://www.91yxq.com/mhzn2/rsc/games/mhzn2/yxjt/h000/h00/img201710201418050.jpg" /></div>
+                            <div class="text">游戏截图4</div>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="http://www.91yxq.com/mhzn2/yxjt/4258.html" target="_blank">
+                            <div class="pic"><img src="http://www.91yxq.com/mhzn2/rsc/games/mhzn2/yxjt/h000/h00/img201710201417430.jpg" /></div>
+                            <div class="text">游戏截图3</div>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="http://www.91yxq.com/mhzn2/yxjt/4257.html" target="_blank">
+                            <div class="pic"><img src="http://www.91yxq.com/mhzn2/rsc/games/mhzn2/yxjt/h000/h00/img201710201417170.jpg" /></div>
+                            <div class="text">游戏截图2</div>
+                        </a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+
+        <!--游戏攻略-->
+        <div class="fr w480">
+            <!--游戏载图-->
+            <div class="inner_box" style="min-height:230px">
+                <div class="hd_tab">
+                    <div class="li_a">游戏攻略</div>
+                    <a href="./yxgl/index.html" class="fr more">更多 >></a>
+                </div>
+                <ul class="in_news_list">
+                                                            <li>
+                        <span class="time">10-20</span>
+                        <a href="http://www.91yxq.com/mhzn2/yxgl/4252.html" target="_blank">[攻略] 《蛮荒之怒2》日常福利</a>
+                    </li>
+                                        <li>
+                        <span class="time">10-20</span>
+                        <a href="http://www.91yxq.com/mhzn2/yxgl/4251.html" target="_blank">[攻略] 《蛮荒之怒2》每日必做</a>
+                    </li>
+                                        <li>
+                        <span class="time">10-20</span>
+                        <a href="http://www.91yxq.com/mhzn2/yxgl/4250.html" target="_blank">[攻略] 《蛮荒之怒2》升级技巧</a>
+                    </li>
+                                        <li>
+                        <span class="time">10-20</span>
+                        <a href="http://www.91yxq.com/mhzn2/yxgl/4249.html" target="_blank">[攻略] 《蛮荒之怒2》升级流程</a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+
+        <div class="blank15"></div>
+        <!--友情链接-->
+        <!--
+        <div class="inner_box">
+            <div class="hd_tab"><div class="li_a">游戏链接</div></div>
+            <div class="links">
+                <B>Error:</B>The NodeID <font color=#FF0000>6750</font> you have set does not exist!                            </div>
+        </div>
+        -->
+
+        <!--相关游戏-->
+        <div class="fl w980">
+            <!--相关游戏-->
+            <div class="inner_box">
+                <div class="hd_tab">
+                    <div class="li_a">其他游戏</div>
+                    <a href="http://www.91yxq.com" class="fr more" target="_blank">更多 >></a>
+                </div>
+
+                <ul class="in_pic_list">
+                                        <li>
+                        <a href="http://www.91yxq.com" target="_blank">
+                            <div class="text">91游戏圈</div>
+                        </a>
+                    </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/hys/" target="_blank">
+                                <div class="text">魔神变</div>
+                            </a>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/dpsc/" target="_blank">
+                                <div class="text">斗破沙城</div>
+                            </a>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/mhzn2/" target="_blank">
+                                <div class="text">蛮荒之怒2</div>
+                            </a>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/rxhw/" target="_blank">
+                                <div class="text">热血虎卫</div>
+                            </a>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/sd/" target="_blank">
+                                <div class="text">神道</div>
+                            </a>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/zgzn/" target="_blank">
+                                <div class="text">战国之怒</div>
+                            </a>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/czdtx/" target="_blank">
+                                <div class="text">村长打天下</div>
+                            </a>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/rxsg3/" target="_blank">
+                                <div class="text">热血三国3</div>
+                            </a>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/nslm/" target="_blank">
+                                <div class="text">女神联盟</div>
+                            </a>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/cycs2/" target="_blank">
+                                <div class="text">赤月传说2</div>
+                            </a>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/xxd2/" target="_blank">
+                                <div class="text">仙侠道2</div>
+                            </a>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/qyz/" target="_blank">
+                                <div class="text">青云志</div>
+                            </a>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/fyws/" target="_blank">
+                                <div class="text">风云无双</div>
+                            </a>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/xsqst/" target="_blank">
+                                <div class="text">勇者立志传</div>
+                            </a>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/dyjd/" target="_blank">
+                                <div class="text">第一舰队</div>
+                            </a>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/blr/" target="_blank">
+                                <div class="text">不良人</div>
+                            </a>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/wszzl/" target="_blank">
+                                <div class="text">武神赵子龙</div>
+                            </a>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/cgtx/" target="_blank">
+                                <div class="text">操戈天下</div>
+                            </a>
+                        </li>
+                                            <li>
+                            <a href="http://www.91yxq.com/sywz/" target="_blank">
+                                <div class="text">神印王座</div>
+                            </a>
+                        </li>
+                                            <li>
+                            <a href="http://www.81900.com/" target="_blank">
+                                <div class="text">大天使之剑</div>
+                            </a>
+                        </li>
+                                            <li>
+                            <a href="http://www.81900.com/" target="_blank">
+                                <div class="text">H5游戏</div>
+                            </a>
+                        </li>
+                                    </ul>
+            </div>
+        </div>
+
+        <div class="blank15"></div>
+    </div>
+
+    <!--页脚-->
+    <input class="gameId" type="hidden" value="22">
+    <div class="foot">
+    <div class="foot_copy">
+        <p>
+            <a href="http://www.91yxq.com/doc/aboutus.html" target="_blank">关于我们</a>
+            <span class="line">|</span>
+            <a href="http://www.91yxq.com/fcm/" target="_blank">家长监护</a>
+            <span class="line">|</span>
+            <a href="http://www.91yxq.com/doc/contactus.html" target="_blank">联系我们</a>
+            <span class="line">|</span>
+            <a href="http://www.91yxq.com/doc/cooperation.html" target="_blank">商务合作</a>
+            <span class="line">|</span>
+            <a href="http://www.91yxq.com/doc/jfcl.html" target="_blank">纠纷处理</a>
+            <span class="line">|</span>
+            <a href="http://www.91yxq.com/doc/fcm.html" target="_blank">防沉迷</a>
+        </p>
+        <p>Copyright ? 2012 - 2017 南京魔苹网络科技有限公司 版权所有 <a href="http://www.miitbeian.gov.cn/" target="_blank">苏ICP备14015522号-1</a> 《网络文化经营许可证》编号：<a href="http://7xpfbb.com1.z0.glb.clouddn.com/wangwen.pdf" target="_blank">苏网文(2016)1086-026号</a></p>
+    </div>
+    <div class="foot_prove">
+        <a href="http://7xpfbb.com1.z0.glb.clouddn.com/wangwen.pdf" class="prove_ic1"></a>
+    </div>
+    <div class="foot_msg">抵制不良游戏，拒绝盗版游戏。注意自我保护，谨防受骗上当。适度游戏益脑，沉迷游戏伤身。合理安排时间，享受健康生活</div>
+    <div class="foot_msg data"> </div>
+    <div class="foot_msg">文化部网络游戏举报和联系电子邮箱：wlwh@vip.sina.com 纠纷处理方式：联系客服或依《用户协议》约定方式处理</div>
+</div>
+
+<!-- <div style="margin-right:-695px; position:fixed; top:130px; right:50%" id="activity">
+    <div style="width:125px; height:350px; z-index:1; visibility:visible; border:0;">
+        <a id="6k_url" href="http://www.6kwan.com/qjsx/index.html" target="_blank" style="text-decoration:none; display:block; height:350px; width:125px"></a>
+    </div>
+    <div style=" position:absolute; top:0; left:0; z-index:-1">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="192" height="136">
+            <param name="movie" value="http://image.777wan.com/common/swf/125X350.swf"/>
+            <param name="quality" value="high"/>
+            <param name="wmode" value="opaque"/> -->
+            <!--此处添加flash-->
+            <!-- <embed src="http://image.777wan.com/common/swf/125X350.swf" quality="high" wmode="opaque" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="125" height="350"></embed>
+        </object>
+    </div>
+    <a href="javascript:void(0);" id="close" style="display:block; background:#0f0f0f; font-size:12px; color:#999; text-align:center; line-height:20px">关闭</a>
+</div>
+</div>
+<script src="http://image.777wan.com/common/js/6k_url.js" type="text/javascript"></script> -->
+<script type="text/javascript">
+    var gameId = $(".gameId").val();
+    var arr = new Array();
+
+    arr[1]  = '软著登字第1101286号 | 新广出审[2016]70号 | 文网游备字[2014]W-RPG058号';
+    arr[2]  = '软著登字第0876687号 | 新广出审[2015]471号 | 文网游备字[2016]W-RPG7887号';
+    arr[3]  = '软著登字第1205709号 | 新广出审[2016]851号 | 文网游备字[2017]W-RPG0051号';
+    arr[5]  = '软著登字第0895617号 | 新广出审[2015]1042号 | 文网游备字[2015]W-RPG0506号';
+    arr[6]  = '软著登字第1099513号 | 新广出审[2016]489号 | 文网游备字]2016]W-SLG4122号';
+    arr[7]  = '软著登字第0548298号 | 新出审字[2013]893号 | 文网游备字[2016]W-RPG0284号';
+    arr[8]  = '软著登字第1079940号 | 新广出审[2016]573号 | 文网游备字[2016]W-RPG692号';
+    arr[9]  = '软著登字第0653615号 | 新广出审[2014]430号 | 文网游备字[2014]W-RPG058号';
+    arr[11] = '软著登字第1067489号 | 新广出审[2015]1334号 | 文网游备字[2015]W-RPG1172号';
+    arr[12] = '软著登字第1207149号 | 新广出审]2016]796号 | 文网游备字]2016]W-RPG5376号';
+    arr[13] = '软著登字第0569816号 | 新广出审[2014]424号 | 文网游备字[2014]W-RPG054号';
+    arr[14] = '软著登字第0820286号 | 新广出审[2015]228号 | 文网游备字(2015)W-RPG0229号';
+    arr[15] = '软著登字第1161752号 | 新广出审[2016]3180号 | 文网游备字[2016]W-SLG8068号';
+    arr[16] = '软著登字第1221251号 | 新广出审[2016]1407号 | 文网游备字[2017]W-RPG0002号';
+    arr[17] = '软著登字第0955694号 | 新广出审[2015]1066号 | 文网游备字[2015]W-RPG0460号';
+    arr[18] = '软著登字第1123541号 | 新广出审[2016]383号 | 文网游备字[2016]W-RPG0789号';
+    arr[19] = '软著登字第1476462号 | 新广出审[2017]5111号 | 文网游备字[2017]W-RPG0034号';
+    arr[20] = '软著登字第1492064号 | 新广出审[2014]277号 | 文网游备字[2013]W-RPG164号';
+    arr[21] = '软著登字第0779496号 | 新广出审[2015]157号 | 文网游备字[2014]W-RPG159号';
+    arr[22] = '软著登字第1677262号 | 新广出审[2017]5140号 | 文网游备字[2016]W-RPG7887号';
+
+    $('.data').text(arr[gameId]);
+</script>
+
+    <script type="text/javascript">
+    jsScroll(document.getElementById('div1'), 8, 'divScrollBar');
+    //最后登录游戏信息
+$(function(){
+
+    var login_game_info = unescape(getCookie('login_game_info'));
+    if(login_game_info != 0){
+        var gameList = login_game_info.split("<a");
+        if(gameList.length>0){
+            var i,gameinfo,game_id=0,href = '',server_name = '';
+            for(i in gameList){
+                gameinfo = gameList[i].split("_");
+                if(gameinfo[0] == 22){
+                    game_id = gameinfo[0];
+                    href = "http://www.91yxq.com/main.php?act=gamelogin&game_id="+game_id+"&server_id="+gameinfo[1];
+                    server_name = gameinfo[2];
+                    jQuery('#last_server').attr('href',href).html(server_name);
+                    jQuery('#enterGameBtn').attr('href',href);
+                    break;
+                }
+            }
+            if(game_id == 0){
+                jQuery('#enterGameBtn').hide();
+            }
+
+        }else{
+            jQuery('#enterGameBtn').hide();
+        }
+    }
+})
+    </script>
+
+</div>
+</body>
+</html>

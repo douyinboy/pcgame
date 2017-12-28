@@ -1,0 +1,90 @@
+<form id="pagerForm" action="" method="post">
+    <input type="hidden" name="access" value="1"/>
+    <input type="hidden" name="pageNum" value="<{$currentpage}>"/>
+    <input type="hidden" name="numPerPage" value="<{$numperpage}>"/>
+    <input type="hidden" name="name" value="<{$smarty.post.name}>"/>
+    <input type="hidden" name="id" value="<{$smarty.post.id}>"/>
+</form>
+<div class="pageHeader">
+    <form onsubmit="return navTabSearch(this);" action="" method="post">
+    <input type="hidden" name="access" value="1"/>    
+    <div class="searchBar">
+        <ul class="searchContent">
+            <li> 
+                <label>成员名：</label>
+                <input type="text" name="name" value="<{$smarty.post.name}>"/>
+            </li>
+        </ul>
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="add" title="添加成员" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=add&navTabId=<{$smarty.get.navTabId}>" height="205" target="dialog" mask="true"><span>新增</span></a></li>
+            <li><a class="edit" title ="编辑成员信息" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=add&id={id}&navTabId=<{$smarty.get.navTabId}>" height="205" target="dialog" mask="true" warn="您尚未选择要编辑的公会成员噢！"><span>编辑</span></a>
+       </ul>
+    </div>
+    <table class="table" width="100%"  layoutH="137">
+        <thead>
+        <tr>
+            <th width="22"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
+            <th width="80">成员ID</th>
+            <th width="160">成员名</th>
+            <th width="130">登录账号</th>
+            <th width="160">添加时间</th>
+            <th width="160">登录次数</th>
+            <th width="160">最后登录地区</th>
+            <th width="110">当前状态</th>
+            <th width="160" >操作</th>
+        </tr>
+        </thead>
+        
+        <tbody>
+            <td>--</td>
+            <td><{$adminInfo['uid']}></td>
+                <td><{$adminInfo['name']}>(会长)</td>
+                <td><{$adminInfo['account']}></td>
+                <td><{$adminInfo['regdate']|default:"--"}></td>
+                <td><{$adminInfo['logincount']+1|default:"--"}></td>
+                <td><{$adminInfo['loginaddress']|default:"--"}></td>
+                <td>正常</td>
+                <td>
+                    -----<a title="获取注册链接" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=geturl&id=0&navTabId=get_reg_url"  height="315" width="600" target="dialog" rel="get_reg_url" mask="true">获取链接</a>
+                </td>
+            <{foreach item=vo from=$data name=test}>
+            <tr target="sid" rel="1" style="background-color: <{if $smarty.foreach.test.iteration%2 !=0}> #f8fdfc;<{/if}>">
+                <td><input name="ids" value="<{$vo.site_id}>" type="checkbox"></td>
+                <td><{$vo.site_id}></td>
+                <td><{$vo.author}></td>
+                <td><{$vo.aAccount}></td>
+                <td><{$vo.addtime}></td>
+                <td><{$vo['logincount']|default:"--"}></td>
+                <td><{$vo['loginAddress']|default:"--"}></td>
+                <td><{if $vo.state==1}>正常<{else}>禁止<{/if}></td>
+                <td>
+                    <a title="确定要删该成员信息吗？" target="ajaxTodo" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=del&id=<{$vo.site_id}>&navTabId=<{$smarty.get.navTabId}>" class="btnDel">删除</a>
+                    <a title="编辑成员信息" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=add&id=<{$vo.site_id}>&navTabId=<{$smarty.get.navTabId}>" class="btnEdit"  height="205" target="dialog" mask="true">编辑</a>
+                    <a title="获取注册链接" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=geturl&id=<{$vo.site_id}>&navTabId=get_reg_url"  height="315" width="600" target="dialog" rel="get_reg_url" mask="true">获取链接</a>
+                </td>
+            </tr>
+            <{/foreach}>
+        </tbody>
+    </table>
+    <div class="panelBar">
+        <div class="pages"><span>显示</span>
+            <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                <option <{if $smarty.post.numPerPage==20}>selected<{/if}>  value="20">20</option>
+                <option <{if $smarty.post.numPerPage==50}>selected<{/if}> value="50">50</option>
+                <option <{if $smarty.post.numPerPage==100}>selected<{/if}> value="100">100</option>
+                <option <{if $smarty.post.numPerPage==200}>selected<{/if}> value="200">200</option>
+            </select><span>条，共<{$totalcount}>条</span>
+        </div>
+        <div class="pagination" targetType="navTab" totalCount="<{$totalcount}>" numPerPage="<{$numperpage}>" pageNumShown="10" currentPage="<{$currentpage}>"></div>
+    </div>
+</div>

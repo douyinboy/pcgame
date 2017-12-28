@@ -1,0 +1,86 @@
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, em, img, dl, dt,
+dd, ol, ul, li, form, label, i, input, button, textarea{ margin:0; padding:0; border:0; outline:0;
+vertical-align:baseline; font-size:100%; font-family:inherit; font-weight:inherit; font-style:normal; }
+img { border:0; }
+li { list-style:none; }
+a img { border: none; }
+em{font-style:normal; font-weight: bold;}
+body {font-family:'宋体',Arial, Helvetica, Tahoma, Helvetica; color:#fff; font-size:14px; overflow: hidden;}
+/* 常用基础样式 */
+a:link, a:visited, a:active { text-decoration:none;}
+a:hover {text-decoration:underline;}
+.fl{float:left;}
+.fr{float:right;}
+.clearfix:after{content:"\200B";display:block;height:0;clear:both;overflow:hidden;}
+.clearfix{*zoom:1;}
+/*登录页面*/
+.log_box{width: 580px; height: 355px; overflow:hidden;position:relative;background:url(../images/bg.jpg) no-repeat;}
+/*导航*/
+.nav{height:36px;margin-left:3px;}
+.nav a{display:block;width:114px;height:36px;background:url(../images/nav.png) no-repeat 0 0;}
+.nav a.a2{background-position:-114px 0;}
+.nav a.a3{background-position:-228px 0;}
+.nav a.a4{background-position:-342px 0;}
+.nav a.a5{width:116px;background-position:-456px 0;}
+.nav a.a1:hover{background-position:0 -40px;}
+.nav a.a2:hover{background-position:-114px -40px;}
+.nav a.a3:hover{background-position:-228px -40px;}
+.nav a.a4:hover{background-position:-342px -40px;}
+.nav a.a5:hover{background-position:-456px -40px;}
+/*banner*/
+.banner{width:263px; height:170px;padding:4px 0 5px 12px;}
+/*新闻*/
+.news{width:236px; height:180px; position:absolute; top:40px;left:300px;}
+.news_til{height:30px;}
+.more{color:#9fa3be;font-size:12px;line-height:30px;}
+.news_con li{font:12px/26px SimSun; color:#62534b;border-bottom:1px dashed #9fa3be;}
+.news_con li p{float:left; display:inline; width:80%; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+.news_con li a{color:#9fa3be;}
+.news_con li span{float:right; display:inline;}
+.news_con li.font_b{font-weight:bold; color:#c19781;}
+.news_con li.font_b a{color:#c19781;}
+.news_con li:hover{color:#c19781;}
+.news_con li:hover a{color:#c19781;}
+/*登录*/
+.login_box{padding-left:12px;width:263px;position:relative;margin-top: 10px;}
+.login_msg,.reg_msg{font:12px SimSun; color:red; padding-left:75px; margin:5px 0;}
+.log_in li{overflow: hidden;margin-bottom: 5px;}
+.log_in li span{width:78px;height:34px;float:left; display:block; text-align:right; font:14px/28px SimSun; color:#9c9a9a;}
+.log_in .user{background:url(../images/bg_user.png) no-repeat 29px 5px;}
+.log_in .psw{background:url(../images/bg_code.png) no-repeat 26px 5px;}
+.log_in .psw02{background:url(../images/bg_code02.png) no-repeat 0 5px;background-size:  auto 18px;}
+.log_in li input{width:160px;height:20px;line-height:20px;background:#170300; border:1px solid #531c11; margin-left:10px; padding:5px; color:#9c9a9a;}
+.log_btn, .reg_btn,.reg_btn02{width:165px; height:51px; background:url("../images/icon.png") no-repeat; display:block;margin-bottom:10px;}
+.login_btns{position: absolute;right:-200px;top: 0;}
+.log_btn{background-position:0 -41px;}
+.reg_btn{background-position:0 -101px;}
+.reg_btn02{background-position:0 -160px;}
+.log_other{text-align:right;line-height:20px;}
+.log_other a{font:12px/20px SimSun; color:#a08f7c;margin-right:18px;}
+/*注册页面/////////////////////////////*/
+.reg_other{margin-top:20px;}
+.reg_other a{text-decoration:underline; color:#a08f7c; width:165px; text-align:center; font:12px/30px SimSun; display:block; margin-left:75px;}
+.reg_other a.btn_reg{background:url(../images/icon.png) no-repeat; background-position:0 -160px; height:53px; margin-bottom:10px;}
+
+.main{width: 580px; height: 355px; overflow:hidden; background:url(http://p1.ifengimg.com/8369833f2e281cb1/2016/37/bg.jpg) no-repeat;}
+/*服务列表*/
+.serve_data{height:155px; padding-left:50px; margin-right:45px; overflow-y: auto; clear: both;}
+.serve_data h3{font-size: 14px; font-weight: bold; text-align: center; padding-bottom:10px; color: #fff;}
+.abuttonlv,.abuttonhu {display: block;font-size: 14px;text-align: center;margin-left:15px;overflow:hidden;float: left;color:#c49454;}
+.abuttonhu:link,.abuttonhu:visited {color:#ffc600;}
+.abuttonhu { background: url(http://p2.ifengimg.com/8369833f2e281cb1/2016/25/icon2_03.png) no-repeat 0 -45px; width: 128px; height: 29px; line-height: 29px; font-weight: bold;cursor:pointer;}
+.abuttonlv {background: url(http://p2.ifengimg.com/8369833f2e281cb1/2016/25/icon2_03.png) no-repeat 0 0;width: 128px; height: 29px; line-height: 29px; margin-bottom:15px;cursor:pointer;}
+.abuttonlv:hover{background:url(http://p2.ifengimg.com/8369833f2e281cb1/2016/25/icon2_03.png) no-repeat 0 -45px;}
+
+/* 登录 */
+.login_form {padding:45px 0 45px;text-align: center;}
+.login_form .item {position:relative; clear: both; margin-bottom: 15px; overflow:hidden;}
+.login_form .item .check{float: left; margin-left:70px;}
+.login_form .item span.agree {float: left; *margin-top:2px; color: #c7892c; font-size:12px; margin-left:2px;}
+.login_form .item span.agree a:link,.login_form .item span.agree a:visited {color: #c7892c}
+.login_form .item .foget_pass{font-size:12px; float: right; margin-right:20px;}
+
+.login_form p{padding-bottom:30px;padding-left:25px;color:#ffab49}
+.login_form p span{float:left; line-height: 29px;}
+
+.red{color:red!important;}

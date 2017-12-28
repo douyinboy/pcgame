@@ -1,0 +1,118 @@
+<html><head><title><?php echo $_LANG_SKIN['title'];?></title>
+<style type="text/css"><!--* {font-family: "Courier New", "Courier"; font-size: 12px;}--></style>
+</head>
+<script>
+<?php if($this->_tpl_vars['include_loop_error']): ?>
+var include_loop_Error = true;
+<?php else: ?>
+var include_loop_Error = false;
+<?php endif;?>
+
+
+<?php if($this->_tpl_vars['include_if_error']): ?>
+var include_if_Error = true;
+<?php else: ?>
+var include_if_Error = false;
+<?php endif;?>
+
+
+function init()
+{
+	if(include_loop_Error) {
+		alert("<?php echo $_LANG_SKIN['error_loop'];?>");
+	}
+
+	if(include_if_Error) {
+		alert("<?php echo $_LANG_SKIN['error_if'];?>");
+	}
+}
+var lastObj = null;
+function focusObj(obj) {
+	//alert(obj)
+	obj.style.backgroundColor='#CCCCCC';
+	if(lastObj != null) {
+		lastObj.style.backgroundColor='';
+	}
+	lastObj = obj;
+}
+</script>
+<script>
+function reportError(msg,url,line){
+line-=14;
+var str='You have found an error as below: \n\n';
+str+='Err: '+msg+' on line: '+(line);
+alert(str);
+opener.goto(line);
+opener.focus();
+window.onerror=null;
+setTimeout('self.close()',10);
+return true;
+}
+window.onerror = reportError;
+</script>
+
+<body onload="javascript:init();" topmargin="0" leftmargin="0" bgColor="#ffffff">
+<?php $this->_tpl_vars['data'] = explode('<br />', $this->_tpl_vars['content']) ; ?>
+
+
+ <div style="white-space: nowrap;">
+ <table border=0>
+  <tr><td align="right"  valign="top" >
+ 
+  <table border='0' cellpadding='0' cellspacing='0'>
+ 
+ <?php if(!empty($this->_tpl_vars['data'] )): 
+
+ $this->_tpl_vars['kTemplate_i'] = 1;
+ 
+
+ $this->_tpl_vars['kTemplate_data'] = array();
+ foreach($this->_tpl_vars['data'] as $this->_tpl_vars['kTemplate_key']=>$this->_tpl_vars['kTemplate_var']) {
+
+ $this->_tpl_vars['kTemplate_data']["{$this->_tpl_vars['kTemplate_i']}"] = $this->_tpl_vars['kTemplate_var']; 
+
+ $this->_tpl_vars['kTemplate_i']++; 
+
+}
+
+ $this->_tpl_vars['data']=$this->_tpl_vars['kTemplate_data'];
+ foreach ($this->_tpl_vars['data'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+  <tr><td align="right"  height="18"  onselectstart="return false" style="white-space: nowrap;cursor: hand;" onclick="parent.tabClick(0);parent.document.FM.content.focus();parent.goto(<?php echo $this->_tpl_vars["key"];?>);" title="<?php echo $_LANG_SKIN['jump_to'];?>">
+&nbsp;<FONT   COLOR="#6F6F6F"><?php echo $this->_tpl_vars["key"];?></FONT>&nbsp;</td></tr>
+  <?php endforeach; endif;?>
+  </table>
+  </td>
+  
+  <td style="white-space: nowrap;" valign="top">
+ <table border='0' cellpadding='0' cellspacing='0'>
+
+ <?php if(!empty($this->_tpl_vars['data'] )): 
+
+ $this->_tpl_vars['kTemplate_i'] = 1;
+ 
+
+ $this->_tpl_vars['kTemplate_data'] = array();
+ foreach($this->_tpl_vars['data'] as $this->_tpl_vars['kTemplate_key']=>$this->_tpl_vars['kTemplate_var']) {
+
+ $this->_tpl_vars['kTemplate_data']["{$this->_tpl_vars['kTemplate_i']}"] = $this->_tpl_vars['kTemplate_var']; 
+
+ $this->_tpl_vars['kTemplate_i']++; 
+
+}
+
+ $this->_tpl_vars['data']=$this->_tpl_vars['kTemplate_data'];
+ foreach ($this->_tpl_vars['data'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+  <tr><td   height="18"  style="white-space: nowrap;" onClick="focusObj(this)"
+                    onDblClick="parent.tabClick(0);parent.document.FM.content.focus();parent.goto(<?php echo $this->_tpl_vars["key"];?>);" title="<?php echo $_LANG_SKIN['doubleclick_edit'];?>" >
+<?php echo $this->_tpl_vars["var"];?></td></tr>
+  <?php endforeach; endif;?>
+  </table>
+</td>
+  
+  </tr>
+  </table>
+ </div></h4><hr size=1> 
+<DIV align=center>Powered by <b>91yxq游戏官网发布系统</b> 2012-<?php echo date('Y');?> 南京魔苹网络科技有限公司 All rights reserved. </DIV> 
+
+</body></html>
+

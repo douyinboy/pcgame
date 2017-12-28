@@ -1,0 +1,21 @@
+<?php
+echo '<?php';
+// 优踢哎符八
+?>
+
+$ad_gameurl=array (
+<CMS action="LIST" return="List" NodeID="4" where="c.GameId!='' and c.GameName!='' and c.AdUrl!=''" orderby="c.GameId" />
+<LOOP name="List" var="var" key="key">
+  [$var.GameId] => 
+  array (
+    'game_id' => [$var.GameId],
+    'game_name' => '[$var.GameName]',
+    'game_root' => '[$var.GameWeb]',
+    'game_url' => '[$var.AdUrl]',
+  ),
+</LOOP>
+);
+
+<?php
+echo '?>';
+?>

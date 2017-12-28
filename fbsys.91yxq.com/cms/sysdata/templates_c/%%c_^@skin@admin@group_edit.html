@@ -1,0 +1,241 @@
+<?php include("../sysdata/templates_c/%%c_^@skin@admin@header.html");?>
+   <script type="text/javascript" language="javascript">
+function check(){
+ 	if(document.clientform.gName.value == ''){	
+
+	 		alert("<?php echo $_LANG_SKIN['error_gname_null'];?>");
+ 			document.clientform.gName.focus();
+			return false;
+	}else {
+		return true;
+	}
+	
+}
+</script>
+  <table border="0" cellspacing="1" cellpadding="4" width="95%"  align=center class="table_border">
+ <form name='clientform' id=clientform method='post' action='<?php echo $this->_tpl_vars["base_url"];?>o=edit_submit&gId=<?php echo $this->_tpl_vars["gInfo"]["gId"];?>'  >
+     <tr> 
+      <td colspan="2" class="table_header"><?php echo $_LANG_SKIN['topic'];?> </td>
+    </tr>
+   <tr> 
+      <td class="table_td1" width=180><?php echo $_LANG_SKIN['group_name'];?>:</td>
+      <td class="table_td2"><input name='gName' type='text' class='flat' id="username" tabindex='8'    size='25' value="<?php echo $this->_tpl_vars["gInfo"]["gName"];?>"></td>
+    </tr>
+	<!--
+    <tr> 
+      <td class="table_td1"><?php echo $_LANG_SKIN['publish_auth'];?>:</td>
+      <td class="table_td2"> <select name="gPublishAuth[]" size="8" multiple>
+               <?php if(!empty($this->_tpl_vars['pAuthInfo'] )): 
+ foreach ($this->_tpl_vars['pAuthInfo'] as  $this->_tpl_vars['var']): ?> 
+		 <?php if(strpos( $this->_tpl_vars["gInfo"]["gPublishAuth"] , ','.$this->_tpl_vars["var"]["pId"] .',' )): ?>
+
+          <option value="<?php echo $this->_tpl_vars["var"]["pId"];?>" selected><?php echo $this->_tpl_vars["var"]["pName"];?></option>
+		  <?php else: ?>
+	          <option value="<?php echo $this->_tpl_vars["var"]["pId"];?>" ><?php echo $this->_tpl_vars["var"]["pName"];?></option>
+	  <?php endif;?>
+          <?php endforeach; endif;?>
+                <option value=""></option>
+		  
+		  </select></td>
+    </tr>-->
+    <tr> 
+      <td class="table_td1"><?php echo $_LANG_SKIN['can_admin_login'];?>:</td>
+      <td class="table_td2"> 
+	    <?php if($this->_tpl_vars["gInfo"]["canLoginAdmin"] == 1): ?>
+	  <input name="canLoginAdmin" type="radio" id="hawking33" value="1" checked > 
+        <label for="hawking33"  ><?php echo $_LANG_SKIN_GLOBAL['yes'];?></label> 
+        <input name="canLoginAdmin" type="radio" value="0" id="hawking53" > 
+        <label for="hawking53"  ><?php echo $_LANG_SKIN_GLOBAL['no'];?></label>
+	  <?php else: ?>
+	  <input name="canLoginAdmin" type="radio" id="hawking32" value="1"  > 
+        <label for="hawking32"  ><?php echo $_LANG_SKIN_GLOBAL['yes'];?></label> 
+        <input name="canLoginAdmin" type="radio" value="0" id="hawking52" checked> 
+        <label for="hawking52"  ><?php echo $_LANG_SKIN_GLOBAL['no'];?></label>
+	<?php endif;?>
+	  </td>
+    </tr>
+ <tr> 
+      <td colspan="2" class="table_header"> &nbsp;</td>
+    </tr> 
+	<!--{{{-->
+
+ <tr> 
+      <td class="table_td1"><?php echo $_LANG_SKIN['parent_group'];?>:</td>
+      <td class="table_td2"> <select name="ParentGID"  >
+               <?php if(!empty($this->_tpl_vars['groupsInfo'] )): 
+ foreach ($this->_tpl_vars['groupsInfo'] as  $this->_tpl_vars['var']): ?> 
+			
+
+<?php if($this->_tpl_vars["gInfo"]["ParentGID"] == $this->_tpl_vars["var"]["gId"] ): ?>
+			<?php if($this->_tpl_vars["var"]["gId"] ==0): ?>
+          <option value="<?php echo $this->_tpl_vars["var"]["gId"];?>" selected><?php echo $_LANG_SKIN['root_group'];?></option>
+			<?php else: ?>
+          <option value="<?php echo $this->_tpl_vars["var"]["gId"];?>" selected><?php echo $this->_tpl_vars["var"]["gName"];?></option>
+			<?php endif;?>
+<?php elseif($this->_tpl_vars["var"]["gId"] == $this->_tpl_vars["gInfo"]["gId"]): ?>
+<?php else: ?>
+
+			<?php if($this->_tpl_vars["var"]["gId"] ==0): ?>
+          <option value="<?php echo $this->_tpl_vars["var"]["gId"];?>"  ><?php echo $_LANG_SKIN['root_group'];?></option>
+			<?php else: ?>
+          <option value="<?php echo $this->_tpl_vars["var"]["gId"];?>"  ><?php echo $this->_tpl_vars["var"]["gName"];?></option>
+			<?php endif;?>
+	  
+<?php endif;?>
+          <?php endforeach; endif;?>
+		  
+		  </select></td>
+    </tr>
+
+  <tr> 
+      <td class="table_td1"><?php echo $_LANG_SKIN['mk_group'];?>:</td>
+      <td class="table_td2"> 
+	    <?php if($this->_tpl_vars["gInfo"]["canMakeG"] == 1): ?>
+	  <input name="canMakeG" type="radio" id="canMakeG33" value="1" checked > 
+        <label for="canMakeG33"  ><?php echo $_LANG_SKIN_GLOBAL['yes'];?></label> 
+        <input name="canMakeG" type="radio" value="0" id="canMakeG53" > 
+        <label for="canMakeG53"  ><?php echo $_LANG_SKIN_GLOBAL['no'];?></label>
+	  <?php else: ?>
+	  <input name="canMakeG" type="radio" id="canMakeG32" value="1"  > 
+        <label for="canMakeG32"  ><?php echo $_LANG_SKIN_GLOBAL['yes'];?></label> 
+        <input name="canMakeG" type="radio" value="0" id="canMakeG52" checked> 
+        <label for="canMakeG52"  ><?php echo $_LANG_SKIN_GLOBAL['no'];?></label>
+	<?php endif;?>
+	  </td>
+    </tr>
+
+	 <tr> 
+      <td class="table_td1"><?php echo $_LANG_SKIN['mk_user'];?>:</td>
+      <td class="table_td2"> 
+	    <?php if($this->_tpl_vars["gInfo"]["canMakeU"] == 1): ?>
+	  <input name="canMakeU" type="radio" id="canMakeU33" value="1" checked > 
+        <label for="canMakeU33"  ><?php echo $_LANG_SKIN_GLOBAL['yes'];?></label> 
+        <input name="canMakeU" type="radio" value="0" id="canMakeU53" > 
+        <label for="canMakeU53"  ><?php echo $_LANG_SKIN_GLOBAL['no'];?></label>
+	  <?php else: ?>
+	  <input name="canMakeU" type="radio" id="canMakeU32" value="1"  > 
+        <label for="canMakeU32"  ><?php echo $_LANG_SKIN_GLOBAL['yes'];?></label> 
+        <input name="canMakeU" type="radio" value="0" id="canMakeU52" checked> 
+        <label for="canMakeU52"  ><?php echo $_LANG_SKIN_GLOBAL['no'];?></label>
+	<?php endif;?>
+	  </td>
+    </tr>
+	<!--}}}-->
+
+<?php if($this->_tpl_vars["session"]["sGIsAdmin"] == 1): ?>
+<tr> 
+      <td colspan="2" class="table_header"><?php echo $_LANG_SKIN['other_auth'];?></td>
+    </tr>
+    <tr> 
+      <td class="table_td1"><span class=highlight><?php echo $_LANG_SKIN['is_admin'];?>:</span></td>
+      <td class="table_td2"> 	 
+	   <?php if($this->_tpl_vars["gInfo"]["gIsAdmin"] == 1): ?>
+	  <input type="radio" name="isAdmin" value="1" id="hawking1" onclick="accessPermission('yes')" checked> 
+        <label for="hawking1"  ><?php echo $_LANG_SKIN_GLOBAL['yes'];?></label> <input name="isAdmin" type="radio" value="0"  id="hawking2" onclick="accessPermission('no')"> 
+        <label for="hawking2"  ><?php echo $_LANG_SKIN_GLOBAL['no'];?></label>
+	  <?php else: ?>
+	  <input type="radio" name="isAdmin" value="1" id="hawking1" onclick="accessPermission('yes')"> 
+        <label for="hawking1"  ><?php echo $_LANG_SKIN_GLOBAL['yes'];?></label> <input name="isAdmin" type="radio" value="0" checked id="hawking2" onclick="accessPermission('no')"> 
+        <label for="hawking2"  ><?php echo $_LANG_SKIN_GLOBAL['no'];?></label>
+	  <?php endif;?>
+	  
+	  </td>
+    </tr>
+    <tr> 
+      <td class="table_td1"><?php echo $_LANG_SKIN['site_admin'];?>:</td>
+      <td class="table_td2">
+ 	   <?php if($this->_tpl_vars["gInfo"]["canNode"] == 1): ?>
+  <input name="canNode" type="radio" id="hawking21" value="1" checked > 
+        <label for="hawking21"  ><?php echo $_LANG_SKIN_GLOBAL['yes'];?></label> <input name="canNode" type="radio" id="hawking22" value="0" > 
+        <label for="hawking22"  ><?php echo $_LANG_SKIN_GLOBAL['no'];?></label>
+		<?php else: ?>
+  <input name="canNode" type="radio" id="hawking21" value="1" > 
+        <label for="hawking21"  ><?php echo $_LANG_SKIN_GLOBAL['yes'];?></label> <input name="canNode" type="radio" id="hawking22" value="0" checked > 
+        <label for="hawking22"  ><?php echo $_LANG_SKIN_GLOBAL['no'];?></label>
+
+		<?php endif;?>
+	 </td>
+    </tr>
+    <tr> 
+      <td class="table_td1"><?php echo $_LANG_SKIN['tpl_admin'];?>:</td>
+      <td class="table_td2">
+ 	   <?php if($this->_tpl_vars["gInfo"]["canTpl"] == 1): ?>
+		  <input name="canTpl" type="radio" id="hawking23" value="1" checked> 
+        <label for="hawking23"  ><?php echo $_LANG_SKIN_GLOBAL['yes'];?></label> <input name="canTpl" type="radio" id="hawking25" value="0"  > 
+        <label for="hawking25"  ><?php echo $_LANG_SKIN_GLOBAL['no'];?></label> 
+	
+		<?php else: ?>
+			  <input name="canTpl" type="radio" id="hawking23" value="1" > 
+        <label for="hawking23"  ><?php echo $_LANG_SKIN_GLOBAL['yes'];?></label> <input name="canTpl" type="radio" id="hawking25" value="0" checked > 
+        <label for="hawking25"  ><?php echo $_LANG_SKIN_GLOBAL['no'];?></label> 
+		
+		<?php endif;?>	  
+	  
+</td>
+    </tr>
+
+	    <tr> 
+      <td class="table_td1"><?php echo $_LANG_SKIN['collection_admin'];?>:</td>
+      <td class="table_td2">
+ 	   <?php if($this->_tpl_vars["gInfo"]["canCollection"] == 1): ?>
+		  <input name="canCollection" type="radio" id="canCollection23" value="1" checked> 
+        <label for="canCollection23"  ><?php echo $_LANG_SKIN_GLOBAL['yes'];?></label> <input name="canCollection" type="radio" id="canCollection25" value="0"  > 
+        <label for="canCollection25"  ><?php echo $_LANG_SKIN_GLOBAL['no'];?></label> 
+	
+		<?php else: ?>
+			  <input name="canCollection" type="radio" id="canCollection23" value="1" > 
+        <label for="canCollection23"  ><?php echo $_LANG_SKIN_GLOBAL['yes'];?></label> <input name="canCollection" type="radio" id="canCollection25" value="0" checked > 
+        <label for="canCollection25"  ><?php echo $_LANG_SKIN_GLOBAL['no'];?></label> 
+		
+		<?php endif;?>	  
+	  
+</td>
+    </tr>
+
+<?php endif;?>
+    <tr> 
+      <td class="table_td1"><?php echo $_LANG_SKIN['group_info'];?>:</td>
+      <td class="table_td2"> <textarea name="gInfo" cols="50" rows="5" class='flat' id="groupinfo" ><?php echo $this->_tpl_vars["gInfo"]["gInfo"];?></textarea></td>
+    </tr>
+	<tr> 
+      <td class="table_td1"><?php echo $_LANG_SKIN['src_creator'];?> :</td>
+      <td class="table_td2"><?php echo userAdmin::getInfo($this->_tpl_vars["gInfo"]["CreationUserID"],'uName');?>
+	  
+	  </td>
+    </tr>
+    <tr> 
+      <td colspan="2" class="table_td2" align=center><input type='submit' name='submit' value='<?php echo $_LANG_SKIN_GLOBAL['submit_value'];?>' tabindex='13' onClick="return check();"> 
+        &nbsp;&nbsp;&nbsp;&nbsp; <input type="reset" name="Submit" value="<?php echo $_LANG_SKIN_GLOBAL['reset_value'];?>"></td>
+    </tr>
+</form>
+  </table>
+<!-------------->            
+					<script language='Javascript1.1'>
+				<!--
+				
+		
+
+				function accessPermission(mode) {
+					var f = document.clientform;
+
+					if(mode == 'no') {
+			
+					} else {
+						if(confirm("<?php echo $_LANG_SKIN['warning_set_admin'];?>")) {
+				
+
+						} else {
+					
+							eval( 'f.hawking2.checked= true' );
+
+							return false;
+						}
+
+					}
+				}
+
+		//-->
+				</script>
+					
+		</BODY>
+<?php include("../sysdata/templates_c/%%c_^@skin@admin@footer.html");?>

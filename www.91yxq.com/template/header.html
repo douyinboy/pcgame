@@ -1,0 +1,19 @@
+<!---头部-->
+<div class="head">
+	<div id="platform_top_div" class="m1200">
+        <a href="{%$root_url%}index.html" class="logo"></a>
+        
+        <!--导航-->
+        <div class="nav">
+            <a href="{%$root_url%}index.html">首页</a>
+            <a href="{%$root_url%}games/index.html">游戏大厅</a>
+            <a href="{%$root_url%}user.php" {%if $entrance=="user"%}class="on"{%/if%}>用户中心</a>
+            <a href="{%$pay_url%}">充值中心</a>
+            <a href="{%$root_url%}news/index.html">新闻中心</a>
+            <a href="{%$root_url%}help/index.html" {%if $entrance=="help"%}class="on"{%/if%}>客服中心</a>
+        </div>
+        
+        <!--游戏列表;登录注册按钮或登录后用户名js-->
+		<script src="{%$root_url%}/public/www_top.js"></script>
+    </div>
+</div>

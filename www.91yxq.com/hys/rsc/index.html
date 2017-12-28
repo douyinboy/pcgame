@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="网页游戏,网页游戏大全,网页游戏开服,网页游戏排行榜,网页游戏平台" />
+<meta name="description" content="91游戏平台，91游戏圈为您推荐热门的网页游戏，在这里你能找到各种好玩的网页游戏，网页游戏排行榜提供各种三国、仙侠、RPG类、策略类、养成类、回合制等精彩火爆的网页游戏大全及最新的网页游戏开服表。" />
+<title>网页游戏_网页游戏大全|开服|排行榜_91游戏平台-热门游戏</title>
+<link type="text/css" rel="stylesheet" href="http://image.demo.com/css/www/base.css" />
+<link type="text/css" rel="stylesheet" href="http://image.demo.com/css/www/public.css" />
+<link type="text/css" rel="stylesheet" href="http://image.demo.com/css/www/main_pq.css" />
+<script type="text/javascript" src="http://image.demo.com/js/jquery-1.10.2.min.js"></script>
+<script>
+$(document).ready(function(){
+	
+	//游戏选择条件
+	$(".drop_menu").hover(
+		function(){
+			$(this).children(".drop_box").show();
+			$(this).children(".arrow_box").addClass("arrow_box_on");
+		},
+		function(){
+			$(this).children(".drop_box").hide();
+			$(this).children(".arrow_box").removeClass("arrow_box_on");
+		}
+	);
+	jsonpGetGamesPage(1);
+})
+function jsonpGetGamesPage(page){
+	var GameTypeId = $("#GameTypeId").val();
+	var GameThemeId = $("#GameThemeId").val();
+	var GameInitialId = $("#GameInitialId").val();
+	$.ajax({
+		//type: "POST",  //jsonp 默认相当于get请求方式,设置type没有意义
+		url: "http://www.demo.com/games/get_game_list.php",
+		data: {type:GameTypeId,theme:GameThemeId,initial:GameInitialId,page:page},	//get方式提交到服务端的数据
+		dataType:'jsonp',
+		jsonp:'callback',				//默认值'callback',服务端用于接收回调函数名的get下标值
+		jsonpCallback:'jsonp_get_games_callback',	//提交到服务端的回调函数名,不设置默认由jquery随机生成
+		success: function(json){
+			$("#game_list_box").html(json.gameListHtml).hide().fadeIn(300);
+			$("#page_list_box").html(json.pageListHtml).hide().fadeIn(300);
+			if(json.pageListHtml == ""){
+				$("#page_list_box").hide();
+			}
+		}
+	});
+}
+function selectCondition(DataId,DataValue,thisElm){
+	$(thisElm).siblings("input").val(DataId);
+	$(thisElm).parent().hide().prev().removeClass("arrow_box_on").children(".t").html(DataValue);
+	
+	var page = 1;
+	jsonpGetGamesPage(page);
+}
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?40046e537679c6fcc02004afff9e4d2d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+
+<body>
+
+<!---头部-->
+<!---头部-->
+<div class="head">
+	<div id="platform_top_div" class="m1200">
+		
+        <a href="http://www.demo.com/index.html" class="logo"></a>
+        
+        <!--导航-->
+        <div class="nav">
+            <a href="http://www.demo.com/index.html" >首页<span class="line"></span></a>
+            <a href="http://www.demo.com/games/index.html" >游戏大厅<span class="line"></span></a>
+            <a href="http://www.demo.com/user.php">用户中心<span class="line"></span></a>
+            <a href="http://pay.demo.com">充值中心<span class="line"></span></a>
+            <a href="http://www.demo.com/news/index.html" >新闻中心<span class="line"></span></a>
+            <a href="http://www.demo.com/help/index.html" >客服中心<span class="line"></span></a>
+        </div>
+        
+		<!--游戏列表;登录注册按钮或登录后用户名js-->
+		<script src="http://www.demo.com/public/www_top.js"></script>
+        
+    </div>
+	
+</div>
+<!--banner-->
+<div class="m1200 pt20 pb20">
+			<a href="http://www.demo.com/hys/" target="_blank"><img src="http://image.demo.com/rsc/www/gamecenter/banner/h000/h00/img201703090952180.jpg" /></a>
+	</div>
+
+<!--主内容-->
+<div class="m1200 clearfix">
+	<!--左侧-->
+    <div class="fl w260">
+		
+    	<!--开服列表-->
+        <div class="m_box" id="svr_list_box">
+        	<script src="http://www.demo.com/public/svr_list_box.js"></script>
+        </div>
+        
+		<div class="mt15"></div>
+		
+		<!--客服中心-->
+        <div class="m_box" id="kefu_box">
+        	<script src="http://www.demo.com/public/kefu_box.js"></script>
+        </div>
+		
+    </div>
+    
+    <!--右侧-->
+    <div class="fr w920">
+        <div class="m_box mb15">
+            <div class="hd_title"><h2>游戏列表</h2></div>
+            <div class="clearfix" style="padding:40px 50px 0">
+				
+            	<div class="fl drop_menu">
+                    <a class="arrow_box" href="javascript:void(0)"><span class="arrow"><i></i></span><span class="t">游戏类型</span></a>
+                    <div class="drop_box" style="display:none">
+						<input type="hidden" name="GameTypeId" id="GameTypeId" value="0" autocomplete="off" />
+						                        <a href="javascript:void(0);" onclick="selectCondition(0,'游戏类型',this)">不限</a>
+						                        <a href="javascript:void(0);" onclick="selectCondition(1,'角色扮演',this)">角色扮演</a>
+						                        <a href="javascript:void(0);" onclick="selectCondition(2,'模拟经营',this)">模拟经营</a>
+						                        <a href="javascript:void(0);" onclick="selectCondition(3,'战争策略',this)">战争策略</a>
+						                        <a href="javascript:void(0);" onclick="selectCondition(4,'休闲竞技',this)">休闲竞技</a>
+						                    </div>
+                </div>
+                <div class="fl drop_menu">
+                    <a class="arrow_box" href="javascript:void(0)"><span class="arrow"><i></i></span><span class="t">游戏题材</span></a>
+                    <div class="drop_box" style="display:none">
+						<input type="hidden" name="GameThemeId" id="GameThemeId" value="0" autocomplete="off" />
+						                        <a href="javascript:void(0);" onclick="selectCondition(0,'游戏题材',this)">不限</a>
+						                        <a href="javascript:void(0);" onclick="selectCondition(1,'三国',this)">三国</a>
+						                        <a href="javascript:void(0);" onclick="selectCondition(2,'西游',this)">西游</a>
+						                        <a href="javascript:void(0);" onclick="selectCondition(3,'水浒',this)">水浒</a>
+						                        <a href="javascript:void(0);" onclick="selectCondition(4,'仙侠',this)">仙侠</a>
+						                        <a href="javascript:void(0);" onclick="selectCondition(5,'武侠',this)">武侠</a>
+						                        <a href="javascript:void(0);" onclick="selectCondition(6,'魔幻',this)">魔幻</a>
+						                        <a href="javascript:void(0);" onclick="selectCondition(7,'其他',this)">其他</a>
+						                    </div>
+                </div>
+                <div class="fl drop_menu">
+                    <a class="arrow_box" href="javascript:void(0)"><span class="arrow"><i></i></span><span class="t">字母排序</span></a>
+                    <div class="drop_box" style="display:none">
+						<input type="hidden" name="GameInitialId" id="GameInitialId" value="0" autocomplete="off" />
+                                                <a href="javascript:void(0);" onclick="selectCondition(0,'字母排序',this)">不限</a>
+						                        <a href="javascript:void(0);" onclick="selectCondition(1,'ABCDE',this)">ABCDE</a>
+						                        <a href="javascript:void(0);" onclick="selectCondition(2,'FGHIJ',this)">FGHIJ</a>
+						                        <a href="javascript:void(0);" onclick="selectCondition(3,'KLMNO',this)">KLMNO</a>
+						                        <a href="javascript:void(0);" onclick="selectCondition(4,'PQRST',this)">PQRST</a>
+						                        <a href="javascript:void(0);" onclick="selectCondition(5,'UWXYZ',this)">UWXYZ</a>
+						                    </div>
+                </div>          
+            </div>
+            <div class="game_list" id="game_list_box">
+                <ul>
+					<!--
+                    <li class="clearfix">
+                        <div class="pic"><img src="http://image.demo.com/images/www/280x145.jpg" /></div>
+                        <div class="txt">
+                            <div class="name">醉武侠贰</div>
+                            <div class="text">莽荒记网页游戏以同名网络小说《莽荒纪》为蓝本，玩家将置身小说中所描绘的的世界，以原创角色的身份与原著人物互动，推进游戏剧情的发展。游戏以小说世界观为基础。</div>
+                            <div><a href="javascript:ovid(0);" class="btn1">进入游戏</a><span class="f14 ml15"><a href="javascript:void(0);" target="_blank">官网</a><span class="line">|</span><a href="javascript:void(0);" target="_blank">礼包</a></span></div>
+                        </div>
+                    </li>
+                    -->
+                </ul>
+            </div>
+            
+            <!--翻页-->
+            <div class="page p50" id="page_list_box">
+                <!--<a href="javascript:void(0);" class="updow">&lt;</a> 
+                <a href="javascript:void(0);">1</a>
+                <a href="javascript:void(0);">2</a>
+                <a href="javascript:void(0);">3</a>
+                <a href="javascript:void(0)" class="on">4</a>
+                <a href="javascript:void(0);">5</a>
+                <span>...</span>
+                <a href="javascript:ovid(0);">20</a>
+                <a href="javascript:ovid(0);" class="updow">&gt;</a>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--页脚-->
+<div class="foot clearfix" id="footer_box">
+	<script src="http://www.demo.com/public/footer.js"></script>
+</div>
+
+</body>
+</html>

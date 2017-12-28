@@ -1,0 +1,72 @@
+<?php include("../sysdata/templates_c/%%c_^@skin@admin@header.html");?>
+
+  <table border="0" cellspacing="1" cellpadding="4" width="98%"  align=center class="table_border">
+<form action='<?php echo $this->_tpl_vars["base_url"];?>o=add_submit' method='post' enctype="multipart/form-data" name='clientform' id=clientform >
+    <tr> 
+      <td colspan="8" class="table_header"><?php echo $_LANG_SKIN['topic'];?></td>
+    </tr>
+    <tr> 
+      <td width="20%" class="table_td1"><?php echo $_LANG_SKIN['plugin_name'];?>:</td>
+      <td colspan=6 class="table_td2"><input name='pName' type='text' class='flat' id="pName" tabindex='8'> 
+        &nbsp;</td>
+    </tr>
+  <tr id=local > 
+      <td class="table_td1"><?php echo $_LANG_SKIN['plugin_path'];?>:</td>
+      <td colspan=6 class="table_td2">
+	  <select name="Path">
+	  <?php if(!empty($this->_tpl_vars['pList'] )): 
+ foreach ($this->_tpl_vars['pList'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+	  <option value="<?php echo $this->_tpl_vars["var"];?>"><?php echo $this->_tpl_vars["var"];?></option>
+	  <?php endforeach; endif;?>
+	  </select>
+        &nbsp; <?php echo $_LANG_SKIN['plugin_path_help'];?> </td>
+    </tr>
+
+<tr> 
+      <td width="20%" class="table_td1"><?php echo $_LANG_SKIN['AccessGroup'];?>:</td>
+      <td colspan=6 class="table_td2">	
+	  <select name="AccessGroup[]" size="8" multiple>
+		<option value="" ></option>
+<?php if(!empty($this->_tpl_vars['Group'] )): 
+ foreach ($this->_tpl_vars['Group'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+		<option value="<?php echo $this->_tpl_vars["var"]["gId"];?>" ><?php echo $this->_tpl_vars["var"]["gName"];?></option>
+<?php endforeach; endif;?>  
+		  </select>
+		  
+		  </td>
+    </tr>
+<tr> 
+      <td width="20%" class="table_td1"><?php echo $_LANG_SKIN['AccessUser'];?>:</td>
+      <td colspan=6 class="table_td2">	
+	  <select name="AccessUser[]" size="8" multiple>
+		<option value="" ></option>
+<?php if(!empty($this->_tpl_vars['User'] )): 
+ foreach ($this->_tpl_vars['User'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+		<option value="<?php echo $this->_tpl_vars["var"]["uId"];?>" ><?php echo $this->_tpl_vars["var"]["uName"];?></option>
+<?php endforeach; endif;?>  
+		  </select>
+		  
+		  </td>
+    </tr>
+
+
+
+<tr> 
+      <td width="20%" class="table_td1"><?php echo $_LANG_SKIN['plugin_license_key'];?>:</td>
+      <td colspan=6 class="table_td2"><textarea name="LicenseKey" cols="50" wrap="VIRTUAL" class="flat" id="LicenseKey" tabindex="8"></textarea> 
+        &nbsp;</td>
+    </tr>
+    <tr> 
+      <td class="table_td1"><?php echo $_LANG_SKIN['info'];?>:</td>
+      <td colspan=6 class="table_td2"><textarea name="Info" cols="50" rows="5" class="flat" id="fieldname2" tabindex="8"></textarea> 
+        &nbsp;</td>
+    </tr>
+
+    <tr> 
+      <td colspan="8" class="table_td2" align=center><input type='submit' name='submit' value='<?php echo $_LANG_SKIN_GLOBAL['submit_value'];?>' tabindex='13'> 
+        &nbsp;&nbsp;&nbsp;&nbsp; <input type="reset" name="Submit" value="<?php echo $_LANG_SKIN_GLOBAL['reset_value'];?>"></td>
+    </tr>
+</form>
+  </table>
+</BODY>
+<?php include("../sysdata/templates_c/%%c_^@skin@admin@footer.html");?>

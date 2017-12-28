@@ -1,0 +1,101 @@
+<form id="pagerForm" action="" method="post">
+    <input type="hidden" name="access" value="1"/>
+    <input type="hidden" name="pageNum" value="<{$currentpage}>"/>
+    <input type="hidden" name="numPerPage" value="<{$numperpage}>"/>
+    <input type="hidden" name="name" value="<{$smarty.post.name}>"/>
+    <input type="hidden" name="id" value="<{$smarty.post.id}>"/>
+    <input type="hidden" name="orderField" value="<{$orderField}>" class="orderField_input"/>
+    <input type="hidden" name="orderDesc" value="<{$orderDesc}>" class="orderDesc_input"/>
+</form>
+<div class="pageHeader">
+    <form onsubmit="return navTabSearch(this);" action="" method="post">
+    <input type="hidden" name="access" value="1"/>    
+    <div class="searchBar">
+        <ul class="searchContent">
+            <li>  
+                <label>公会11：</label>
+                <select class="combox" name="id" id="agent_id12">
+                    <option value="0">选择公会</option>
+                <{foreach item=v from =$guildlist}>
+                <option value="<{$v.id}>" <{if $smarty.post.id==$v.id}> selected <{/if}> ><{$v.agentname}></option>
+                <{/foreach}>
+                </select>
+                <input type="text" id="search_key30123" size="10" class="" value="输入关键字"/>
+            </li>
+            <li> 
+                <label>成员名：</label>
+                <input type="text" name="name" value="<{$smarty.post.name}>"/>
+            </li>
+        </ul>
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="add" title="添加公会成员" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=add&navTabId=<{$smarty.get.navTabId}>" height="245" target="dialog" mask="true"><span>新增</span></a></li>
+            <li><a class="edit" title ="编辑公会成员信息" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=add&id={id}&navTabId=<{$smarty.get.navTabId}>" height="245" target="dialog" mask="true" warn="您尚未选择要编辑的公会成员噢！"><span>编辑</span></a></li>
+            <li><a class="delete" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=del&id={id}&navTabId=<{$smarty.get.navTabId}>" target="ajaxTodo" title="您确定要删除该公会信息吗？" warn="您尚未选择要删除的公会成员条目噢！"><span>删除</span></a></li>
+            <li><a title="您确定要删除所选公会成员条目吗?" target="selectedTodo" rel="ids" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=mult_del&navTabId=<{$smarty.get.navTabId}>" postType="string" warn="您尚未选择要删除的公会成员条目噢！" class="delete"><span>批量删除</span></a></li>
+       </ul>
+    </div>
+    <table class="table" width="100%"  layoutH="137">
+        <thead>
+        <tr>
+            <th><input type="checkbox" group="ids" class="checkboxCtrl"></th>
+            <th style="background:#cde;" onclick="sortBy('site_id',this)">成员ID</th>
+            <th>成员名</th>
+            <th style="background:#cde;" onclick="sortBy('agent_id',this)">所属公会（ID）</th>
+            <th>登录账号</th>
+            <th style="background:#cde;" onclick="sortBy('addtime',this)">添加时间</th>
+            <th style="background:#cde;" onclick="sortBy('loginTime',this)">最后登录时间</th>
+            <th>最后登录IP</th>
+            <th>最后登录地区</th>
+            <th style="background:#cde;" onclick="sortBy('logincount',this)">登录次数</th>
+            <th style="background:#cde;" onclick="sortBy('state',this)">当前状态</th>
+            <th >操作</th>
+        </tr>
+        </thead>
+        <tbody>
+            <{foreach item=vo from=$data name=test}>
+            <tr target="sid" rel="1" style="background-color: <{if $smarty.foreach.test.iteration%2==0}> #e4edf2;<{/if}>">
+                <td><input name="ids" value="<{$vo.site_id}>" type="checkbox"></td>
+                <td><{$vo.site_id}></td>
+                <td><{$vo.author}></td>
+                <td><{$guildlist[$vo.agent_id]['agentname']|default:"不存在"}>(<{$vo.agent_id}>)</td>
+                <td><{$vo.aAccount}></td>
+                <td><{$vo.addtime}></td>
+                <td><{$vo.loginTime|default:"---"}></td>
+                <td><{$vo.loginIp|default:"---"}></td>
+                <td><{$vo.loginAddress|default:"---"}></td>
+                <td><span style="color:red"><{$vo.logincount}></span></td>
+                <td><{if $vo.state==1}>正常<{else}>禁止<{/if}></td>
+                <td>
+                    <a title="编辑成员信息" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=add&id=<{$vo.site_id}>&navTabId=<{$smarty.get.navTabId}>" class="btnEdit"  height="245" target="dialog" mask="true">编辑</a>
+                    <a title="确定要删除该成员信息吗？" target="ajaxTodo" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=del&id=<{$vo.site_id}>&navTabId=<{$smarty.get.navTabId}>" class="btnDel">删除</a>
+                </td>
+            </tr>
+            <{/foreach}>
+        </tbody>
+    </table>
+    <div class="panelBar">
+        <div class="pages"><span>显示</span>
+            <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                <option <{if $smarty.post.numPerPage==20}>selected<{/if}>  value="20">20</option>
+                <option <{if $smarty.post.numPerPage==50}>selected<{/if}> value="50">50</option>
+                <option <{if $smarty.post.numPerPage==100}>selected<{/if}> value="100">100</option>
+                <option <{if $smarty.post.numPerPage==200}>selected<{/if}> value="200">200</option>
+            </select><span>条，共<{$totalcount}>条</span>
+        </div>
+        <div class="pagination" targetType="navTab" totalCount="<{$totalcount}>" numPerPage="<{$numperpage}>" pageNumShown="10" currentPage="<{$currentpage}>"></div>
+    </div>
+</div>
+<script>
+    var pro_str={ <{foreach item=v from =$guildlist}> "<{$v.id}>":"<{$v.agentname}>", <{/foreach}> };
+    search_pro('search_key30123','agent_id12');
+</script>

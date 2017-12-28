@@ -1,0 +1,37 @@
+*{margin: 0;padding: 0;font-family: "微软雅黑",Arial,Verdana,"microsoft yahei";}
+ul,li{list-style: none;}
+.register{background:#15100d url(../images/reg-bg01.jpg) no-repeat center 0; overflow-y: auto;min-width: 900px; }
+.register02{background:#15100d url(../images/reg-bg02.jpg) no-repeat center 0;}
+.register .container{width: 1000px;margin:15px auto 100px;}
+.register02 .container{width: 800px; margin:350px auto 100px;}
+.register .hd img{width: 440px;}
+.register .bd .inner{float: left; width: 450px;height: 300px; background: url(../images/reg-form.png) no-repeat;background-size: 100% auto;}
+.register .bd .qr{float: left;margin-left: 30px;}
+.register .bd .qr img{height: 305px}
+.register .btn01{text-align: center;padding-top: 39px;}
+.register .btn02{text-align: center;padding-top: 20px;}
+.register .btn01 img,.register .btn02 img{width: 100px;}
+.register .btn01 a:active img{transform:scale(.9,.9);-webkit-transform:scale(.9,.9);-moz-transform:scale(.9,.9);transform-origin:50% 100%;-webkit-transform-origin:50% 100%;-moz-transform-origin:50% 100%;}
+.register .btn02 a:active img{transform:scale(.9,.9);-webkit-transform:scale(.9,.9);-moz-transform:scale(.9,.9);}
+.register .form{color: #fff;padding-left:25px;font-size: 14px;}
+.register .form li{margin: 10px 0;}
+.register .form label{display: inline-block;width: 85px;text-align: right;font-weight: bold;}
+.register .form input{height: 16px;line-height: 16px;padding: 8px 5px;background: #ddd;border: 0;width: 200px;}
+.register .form p{display: inline-block;font-size: 12px;margin-left: 5px;}
+.register .ft{padding-top: 25px;clear: both;}
+.register .ft img{width: 660px;}
+@media screen and (max-width: 1600px) {
+	.register{background-position: center 0;}
+    .register02 {
+        background-size: 100% auto;
+    }
+    .register02 .container{
+    	margin-top: 170px;
+    }
+}
+@media screen and (max-width: 1200px) {
+	.register{background-position: center -80px;}
+}
+@media screen and (max-width: 1200px) {
+	.register{background-position: center -60px;}
+}

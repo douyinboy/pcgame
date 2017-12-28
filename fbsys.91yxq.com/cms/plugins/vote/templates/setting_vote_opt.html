@@ -1,0 +1,145 @@
+<include: file="header.html">
+
+<table width="750" border="0" align="center" cellpadding="0" cellspacing="1" class="table_border">
+  <tr> 
+    <td height="30" colspan="10" class="table_header"><table width="700" height="25" border="0" cellpadding="0" cellspacing="0">
+        <tr> 
+          <td width="40" align="center"><IMG SRC='../html/images/icon-overview.gif' BORDER=0 align=absmiddle></td>
+          <td><strong>{lang:opt_admin}　　　<a href="[$base_url]o=index::setting"><IMG SRC='../html/images/icon-affiliate.gif' BORDER=0 align=absmiddle> {lang:opt_back_topic}</a>　　<a href="../plugins/[$vote_path]/vote.php?id=<?=$_REQUEST['title_id']?>" target=_blank><IMG SRC='../html/images/icon-zoom.gif' BORDER=0 align=absmiddle> {lang:opt_view}</a></strong></td>
+          <td width="300" align="right">&nbsp;
+          </td>
+        </tr>
+      </table></td>
+  </tr>
+   <form name="vote_option_updata" method="POST" action="[$base_url]o=index::setting_opt&title_id=<?=$_REQUEST['title_id']?>">
+   <script>
+<!--
+var checkflag=1;           //选择标志
+function really(u,v,m)  //根据输入的信息提交,u为表单名，v为请求方式，m为显示的信息
+{
+  if(confirm(m)){
+    u.action=u.action+'&vot_act='+v;
+    u.submit();
+  }
+}
+
+function check(u) {
+if (checkflag ==1) {
+for (i = 0; i < u.length; i++) {
+u[i].checked = true;}
+checkflag =0;
+}
+else {
+for (i = 0; i < u.length; i++) {
+u[i].checked = false; }
+checkflag =1;
+}
+}
+-->
+</script>
+  <tr align="center" class="table_td1"> 
+    <td width="21" height="30">
+	  <INPUT TYPE="checkbox" NAME="selectAll" onClick="check(this.form)"  value="ON">
+</td>
+    <td width="177" height="30">{lang:info_name}</td>
+    <td width="44" height="30">{lang:info_sequence}</td>
+	<td width="125" height="30">{lang:info_my_topic}</td>
+	<td width="47" height="30">{lang:info_votenum}</td>
+    <td width="96" height="30">{lang:info_createdate}</td>
+    <td width="55" height="30">{lang:info_createid}</td>
+    <td width="100" height="30">{lang:info_editdate}</td>
+    <td width="75" height="30">{lang:info_editid}</td>
+    
+  </tr>
+  <LOOP $title_info var=var key=key >
+  <tr align="center" class="table_td2"> 
+  	    	    <td height="30">
+				<input name="deal_id[]" type="checkbox" id="delid[]" value="[$var.id]">
+                <input name="temp[[$var.id]]" type="hidden" id="setid[]" value="[$key]">
+				</td>
+       	        <td height="30" class="table_td3"><input name="nclass[]" type="text" id="nclass[]" style="width:150;height:20" value="[$var.nclass]"></td>
+     	        <td height="30"><input name="sequence[]" type="text" id="sequence[]" style="width:30;height:20" value="[$var.sequence]" ></td>
+                <td height="30">
+				<select name="anclassid[]" id="anclassid[]" style="width:100;height:20;">
+				<option selected value='<?=$_REQUEST['title_id']?>'>[$var.topic_name]</option>
+</select>
+				</td>
+				<td height="30"><input name="votenum[]" type="text" id="votenum[]" style="width:30;height:20" value="[$var.votenum]" ></td>
+				<td height="30">[@date('Y-m-d',$var.createdate)]</td>
+                <td height="30">[$var.createid]</td>
+                <td height="30">[@date('Y-m-d',$var.editdate)]</td>
+                <td height="30">[$var.editid]</td>
+               </tr> 
+</LOOP>
+			    <tr class="table_td2"> 
+             <td height="30" colspan="10">
+	         <div id="msviLocalToolbar1">
+	         <table width="700" height="23" border="0" cellpadding="0" cellspacing="0">
+                 <tr>
+                   <td width="40" align="center">&nbsp;</td>
+                   <td width="60" ><INPUT name="del" type=button value="{lang:opt_del}" class="button" onclick="really(this.form,'vote_option_del','{lang:opt_del_sure}');"></td>
+                   <td width="20">&nbsp;</td>
+                   <td width="60" ><INPUT name="updata" type=button value="{lang:opt_update}" class="button" onclick="really(this.form,'vote_option_updata','{lang:opt_update_sure}');"></td>
+                   <td >　<font color=red>{lang:opt_select_all}:</font>
+                     <input type="checkbox" name="selectAll2" onClick="check(this.form)"  value="ON"></td>
+                 </tr>
+             </table>
+	         </div>
+	         </td>
+             </tr>
+  
+  
+  </form>
+</table>
+<br>
+<table width="750" border="0" align="center" cellpadding="0" cellspacing="1" class="table_border">
+  <tr> 
+    <td height="30" colspan="10" class="table_header"><table width="700" height="30" border="0" cellpadding="0" cellspacing="0">
+        <tr> 
+          <td width="40" align="center"><IMG SRC='../html/images/advice.gif' BORDER=0 align=absmiddle></td>
+          <td><strong>{lang:opt_add_admin}</strong></td>
+          <td width="300" align="right">&nbsp; </td>
+        </tr>
+      </table></td>
+  </tr>
+  <tr align="center" class="table_td1"> 
+    <td width="52" height="30">&nbsp;</td>
+    <td width="237" height="30">{lang:opt_add_name}</td>
+    <td width="96" height="30">{lang:opt_add_sequence}</td>
+	<td width="122" height="30">{lang:opt_add_my_topic}</td>
+	  <td width="104" height="30">{lang:opt_add_votenum}</td>
+    <td width="132" height="30">{lang:opt_add_opt}</td>
+  </tr>
+  <form name="vote_option_add" method="POST" action="[$base_url]o=index::setting_opt&title_id=<?=$_REQUEST['title_id']?>">
+  <tr align="center" class="table_td2"> 
+    <td height="30"><input name="vot_act" type="hidden" id="action" value="vote_option_add">
+	</td>
+    <td height="30"><input name="nclass" type="text" id="nclass" style="width:200;height:20" value="{lang:add_new_opt}" ></td>
+    <td height="30"><input name="sequence" type="text" id="sequence" style="width:60;height:20" value="0"></td>
+	<td height="30">
+	    <select name="anclassid" id="anclassid" style="width:100;height:20;">
+          <option selected value='<?=$_REQUEST['title_id']?>'>[$var.topic_name]</option>        </select>
+	</td>
+      <td height="30">
+	  <input name="votenum" type="text" id="votenum" style="width:60;height:20" value="0">
+	  </td>
+	  <td height="30"><INPUT name="submit" type=submit value="{lang:opt_add_submit}" class="button"></td>
+  </tr>
+  </form>
+  <tr class="table_td2"> 
+    <td height="30" colspan="10">
+	<div id="msviLocalToolbar2">
+	<table width="700" height="23" border="0" cellpadding="0" cellspacing="0">
+        <tr> 
+          <td width="40">&nbsp;</td>
+            <td width="100" align="center"  onmouseover="mhHover('msviLocalToolbar2', 1, 'lt1')" onmouseout="mhHover('msviLocalToolbar2', 1, 'lt0')" >&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+	  </div>
+	  </td>
+  </tr>
+  </form>
+</table>
+
+<include: file="footer.html">

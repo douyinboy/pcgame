@@ -1,0 +1,45 @@
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="__URL__/add" target="dialog" mask="true"><span>新增</span></a></li>
+			<li><a class="delete" href="__URL__/foreverdelete/id/{sid_user}/navTabId/__MODULE__" target="ajaxTodo" title="你确定要删除吗？" warn="请选择用户"><span>删除</span></a></li>
+			<li><a class="edit" href="__URL__/edit/id/{sid_user}" target="dialog" mask="true" warn="请选择用户"><span>编辑</span></a></li>
+			<li class="line">line</li>
+			<li><a class="icon" href="__URL__/password/id/{sid_user}" target="dialog" mask="true" warn="请选择用户"><span>修改密码</span></a></li>
+		</ul>
+	</div>
+
+	<table class="table" width="100%">
+		<thead>
+		<tr>
+			<th width="60">用户ID</th>
+			<th width="100">用户账号</th>
+			<th>真实姓名</th>
+			<th>职务</th>
+			<th>所属分组</th>
+            <th>E-mail</th>
+			<th>上次登录</th>
+			<th>登录次数</th>
+			<th>当前状态</th>
+            <th>操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<{foreach item=vo from =$data}>
+			<tr target="sid_user" rel="<{$vo.uid}>">
+                <td><{$vo.uid}></td>
+				<td><{$vo.account}></td>
+				<td><{$vo.name}></td>
+				<td><{$vo.dep}></td>
+				<td><{$vo.title}></td>
+				<td><{$vo.email}></td>
+				<td><{$vo.logintime}></td>
+
+				<td><{$vo.logincount}></td>
+				<td><{$vo.state}></td>
+                <td></td>
+			</tr>
+		<{/foreach}>
+		</tbody>
+	</table>
+</div>

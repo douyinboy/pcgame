@@ -1,0 +1,101 @@
+<?php include("../sysdata/templates_c/%%c_^@skin@admin@header_init.html");?>
+<script>
+function returnImg(url)
+{
+
+parent.mainFrame.location = parent.mainFrame.location;
+}
+
+function returnInfo(a, b,c,d) {
+	parent.mainFrame.location = parent.mainFrame.location;
+
+}
+
+function loadBarUnDisplay() {
+	parent.mainFrame.loadBarUnDisplay();
+	document.form.Submit1.disabled = false;
+}
+</script>
+
+ <BODY  topmargin=0 leftmargin=0 >
+<div id="msviLocalToolbar">
+  <table border="0" cellspacing="0">
+          <tr>
+            <td width="80" >&nbsp;&nbsp;<?php echo $_LANG_SKIN['view_by_node'];?>:</td>
+<td>
+<select name="Category" id="Category">
+<option value="img"><?php echo $_LANG_SKIN['Category_img'];?></option>
+<option value="attach"><?php echo $_LANG_SKIN['Category_attach'];?></option>
+<option value="flash"><?php echo $_LANG_SKIN['Category_flash'];?></option>
+ </select>
+</td>   
+<td>
+<select name="haveLinks" id="haveLinks">
+<option value="2"><?php echo $_LANG_SKIN['Category_2'];?></option>
+<option value="1"><?php echo $_LANG_SKIN['Category_1'];?></option>
+<option value="0"><?php echo $_LANG_SKIN['Category_0'];?></option>
+ </select>
+</td>
+            <td ><select name="selectNode"  id="selectNode" style="width:250" onchange="if(this.options[this.selectedIndex].value != ''){
+parent.mainFrame.location=('admin_resource.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=admin_list&NodeID='+this.options[this.selectedIndex].value + '&Category=' + Category.options[Category.selectedIndex].value + '&haveLinks=' + haveLinks.options[haveLinks.selectedIndex].value);
+} ">                 <option value="0"><?php echo $_LANG_SKIN['view_all'];?>
+</option>
+
+<?php if(!empty($this->_tpl_vars['NODE_LIST'] )): 
+ foreach ($this->_tpl_vars['NODE_LIST'] as  $this->_tpl_vars['var']): ?>
+<?php if($this->_tpl_vars["var"]["NodeType"] == 1): ?>
+<?php if($this->_tpl_vars["var"]["NodeID"] == $this->_tpl_vars['NodeID']): ?>
+<option value="<?php echo $this->_tpl_vars["var"]["NodeID"];?>" selected><?php echo str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;", $this->_tpl_vars["var"]["cHeader"]);?>  - &nbsp;<?php echo $this->_tpl_vars["var"]["Name"];?></option>
+<?php else: ?>
+<option value="<?php echo $this->_tpl_vars["var"]["NodeID"];?>"><?php echo str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;", $this->_tpl_vars["var"]["cHeader"]);?>  - &nbsp;<?php echo $this->_tpl_vars["var"]["Name"];?></option>
+<?php endif;?>
+<?php endif;?>
+
+ <?php endforeach; endif;?>		
+
+              </select></td>
+            <td  >
+			
+<script>
+var action=new Array( "go")
+var tooltip=new Array(  "Go")
+
+var s=
+'     ' +
+'    <style>' +
+'    .Utoolbutton{border:1 double;border-color:#F1F1F1 #F1F1F1 #F1F1F1 #F1F1F1; background:#F1F1F1}' +
+'    .Dtoolbutton{border:1 double;border-color:#FFFFFF #999999 #999999 #FFFFFF; background:#D6D3CE}' +
+'    .Ctoolbutton{border:1 double;border-color:#999999 #FFFFFF #FFFFFF #999999; background:#D6D3CE}' +
+'    </style>' +
+'    <table border=0 cellPadding=0 cellSpacing=0 ><tbody>' +
+'      <tr><td colspan="2">';
+for (var i=0;i<action.length;i++) {
+    s+='<img width="20" height="20" src="../html/images/' + action[i] + '.gif" class="Utoolbutton" onmouseover="this.className=\'Dtoolbutton\';" onmouseout="this.className=\'Utoolbutton\';" onclick="this.className=\'Ctoolbutton\';'   
+     if(i==0) s+= "parent.mainFrame.location = 'admin_resource.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=admin_list&NodeID='+selectNode.options[selectNode.selectedIndex].value + '&Category=' + Category.options[Category.selectedIndex].value + '&haveLinks=' + haveLinks.options[haveLinks.selectedIndex].value;"
+	// else if(i==1) s+="workFrame.location = 'admin_resource.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=list&next=1&NodeID=' + document.form.selectNode.options[document.form.selectNode.selectedIndex].value;"
+	// else if(i==2) s+='workFrame.location = workFrame.location;'
+
+	s+='" title="' + tooltip[i] + '" hspace="2" vspace="0">'
+}
+
+s+=
+'      </td></tr></table>' ;
+
+document.write(s)		
+</script>
+			
+			
+			
+			</td>
+			 <form  action="upload.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=upload&mode=picker" method="post" enctype="multipart/form-data" name="form" target="operation" onsubmit="this.Submit1.disabled=true;">
+			<td align="right" width="300"> <input name="uploadFile[]" style="width:150px;" type="file" id="uploadFile" > 
+                   &nbsp;&nbsp;<input type="submit" name="Submit1" value="<?php echo $_LANG_SKIN_GLOBAL['upload'];?>" onclick="document.form.NodeID.value = selectNode.options[selectNode.selectedIndex].value; document.form.type.value=Category.options[Category.selectedIndex].value ;parent.mainFrame.loadBarDisplay();">  <input type="hidden" name="changeName" value="1"    id="changeName4"><input type="hidden" name="type"  id="type"><input type="hidden" name="NodeID"  id="NodeID">
+                  </td> 
+				  </form>
+          </tr>
+        </table>
+</div>
+ <Iframe name=operation src="" frameborder=0 class=button style="display:none"> </iframe>
+
+</body>
+</html>

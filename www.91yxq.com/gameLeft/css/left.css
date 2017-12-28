@@ -1,0 +1,150 @@
+html,body,div,a,p,h3,img,span{margin: 0;padding: 0;list-style: none;}
+
+    			html, body {
+		    font-size: 12px;
+		    color: #CCC;
+		    font-family: 'Î¢ÈíÑÅºÚ','ËÎÌå';
+		}
+
+	    body {
+		    font-family: "Î¢ÈíÑÅºÚ",Arial, Verdana, sans-serif;
+		    color: #FFF;
+		    font-size: 14px;
+		
+		    line-height: 1;
+		}
+		html,body{
+			height: 100%;
+			overflow-y: hidden;
+		}
+
+		h3{
+		    margin: 0;
+		    padding: 0;
+		    border: 0;
+		    font-size: 100%;
+		    font: inherit;
+		    vertical-align: baseline;
+		}
+
+    	#i_left {
+		    left: 0;
+		    width: 176px;
+		    background: url(../images/left_bg.png) no-repeat 0 0 #15100D;
+		}
+		#i_left{
+		    position: absolute;
+		    top: 0;
+		}
+
+		#i_left.i_left_drawbank {
+		    left: -176px;
+		}
+
+		#i_left.i_left_drawbank #i_left_open_btn {
+		    display: block;
+		}
+
+		.i_btn_download {
+		    display: block;
+		    width: 153px;
+		    height: 83px;
+		    margin: 230px 0 10px 3px;
+		    background: url(../images/btn_download.png) no-repeat center;
+		}
+		.i_left_item {
+		    position: relative;
+		    line-height: 24px;
+		    padding: 0 14px 5px 5px;
+		}
+
+		.i_left_item h3 {
+		    text-align: center;
+		    color: #ffd839;
+		}
+
+		.i_left_item p {
+		    text-align: center;
+		}
+
+		.i_left_item img {
+		    display: block;
+		    margin: 0 auto 10px;
+		}
+
+		.i_btn_link {
+		    display: block;
+		    width: 147px;
+		    height: 38px;
+		    line-height: 33px;
+		    text-align: center;
+		    color: #FFF;
+		    font-size: 18px;
+		    background: url(../images/btn1.png) no-repeat center center;
+		    background-size: contain;
+		}
+
+		#i_left_drawbank_btn {
+		    width: 13px;
+		    height: 100%;
+		    cursor: pointer;
+		    position: absolute;
+		    top: 0;
+		    right: 0;
+		    border: #151515 solid;
+		        border-top-width: medium;
+		        border-right-width: medium;
+		        border-bottom-width: medium;
+		        border-left-width: medium;
+		    border-width: 0 0 0 1px;
+		    background: url(../images/left_on_bg.png) repeat-y;
+		}
+
+		#i_left_drawbank_btn span {
+		     display: block;
+		    width: 13px;
+		    height: 114px;
+		    background: url(../images/left_on_control.png) no-repeat;
+		    position: absolute;
+		    top: 38%;
+		    left: 0; 
+		}
+
+		#i_left_open_btn {
+		    width: 15px;
+		    height: 100%;
+		    cursor: pointer;
+		    position: absolute;
+		    top: 0;
+		    right: -15px;
+		    background-color: #000;
+		    display: none;
+		    border-width: 0 0 0 1px;
+		    background: url(../images/left_on_bg.png) repeat-y;
+		}
+
+		#i_left_open_btn span {
+		    display: block;
+		    width: 13px;
+		    height: 59px;
+		    color: #ffde55;
+		    font-weight: bold;
+		    background: url(../images/left_on_control.png) no-repeat 0 bottom;
+		    padding: 0 0 80px;
+		    position: absolute;
+		    top: 38%;
+		    left: 0;
+		    transform: rotate(180deg)
+		}
+
+		a {
+		    color: #FFF;
+		    text-decoration: none;
+		    outline: none;
+		    border: 0;
+		}
+
+		a:hover {
+		    color: #F60;
+		    text-decoration: none;
+		}

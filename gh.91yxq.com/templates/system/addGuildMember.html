@@ -1,0 +1,36 @@
+<div class="pageContent">
+    <form method="post" action="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=add&callbackType=closeCurrent&navTabId=<{$smarty.get.navTabId}>" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <input name="sub" type="hidden" value="1" />
+        <input name="id" type="hidden" value="<{$smarty.get.id}>" />
+        <div class="pageFormContent" layoutH="68">
+        <div class="unit">
+                <label>成员名：</label>
+                <input type="text" class="required"  value="<{$mInfo.author}>" name="author">
+                <span class="info"></span>
+        </div>
+        <div class="unit"  style="">
+                <label>登录账号：</label>
+                <input type="text" class="required"  value="<{$mInfo.aAccount}>" name="aAccount">
+                <span class="info"></span>
+        </div>
+        <div class="unit"  style="">
+                <label>登录密码：</label>
+                <input type="text" class="required"  value="<{$mInfo.aPass}>" name="aPass">
+                <span class="info"></span>
+        </div> 
+        <div class="unit">
+            <label>状态：</label>
+            <select  class="combox" name="state">
+                <option value="0" >暂不启用</option>
+                <option value="1" <{if $mInfo.state==1}>selected<{/if}>>正常启用</option>
+            </select>                       
+        </div>
+    </div>
+    <div class="formBar">
+        <ul>
+            <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+            <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+        </ul>
+    </div>
+    </form>
+</div>

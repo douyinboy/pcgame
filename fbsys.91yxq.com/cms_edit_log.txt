@@ -1,0 +1,50 @@
+/admin/admin_publish.php  增加了改变开服状态处理；
+
+/admin/modules/editor.php   编辑器显示
+
+/include/admin/publishAdmin.class.php 增加了setServerStatus方法 修改开服列表模型 字段ServerStatus的值，修改 getIndexLimit 方法，调整列表排序；
+
+/skin/admin/content_admin_list.html 添加了 设置开服状态的功能选项，显示开服状态；
+
+/language/utf8-zh/lang_admin.php  增加server_set_ok和server_set_fail;
+
+/language/utf8-zh/lang_skin/admin/content_admin_list.html.php 增加开服状态相关词语
+
+
+
+
+===================== 20110625 ========================
+
+/include/admin/publishAdmin.class.php
+
+修改 getIndexLimit 方法，开服列表按server_id 倒序排；
+
+
+===================== 20111212 ==============
+
+/admin/modules/editor.php   编辑器显示
+
+修改 单行文本 中 表单选择器   $var[FieldInputPicker] == 'date'
+
+
+===================== 20120723 ==============
+
+/admin/admin_tree.php   权限控制显示
+
+判断用户组ID 是否在 节点的可读组ID中，如果不在，则不在列表显示该栏目
+
+
+===================== 20120731 ==============
+
+/include/admin/log.ini.php   增加 文章内容 更新的记录
+
+===================== 20120813 ==============
+//增加结点显示或隐藏选项，避免停服了的游戏继续在那里影响浏览
+
+数据表5399_site 增加'show'字段
+/cms/skin/admin/site_edit.html  模板增加 - 显示或隐藏选项
+/cms/admin/admin_tree.php  增加 - 判断是否隐藏了的
+
+
+
+

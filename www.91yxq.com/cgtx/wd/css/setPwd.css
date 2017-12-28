@@ -1,0 +1,21 @@
+/*------setPwd3------*/
+.setPwd3{ width:321px; height:266px; padding: 20px; position:relative; background:url(./setPwd3.png) no-repeat 0 0; position:absolute; left:50%;top:50%;margin:-153px 0 0 -180px; z-index:999;}
+.setPwd3 .close3{ width:20px; height:20px; overflow:hidden; background:url(./setBtn3.gif) no-repeat 0 -67px; text-indent:-999em; overflow:hidden; position:absolute; top:24px; right:24px;}
+.setPwd3 .close3:hover{ background-position:0 -87px;}
+.setPwd3 .img3{ width:80px; height:80px; display:block; margin:0 auto 8px; padding:6px 0 0;}
+.setPwd3 .img3 img{ width:80px; height:80px; overflow:hidden;}
+.setPwd3 p.txt{width: 166px; line-height:22px; margin:0 auto 8px; text-align: center;  font-family:"Microsoft Yahei","\5b8b\4f53", Arial, Helvetica, sans-serif;color:#d3d3d3;}
+.setPwd3 p.btn{ width:116px; height:29px; margin:0 auto 15px;}
+.setPwd3 p.btn a{ display:block; width:116px; height:29px; overflow:hidden; margin:0 auto; text-indent:-999em; background:url(./setBtn3.gif) no-repeat 0 0;}
+.setPwd3 p.btn a:hover{ background-position:0 -34px;}
+.setPwd3 .tip3{ width:268px; margin:0 auto; padding:10px 0 0; border-top:1px dashed #43413f;}
+.setPwd3 .tip3 .tips3{ width:268px; height:24px; float:left; position:relative;}
+.setPwd3 .tip3 .tips3 a{ display:block; height:24px; line-height:24px; overflow:hidden; color:#2a86ad; padding:0 0 0 10px; text-decoration:underline;}
+.setPwd3 .tip3 .tips3 a:hover{color:#2a86ad;}
+.setPwd3 .tipDiv3{ position:absolute; bottom:18px; left:6px;}
+.setPwd3 .tipDiv3 .cont{ padding:10px 0 10px 14px; line-height:28px;}
+.setPwd3 .tipDiv3 .cont p{ color:#d3d3d3;}
+.setPwd3 .tipDiv3 .cont span{ color:#d3d3d3; font-weight:normal; display:block;}
+.setPwd3 .set01{ background:url(./setTip3_1.png) no-repeat 0 0; width:212px; height:88px;}
+.setPwd3 .set02{ background:url(./setTip3_2.png) no-repeat 0 0; width:312px; height:120px;}
+.setPwd3 .set02 .cont{ line-height:24px;}

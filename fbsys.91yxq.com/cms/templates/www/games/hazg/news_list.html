@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<title>[$Title] - [$NodeInfo.Name] - [$91yxq_platform_title]黑暗之光官网 - [$91yxq_platform_title]游戏</title> 
+<meta name="keywords" content="[$Title],[$NodeInfo.Name],[$91yxq_platform_title]黑暗之光官网,[$91yxq_platform_title]游戏" /> 
+<meta name="description" content="[$91yxq_platform_title]黑暗之光官网，更多资料尽在[$91yxq_platform_title]黑暗之光官网。" /> 
+<link type="text/css" rel="stylesheet" href="[$91yxq_resource]/games/hazg/css/main.css" /> 
+<script type="text/javascript" src="[$91yxq_resource]/newvossion/js/jquery-1.4.4.min.js"></script> 
+
+</head>
+
+<body>
+
+<!-- 公用顶部通栏 --> 
+<script type="text/javascript" src="[$91yxq_resource]/gameTop/js/gameTop.js?login=1"></script> 
+<div style="background:url([$91yxq_resource]/games/hazg/img/m_bg.jpg) no-repeat top center; overflow:hidden">
+
+	<include file="header.html" />
+
+	<!--主内容-->
+	<div class="w980">
+		<div class="inside_tit">
+			<h2>[$NodeInfo.Name]</h2>
+			<div class="location fr">
+				您当前的位置：<a href="[$91yxq_url]/hazg/index.html">黑暗之光</a> 
+				<span class="arrow"> &gt; </span>[$NodeInfo.Name]
+			</div>
+		</div>
+		<div class="inner_box pt30 pb30 pl50 pr50">
+			<if test="$NodeInfo.NodeID >= 62 and $NodeInfo.NodeID <= 66 ">
+			<!--游戏资料-->
+			<div class="show_tab clearfix">
+				<a <if test="$NodeInfo.NodeID == 62 or $NodeInfo.NodeID == 63">class='on'<else> href="[$91yxq_url]/hazg/yxzl/xszn.html"</if> ><i class="arrow"></i>新手指南</a>
+				<a <if test="$NodeInfo.NodeID == 64" >class='on'<else> href="[$91yxq_url]/hazg/yxzl/gsjj.html"</if> ><i class="arrow"></i>高手进阶</a>
+				<a <if test="$NodeInfo.NodeID == 65" >class='on'<else> href="[$91yxq_url]/hazg/yxzl/yxxt.html"</if> ><i class="arrow"></i>游戏系统</a>
+				<a <if test="$NodeInfo.NodeID == 66" >class='on'<else> href="[$91yxq_url]/hazg/yxzl/tswf.html"</if> ><i class="arrow"></i>特色玩法</a>
+			</div>
+			<elseif test="$NodeInfo.NodeID >= 57 and $NodeInfo.NodeID <= 60">
+			<!--新闻中心-->
+			<div class="show_tab clearfix">
+				<a <if test="$NodeInfo.NodeID == 57" >class='on'<else> href="[$91yxq_url]/hazg/xwzx/index.html"</if> ><i class="arrow"></i>最新</a>
+				<a <if test="$NodeInfo.NodeID == 58" >class='on'<else> href="[$91yxq_url]/hazg/xwzx/news.html"</if> ><i class="arrow"></i>新闻</a>
+				<a <if test="$NodeInfo.NodeID == 59" >class='on'<else> href="[$91yxq_url]/hazg/xwzx/notice.html"</if> ><i class="arrow"></i>公告</a>
+				<a <if test="$NodeInfo.NodeID == 60" >class='on'<else> href="[$91yxq_url]/hazg/xwzx/activity.html"</if> ><i class="arrow"></i>活动</a>
+			</div>
+			</if>
+			<div >
+				<div class="news_list">
+					<ul>
+						<if test="$NodeInfo.NodeID == 62 ">
+							<!--游戏资料节点 转 新手指南-->
+							<cms action="LIST" return="List" NodeID="63" Num="page-15" />
+						<elseif test="$NodeInfo.NodeID == 57 ">
+							<!--新闻中心节点-->
+							<cms action="LIST" return="List" NodeID="all-57" Num="page-15" />
+						<else>
+							<!--其他节点-->
+							<cms action="LIST" return="List" NodeID="self" Num="page-15" />
+						</if>
+						<loop name="List" var="var" key="key" >
+							<li>
+								<span class="time">[[@date('Y-m-d', $var.PublishDate)]]</span>
+								<a href="[$var.URL]" target="_blank"><i></i>[$var.Title]</a>
+							</li>
+						</loop>
+					</ul>
+				</div>
+
+				<!--翻页-->
+				<div class="page">
+					[@list_page($PageInfo.TotalPage,$PageInfo.CurrentPage,$PageInfo.URL)]
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!--页脚-->
+	<include file="../public/footer.html" />
+</div>
+</body>
+</html>

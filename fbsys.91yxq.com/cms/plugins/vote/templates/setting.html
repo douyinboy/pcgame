@@ -1,0 +1,156 @@
+<include: file="header.html">
+<script>
+function tplSelect(tpl,form, element) 
+{
+	var arr = showModalDialog("admin_select.php?sId=[$sId]&o=tpl&tpl=" + tpl,"color","dialogWidth:428px;dialogHeight:266px;help:0;status:0;scroll:no");
+	if(arr != null) {
+		with(form){
+
+			eval(element + ".value= '" +  arr + "'")
+
+		}
+
+
+	}
+}
+</script>
+
+<table width="750" border="0" align="center" cellpadding="0" cellspacing="1" class="table_border">
+  <tr> 
+    <td height="30" colspan="10" class="table_header"><table width="700" height="25" border="0" cellpadding="0" cellspacing="0">
+        <tr> 
+          <td width="40" align="center"><IMG SRC='../html/images/icon-affiliate.gif' BORDER=0 align=absmiddle></td>
+          <td><strong>{lang:topic_admin}</strong></td>
+          <td width="300" align="right">&nbsp; </td>
+        </tr>
+      </table></td>
+  </tr>
+   <form name="vote_title_updata" method="POST" action="[$base_url]o=index::setting">
+   <script>
+<!--
+var checkflag=1;           //选择标志
+function really(u,v,m)  //根据输入的信息提交,u为表单名，v为请求方式，m为显示的信息
+{
+  if(confirm(m)){
+    u.action=u.action+'&vot_act='+v;
+    u.submit();
+  }
+}
+
+function check(u) {
+if (checkflag ==1) {
+for (i = 0; i < u.length; i++) {
+u[i].checked = true;}
+checkflag =0;
+}
+else {
+for (i = 0; i < u.length; i++) {
+u[i].checked = false; }
+checkflag =1;
+}
+}
+-->
+</script>
+  <tr align="center" class="table_td1"> 
+    <td width="34" height="30">
+	<INPUT TYPE="checkbox" NAME="selectAll" onClick="check(this.form)"  value="ON">
+	</td>
+	<td width="35" height="30">ID</td>
+    <td width="162" height="30">{lang:info_topic}</td>
+	  <td width="57" height="30">{lang:info_choose}</td>
+    <td width="36" height="30">{lang:info_sequence}</td>
+    <td width="40" height="30">{lang:info_cheat}</td>
+    <td width="135" height="30">{lang:info_TPLindex}</td>
+    <td width="131" height="30">{lang:info_TPLresult}</td>
+    <td width="44" height="30"><IMG SRC='../html/images/icon-zoom.gif' BORDER=0 align=absmiddle></td>
+	
+    <td width="65" height="30">{lang:info_OPT}</td>
+  </tr>
+<LOOP $title_info var=var key=key >
+  <tr align="center" class="table_td2" 
+  title="  {lang:info_topic_id}:[$var.id] 
+  {lang:info_createid}:[$var.createid] 
+  {lang:info_editid}:[$var.editid] 
+  {lang:info_createdate}:[@date('Y-m-d',$var.createdate)]  
+  {lang:info_editdate}:[@date('Y-m-d',$var.editdate)]"> 
+      <td height="30" align="center">
+				<input name="deal_id[]" type="checkbox" id="delid[]" value="[$var.id]"> 
+      <input name="temp[[$var.id]]" type="hidden" id="setid[]" value="[$key]">	  </td>
+				<td width="35" height="30" align="center"><a href=#><b>[$var.id]</b></a></td>
+      <td height="30" align="center" class="table_td3"><input name="topic_name[]" type="text" id="topic_name[]" style="width:150;height:20" value="[$var.topic_name]"></td>
+     	        <td width="57" height="30" align="center"> <select name="choose[]" style="width:50;height:20">
+	  <option [@((!$var.choose?'selected':''))] value="0">{lang:info_choose_0}</option><option  [@(($var.choose?'selected':''))] value="1">{lang:info_choose_1}</option> </select></td>
+				<td height="30" align="center"><input name="sequence[]" type="text" id="sequence[]" style="width:30;height:20" value="[$var.sequence]" ></td>
+                <td height="30" align="center"><input name="cheat[]" type="text" id="cheat[]" style="width:30;height:20" value="[$var.cheat]" ></td>
+                <td height="30" align="center"><INPUT name="voteTPL[]" id="voteTPL_[$key]" size=15  class='flat'  value="[$var.voteTPL]"><input name="button" type='button' tabindex='13' onclick="tplSelect('[$var.voteTPL]',this.form,'voteTPL_[$key]')" value='...'></td>
+                <td height="30" align="center"><INPUT name="resultsTPL[]" id="resultsTPL_[$key]" size=15  class='flat'  value="[$var.resultsTPL]"><input name="button" type='button' tabindex='13' onclick="tplSelect('[$var.resultsTPL]',this.form,'resultsTPL_[$key]')" value='...'></td>
+                <td height="30" align="center"><a href="../plugins/[$vote_path]/vote.php?id=[$var.id]" target=_blank>{lang:info_view}</a></td>
+				
+                <td height="30" align="center"><a href="[$base_url]o=index::setting_opt&title_id=[$var.id]">{lang:info_OPT_admin}</a></td>
+    </tr>
+</LOOP>
+				<tr class="table_td2"> 
+          <td height="30" colspan="10">
+	      <div id="msviLocalToolbar1">
+	      <table width="700" height="23" border="0" cellpadding="0" cellspacing="0">
+             <tr>
+              <td width="40" align="center">
+			  </td>
+              <td width="60" align="center" ><INPUT name="del" type=button value="{lang:topic_del}" class="button" onclick="really(this.form,'vote_title_del','{lang:topic_del_sure}');"></td>
+              <td width="20">&nbsp;</td>
+              <td width="60" align="center" ><INPUT name="updata" type=button value="{lang:topic_update}" class="button" onclick="really(this.form,'vote_title_updata','{lang:topic_update_sure}');"></td>
+              <td >　<font color=red>{lang:topic_select_all}:</font>
+               <input type="checkbox" name="selectAll2" onClick="check(this.form)"  value="ON"></td>
+             </tr>
+          </table>
+	      </div>
+	      </td>
+          </tr>
+  
+  
+  </form>
+</table>
+<br>
+<table width="750" height="114" border="0" align="center" cellpadding="0" cellspacing="1" class="table_border">
+  <tr> 
+    <td height="30" colspan="9" class="table_header"><table width="700" height="30" border="0" cellpadding="0" cellspacing="0">
+        <tr> 
+          <td width="40" align="center"><IMG SRC='../html/images/advice.gif' BORDER=0 align=absmiddle></td>
+          <td><strong>{lang:topic_add_admin}</strong></td>
+          <td width="300" align="right">&nbsp; </td>
+        </tr>
+      </table></td>
+  </tr>
+  <tr align="center" class="table_td1"> 
+    <td width="27" height="30">&nbsp;</td>
+    <td width="211" height="30">{lang:add_topic}</td>
+	<td width="61" height="30">{lang:add_choose}</td>
+    <td width="41" height="30">{lang:add_sequence}</td>
+    <td width="43" >{lang:add_cheat}</td>
+    <td width="135">{lang:add_TPLindex}</td>
+    <td width="126" height="30">{lang:add_TPLresult}</td>
+    <td width="97" height="30">{lang:add_OPT}</td>
+  </tr>
+  <form name="vote_title_add" method="POST" action="[$base_url]o=index::setting">
+  <tr align="center" class="table_td2"> 
+    <td height="30"><input name="vot_act" type="hidden" id="vot_act" value="vote_title_add"> </td>
+    <td height="30"><input name="topic_name" type="text" id="anclass" style="width:200;height:20" value="{lang:add_new_topic}" ></td>
+	  <td width="61" height="30">
+	    <select name="choose" style="width:50;height:20">
+       <option   value="0">{lang:add_choose_0}</option><option   value="1">{lang:add_choose_1}</option>	    </select></td>
+    <td height="30"><input name="sequence" type="text" id="sequence" style="width:30;height:20" value="0"></td>
+      <td><input name="cheat" type="text" id="cheat" style="width:30;height:20" value="24" ></td>
+      <td><INPUT name="voteTPL" id="voteTPL" size=15  class='flat'  value="">
+      <input name="button2" type='button' tabindex='13' onclick="tplSelect('',this.form,'voteTPL')" value='...'></td>
+      <td height="30"><INPUT name="resultsTPL" id="resultsTPL" size=15  class='flat'  value="">
+      <input name="button3" type='button' tabindex='13' onclick="tplSelect('',this.form,'resultsTPL')" value='...'></td>
+    <td height="30"><INPUT name="submit" type=submit value="{lang:add_submit}" class="button"></td>
+  </tr>
+  </form>
+  <tr class="table_td2"> 
+    <td height="13" colspan="9">&nbsp;	</td>
+  </tr>
+</table>
+
+
+<include: file="footer.html">

@@ -1,0 +1,363 @@
+<?php include("../sysdata/templates_c/%%c_^@skin@admin@header_init.html");?>
+<BODY  style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px" >
+<style>
+
+div.titleholder {
+	font-family: ms sans serif, arial;
+	font-size: 8pt;
+	width: 200;
+	text-overflow: ellipsis;
+	margin: 0px;
+	overflow: hidden;
+	white-space: nowrap;			
+}		
+div.subtitleholder {
+	font-family: ms sans serif, arial;
+	font-size: 8pt;
+	
+	text-overflow: ellipsis;
+	margin: 0px;
+	overflow: hidden;
+	white-space: nowrap;			
+}
+div.timeholder {
+	font-family: ms sans serif, arial;
+	font-size: 8pt;
+	width: 90;
+	text-overflow: ellipsis;
+	margin: 0px;
+	overflow: hidden;
+	white-space: nowrap;			
+}	
+</style>
+<script language='JavaScript'>
+var doImage = doImage;
+var TType = TType;
+
+function mhHover(tbl, idx, cls)
+{
+	var t, d;
+	if (document.getElementById)
+		t = document.getElementById(tbl);
+	else
+		t = document.all(tbl);
+	if (t == null) return;
+	if (t.getElementsByTagName)
+		d = t.getElementsByTagName("TD");
+	else
+		d = t.all.tags("TD");
+	if (d == null) return;
+	if (d.length <= idx) return;
+	d[idx].className = cls;
+}
+
+</script>
+<SCRIPT>
+var elo;
+var loadmenuok=false;
+var type = 'main';
+var NodeID = '<?php echo $this->_tpl_vars["NodeInfo"]["NodeID"];?>';
+function initrightmenu(){
+	loadmenuok = true;
+}
+
+
+
+
+function addThread(url,TaskID) {
+	top.CrawlerTaskFrame.addThread(url , TaskID)
+	
+}
+
+function doing(action, IndexID) {
+	var returnValue;
+	switch(action) {
+		case 'restore':
+				returnValue = CMSware_send('<?php echo $this->_tpl_vars["base_url"];?>' + 'o=restore&type=' + type + '&IndexID=' + IndexID + '&NodeID=' + NodeID);
+				//alert(returnValue);
+				if(returnValue == '1') {
+					alert("<?php echo $_LANG_SKIN['restore_ok'];?>");
+					document.location.reload();
+					return true;
+					
+				} else {
+					alert("<?php echo $_LANG_SKIN['restore_fail'];?>");
+					document.location.reload();
+					return false;
+				
+				}			
+		
+			break;
+
+		case 'destroy':
+			if(confirm("<?php echo $_LANG_SKIN['confirm_del'];?>")) {
+				returnValue = CMSware_send('<?php echo $this->_tpl_vars["base_url"];?>' + 'o=destroy&type=' + type + '&IndexID=' + IndexID + '&NodeID=' + NodeID);
+				//alert(returnValue);
+				if(returnValue == '1') {
+					alert("<?php echo $_LANG_SKIN['destroy_ok'];?>");
+					document.location.reload();
+					return true;
+					
+				} else {
+					alert("<?php echo $_LANG_SKIN['destroy_fail'];?>");
+					document.location.reload();
+					return false;
+				
+				}			
+		
+				
+			}
+			break;
+		case 'view':
+			var leftPos = (screen.availWidth-800) / 2
+			var topPos = (screen.availHeight-600) / 2 
+			 window.open('<?php echo $this->_tpl_vars["base_url"];?>type=main&o=view&NodeID='+NodeID  + '&IndexID=' + IndexID,'','width=800,height=600,scrollbars=yes,resizable=yes,titlebar=0,top=' + topPos + ',left=' + leftPos);
+
+			break;
+		case 'display_record':
+			parent.mainFrame.location = "admin_publish.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=recycle_bin&NodeID=" + NodeID + "&offset=" + document.documentlist.offset.value;
+			break;		
+
+	}
+	//sId=6891856b84ee23f2330ee8359cd3f60d&o=view&type=main&pId=41&cId=4
+}
+
+
+
+function rightMenu(pId, State, Type, Top,Pink) {
+	var toolMenu = new WebFXMenu;
+
+
+		toolMenu.add(new WebFXMenuItem('<?php echo $_LANG_SKIN_GLOBAL['view'];?>','javascript:doing("view","'+ pId +'")','<?php echo $_LANG_SKIN['view_doc'];?>'));
+		toolMenu.add(new WebFXMenuItem('<?php echo $_LANG_SKIN['restore'];?>','javascript:doing("restore","'+ pId +'")', '<?php echo $_LANG_SKIN['restore'];?>'));
+		toolMenu.add(new WebFXMenuItem('<?php echo $_LANG_SKIN['destroy'];?>','javascript:doing("destroy","'+ pId +'")','<?php echo $_LANG_SKIN['destroy'];?>'));
+		
+
+
+	 
+	document.getElementById("menudata").innerHTML = toolMenu 
+
+	elo=window.event.srcElement;
+	toolMenu.left = window.event.clientX;
+	toolMenu.top = window.event.clientY+document.body.scrollTop;
+	toolMenu.show();
+
+	//initrightmenu();
+
+}
+</SCRIPT>
+
+<SCRIPT language=JavaScript>
+<!--
+function CheckAll(form)  {
+  for (var i=0;i<form.elements.length;i++)    {
+    var e = form.elements[i];
+    if (e.name != 'chkall' && e.name !='copy')       e.checked = form.chkall.checked; 
+   }
+  }
+
+//-->
+
+
+</script>
+<script>
+var mousemovecolor="#D4D4D4";
+var selectcolor ="#DDDDDD";
+var oldcolor;
+
+function GetRow(oElem)
+{
+	while (oElem)
+	{	//alert(oElem.tagName.toLowerCase())
+		if (oElem.tagName.toLowerCase() == "tr" || oElem.parentElement.tagName.toLowerCase() == "tbody") 
+		    return oElem;
+		if (oElem.tagName.toLowerCase() == "table" || oElem.tagName.toLowerCase() == "th") return false;
+		oElem = oElem.parentElement;
+	}
+}
+
+
+function selected()
+{	//alert(pid)
+
+	var trstyle = GetRow( window.event.srcElement );
+	var a;
+	if( !trstyle )
+		return false;
+
+	if( trstyle.style.backgroundColor.toLowerCase() == selectcolor.toLowerCase())
+	{
+		trstyle.style.backgroundColor = "";
+		a=eval("p_"+ trstyle.id);	
+		//alert(trstyle.id)
+		if (a!=null || a.checked) 
+			a.checked=false
+		oldcolor = "";
+	}
+	else
+	{		
+		trstyle.style.backgroundColor = selectcolor;
+		a=eval("p_"+ trstyle.id);
+		//alert(trstyle.id)
+		if (a!=null) 
+			a.checked=true
+		oldcolor = selectcolor;
+
+	
+	}
+}
+
+function going(form, o)
+{
+	document.documentlist.referer.value = document.location;
+
+	with(form) {
+		switch(o) {
+			case 'restore':
+				document.documentlist.referer.value = document.location;
+				document.documentlist.action = '<?php echo $this->_tpl_vars["base_url"];?>' + '&multi=1&o=' + o + '&type=' + type +  '&NodeID=' + NodeID  ;
+				document.documentlist.submit();
+				break;
+			case 'destroy':
+				if(confirm("<?php echo $_LANG_SKIN['confirm_del'];?>")) {
+					document.documentlist.referer.value = document.location;
+					document.documentlist.action = '<?php echo $this->_tpl_vars["base_url"];?>' + '&multi=1&o=' + o + '&type=' + type +  '&NodeID=' + NodeID  ;
+					document.documentlist.submit();
+					break;
+				}
+					break;
+			case 'empty_recycle_bin':
+				if(confirm("<?php echo $_LANG_SKIN['confirm_empty_recycle_bin'];?>")) {
+					document.documentlist.referer.value = document.location;
+					document.documentlist.action = '<?php echo $this->_tpl_vars["base_url"];?>' + '&multi=1&o=' + o + '&type=' + type +  '&NodeID=' + NodeID  ;
+					document.documentlist.submit();
+					break;
+				}
+			
+		}
+	}
+}
+</script>
+<div id="menudata"></div>
+<table width="100%" border="0" align="center" cellpadding="2" cellspacing="1"  class="table_border" >
+  <TBODY>
+  <form method="post" action="<?php echo $this->_tpl_vars["base_url"];?>type=main&NodeID=<?php echo $this->_tpl_vars["NodeInfo"]["NodeID"];?>" name="documentlist" >
+
+    <tr class="table_td2"> 
+      <td align="center" height=25></td>
+ <td align="center"><B>ID</B></td>	  
+<?php if(!empty($this->_tpl_vars['DisplayItem'] )): 
+ foreach ($this->_tpl_vars['DisplayItem'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+		<td align="center"><B><?php echo $this->_tpl_vars["var"]["FieldTitle"];?></B></td>
+	  <?php endforeach; endif;?>
+      <td align="center"><B><?php echo $_LANG_SKIN['editor'];?></B></td>
+      <td align="center"><B><?php echo $_LANG_SKIN_GLOBAL['date'];?></B></td>
+      <td colspan="5" align="center"><B><?php echo $_LANG_SKIN_GLOBAL['execute_op'];?></B></td>
+ 
+       <td align="center" title="<?php echo $_LANG_SKIN['type'];?>"><B>T</B></td>
+  </tr>
+
+
+<?php if(!empty($this->_tpl_vars['pList'] )): 
+ foreach ($this->_tpl_vars['pList'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+<!------onmouseover='this.style.backgroundColor="#FFFFFF"' 
+                    onmouseout='this.style.backgroundColor=""'------>
+    <tr class="table_td1" id="<?php echo $this->_tpl_vars["var"]["IndexID"];?>" onmouseover='this.style.backgroundColor="#FFFFFF"' 
+                    onmouseout='this.style.backgroundColor=""'> 
+      <td noWrap > <input type='checkbox' name='pData[]' value='<?php echo $this->_tpl_vars["var"]["IndexID"];?>' id="p_<?php echo $this->_tpl_vars["var"]["IndexID"];?>" ></td>
+      <td align="center" noWrap   ><div class="subtitleholder"><?php echo $this->_tpl_vars["var"]["IndexID"];?></div></td>
+	 <?php if(!empty($this->_tpl_vars['DisplayItem'] )): 
+ foreach ($this->_tpl_vars['DisplayItem'] as  $this->_tpl_vars['keyIn']=>$this->_tpl_vars['varIn']): ?>
+		<?php if($this->_tpl_vars['keyIn'] == 0): ?>
+      <td   noWrap  style="cursor:hand" id="<?php echo $this->_tpl_vars["var"]["pId"];?>">
+<table  border="0"  cellpadding="0" cellspacing="0"  >
+<tr>
+<td>
+	  <div class="titleholder">
+	 
+	 
+	  <A HREF="javascript:void(0);" onclick="doing('view','<?php echo $this->_tpl_vars["var"]["IndexID"];?>')" class="o" style="cursor:hand"   oncontextmenu="rightMenu('<?php echo $this->_tpl_vars["var"]["IndexID"];?>', '<?php echo $this->_tpl_vars["var"]["State"];?>','<?php echo $this->_tpl_vars["var"]["Type"];?>','<?php echo $this->_tpl_vars["var"]["Top"];?>','<?php echo $this->_tpl_vars["var"]["Pink"];?>');return false;" title="<?php echo $this->_tpl_vars["var"]["{$this->_tpl_vars['varIn']['FieldName']}"];?>"><?php echo $this->_tpl_vars["var"]["{$this->_tpl_vars['varIn']['FieldName']}"];?></A>   
+	  </div>
+</td>
+<td>
+
+</td>
+</tr>
+</table>
+
+	  
+	  </td>
+
+		<?php else: ?>
+      <td   noWrap   id="<?php echo $this->_tpl_vars["var"]["pId"];?>"><div class="subtitleholder">&nbsp;&nbsp;<?php echo $this->_tpl_vars["var"]["{$this->_tpl_vars['varIn']['FieldName']}"];?> </div></td>
+
+		<?php endif;?>
+
+
+	 <?php endforeach; endif;?>
+      <td align="center" noWrap  ><div class="subtitleholder" title="<?php echo $this->_tpl_vars["var"]["CreationUser"];?>"><?php echo $this->_tpl_vars["var"]["CreationUser"];?></div></td>
+      <td align="center" noWrap ><div class="timeholder"><?php echo date('Y-m-d H:i', $this->_tpl_vars["var"]["PublishDate"]);?></div></td>
+    
+	 <td colspan="5" align="center" noWrap>
+	    
+	  <A HREF="javascript:doing('restore','<?php echo $this->_tpl_vars["var"]["IndexID"];?>')"><?php echo $_LANG_SKIN['restore'];?></A>
+	  
+	  <A HREF="javascript:doing('destroy','<?php echo $this->_tpl_vars["var"]["IndexID"];?>')" ><?php echo $_LANG_SKIN_GLOBAL['del'];?></A> 
+	 
+
+	  
+	  </td>
+<td align="center" width="28">
+<?php if($this->_tpl_vars["var"]["Type"] == 0 ): ?>
+<font color="#AAAAAA"><?php echo $_LANG_SKIN['link'];?></font>
+<?php elseif($this->_tpl_vars["var"]["Type"] == 1 ): ?>
+<?php echo $_LANG_SKIN['solid_link'];?>
+<?php elseif($this->_tpl_vars["var"]["Type"] == 2 ): ?>
+<font color="#3366FF"><?php echo $_LANG_SKIN['index_link'];?></font>
+<?php elseif($this->_tpl_vars["var"]["Type"] == 3 ): ?>
+<font color="#669900"><?php echo $_LANG_SKIN['photo_link'];?></font>
+<?php elseif($this->_tpl_vars["var"]["Type"] == 4 ): ?>
+<font color="#FF9900"><?php echo $_LANG_SKIN['outer_link'];?></font>
+<?php endif;?>
+</td>
+ </tr>
+<?php endforeach; endif;?>
+
+    <tr class="Tablelistbg"> 
+      <td colspan="13" align="left" bgcolor="#F5F5F5"> <table border="0" align="center"  cellpadding="0" cellspacing="0" width="100%">
+          <tr> 
+            <td align=left> 
+            <input type="checkbox" name="chkall" value="on" onclick="CheckAll(this.form)" id="chkall"  > 
+              <label for="chkall" ><?php echo $_LANG_SKIN_GLOBAL['select_all'];?></label>&nbsp;&nbsp;
+			               
+			 <select name="actionMap" id="actionMap" > 
+            <option value="destroy"><?php echo $_LANG_SKIN['destroy'];?></option>
+              <option value="restore"><?php echo $_LANG_SKIN['restore'];?></option>
+              <option value="empty_recycle_bin"><?php echo $_LANG_SKIN['empty_recycle_bin'];?></option>
+     
+
+			  </select>
+
+			  <input type="button" value="Go" class=button onclick="going(this.form,actionMap.options[actionMap.selectedIndex].value)"> 
+         
+            </td>
+
+			<td height="20" align="right" nowrap="nowrap"> <INPUT name="go_display" TYPE="button" value="<?php echo $_LANG_SKIN['display'];?>" onclick="doing('display_record')" ></td>
+	  <td   height="20" nowrap="nowrap" align="right"  width=80> &nbsp;&nbsp;<INPUT TYPE="text" NAME="offset" size=1 value=<?php echo $this->_tpl_vars["offset"];?>> <?php echo $_LANG_SKIN['display_record'];?> 
+       
+   </td>
+
+          </tr>
+        </table></td>
+    </tr>
+	<INPUT TYPE="hidden" name="referer" value ="" >
+  </form>
+  <tr class="table_td1"> 
+    <td colspan="13" height=25 align=right>
+	<?php echo sprintf($_LANG_SKIN['record'], $this->_tpl_vars["recordInfo"]["currentPage"]  , $this->_tpl_vars["recordInfo"]["pageNum"], $this->_tpl_vars["recordInfo"]["offset"], $this->_tpl_vars["recordInfo"]["from"], $this->_tpl_vars["recordInfo"]["to"], $this->_tpl_vars["recordInfo"]["recordNum"] );?>
+	<?php echo $this->_tpl_vars["pagelist"];?> &nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  </tbody> 
+</table>
+
+<?php include("../sysdata/templates_c/%%c_^@skin@admin@footer.html");?>

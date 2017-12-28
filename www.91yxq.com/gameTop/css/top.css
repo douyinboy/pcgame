@@ -1,0 +1,98 @@
+/* 顶部 */
+*{margin: 0;padding: 0;font-size: 16px;font-family: '微软雅黑';}
+a{text-decoration: none;}
+#i_top{
+    width:100%;
+    color: #FFF;
+    background: url("../images/slideup-bg.png") no-repeat;
+    clear: both;
+    height: 38px;
+    line-height:36px;
+    position: absolute;
+    top:0;
+    left:0;
+}
+#i_top .logo img{
+    margin-top: 4px;
+    margin-left: 6px;
+}
+#i_slidedown_top{
+    position: absolute;
+    top:30px;
+    left:0;
+    z-index:3;
+    width:100%;
+    height:8px;
+    cursor: pointer;
+    background: url("../images/slideup-down.png") no-repeat center 0 #0F0736;
+    display: none;
+}
+
+#i_logo{
+    height: 28px;
+    margin:2px 0 0 20px;
+}
+
+.i_qufu{
+    position: absolute;
+    top:0;
+    left: 120px;
+    
+}
+.i_qufu em{
+    font-style: normal;
+    color: #f6d551;
+}
+.i_qufu p{
+    width: 355px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    vertical-align: -12px;
+}
+.i_top_notice{
+    position: absolute;
+    top:0;
+    left: 500px;
+    padding: 0 0 0 30px;
+}
+
+.i_top_notice a{
+    display: block;
+    height:38px;
+    background:url("../images/slideup-notice.png") no-repeat 0 8px;
+    overflow: hidden;
+    padding:0 0 0 26px;
+    color: #fff;
+}
+
+/* 顶部 */
+#i_top_right{
+    position: absolute;
+    top:0;
+    right:0;
+}
+#i_top_right dd,#i_top_right dd a{
+    cursor: pointer;
+    color: #FFF;
+}
+#i_top_right dd em{ color:#f6d551;font-style:normal ;}
+#i_top_right dd{
+    float: left;
+    position: relative;
+    border-left: 1px solid #723e75;
+    padding: 0 10px;
+    line-height: 18px;
+    height: 18px;
+    margin-top: 10px;
+}
+#i_slideup_top{
+    display: block;
+    width: 15px;
+    height: 22px;
+    background: url("../images/slideup-up.png") no-repeat;
+    cursor: pointer;
+    position: relative;
+    top: -3px;
+}

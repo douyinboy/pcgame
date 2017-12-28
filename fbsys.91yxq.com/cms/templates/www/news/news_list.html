@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="[$91yxq_platform_keywords]" />
+<meta name="description" content="[$91yxq_platform_desc]" />
+<title>[$91yxq_platform_title]-[NodeInfo.Name]</title>
+<link type="text/css" rel="stylesheet" href="[$91yxq_image_url]/css/www/base.css" />
+<link type="text/css" rel="stylesheet" href="[$91yxq_image_url]/css/www/public.css" />
+<link type="text/css" rel="stylesheet" href="[$91yxq_image_url]/css/www/main_pq.css" />
+<script type="text/javascript" src="[$91yxq_image_url]/js/jquery-1.10.2.min.js"></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?40046e537679c6fcc02004afff9e4d2d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+
+<body>
+
+<!---头部-->
+<include file="../public/header.html" />
+
+<!--主内容-->
+<div class="m1200 clearfix">
+	<div class="m_box2 p50 mt40">
+    	<!--切换-->
+        <div class="tab1 mb15">
+            <a class='<if test="$NodeInfo.NodeID == 11">li_a<else>li_o</if>' href="[$91yxq_url]/news/index.html" >新闻公告</a>
+            <a class='<if test="$NodeInfo.NodeID == 12">li_a<else>li_o</if>' href="[$91yxq_url]/news/activity.html" >推荐活动</a>
+            <a class='<if test="$NodeInfo.NodeID == 13">li_a<else>li_o</if>' href="[$91yxq_url]/news/maintain.html" >维护公告</a>
+        </div>
+        <div>
+            <ul class="new_item">
+				<cms action="LIST" return="list" NodeID="self" Num="page-5" />
+				<loop name="list" var="var" key="key" >
+				<li>
+					<div class="time">
+						<p class="date">[@date('d', $var.PublishDate)]</p>
+						<p class="years">[@date('Y-m', $var.PublishDate)]</p>
+					</div>
+					<div class="m_t">
+						<h2><a href="[$var.URL]">[$var.Title]</a></h2>
+						<p class="text">
+							[@CsubStr(strip_tags(trim($var.Content)), 0, 140, '...')]
+						</p>
+						<a href="[$var.URL]" class="detail">【查看详情】</a>
+					</div>
+				</li>
+				</loop>
+            </ul>
+        </div>
+		
+        <!--翻页-->
+		<if test="$PageInfo.TotalPage>1">
+		<div class="page2 pt20">
+			[@list_page($PageInfo.TotalPage,$PageInfo.CurrentPage,$PageInfo.URL)]
+		</div>
+		</if>
+    </div>
+</div>
+
+<!--页脚-->
+<div class="foot clearfix" id="footer_box">
+	<script src="[$91yxq_url]/public/footer.js"></script>
+</div>
+
+</body>
+</html>

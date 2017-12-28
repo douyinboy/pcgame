@@ -1,0 +1,9 @@
+<?php echo base64_decode("PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0i");?><?php echo $this->_tpl_vars["charset"];?><?php echo base64_decode("Ij8+");?>
+<tree>
+<?php if(!empty($this->_tpl_vars['DirList'] )): 
+ foreach ($this->_tpl_vars['DirList'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+<?php if($this->_tpl_vars["var"]["type"] == 'dir'): ?>
+	<tree text="<?php echo $this->_tpl_vars["var"]["name"];?>" action="admin_file.php?op=sId::<?php echo $this->_tpl_vars["sId"];?>;o::list;PSNID::<?php echo $this->_tpl_vars["PSNID"];?>;PATH::<?php echo $this->_tpl_vars["PATH"];?>/<?php echo $this->_tpl_vars["var"]["name"];?>"   src="admin_file.php?op=sId::<?php echo $this->_tpl_vars["sId"];?>;o::file_xml;PSNID::<?php echo $this->_tpl_vars["PSNID"];?>;PATH::<?php echo $this->_tpl_vars["PATH"];?>/<?php echo $this->_tpl_vars["var"]["name"];?>"  target="panelWork" cId="<?php echo $this->_tpl_vars["PSNID"];?>"  />
+<?php endif;?>
+<?php endforeach; endif;?>
+</tree>

@@ -1,0 +1,132 @@
+﻿@charset "utf-8";
+/* CSS Document */
+body{overflow: hidden;	font: 12px "宋体",Arial,Helvetica,sans-serif;color:#808080;
+ 	margin:0px; padding:0px;}
+html { background:url(../images/bg.png) repeat #f0f0f0;}
+
+
+/**顶部导航*/
+.top-tbg{ width:100%; height:30px;background-color:#3c3a3b;}
+.main{ width:1000px; margin:0 auto;}
+.top-tbg .top-tbg-left a{ color:#7e7e7e; padding:8px 15px; display:block; float:left; font-size:12px;}
+.top-tbg .top-tbg-left a:hover,.top-tbg .top-tbg-right .user-log .top-login:hover{ color:#bababa}
+
+.user-log{width:200px; height:30px; margin-right:20px;}
+.user-attention{ width:200px;}
+
+.top-tbg .top-tbg-right .user-log .top-login{color:#7e7e7e; margin-top:8px; margin-right:15px;}
+.top-tbg .top-tbg-right .user-log .top-regis{ width:70px; height:20px; display: block;background:url(../images/login_bg.png) repeat  0 -94px; margin-top:5px;}
+.us{ float:left; margin-top:8px; margin-right:5px;}
+.sina{ width:35px; height:30px; display:block;block;background:url(../images/small-ico.png) no-repeat  0 -86px;float:left; }
+.qq{ width:35px; height:30px; display:block;background:url(../images/small-ico.png) no-repeat  0 -123px;float:left;}
+.wx{ width:35px; height:30px; display:block;background:url(../images/small-ico.png) no-repeat  0 -156px;float:left;}
+.sina:hover,.qq:hover,.wx:hover{ background-color:#5e5e5e;}
+
+
+.top-navbg{ width:100%; height:55px;background:url(../images/bg.png) repeat scroll 0 0px; border-bottom:1px solid #fff; }
+.top-navcz{ width:1000px; height:55px;}
+.top-navcz ul{ padding:0px; margin:0px;float:right; }
+.top-navcz ul li{ float:left; margin:0px; padding:0px;}
+.top-navcz ul li a{ font-size:14px;  color:#6a6d70; margin:0px 15px 0px 15px; padding-top:25px; display:block; float:left; font-family:"微软雅黑";}
+.top-navcz ul li span{ width:1px; height:55px;background:url(../images/top-span.png) repeat scroll 0 0px; display:block; float:left;}
+.top-navcz .on a, .top-navcz ul li a:hover{ color:#ff9b05;}
+
+.top-titlebg{ width:100%; height:78px;background-color:#fff;border-top:1px solid #d6d6d6;border-bottom:1px solid #d6d6d6; }
+.payorgame { margin:0px; padding:0px;list-style-type:none;}
+.payorgame li{ float:left;}
+.payorgame li a{display:block; height:78px; line-height:78px;  padding:0px 15px; border-left:1px solid #fff;border-right:1px solid #fff;font-size:16px;font-family:"微软雅黑"; }
+.payorgame .hover a{ display:block; height:78px; line-height:78px; color:#ff8814; padding:0px 15px; border-left:1px solid #f1f1f1;border-right:1px solid #f1f1f1;  font-size:16px;font-family:"微软雅黑"; background:url(../images/nav_bg.gif) no-repeat 0px 1px;background-color:#f8f8f8;  }
+/*充值中心*/
+
+.s_pay_game_title { width:610px; height:40px; line-height:40px; background:#f0f0f0; color:#707070; padding:0 20px; margin:20px 0;}
+.s_pay_game_title span { color:#008feb;}
+.s_pay_game_title em { color:#ff0000; margin-left:50px;}
+.s_pay_game_title a { color:#ff6b00;}
+.s_pay_game_title a:hover { text-decoration:underline;}
+.s_pay { width:1000px; margin:0px auto ; border-right:1px solid #d6d6d6;}
+.s_pay_left { width:272px;border-left:1px solid #e3e2df;}
+.s_pay_left ul li { width:232px; height:54px; line-height:52px; font-size:14px; color:#626262; padding-left:40px; cursor:pointer; background:url(../images/pay-left.png) no-repeat;} 
+.s_pay_left ul li a { color:#626262;}
+.s_pay_left ul li.hover { background:url(../images/arrow-hover.png) no-repeat 230px center #fff; width:232px; margin-right:0; border-bottom:none; border-bottom:1px solid #e3e2df;}
+.s_pay_left ul li.hover a { color:#ff6b00;}
+.s_pay_left ul li span { display:inline-block; _display:inline; zoom:1; background:url(../images/left.png) no-repeat 0 0; _background:url(../images/left.png) no-repeat 0 6px; width:9px; height:10px; margin-right:15px; _margin-top:17px;}
+.s_pay_game { background:#fff; width:692px; height:980px; padding-left:35px; position:relative; border-bottom:1px solid #d6d6d6;}
+.s_pay_game h3 { color:#626262; font-size:14px; font-weight:normal;}
+.s_pay_style p { margin:24px 0 24px 24px; font-size:14px;}
+.s_pay_style p label { margin-right:185px;}
+.s_pay_style p label.hover { color:#008feb;}
+.s_pay_style p label input { vertical-align:-1px; margin-right:3px;}
+.s_pay_select span { display:inline-block; _display:inline; zoom:1; width:223px; height:50px; padding:6px 0 0 23px; background:url(../images/pay-game.png) no-repeat; font-size:16px; color:#fefefe; margin:27px 25px; cursor:pointer;}
+.s_pay_select span em {  font-size:22px; margin-right:16px; vertical-align:-5px;}
+.s_pay_select_pop { background:url(../images/pay-01.jpg) no-repeat 10px 0; padding-top:8px; position:absolute; left:60px;  top:272px; }
+.s_pay_select_pop_cont { background:#fff; border:1px solid #fe964a; width:608px; height:208px;}
+.s_pay_select_pop_cont dl { height:35px; background:#fe964a; color:#626262;}
+.s_pay_select_pop_cont dl dd { float:left; padding:8px 13px; cursor:pointer; }
+.s_pay_select_pop_cont dl dd.hover { background:#fff;margin-top:2px;}
+.s_pay_select_pop_cont dl dd input { width:120px; height:18px; line-height:18px;}
+.s_pay_select_pop_cont dl dd.dd01 { float:right;}
+.s_pay_select_pop_cont dl dt { background:url(../images/pop-close.png) no-repeat; width:16px; height:15px; cursor:pointer; text-indent:-999em; overflow:hidden; margin:11px 5px 0 0;}
+.s_pay_select_list { height:172px; width:568px; overflow-y:auto; overflow-x:hidden; padding:0 20px; _padding:5px 20px 0 20px;}
+.s_pay_select_list li { height:30px; line-height:30px; float:left; width:135px; vertical-align:bottom; cursor:pointer;}
+.s_pay_select_list li input { margin-right:8px; vertical-align:-2px;}
+.s_specie {padding:25px 75px 25px 14px; border:1px solid #c9c9c9; width:345px; margin-left:25px;}
+.s_specie p {color:#626262; font-size:14px;}
+.s_specie p a { color:#ff6b00;}
+.s_account li, .s_money li { margin-top:10px; color:#626262;}
+.s_account li input , .s_money li input{ width:158px; height:22px; line-height:22px; border:1px solid #c9c9c9; margin-right:13px;}
+.s_account li select { width:160px; height:20px; line-height:20px; border:1px solid #c9c9c9; margin-right:13px;}
+.s_account li label, .s_money li label { display:inline-block; _display:inline; zoom:1; width:145px; text-align:right;}
+.s_account li em { margin-right:5px;}
+.s_money table { margin-left:22px;}
+.s_money table td { width:120px; height:36px; line-height:26px; font-size:14px; color:#626262;}
+.s_money table td.hover { color:#008feb; text-decoration:underline;}
+.s_money table td input  { margin-right:10px; vertical-align:-2px;}
+#selectOtherPrice { width:500px;}
+.s_money p { font-size:14px; color:#626262; margin-top:10px; margin-left:23px;}
+.s_money p .s_money_scale { color:#ff6b00; font-size:12px; margin-left:60px;}
+.s_money_other { width:158px; height:22px; line-height:22px; border:1px solid #c9c9c9;}
+.s_money_upload input { width:201px; height:57px; background:url(../images/pay-input.png) no-repeat; border:medium none; cursor:pointer; margin:25px 0 25px 190px;}
+.s_state { padding-top:25px; border-top:1px dotted #bfbfbf; margin-right:25px;}
+.s_state a { color:#ff6b00;}
+.s_state dl { line-height:28px;}
+.s_pay_select_popserver { background-position:409px 0;}
+.s_pay-hint, .s_pay-true, .s_pay-confirm { border:1px solid #e2e1de; width:466px; margin:20px auto; background:#fff; height:350px; padding:67px 267px;}
+.s_pay-hint dl { background:url(../images/plaint.png) no-repeat; padding-left:115px;}
+.s_pay-hint dl dt, .s_pay-true dl dt { color:#ff501a; font-size:24px;}
+.s_pay-hint dl dd { font-size:14px; color:#ff501a; line-height:26px;}
+.s_pay-hint dl dd.dd01, .s_pay-true dl dd.dd01 { margin-top:25px;}
+.s_pay-hint dl dd.dd01 a, .s_pay-true dl dd.dd01 a { display:block; float:left; width:102px; text-align:center; height:32px; line-height:32px; color:#707070; background:#f0f0f0; border:1px solid #e2e1de; margin-right:50px;}
+.s_pay-hint dl dd.dd01 a:hover, .s_pay-true dl dd.dd01 a:hover { background:#fe964a; color:#fff;}
+.s_pay-true dl { background:url(../images/pay-true.png) no-repeat; padding-left:115px;}
+.s_pay-true dl .dd02 { color:#707070; font-family:\5fae\8f6f\96c5\9ed1; font-weight:700; font-size:14px; margin-top:50px;}
+.s_pay-true dl .dd02 ul li { font-weight:normal; line-height:24px; }
+.s_pay-confirm dl { color:#646464; padding-left:90px;}
+.s_pay-confirm dl dt { font-size:16px; font-weight:700; margin-bottom:5px;}
+.s_pay-confirm dl dd { line-height:28px; font-size:14px; padding-left:2px;}
+.s_pay-confirm dl dd.dd03 { margin-top:55px;}
+.s_pay-confirm dl dd.dd03 input { float:left; width:201px; height:55px; border:medium none; cursor:pointer; background:url(../images/pay-confirm.png) no-repeat; text-indent:-999em;}
+.s_pay-confirm dl dd.dd03 a { color:#008feb; text-decoration:underline; font-size:12px; margin-left:26px;}
+.pay-pop-wrap { width:100%; height:100%; background:#000; opacity:0.8; filter:Alpha(opacity=80); position:absolute; left:0; top:0; z-index:9;}
+.pay-pop { width:498px; height:198px; border:1px solid #e2e1de; background:#fff; position:fixed; _position:absolute; top:50%; left:50%; margin:-100px 0 0 -250px; z-index:10;}
+.pay-pop .lacos { margin:7px 0 0 476px;}
+.pay-pop-cont { background:url(../images/pay-icon.png) no-repeat; margin:20px 0 0 35px; padding-left:55px; line-height:22px;}
+.pay-pop-cont .layp03 { font-size:16px; color:#3b3b3b;}
+.pay-pop-cont .layp04 a { color:#0692eb;}
+.pay-pop-cont .layp04 a:hover { text-decoration:underline;}
+.pay-pop-cont .layp05 { margin-top:20px;}
+.pay-pop-cont .layp05 .a1 { display:block; background:#fe964a; color:#fff; width:124px; height:32px; line-height:32px; border:1px solid #ff6000; text-align:center; float:left; margin-right:22px; _display:inline;}
+.pay-pop-cont .layp05 .a2 { display:block; background:#e6e6e6; color:#707070; width:124px; height:32px; line-height:32px; border:1px solid #e2e1de; text-align:center; float:left;}
+
+
+
+/**底部信息**/
+.foot-bottom{ border-bottom:2px solid #ff9a02; width:100%; margin-top:15px; text-align:center; margin-bottom:10px;}
+.foot-ico{ width:128px; height:20px; background:url(../images/top-ico.jpg) no-repeat scroll -368px -62px; display:block; left:50%; margin-left:-64px; position:relative; }
+.foot-ul{ padding-left:250px;}
+.foot-ul a{ border-right:1px solid #ccc; color:#555555; display:block; padding:0px 8px 0px 8px; float:left;}
+.foot-ul a:hover{ color:#f66000; text-decoration:underline;}
+ 
+
+
+
+

@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>91yxq《通用游戏头部导航》</title>
+<meta http-equiv="pragma" content="no-cache" />
+<link href="./css/css.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../jsLib/jquery-1.11.1.min.js"></script>
+<style>
+    html { display: block; overflow: hidden; height: 100%; }
+	
+	/*公告*/
+	.notice_list{line-height:29px; height:29px; width:340px; padding-left:20px; overflow:hidden; zoom:1}
+	.notice_list a{display:block; white-space:nowrap; text-overflow:ellipsis; height:29px; color:#FFF600; overflow:hidden; zoom:1}
+	.notice_list a:hover{color:#FF7200}
+</style>
+</head>
+<body>
+<form id="form1" runat="server" style="overflow: hidden; height: 100%;">
+    <div id="west_top">
+        <div class="fl">
+            <a href="http://www.demo.com" target="_blank" class="logo fl">91yxq</a> <span
+                class="now2 fl"><a href="javascript:void(0);" class="n_fwq ml5"></a></span><span class="now fl" style="width:210px;"><b id="game_name"></b>-当前服务器：<b id="server_id"></b>服: <b id="server_name"></b>
+                    <a href="javascript:void(0);" id="serverName" class="n_fwq"></a></span>
+                    <span class="now1 fl ml5" id="dlq" style="display:none;"><a href="http://www.demo.com" id="dlq_url" target="_blank" class="n_fwq">极速登陆器</a></span>
+                    <span class="now1 fl ml5"><a href="http://www.demo.com" id="xsk_url" target="_blank" class="n_fwq">新手卡</a></span>
+		</div>
+        <div id="Roll1" class="fl notice_list">
+						        </div>
+        <div class="fr">
+            <ul class="fr">
+                <li id="t_a0"><i></i><a href="http://www.demo.com" target="_blank" id="game_url">官网首页</a></li>
+				<li id="t_a3"><i></i><a href="http://pay.demo.com/?game_id=&server_id=" id="pay_url" target="_blank">游戏充值</a></li>
+				<li id="t_a4"><i></i><a title="91yxq游戏" href="javascript:;" rel="sidebar" onclick="return addFavorite(this)">加入收藏</a></li>
+                <li class="jb_btn"><a href="http://www.demo.com/help/" target="_blank"></a></li>
+            </ul>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    function addFavorite(thisElm) {
+        var url = window.top.location.href;
+        var title = window.top.document.title;
+		if (window.external && ("addFavorite" in window.external)){
+			window.external.addFavorite(url,title);
+			return false;
+		}
+		else if(window.sidebar ){
+			if("addPanel" in window.sidebar){
+				window.sidebar.addPanel(title, url, "customizeURL");
+				return false;
+			}
+			else{
+				thisElm.href = url;
+				thisElm.title = title;
+				return true;
+			}
+		}
+		else{
+			alert("抱歉，您所使用的浏览器无法完成此操作，请使用Ctrl+D进行添加");
+			return false;
+		}
+        
+    }
+	function getParameter(param)  
+    {  
+        var query = window.location.search;//获取URL地址中？后的所有字符 
+        if(query.length<4){
+			return false
+		}
+        var new_query = query.substr(1);
+        var query_array = new_query.split('&');
+        var return_arr = new Array();
+        for(v in query_array){
+            var fen_arr = query_array[v].split('=');
+            return_arr[fen_arr[0]] = fen_arr[1];
+        }
+        if(return_arr[param]){
+            return return_arr[param];
+        }
+    }
+	var game_name = decodeURIComponent(getParameter('game_name'));
+	var game_short_name = decodeURIComponent(getParameter('game_short_name'));
+	var game_id = decodeURIComponent(getParameter('game_id'));
+	var server_id = decodeURIComponent(getParameter('server_id'));
+	var server_name = decodeURIComponent(getParameter('server_name'));
+	var wd = decodeURIComponent(getParameter('wd'));
+	$('#game_name').html(game_name);
+	$('#server_id').html(server_id);
+	$('#server_name').html(server_name);
+	if(wd==1){
+		$('#dlq_url').attr('href','http://www.demo.com/'+game_short_name+'/dlq/91yxq_'+game_short_name+'.exe');
+		$('#dlq').show();
+	}
+	$('#xsk_url').attr('href','http://www.demo.com/'+game_short_name+'/xsk/index.html');
+	$('#game_url').attr('href','http://www.demo.com/'+game_short_name+'/index.html');
+	$('#pay_url').attr('href','http://pay.demo.com/?game_id='+game_id+'&server_id='+server_id);
+</script>
+</body>
+</html>
+<script>
+function myGod(id,w,n){
+	var box=document.getElementById(id),can=true,w=w||1500,fq=fq||10,n=n==-1?-1:1;
+	box.innerHTML+=box.innerHTML;
+	box.onmouseover=function(){can=false};
+	box.onmouseout=function(){can=true};
+	var max=parseInt(box.scrollHeight/2);
+	new function (){
+		var stop=box.scrollTop%29==0&&!can;
+		if(!stop){
+			var set=n>0?[max,0]:[0,max];
+			box.scrollTop==set[0]?box.scrollTop=set[1]:box.scrollTop+=n;
+		};
+		setTimeout(arguments.callee,box.scrollTop%29?fq:w);
+	};
+};
+myGod('Roll1',1500,-1);
+</script>
+

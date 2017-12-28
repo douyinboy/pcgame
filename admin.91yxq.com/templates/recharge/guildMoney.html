@@ -1,0 +1,48 @@
+<div class="pageContent">
+    <form method="post" action="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=add&callbackType=closeCurrent&navTabId=<{$smarty.get.navTabId}>" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this, dialogAjaxDone)">
+    <input name="sub" type="hidden" value="1" />
+    <input name="agentid" type="hidden" value="<{$agentid}>" />
+    <input name="wsdate" type="hidden" value="<{$wsdate}>" />
+    <input name="wedate" type="hidden" value="<{$wedate}>" />
+    <div class="pageFormContent" layoutH="68"> 
+         <table class="table" width="100%"  layoutH="110">
+            <thead>
+                <tr>
+                    <th>结算起止日期</th>
+                    <th>游戏名称</th>
+                    <th>收入（元）</th>
+                    <th>内充(元)</th>
+                    <th>最终结算金额</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <{foreach item=vo from=$data name=test}>
+                    <tr target="sid" rel="1" style="background-color: <{if $smarty.foreach.test.iteration%2==0}> #f6fcfc;<{/if}>">
+                        <td><{$vo['stime']|date_format:"%Y-%m-%d"}> 截止至 <{$vo['etime']|date_format:"%Y-%m-%d"}></td>
+                        <td><{$vo['gamename']}></td>
+                        <td>
+                            <input name="paymoney"  size="10" type="text" value="<{$vo['paymoney']}>" readonly="true" />* <{$vo['fc']}>%=<{$vo['pay']}>
+                        </td>
+                        <td>
+                            <input name="paymoney"  size="10" type="text" value="<{$vo['innerpay']|default:"0"}>" readonly="true" />* 35%=<{$vo['inner']}>
+                        </td>
+                        <td><{$vo['pay_jie']}></td>
+                    </tr>
+                    <{/foreach}>
+                   <tr>
+                    <td>合计：</td>
+                    <td>---</td>
+                    <td><{$hj['heji']}></td>
+                    <td><{$hj['payinner']}></td>
+                    <td><{$hj['pay_jie']}></td>
+                </tr> 
+            </tbody>
+        </table>
+    </div>
+    <div class="formBar">
+        <ul>
+            <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+        </ul>
+    </div>
+    </form>
+</div>

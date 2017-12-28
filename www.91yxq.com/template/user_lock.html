@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>账号锁-用户中心-6qwan网页游戏,6qwan国内网页游戏平台,国内优秀网页游戏,用心打造！</title>
+<meta name="keywords" content="6qwan游戏,网页游戏,网页游戏平台,6qwan网页游戏,优秀网页游戏平台">
+<meta name="description" content="6qwan网页游戏平台有最新网页游戏,好玩的网页游戏,汇聚2014年最新、最全、最好玩的网页游戏，打造最受玩家喜爱的游戏平台，让广大玩家尽情体验网页游戏带来的乐趣！" />
+<link rel="icon" href="http://image.6qwan.com/newvossion/images/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="http://image.6qwan.com/newvossion/images/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" href="http://image.6qwan.com/newvossion/css/main.css" />
+<link rel="stylesheet" type="text/css" href="http://image.6qwan.com/newvossion/css/style.css" />
+<link type="text/css" rel="stylesheet" href="http://image.6qwan.com/css/style.css">
+</head>
+<body>
+<div class="all">
+    <!--头部结束 导航开始-->
+   {include file="header.html"}
+   <!--头部结束-->     
+   <div class="center">
+      <div class="cz">
+      <div class="mainc">
+      {include file="my_left.html"}  
+        <div class="cright"> 
+          <div class="yh yh_fcm">密保问题设置</div>
+          <div class="yh">
+             <div class="yh_fcm1">
+              <p class="yh_fcm1b">注意：一旦设置成功将无法更改，请认真填写。</p></div>
+             <div class="yh_fcm2">
+            <form id="lockform" name="lockform" method="post" action="">
+			<input type="hidden" name="stage" value="yes"/>   
+                 <div>&nbsp;状&nbsp;态&nbsp;：<input type="radio" name="lock_state" value="2" {if $users[19]==2}checked=checked{/if} style="width:10px; height:13px; float:none;" />锁定&nbsp;&nbsp;&nbsp;<input type="radio" name="lock_state" value="1" {if $users[19]!=2}checked=checked{/if} style="width:10px; height:13px; float:none;" />正常</div>
+                 <div>密保问题：{$users[11]}</div>
+                 <div>密保答案：<input type="text"  id="lockpasswd" name="answer" /></div>
+                 <div class="yh_fcm2c"><input name="" class="yh_fcm_qd" type="submit" value="确定" /></div>
+			   </form>
+             </div>
+             <div class="clear"></div>
+             <div class="yh_fcm3">
+             </div>
+          </div>
+        </div><!--cright-->   
+      </div>       
+      </div>     
+   </div>
+  {include file="copyright.html"}
+</div>
+</body>
+</html>

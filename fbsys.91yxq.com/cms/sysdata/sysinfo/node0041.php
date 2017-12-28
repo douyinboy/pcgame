@@ -1,0 +1,91 @@
+<?php
+//CMS cache file, DO NOT modify me!
+//Created on December 29, 2016, 20:41
+
+$NodeInfo = array (
+  'NodeID' => '41',
+  'NodeGUID' => 'law',
+  'TableID' => '1',
+  'ParentID' => '10',
+  'RootID' => '0',
+  'InheritNodeID' => '0',
+  'NodeType' => '1',
+  'NodeSort' => '0',
+  'Name' => '法律信息',
+  'ContentPSN' => '',
+  'ContentURL' => '',
+  'ResourcePSN' => '',
+  'ResourceURL' => '',
+  'PublishMode' => '1',
+  'IndexTpl' => NULL,
+  'IndexName' => 'index.html',
+  'ContentTpl' => NULL,
+  'ImageTpl' => NULL,
+  'SubDir' => 'Y-m-d',
+  'PublishFileFormat' => '{TimeStamp}d{ContentID}.html',
+  'IsComment' => '0',
+  'CommentLength' => NULL,
+  'IsPrint' => '0',
+  'IsGrade' => '0',
+  'IsMail' => '0',
+  'Disabled' => '0',
+  'AutoPublish' => '2',
+  'IndexPortalURL' => 'http://manage.test.com/publish/index.php/{NodeID},{Page}.html',
+  'ContentPortalURL' => 'http://manage.test.com/publish/content.php/{IndexID},{Page}.html',
+  'Pager' => 'auto.php',
+  'Editor' => 'news_editor.php',
+  'WorkFlow' => '0',
+  'PermissionManageG' => NULL,
+  'PermissionManageU' => NULL,
+  'PermissionReadG' => NULL,
+  'PermissionReadU' => NULL,
+  'PermissionWriteG' => NULL,
+  'PermissionWriteU' => NULL,
+  'PermissionApproveG' => NULL,
+  'PermissionApproveU' => NULL,
+  'PermissionPublishG' => NULL,
+  'PermissionPublishU' => NULL,
+  'PermissionInherit' => NULL,
+  'show' => '1',
+  'CreationUserID' => '1',
+  'SubNodeID' => '41',
+  'ParentNodeID' => '1%2%10%41',
+  'Nav' => 'a:4:{i:0;a:2:{s:6:"NodeID";s:1:"1";s:4:"Name";s:13:"91yxq游戏";}i:1;a:2:{s:6:"NodeID";s:1:"2";s:4:"Name";s:13:"91yxq平台";}i:2;a:2:{s:6:"NodeID";s:2:"10";s:4:"Name";s:12:"文档中心";}i:3;a:2:{s:6:"NodeID";s:2:"41";s:4:"Name";s:12:"法律信息";}}',
+  'URL' => '/index.html',
+  'Navigation' => 
+  array (
+    0 => 
+    array (
+      'NodeID' => '1',
+      'Name' => '91yxq游戏',
+      'URL' => '/index.html',
+      'NodeName' => '91yxq游戏',
+      'NodeURL' => '/index.html',
+    ),
+    1 => 
+    array (
+      'NodeID' => '2',
+      'Name' => '91yxq平台',
+      'URL' => 'http://www.91yxq.com/index.html',
+      'NodeName' => '91yxq平台',
+      'NodeURL' => 'http://www.91yxq.com/index.html',
+    ),
+    2 => 
+    array (
+      'NodeID' => '10',
+      'Name' => '文档中心',
+      'URL' => NULL,
+      'NodeName' => '文档中心',
+      'NodeURL' => NULL,
+    ),
+    3 => 
+    array (
+      'NodeID' => '41',
+      'Name' => '法律信息',
+      'URL' => '/index.html',
+      'NodeName' => '法律信息',
+      'NodeURL' => '/index.html',
+    ),
+  ),
+);
+?>

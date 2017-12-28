@@ -1,0 +1,49 @@
+<{config_load file="smarty.conf" section="setup"}>
+<form id="pagerForm" action="" method="post">
+    <input type="hidden" name="access" value="1"/>
+    <input type="hidden" name="pageNum" value="<{$currentpage}>"/>
+    <input type="hidden" name="numPerPage" value="<{$numperpage}>"/>
+</form>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+        </ul>
+    </div>
+    <table class="table" width="100%"  layoutH="75">
+        <thead>
+        <tr>
+            <th >内充订单号</th>
+            <th >内充金额</th>
+            <th >获得元宝数</th>
+            <th>账号</th>
+            <th>游戏服区</th>
+            <th>角色名</th>
+            <th >充值时间</th>
+        </tr>
+        </thead>
+        <tbody>
+            <{foreach item=vo from=$data name=test}>
+            <tr target="sid" rel="1" style="background-color: <{if $smarty.foreach.test.iteration%2==0}> #f8fdfc;<{/if}>">
+                <td><{$vo.orderid}></td>
+                <td><{$vo.money}></td>
+                <td><{$vo.gold}></td>
+                <td><{$vo.user_name}></td>
+                <td><{$vo.game}>  S<{$vo.server_id}></td>
+                <td><{$vo.user_role}></td>
+                <td><{$vo['pay_time']}></td>
+            </tr>
+            <{/foreach}>
+        </tbody>
+    </table>
+    <div class="panelBar">
+        <div class="pages"><span>显示</span>
+            <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                <option <{if $smarty.post.numPerPage==20}>selected<{/if}>  value="20">20</option>
+                <option <{if $smarty.post.numPerPage==50}>selected<{/if}> value="50">50</option>
+                <option <{if $smarty.post.numPerPage==100}>selected<{/if}> value="100">100</option>
+                <option <{if $smarty.post.numPerPage==200}>selected<{/if}> value="200">200</option>
+            </select><span>条，共<{$totalcount}>条</span><span style="margin-left: 10px;">共<b style="color: red;"><{$totalmoney}></b>元</span>
+        </div>
+        <div class="pagination" targetType="navTab" totalCount="<{$totalcount}>" numPerPage="<{$numperpage}>" pageNumShown="10" currentPage="<{$currentpage}>"></div>
+    </div>
+</div>

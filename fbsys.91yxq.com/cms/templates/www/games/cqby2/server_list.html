@@ -1,0 +1,68 @@
+
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<title>[$Title] - [$NodeInfo.Name] - [$91yxq_platform_title]传奇霸业官网 - [$91yxq_platform_title]游戏</title> 
+<meta name="keywords" content="[$Title],[$NodeInfo.Name],[$91yxq_platform_title]传奇霸业官网,[$91yxq_platform_title]游戏" /> 
+<meta name="description" content="[$91yxq_platform_title]传奇霸业官网，更多资料尽在[$91yxq_platform_title]传奇霸业官网。" /> 
+<link type="text/css" rel="stylesheet" href="[$91yxq_resource]/games/cqby/css/main.css" /> 
+<script type="text/javascript" src="[$91yxq_resource]/newvossion/js/jquery-1.4.4.min.js"></script> 
+
+</head>
+
+<body >
+
+<!-- 公用顶部通栏 --> 
+<script type="text/javascript" src="[$91yxq_resource]/gameTop/js/gameTop.js?login=1"></script> 
+<div style="background:url([$91yxq_resource]/games/cqby/img/m_bg.jpg) no-repeat top center; overflow:hidden">
+
+    <include file="header.html" />
+
+    <!--主内容-->
+    <div class="w980">
+        <div class="inside_tit">
+            <h2><i class="pqimg"></i>[$NodeInfo.Name]</h2>
+            <div class="location fr">
+                您当前的位置：<a href="[$91yxq_url]/cqby/index.html">传奇霸业</a>
+                <span class="arrow"> &gt; </span>[$NodeInfo.Name]
+            </div>
+        </div>
+        <div class="inner_box p20">
+            <div class="detit">
+                <h1>[$91yxq_platform_title]传奇霸业 服务器列表</h1>
+            </div>
+            <div class="m_text pt30 pb30 pl50 pr50">
+                <style>
+                .m_text ul{margin:12px 0 0 24px;}
+                .m_text li{margin:0 12px 20px 0;padding:0 2px;width:128px;height:28px;line-height:28px;background:#306060;float:left;text-align:center}
+                </style>
+                <ul class="clearfix">
+                    <CMS action="LIST" return="List" NodeID="self" Num="page-60" where="c.ServerShow IN (1,3)" returnKey="ServerId,ServerName,GameId,ServerStatus" />
+                    <LOOP name="List" var="var" key="key">
+                    <li class="fl" >
+                        <a target="_blank" class="server_btn" href="[$91yxq_url]/main.php?act=gamelogin&amp;game_id=[$var.GameId]&amp;server_id=[$var.ServerId]" style="color:#fff;">
+                            <i class="color[$var.ServerStatus]">
+                                [<if test="$var.ServerStatus==0">停服</if><if test="$var.ServerStatus==1">维护</if><if test="$var.ServerStatus==2">待开</if><if test="$var.ServerStatus==3">顺畅</if><if test="$var.ServerStatus==4">火爆</if><if test="$var.ServerStatus==5">爆满</if>]
+                            </i>
+                            [$var.ServerName]
+                        </a>
+                    </li>
+                    </loop>
+                </ul>
+
+            </div>
+            <!--翻页-->
+            <div class="page">
+                [@list_page($PageInfo.TotalPage,$PageInfo.CurrentPage,$PageInfo.URL)]
+            </div>
+        </div>
+
+    </div>
+
+    <!--页脚-->
+    <include file="../public/footer.html" />
+
+</div>
+</body>
+</html>

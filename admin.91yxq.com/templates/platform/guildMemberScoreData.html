@@ -1,0 +1,110 @@
+<form id="pagerForm" action="" method="post">
+     <input type="hidden" name="access" value="1"/>
+    <input type="hidden" name="pageNum" value="<{$currentpage}>"/>
+    <input type="hidden" name="numPerPage" value="<{$numperpage}>"/>
+    <input type="hidden" name="start_date" value="<{$start_date}>"/>
+    <input type="hidden" name="end_date" value="<{$end_date}>"/>
+    <input type="hidden" name="game_id" value="<{$smarty.post.game_id}>"/>
+    <input type="hidden" name="server_id" value="<{$smarty.post.server_id}>"/>
+    <input type="hidden" name="agent_id" value="<{$smarty.post.agent_id}>"/>
+    <input type="hidden" name="placeid" value="<{$smarty.post.placeid}>"/>
+</form>
+<div class="pageHeader">
+    <form onsubmit="return navTabSearch(this);" action="" method="post">
+    <input type="hidden" name="access" value="1"/>    
+    <div class="searchBar">
+        <ul class="searchContent">
+            <li><label>公会：</label>
+                <select class="combox" name="agent_id" id="agentid25" ref="w_combox_hesid2201" refUrl="?action=sysmanage&opt=getMembers&agentid={value}">
+                    <option value="0">请选择</option>
+                    <{foreach item=v from =$guildlist}>
+                         <option value="<{$v.id}>" <{if $smarty.post.agent_id==$v.id}> selected <{/if}> ><{$v.agentname}></option>
+                         <{/foreach}>
+                     </select>
+                <input type="text" id="search_key255" size="10" class="" value="输入关键字"/>
+            </li>
+            <li>  
+                    <label>公会成员：</label>
+                     <select class="combox" name="placeid" id="w_combox_hesid2201">
+                            <option value ="0" selected>请选择</option>
+                             <{foreach item=v from =$guildmembers}>
+                            <option value="<{$v.site_id}>" <{if $smarty.post.placeid==$v.site_id}>selected<{/if}> ><{$v.sitename}></option>
+                            <{/foreach}>
+                            </select>
+            </li> 
+            <li><label>游戏服区：</label>
+            <select class="combox" name="game_id" id="game_id" ref="server_777wan_212333249981" refUrl="?action=sysmanage&opt=getServers&game_id={value}">
+                <option value="0">请选择</option>
+                <{foreach item=v from =$gamelist}>
+                     <option value="<{$v.id}>" <{if $smarty.post.game_id==$v.id}> selected <{/if}> ><{$v.name}></option>
+                     <{/foreach}>
+                 </select>
+                <select class="combox" name="server_id" id="server_777wan_212333249981">
+                <option value="0">请选择</option>
+                <{foreach item=v from =$serverlist}>
+                     <option value="<{$v.server_id}>" <{if $smarty.post.server_id==$v.server_id}> selected <{/if}> ><{$v.name}></option>
+                     <{/foreach}>
+                 </select>
+            </li>
+            
+        </ul>
+        <ul class="searchContent">
+            <li>  
+                <label>查询起始日期：</label>
+                <input type="text" name="start_date" class="date" value="<{$start_date}>" readonly="true"/>
+                            <a class="inputDateButton" href="javascript:;">选择</a></li>
+            <li>
+                <label>查询结束日期：</label>
+                <input type="text" name="end_date" class="date" value="<{$end_date}>" readonly="true"/>
+                            <a class="inputDateButton" href="javascript:;">选择</a>
+            </li>
+        </ul>
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%"  layoutH="137">
+            <thead>
+                <tr>
+                    <th>公会ID</th>
+                    <th>公会名称</th>
+                    <th>成员ID</th>
+                    <th>成员名</th>
+                    <th>独立注册IP数</th>
+                    <th>充值人数</th>
+                    <th>充值金额</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <{foreach item=vo from=$data}>
+                    <tr target="sid" rel="1">
+                        <td><{$vo['agentid']}></td>
+                        <td><{$vo['agentname']}></td>
+                        <td><{$vo['placeid']}></td>
+                        <td><{$vo['membername']|default:"-- --"}></td>
+                        <td><{$vo['regips']|default:"0"}></td>
+                        <td><{$vo['payusers']|default:"0"}></td>
+                        <td><a style="color: red;"  href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&detail=1&agent_id=<{$vo.agentid}>&placeid=<{$vo.placeid}>&start_date=<{$smarty.post.start_date}>&end_date=<{$smarty.post.end_date}>&game_id=<{$smarty.post.game_id}>&server_id=<{$smarty.post.server_id}>" width="800" height="520" title="<{$vo.agentname}>的成员：<{$vo.membername}> 查询区间的充值明细" target="dialog"><{$vo['paymoney']|default:"0"}></a></td>
+                    </tr>
+                    <{/foreach}>
+                   <tr target="sid" rel="1">
+                        <td>合计：</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td><{$heji['regips']}></td>
+                        <td><{$heji['payusers']}></td>
+                        <td><{$heji['paymoney']}></td>
+                        </tr>
+            </tbody>
+    </table>
+</div>
+<script>
+    var pro_str={ <{foreach item=v from =$guildlist}> "<{$v.id}>":"<{$v.agentname}>", <{/foreach}> };
+    search_pro('search_key255','agentid25');
+</script>

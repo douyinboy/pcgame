@@ -1,0 +1,30 @@
+/* CSS Document */
+*{ margin:0; padding:0;}
+BODY {
+	BACKGROUND:url(../../Images/login/bg_login.jpg) #7bdbdd no-repeat center top; FONT-SIZE: 14px
+}	
+img{ border:0;}
+.container {
+	POSITION: relative; MARGIN: 0px auto; WIDTH: 540px; HEIGHT: 500px
+}
+A {
+	COLOR: #000; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #ff0000; TEXT-DECORATION: underline
+}
+.login {
+	Z-INDEX: 1000; POSITION: absolute; WIDTH: 580px; HEIGHT: 437px; TOP: 0px; LEFT: -70px
+}
+.login_txt {
+	Z-INDEX: 1001;
+	POSITION: absolute;
+	TOP: 250px;
+	LEFT: 135px
+}
+.copy {
+	POSITION: absolute; TEXT-ALIGN: center; WIDTH: 540px; COLOR: #000000; FONT-SIZE: 12px; TOP: 460px; LEFT: 0px; font-family:Arial, Helvetica, sans-serif;
+}
+.registered {
+	POSITION: absolute; TEXT-ALIGN: right; WIDTH: 100px; COLOR: #000000; FONT-SIZE: 12px; TOP: 430px; LEFT:385px
+}

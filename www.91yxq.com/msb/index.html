@@ -1,0 +1,694 @@
+
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>魔神变 - 91yxq游戏平台传奇霸业官网 - 91yxq游戏平台</title>
+<meta name="keywords" content="魔神变,91yxq游戏平台传奇霸业官网传奇霸业官网,91yxq游戏平台" />
+<meta name="description" content="91yxq游戏平台传奇霸业官网，更多资料尽在91yxq游戏平台传奇霸业官网。" />
+<link type="text/css" rel="stylesheet" href="http://image.demo.com/games/cqby/css/main.css" />
+<script type="text/javascript" src="http://image.demo.com/newvossion/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="http://image.demo.com/games/public/js/jq.foshow.js"></script>
+<script type="text/javascript" src="http://image.demo.com/games/public/js/jsScroll.js"></script>
+
+<script type="text/javascript" src="http://image.demo.com/jsCommon/function.js"></script>
+<script type="text/javascript" src="http://image.demo.com/jsCommon/login_tips.js"></script>
+<script type="text/javascript">
+
+function SaveLogin(thisElm){
+    if($(thisElm).is(":checked")){
+        setCookie('save_login',1,86400000*365);
+    }else{
+        setCookie('save_login',0,86400000*365);
+        setCookie('last_name','',0);
+    }
+}
+function CheckInput(){
+    var save_login = getCookie('save_login')=='1';
+    var user = unescape(getCookie('last_name')).replace("+"," ");
+    if( user && save_login){
+        $("#SaveLogin").attr("checked","checked");
+        setCookie('save_login',1,86400000*365);
+        $('#login_user').val( user );
+    }else{
+        $("#SaveLogin").removeAttr("checked");
+        setCookie('save_login',0,86400000*365);
+        $('#login_user').val('');
+        $('#login_pwd').val('');
+
+    }
+}
+
+//检测登录状态
+function CheckLogined(){
+    var login_name = unescape(getCookie('login_name'));
+    var user_info = unescape(getCookie('userinfo'));
+    var login_time = unescape(getCookie('login_time')).replace("+"," ");
+    if(login_name){
+        //登录名
+        var qq_nick=unescape(getCookie('qq_nick'));
+        if(qq_nick&&login_name.indexOf('@qq')>0){
+            $(".in_login_info").find('.name').html( '您好!'+qq_nick+' - '+login_name.replace("+"," ") );
+        }else{
+            $(".in_login_info").find('.name').html( "您好, "+login_name.replace("+"," ") );
+        }
+        //头像
+        var a = user_info.split('|');
+        var userid = a[0];
+        $('.in_login_info .avatar img').attr('src','http://image.demo.com/images/www/noavatar_middle.gif');
+        //上次登录时间
+        $('.in_login_info').find('.time').html('上传登录时间：'+login_time);
+        $('.in_login_info').show();
+        $('.in_login').hide();
+        setCookie('last_name',login_name,86400000*365);
+    } else {
+        $('.in_login_info').hide();
+        $('.in_login').show();
+        CheckInput();
+    }
+}
+
+function Login(){
+    //var backUrl=$("#ref").val();
+    if(typeof(backUrl)=='undefined' || backUrl=='' ){
+        backUrl= window.location.href;
+    }
+    var login_user=$("#login_user").val();
+    var login_pwd=$("#login_pwd").val();
+    if( login_user == '' || login_user == '请输入91yxq游戏平台帐号'){
+        login_tips.show_msg('请输入账号！');
+        $("#login_user").focus();
+        return false;
+    }
+    if(login_pwd == '' || login_pwd == '1234'){
+        login_tips.show_msg('请输入密码！');
+        $("#login_pwd").focus();
+        return false;
+    }
+
+    var url="http://www.demo.com/api/check_login_user.php?act=login";
+    var paras={'login_user':login_user,'login_pwd':login_pwd};
+    $.ajax(
+    {
+    type:"POST",
+    url:url,
+    data:paras,
+    dataType : 'json',
+    success: function(data)
+    {
+        switch(data.code){
+            case '01':
+                login_tips.show_msg(data.msg);
+                break;
+            case '02':
+                login_tips.show_verify();
+                break;
+            case '11':
+                alert('已经登录,请勿重复登录');
+                location.href= backUrl;
+                break;
+            case '10':
+                /*window.location.reload();*/
+                location.href= backUrl;
+                break;
+        }
+    },
+    error:function()
+    {
+        login_tips.show_msg('网络故障，验证失败！');
+        return false;
+    }
+    });
+    return false;
+}
+
+
+function addFavorite(url,title)
+{
+    if (window.external && ("addFavorite" in window.external)){
+        window.external.addFavorite(url,title);
+        return false;
+    }
+    else if(window.sidebar ){
+        if("addPanel" in window.sidebar){
+            window.sidebar.addPanel(title, url, "customizeURL");
+            return false
+        }
+        else{
+            return true;
+        }
+    }
+    else{
+        alert("您的浏览器不支持此操作，请用快捷键Ctrl+D添加收藏夹。");
+        return false;
+    }
+}
+
+$(function(){
+    CheckLogined();
+});
+</script>
+</head>
+
+<body >
+
+<!-- 公用顶部通栏 -->
+<script type="text/javascript" src="http://image.demo.com/gameTop/js/gameTop.js?login=1"></script>
+<div style="background:url(http://image.demo.com/games/cqby/img/m_bg.jpg) no-repeat top center; overflow:hidden">
+    
+<!--导航-->
+<div class="nav clearfix">
+    <div class="pq_nav w980">
+        <ul>
+            <li>
+                <a href="/msb/index.html"  >
+                    <span class="y1">首页</span>
+                    <i></i>
+                </a>
+            </li >
+            <li>
+                <a href="/msb/xwzx/index.html"  >
+                    <span class="y2">新闻中心</span>
+                    <i></i>
+                </a>
+            </li>
+            <li>
+                <a href="/msb/yxzl/index.html"  >
+                    <span class="y3">游戏资料</span>
+                    <i></i>
+                </a>
+            </li>
+            <li class="logo"><a href="/msb/index.html"></a></li>
+            <li>
+                <a href="/msb/yxgl/index.html"  >
+                    <span class="y4">游戏攻略</span>
+                    <i></i>
+                </a>
+            </li>
+            <li>
+                <a href="http://pay.demo.com/?game_id=1" target="_blank">
+                    <span class="y5">充值中心</span>
+                    <i></i>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.demo.com/help/index.html" target="_blank">
+                    <span class="y6">客服中心</span>
+                    <i></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!--中内广告-->
+<div class="w980 banner"></div>
+    <!--主内容-->
+    <div class="w980">
+        <!--登录-->
+        <div class="fl in_login_box">
+            <!--登录前-->
+            <div class="in_login" id="loginform">
+                <div class="in_login_tit">用户登录</div>
+                <ul>
+                    <li class="mb5"><input name="login_user" type="text" id="login_user" placeholder="请输入的91yxq游戏平台账号" value="" class="text"></li>
+                    <li><input name="login_pwd" type="password" id="login_pwd" placeholder="请输入密码" value="" autocomplete="off" class="text"></li>
+                    <li class="mt10 mb10"><input name="" type="button" value="" class="pqimg btn_go" onclick="Login();"/></li>
+                    <li>
+                        <p class="fr"><a href="http://www.demo.com/help.php?act=getpwd_email" class="orange" target="_blank">忘记密码</a><span class="orange">&nbsp;&nbsp;/&nbsp;&nbsp;</span><a href="http://www.demo.com/main.php?act=reg" class="orange" target="_blank">注册帐号</a></p>
+                        <p><span class="pr10"><input name="checkbox" type="checkbox" id="SaveLogin" checked="checked" onclick="SaveLogin(this);"></span>记住账号</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!--登录后-->
+            <div class="in_login_info" style="display:none;">
+                <div class="in_login_tit">用户信息</div>
+                <dl class="clearfix">
+                    <dt><a class="avatar" href="http://www.demo.com/my.php" target="_blank"><img src="http://image.demo.com/games/public/images/avatar_pic.gif" /></a></dt>
+                    <dd>
+                        <div class="name"></div>
+                        <p class="btn_login"><a href="http://www.demo.com/my.php"  target="_blank">个人中心</a><a href="http://www.demo.com/main.php?act=logout" class="ml5" style="background:#4e90ed">退出</a></p>
+                    </dd>
+                </dl>
+                <div class="tc">
+                    <div class="orange">最近登录的服区：<a id="last_server" class="orange" href="javascoript:void(0);"></a></div>
+                    <p class="time">上次登陆时间：</p>
+                </div>
+            </div>
+        </div>
+
+        <!--按钮-->
+        <div class="fl w280 pr10">
+            <!--微端下载-->
+            <a href="Javascript:void(0);" class="pqimg btn_xz" ></a>
+            <div class="blank10"></div>
+            <!--礼包-->
+            <a href="./xsk/index.html" class="pqimg btn_lb fl" target="_blank"></a>
+            <!--充值-->
+            <a href="http://pay.demo.com/?game_id=1" class="pqimg btn_cz fr" target="_blank"></a>
+        </div>
+
+        <!--服务器登录-->
+        <div class="fr in_server_box">
+                        <div class="top_tit">
+                <p class="fl">
+                    快速进入&nbsp;&nbsp;
+                                                                                            <input name="textfield" type="text" id="textfield" value="7" class="text" />
+                        <a title="进入游戏" class="btn" id="fast_play" href="http://www.demo.com/main.php?act=gamelogin&game_id=1&server_id=7" target="_blank">进入游戏</a>
+                                                                                                                                                                                                                                                                                                                                                                                    </p>
+                <a href="./list/index.html" target="_blank" class="fr more">更多 &gt;&gt;</a>
+            </div>
+            <script>
+                $("#textfield").keyup(function(){
+                    $("#fast_play").attr("href","http://www.demo.com/main.php?act=gamelogin&game_id=1&server_id="+$(this).val());
+                });
+            </script>
+            <div class="tit">所有服务器</div>
+            <div id="div1" class="server_scroll">
+                <ul class="server_list">
+                                        <li>
+                        <a href="http://www.demo.com/main.php?act=gamelogin&game_id=1&server_id=7" target="_blank">
+                            <span class="orange">双线7服</span>
+                            <span class="yellow">顺畅</span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="http://www.demo.com/main.php?act=gamelogin&game_id=1&server_id=6" target="_blank">
+                            <span class="orange">双线6服</span>
+                            <span class="yellow">维护</span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="http://www.demo.com/main.php?act=gamelogin&game_id=1&server_id=5" target="_blank">
+                            <span class="orange">双线5服</span>
+                            <span class="yellow">火爆</span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="http://www.demo.com/main.php?act=gamelogin&game_id=1&server_id=4" target="_blank">
+                            <span class="orange">双线4服</span>
+                            <span class="yellow">顺畅</span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="http://www.demo.com/main.php?act=gamelogin&game_id=1&server_id=3" target="_blank">
+                            <span class="orange">双线3服</span>
+                            <span class="yellow">顺畅</span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="http://www.demo.com/main.php?act=gamelogin&game_id=1&server_id=2" target="_blank">
+                            <span class="orange">双线2服</span>
+                            <span class="yellow">顺畅</span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="http://www.demo.com/main.php?act=gamelogin&game_id=1&server_id=1" target="_blank">
+                            <span class="orange">双线1服</span>
+                            <span class="yellow">爆满</span>
+                        </a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+
+        <div class="blank20"></div>
+        <div class="blank20"></div>
+        <!--广告轮换-->
+        <div id="focus_box" class="fl">
+            <div class="prev"></div>
+            <div class="next"></div>
+                        <ul class="focus_ad">
+                                <li>
+                    <a href="http://www.demo.com/cqby/xwzx/99.html" target="_blank">
+                        <img src="http://image.demo.com/rsc/games/cqby/ad/h000/h00/img201612280025110.jpg" />
+                    </a>
+                </li>
+                            </ul>
+            <ul class="focus_num">
+                                <li class="on" ></li>
+                            </ul>
+        </div>
+        <script>
+        $("#focus_box").foShow({
+            mains:$("#focus_box").children(".focus_ad").children(),
+            navs:$("#focus_box").children(".focus_num").children(),
+            prev:$("#focus_box").children(".prev"),
+            next:$("#focus_box").children(".next"),
+            duration:500,
+            interval:3000,
+            curClass:"on",
+            hovering:true
+        });
+        </script>
+
+        <!--新闻-->
+        <div class="fl main_tab">
+            <div class="hd_tab" id="myTab1">
+                <div class="li_o li_a" >新闻</div>
+                <div class="li_o" >公告</div>
+                <div class="li_o" >活动</div>
+                <a href="./xwzx/index.html" target="_blank" class="fr more">更多 >></a>
+            </div>
+            <div class="in_news_list">
+                <ul>
+                                                                <li>
+                            <a href="http://www.demo.com/cqby/xwzx/104.html" title="91yxq12月28日19点双线10服火爆开启 " target="_blank">[新闻] 91yxq12月28日19点双线10服火爆开启 </a>
+                            <span class="time">12-28</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.demo.com/cqby/xwzx/103.html" title="91yxq12月27日19点双线10服火爆开启 " target="_blank">[新闻] 91yxq12月27日19点双线10服火爆开启 </a>
+                            <span class="time">12-28</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.demo.com/cqby/xwzx/102.html" title="91yxq12月26日19点双线10服火爆开启 " target="_blank">[新闻] 91yxq12月26日19点双线10服火爆开启 </a>
+                            <span class="time">12-28</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.demo.com/cqby/xwzx/101.html" title="91yxq12月26日19点双线10服火爆开启 " target="_blank">[新闻] 91yxq12月26日19点双线10服火爆开启 </a>
+                            <span class="time">12-28</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.demo.com/cqby/xwzx/100.html" title="91yxq12月25日19点双线10服火爆开启 " target="_blank">[新闻] 91yxq12月25日19点双线10服火爆开启 </a>
+                            <span class="time">12-28</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.demo.com/cqby/xwzx/99.html" title="91yxq12月24日19点双线10服火爆开启" target="_blank">[新闻] 91yxq12月24日19点双线10服火爆开启</a>
+                            <span class="time">12-28</span>
+                        </li>
+                                    </ul>
+            </div>
+            <div class="in_news_list" style="display:none">
+                <ul>
+                                                                <li>
+                            <a href="http://www.demo.com/cqby/xwzx/105.html" title="91yxq12月28日19点双线10服火爆开启 " target="_blank">[公告] 91yxq12月28日19点双线10服火爆开启 </a>
+                            <span class="time">12-28</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.demo.com/cqby/xwzx/106.html" title="91yxq12月27日19点双线10服火爆开启 " target="_blank">[公告] 91yxq12月27日19点双线10服火爆开启 </a>
+                            <span class="time">12-28</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.demo.com/cqby/xwzx/107.html" title="91yxq12月26日19点双线10服火爆开启 " target="_blank">[公告] 91yxq12月26日19点双线10服火爆开启 </a>
+                            <span class="time">12-28</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.demo.com/cqby/xwzx/108.html" title="91yxq12月26日19点双线10服火爆开启 " target="_blank">[公告] 91yxq12月26日19点双线10服火爆开启 </a>
+                            <span class="time">12-28</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.demo.com/cqby/xwzx/109.html" title="91yxq12月25日19点双线10服火爆开启 " target="_blank">[公告] 91yxq12月25日19点双线10服火爆开启 </a>
+                            <span class="time">12-28</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.demo.com/cqby/xwzx/110.html" title="91yxq12月24日19点双线10服火爆开启" target="_blank">[公告] 91yxq12月24日19点双线10服火爆开启</a>
+                            <span class="time">12-28</span>
+                        </li>
+                                    </ul>
+            </div>
+            <div class="in_news_list" style="display:none">
+                <ul>
+                                                                <li>
+                            <a href="http://www.demo.com/cqby/xwzx/112.html" title="91yxq12月28日19点双线10服火爆开启 " target="_blank">[活动] 91yxq12月28日19点双线10服火爆开启 </a>
+                            <span class="time">12-28</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.demo.com/cqby/xwzx/113.html" title="91yxq12月27日19点双线10服火爆开启 " target="_blank">[活动] 91yxq12月27日19点双线10服火爆开启 </a>
+                            <span class="time">12-28</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.demo.com/cqby/xwzx/114.html" title="91yxq12月26日19点双线10服火爆开启 " target="_blank">[活动] 91yxq12月26日19点双线10服火爆开启 </a>
+                            <span class="time">12-28</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.demo.com/cqby/xwzx/115.html" title="91yxq12月26日19点双线10服火爆开启 " target="_blank">[活动] 91yxq12月26日19点双线10服火爆开启 </a>
+                            <span class="time">12-28</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.demo.com/cqby/xwzx/116.html" title="91yxq12月25日19点双线10服火爆开启 " target="_blank">[活动] 91yxq12月25日19点双线10服火爆开启 </a>
+                            <span class="time">12-28</span>
+                        </li>
+                                            <li>
+                            <a href="http://www.demo.com/cqby/xwzx/117.html" title="91yxq12月24日19点双线10服火爆开启" target="_blank">[活动] 91yxq12月24日19点双线10服火爆开启</a>
+                            <span class="time">12-28</span>
+                        </li>
+                                    </ul>
+            </div>
+        </div>
+        <script>
+        $(".main_tab").foShow({
+            mains:$(".main_tab .in_news_list"),
+            navs:$("#myTab1 .li_o"),
+            prev:null,
+            next:null,
+            duration:300,
+            interval:null,
+            curClass:"li_a",
+            hovering:false
+        });
+        </script>
+
+        <!--客服-->
+        <div class="fr"><a href="Javascript:void(0);" onclick="alert('敬请期待');" class="pqimg in_kf" target="_blank"></a></div>
+
+        <div class="blank15"></div>
+        <!--游戏指南-->
+        <div class="inner_box">
+            <div class="hd_tab">
+                <div class="li_a">游戏指南</div>
+                <a href="./yxzl/index.html" class="fr more">更多 >></a>
+            </div>
+            <div class="in_guide">
+                <ul class="clearfix">
+                    <li>
+                        <div class="fl"><i class="pqimg guide_ic01"></i></div>
+                        <div class="text">
+                            <h3>新手指南</h3>
+                            <div class="txt">
+                                                                                                                                        <a href="http://www.demo.com/cqby/yxzl/x2136212/76.html"  target="_blank">锦衣系统</a>
+                                                                    <span>|</span>                                    <a href="http://www.demo.com/cqby/yxzl/x5936212/75.html"  target="_blank">市场交易</a>
+                                                                    <span>|</span>                                    <a href="http://www.demo.com/cqby/yxzl/x3336212/74.html"  target="_blank">个人竞技</a>
+                                                                    <span>|</span>                                    <a href="http://www.demo.com/cqby/yxzl/x0336212/73.html"  target="_blank">称号系统</a>
+                                                                    <span>|</span>                                    <a href="http://www.demo.com/cqby/yxzl/x3836212/72.html"  target="_blank">凌云仙职</a>
+                                                                    <span>|</span>                                    <a href="http://www.demo.com/cqby/yxzl/x5036212/71.html"  target="_blank">巅峰竞技</a>
+                                                                    <span>|</span>                                    <a href="http://www.demo.com/cqby/yxzl/x1736212/70.html"  target="_blank">技能系统</a>
+                                                                <span>|</span>
+                                <a href="./yxzl/xszn.html"  target="_blank">更多</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="fl"><i class="pqimg guide_ic02"></i></div>
+                        <div class="text">
+                            <h3>高手进阶</h3>
+                            <div class="txt">
+                                                                                                                                        <a href="http://www.demo.com/cqby/yxzl/12192828/83.html" target="_blank">元宵汤圆</a>
+                                                                    <span>|</span>                                    <a href="http://www.demo.com/cqby/yxzl/12572828/82.html" target="_blank">趣味灯谜</a>
+                                                                    <span>|</span>                                    <a href="http://www.demo.com/cqby/yxzl/12382828/81.html" target="_blank">五倍刷怪</a>
+                                                                    <span>|</span>                                    <a href="http://www.demo.com/cqby/yxzl/12522828/80.html" target="_blank">世界BOSS</a>
+                                                                    <span>|</span>                                    <a href="http://www.demo.com/cqby/yxzl/12382828/79.html" target="_blank">仙盟系统</a>
+                                                                    <span>|</span>                                    <a href="http://www.demo.com/cqby/yxzl/12122828/78.html" target="_blank">欢乐探宝</a>
+                                                                    <span>|</span>                                    <a href="http://www.demo.com/cqby/yxzl/12402828/77.html" target="_blank">VIP副本</a>
+                                                                <span>|</span>
+                                <a href="./yxzl/gsjj.html" target="_blank">更多</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="clearfix">
+                    <li>
+                        <div class="fl"><i class="pqimg guide_ic03"></i></div>
+                        <div class="text">
+                            <h3>游戏系统</h3>
+                            <div class="txt">
+                                                                                                                                        <a href="http://www.demo.com/cqby/yxzl/16xx31/90.html" target="_blank">夫妻系统</a>
+                                                                    <span>|</span>                                    <a href="http://www.demo.com/cqby/yxzl/16xx31/89.html" target="_blank">灵环系统</a>
+                                                                    <span>|</span>                                    <a href="http://www.demo.com/cqby/yxzl/16xx31/88.html" target="_blank">剑阵系统</a>
+                                                                    <span>|</span>                                    <a href="http://www.demo.com/cqby/yxzl/16xx31/87.html" target="_blank">侍女系统</a>
+                                                                    <span>|</span>                                    <a href="http://www.demo.com/cqby/yxzl/16xx31/86.html" target="_blank">法宝系统</a>
+                                                                    <span>|</span>                                    <a href="http://www.demo.com/cqby/yxzl/16xx31/85.html" target="_blank">神兵系统</a>
+                                                                    <span>|</span>                                    <a href="http://www.demo.com/cqby/yxzl/16xx31/84.html" target="_blank">羽翼系统</a>
+                                                                <span>|</span>
+                                <a href="./yxzl/yxxt.html" target="_blank">更多</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="fl"><i class="pqimg guide_ic04"></i></div>
+                        <div class="text">
+                            <h3>特色玩法</h3>
+                            <div class="txt">
+                                                                                                                                        <a href="http://www.demo.com/cqby/yxzl/31383f/97.html" target="_blank">育儿系统</a>
+                                                                    <span>|</span>                                    <a href="http://www.demo.com/cqby/yxzl/31233f/96.html" target="_blank">夫妻系统</a>
+                                                                    <span>|</span>                                    <a href="http://www.demo.com/cqby/yxzl/31063f/95.html" target="_blank">战场大厅</a>
+                                                                    <span>|</span>                                    <a href="http://www.demo.com/cqby/yxzl/31493f/94.html" target="_blank">长安夺宝</a>
+                                                                    <span>|</span>                                    <a href="http://www.demo.com/cqby/yxzl/31323f/93.html" target="_blank">护送经书</a>
+                                                                    <span>|</span>                                    <a href="http://www.demo.com/cqby/yxzl/31183f/92.html" target="_blank">副本大厅</a>
+                                                                    <span>|</span>                                    <a href="http://www.demo.com/cqby/yxzl/31003f/91.html" target="_blank">全民乱斗</a>
+                                                                <span>|</span>
+                                <a href="./yxzl/tswf.html" target="_blank">更多</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="blank15"></div>
+        <!--游戏截图-->
+        <div class="fl w480">
+            <!--游戏载图-->
+            <div class="inner_box" style="min-height:230px">
+                <div class="hd_tab">
+                    <div class="li_a">游戏截图</div>
+                    <a href="./yxjt/index.html" class="fr more">更多 >></a>
+                </div>
+                <ul class="in_pic_list">
+                                                            <li>
+                        <a href="http://www.demo.com/cqby/yxjt/68.html" target="_blank">
+                            <div class="pic"><img src="http://image.demo.com/rsc/games/cqby/yxjt/h000/h00/img201612280017060.jpg" /></div>
+                            <div class="text">精美截图</div>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="http://www.demo.com/cqby/yxjt/67.html" target="_blank">
+                            <div class="pic"><img src="http://image.demo.com/rsc/games/cqby/yxjt/h000/h00/img201612280016410.jpg" /></div>
+                            <div class="text">精彩截图</div>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="http://www.demo.com/cqby/yxjt/66.html" target="_blank">
+                            <div class="pic"><img src="http://image.demo.com/rsc/games/cqby/yxjt/h000/h00/img201612280013190.jpg" /></div>
+                            <div class="text">惊艳截图</div>
+                        </a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+
+        <!--游戏攻略-->
+        <div class="fr w480">
+            <!--游戏载图-->
+            <div class="inner_box" style="min-height:230px">
+                <div class="hd_tab">
+                    <div class="li_a">游戏攻略</div>
+                    <a href="./yxgl/index.html" class="fr more">更多 >></a>
+                </div>
+                <ul class="in_news_list">
+                                                            <li>
+                        <span class="time">12-28</span>
+                        <a href="http://www.demo.com/cqby/yxgl/65.html" target="_blank">[攻略] 快速升级攻略</a>
+                    </li>
+                                        <li>
+                        <span class="time">12-28</span>
+                        <a href="http://www.demo.com/cqby/yxgl/64.html" target="_blank">[攻略] 迷惘之森试炼攻略</a>
+                    </li>
+                                        <li>
+                        <span class="time">12-28</span>
+                        <a href="http://www.demo.com/cqby/yxgl/63.html" target="_blank">[攻略] 亡者峡谷试炼攻略</a>
+                    </li>
+                                        <li>
+                        <span class="time">12-28</span>
+                        <a href="http://www.demo.com/cqby/yxgl/62.html" target="_blank">[攻略] 勇者之塔试炼攻略</a>
+                    </li>
+                                        <li>
+                        <span class="time">12-28</span>
+                        <a href="http://www.demo.com/cqby/yxgl/61.html" target="_blank">[攻略] 堕落深渊试炼攻略</a>
+                    </li>
+                                    </ul>
+            </div>
+        </div>
+
+        <div class="blank15"></div>
+        <!--友情链接-->
+        <!--
+        <div class="inner_box">
+            <div class="hd_tab"><div class="li_a">游戏链接</div></div>
+            <div class="links">
+                <B>Error:</B>The NodeID <font color=#FF0000>6750</font> you have set does not exist!                            </div>
+        </div>
+        -->
+    </div>
+
+    <!--页脚-->
+    <div class="foot">
+    <div class="foot_copy">
+        <p>
+            <a href="http://www.demo.com/us/about.html" target="_blank">关于我们</a>
+            <span class="line">|</span>
+            <a href="http://www.demo.com/fcm/" target="_blank">家长监护</a>
+            <span class="line">|</span>
+            <a href="http://www.demo.com/us/contact.html" target="_blank">联系我们</a>
+            <span class="line">|</span>
+            <a href="http://www.demo.com/us/business.html" target="_blank">商务合作</a>
+        </p>
+        <p>Copyright ? 2012 - 2017 南京魔苹网络科技有限公司 备案号 苏ICP备14015522号-1 《网络文化经营许可证》编号：苏网文(2016)1086-026号</p>
+    </div>
+    <div class="foot_prove">
+        <a href="javascript:void(0);" class="prove_ic1"></a>
+        <a href="javascript:void(0);" class="prove_ic2"></a>
+        <a href="javascript:void(0);" class="prove_ic3"></a>
+        <a href="javascript:void(0);" class="prove_ic4"></a>
+    </div>
+    <div class="foot_msg">抵制不良游戏，拒绝盗版游戏。注意自我保护，谨防受骗上当。适度游戏益脑，沉迷游戏伤身。合理安排时间，享受健康生活。</div>
+</div>
+
+<!-- <div style="margin-right:-695px; position:fixed; top:130px; right:50%" id="activity">
+    <div style="width:125px; height:350px; z-index:1; visibility:visible; border:0;">
+        <a id="6k_url" href="http://www.6kwan.com/qjsx/index.html" target="_blank" style="text-decoration:none; display:block; height:350px; width:125px"></a>
+    </div>
+    <div style=" position:absolute; top:0; left:0; z-index:-1">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="192" height="136">
+            <param name="movie" value="http://image.777wan.com/common/swf/125X350.swf"/>
+            <param name="quality" value="high"/>
+            <param name="wmode" value="opaque"/> -->
+            <!--此处添加flash-->
+            <!-- <embed src="http://image.777wan.com/common/swf/125X350.swf" quality="high" wmode="opaque" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="125" height="350"></embed>
+        </object>
+    </div>
+    <a href="javascript:void(0);" id="close" style="display:block; background:#0f0f0f; font-size:12px; color:#999; text-align:center; line-height:20px">关闭</a>
+</div>
+</div>
+<script src="http://image.777wan.com/common/js/6k_url.js" type="text/javascript"></script>
+<script type="text/javascript">
+$("#close").click(function() {
+    $("#activity").hide();
+});
+</script> -->
+
+    <script type="text/javascript">
+    jsScroll(document.getElementById('div1'), 8, 'divScrollBar');
+    //最后登录游戏信息
+$(function(){
+
+    var login_game_info = unescape(getCookie('login_game_info'));
+    if(login_game_info != 0){
+        var gameList = login_game_info.split("<a");
+        if(gameList.length>0){
+            var i,gameinfo,game_id=0,href = '',server_name = '';
+            for(i in gameList){
+                gameinfo = gameList[i].split("_");
+                if(gameinfo[0] == 1){
+                    game_id = gameinfo[0];
+                    href = "http://www.demo.com/main.php?act=gamelogin&game_id="+game_id+"&server_id="+gameinfo[1];
+                    server_name = gameinfo[2];
+                    jQuery('#last_server').attr('href',href).html(server_name);
+                    jQuery('#enterGameBtn').attr('href',href);
+                    break;
+                }
+            }
+            if(game_id == 0){
+                jQuery('#enterGameBtn').hide();
+            }
+
+        }else{
+            jQuery('#enterGameBtn').hide();
+        }
+    }
+})
+    </script>
+
+</div>
+</body>
+</html>

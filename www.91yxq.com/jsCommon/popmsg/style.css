@@ -1,0 +1,56 @@
+#popmsg{
+    z-index:11000;
+    position:absolute;
+    width:480px;
+    background:url(pop1.gif) 0 bottom no-repeat;
+    text-align:left;
+}
+#popmsg_title_box{
+    color: #FFFFFF;
+    font-size: 14px;
+    line-height: 28px;
+    height: 28px;
+    margin: 0;
+    padding: 0 16px 0 12px;
+    position: relative;
+    background: url(pop1.gif) 0 top no-repeat;
+}
+#popmsg_title{
+}
+#popmsg_close{
+    background: url(pop_close.gif) no-repeat scroll 0 -15px transparent;
+    display: block;
+    height: 15px;
+    overflow: hidden;
+    position: absolute;
+    right: 12px;
+    top: 6px;
+    width: 15px;
+}
+#popmsg_close:hover {
+    background:url(pop_close.gif) 0 -30px no-repeat;
+}
+#popmsg_content{
+    background: url(mark.gif) no-repeat scroll 30px 30px transparent;
+    clear: both;
+    color: #333333;
+    font-size: 14px;
+    line-height: 26px;
+    min-height: 60px;
+    _height: 60px;
+    padding: 30px 30px 20px 100px;
+}
+#popmsg_footer{
+    padding: 10px;
+    text-align: right;
+}
+#popmsg_confirm{
+    background: url(btn0.gif) no-repeat;
+    color: #FFFFFF;
+    height: 24px;
+    line-height: 24px;
+    margin: 0 16px 0 0;
+    width: 75px;
+    border:0;
+    cursor:pointer;
+}

@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="<?php echo $this->_tpl_vars["91yxq_platform_keywords"];?>" />
+<meta name="description" content="<?php echo $this->_tpl_vars["91yxq_platform_desc"];?>" />
+<title><?php echo $this->_tpl_vars["91yxq_platform_title"];?>-<?php echo $this->_tpl_vars["NodeInfo"]["Name"];?>详细</title>
+<link type="text/css" rel="stylesheet" href="<?php echo $this->_tpl_vars["91yxq_image_url"];?>/css/www/base.css" />
+<link type="text/css" rel="stylesheet" href="<?php echo $this->_tpl_vars["91yxq_image_url"];?>/css/www/public.css" />
+<link type="text/css" rel="stylesheet" href="<?php echo $this->_tpl_vars["91yxq_image_url"];?>/css/www/main_pq.css" />
+<script type="text/javascript" src="<?php echo $this->_tpl_vars["91yxq_image_url"];?>/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->_tpl_vars["91yxq_image_url"];?>/js/jq.foshow.js"></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?40046e537679c6fcc02004afff9e4d2d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+
+<body>
+
+<!---头部-->
+<?php include("../sysdata/templates_c/%%c_^@templates@www@help@public@header.html");?>
+
+<!--主内容-->
+<div class="m1200 clearfix">
+	<!--左侧-->
+    <div class="fl w920 mt40">
+    	<div class="m_box2 p50">
+            
+			<div class="list_detail">
+                <h1><?php echo $this->_tpl_vars["Title"];?></h1>
+                <p>作者：<?php echo $this->_tpl_vars["Author"];?>&nbsp;&nbsp;&nbsp;&nbsp;发布时间：<?php echo date("Y-m-d", $this->_tpl_vars['PublishDate']);?></p>
+                <a href="<?php echo $this->_tpl_vars["NodeInfo"]["URL"];?>" class="return_btn">返回</a>
+            </div>
+            <div class="m_text">
+                <?php echo $this->_tpl_vars["Content"];?>
+            </div>
+            <div class="page_updown clearfix">
+				
+				<?php
+ global $PageInfo,$params; 
+ $params = array ( 
+	'action' => "LIST",
+	'return' => "list",
+	'nodeid' => "{$this->_tpl_vars['NodeID']}",
+	'num' => "1",
+	'where' => "i.PublishDate < {$this->_tpl_vars['PublishDate']}",
+	'orderby' => "i.PublishDate DESC",
+ ); 
+;
+$this->_tpl_vars['list'] = CMS_LIST($params); 
+    $this->_tpl_vars['PageInfo'] = &$PageInfo;  
+?>
+				<?php if(empty($this->_tpl_vars['list'])): ?>
+                <p class="fl">上一条：<a href="javascript:void(0)">没有了</a></p>
+				<?php else: ?>
+				<?php if(!empty($this->_tpl_vars['list'] )): 
+   foreach ($this->_tpl_vars['list'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+				<p class="fl">上一条：<a href="<?php echo $this->_tpl_vars["var"]["URL"];?>" title="<?php echo $this->_tpl_vars["var"]["Title"];?>"><?php echo $this->_tpl_vars["var"]["Title"];?></a></p>
+				<?php endforeach; endif;?>
+				<?php endif;?>
+				
+				<?php
+ global $PageInfo,$params; 
+ $params = array ( 
+	'action' => "LIST",
+	'return' => "list",
+	'nodeid' => "{$this->_tpl_vars['NodeID']}",
+	'num' => "1",
+	'where' => "i.PublishDate > {$this->_tpl_vars['PublishDate']}",
+	'orderby' => "i.PublishDate ASC",
+ ); 
+;
+$this->_tpl_vars['list'] = CMS_LIST($params); 
+    $this->_tpl_vars['PageInfo'] = &$PageInfo;  
+?>
+				<?php if(empty($this->_tpl_vars['list'])): ?>
+                <p class="fr">下一条：<a href="javascript:void(0)">没有了</a></p>
+				<?php else: ?>
+				<?php if(!empty($this->_tpl_vars['list'] )): 
+   foreach ($this->_tpl_vars['list'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+				<p class="fr">下一条：<a href="<?php echo $this->_tpl_vars["var"]["URL"];?>" title="<?php echo $this->_tpl_vars["var"]["Title"];?>"><?php echo $this->_tpl_vars["var"]["Title"];?></a></p>
+				<?php endforeach; endif;?>
+				<?php endif;?>
+				
+            </div>
+        </div>
+    </div>
+    
+    <!--右侧-->
+    <div class="fr w260 mt40">
+    	<!--推荐活动-->
+        <div class="m_box" id="activity_box">
+        	<script src="<?php echo $this->_tpl_vars["91yxq_url"];?>/public/activity_box.js"></script>
+        </div>
+        
+        <div class=" mt15"></div>
+		
+        <!--开服列表-->
+        <div class="m_box" id="svr_list_box">
+        	<script src="<?php echo $this->_tpl_vars["91yxq_url"];?>/public/svr_list_box.js"></script>
+        </div>
+    </div>
+</div>
+
+<!--页脚-->
+<div class="foot clearfix" id="footer_box">
+	<script src="<?php echo $this->_tpl_vars["91yxq_url"];?>/public/footer.js"></script>
+</div>
+
+</body>
+</html>

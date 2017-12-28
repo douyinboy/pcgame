@@ -1,0 +1,52 @@
+<div class="pageContent">
+    <form method="post" action="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=add&callbackType=closeCurrent&navTabId=<{$smarty.get.navTabId}>" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+    <input name="sub" type="hidden" value="1" />
+    <div class="pageFormContent" layoutH="58"> 
+        <div class="unit">
+            <label style="width:70px;">账号：</label>
+                    <input name="user_name" id="account" type="text"  class="required" value=""/>
+                     <span class="info">  请填写玩家账号</span>
+        </div>
+        <div class="unit">
+                <label style="width:70px;">内充金额：</label>
+                <input name="pay_money"  type="text" class="required digits" value=""/>
+        </div>
+        <div class="unit">
+                <label style="width:70px;">游戏：</label>
+            <select class="combox" name="game_id" id="game_id" ref="gameid123" refUrl="?action=sysmanage&opt=getServers&game_id={value}">
+                <option value="0">请选择</option>
+                <{foreach item=v  from=$gamelist}>
+                     <option value="<{$v.id}>" <{if $smarty.get.game_id==$v.id}> selected <{/if}> ><{$v.name}></option>
+                     <{/foreach}>
+                 </select> 
+                <select class="combox" name="server_id" id="gameid123"  onchange="get_user_role()">
+                <option value="0">请选择</option>
+                <{foreach item=v from =$serverlist}>
+                     <option value="<{$v.server_id}>" <{if $smarty.get.server_id==$v.server_id}> selected <{/if}> ><{$v.name}></option>
+                     <{/foreach}>
+                 </select>  
+        </div>
+         <div class="unit" id="gamerole">
+                <label style="width:70px;">角色名：</label>
+                <input name="user_role" id="user_role" type="text" class="required readonly" value="12" readonly=true />
+        </div>
+          <div class="unit">
+                <label style="width:70px;"> 充值类型：</label>
+                    <select name="pay_type" onchange="get_role()">
+                        <option value="0">请选择</option>
+                        <option value="2">公会赔付</option>
+                    </select>
+        </div>
+        <div class="unit">
+                <label style="width:70px;">申请理由：</label>
+                    <textarea rows="3" cols="60" name="reason" class="textInput" ></textarea>
+        </div>                                      
+    </div>
+    <div class="formBar">
+        <ul>
+            <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+            <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+        </ul>
+    </div>
+    </form>
+</div>

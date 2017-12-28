@@ -1,0 +1,52 @@
+<form id="pagerForm" action="" method="post">
+     <input type="hidden" name="access" value="1"/>
+    <input type="hidden" name="pageNum" value="<{$currentpage}>"/>
+    <input type="hidden" name="numPerPage" value="<{$numperpage}>"/>
+</form>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="add" title="关联回源" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=add&navTabId=<{$smarty.get.navTabId}>" height="480" target="dialog" mask="true"><span>添加修复账号</span></a></li>
+            <li><a class="add" style="color: red;"><span>PS：内充只绑本周数据</span></a></li>
+        </ul>
+    </div>
+    <table class="table" width="100%"  layoutH="75">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>玩家账号</th>
+                            <th>关联公会</th>
+                            <th>关联游戏</th>
+                            <th>操作结果</th>
+                            <th>操作人ID</th>
+                            <th>操作时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <volist id="vo" name="list">
+                            <{foreach item=vo from=$data}>
+                            <tr target="sid" rel="1">
+                                <td><{$vo['id']}></td>
+                                <td><{$vo['user_name']}></td>
+                                <td><{$vo['agentname']|default:"-- --"}></td>
+                                <td><{$vo['game']}><{$vo['server_id']}>服</td>
+                                <td <{if $vo['result']!=1}> style="color: red;"<{/if}>><{if $vo['result']==1}>成功<{else}><{$vo['result']}><{/if}></td>
+                                <td><{$vo['uid']}></td>
+                                <td><{$vo['bTime']|date_format:"%Y-%m-%d %H:%I:%S"}></td>
+                            </tr>
+                            <{/foreach}>
+                        </volist>
+                    </tbody>
+    </table>
+    <div class="panelBar">
+        <div class="pages"><span>显示</span>
+            <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                <option <{if $smarty.post.numPerPage==20}>selected<{/if}>  value="20">20</option>
+                <option <{if $smarty.post.numPerPage==50}>selected<{/if}> value="50">50</option>
+                <option <{if $smarty.post.numPerPage==100}>selected<{/if}> value="100">100</option>
+                <option <{if $smarty.post.numPerPage==200}>selected<{/if}> value="200">200</option>
+            </select><span>条，共<{$totalcount}>条</span>
+        </div>
+        <div class="pagination" targetType="navTab" totalCount="<{$totalcount}>" numPerPage="<{$numperpage}>" pageNumShown="10" currentPage="<{$currentpage}>"></div>
+    </div>
+</div>

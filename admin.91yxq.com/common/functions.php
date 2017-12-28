@@ -1,0 +1,367 @@
+<?php
+ /**==============================
+  * 公共函数库文件
+  * @author Kevin
+  * @email 254056198@qq.com
+  * @version 1.0 data
+  * @package 游戏公会联盟后台管理系统
+ ==================================*/
+//模拟post提交函数
+function initcurl($url) {
+	$ch = curl_init();
+	$this_header =  array(
+			"Content-type: multipart/form-data;charset=UTF-8"
+                        );
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $this_header);
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+	$data = curl_exec($ch);
+	$obj=json_decode($data);
+	curl_close($ch);
+	return $obj;
+}
+function ymdToDate($ymd){
+    return substr($ymd, 0, 4).'-'.substr($ymd, 4, 2).'-'.substr($ymd, 6,2);
+}
+
+//*************************************字符串处理函数集***********************************
+/*utf8中文字串截取函数*/
+function strcut($str,$start,$len){
+ if($start < 0)
+  $start = strlen($str)+$start;
+ $retstart = $start+getOfFirstIndex($str,$start);
+ $retend = $start + $len -1 + getOfFirstIndex($str,$start + $len);
+ return substr($str,$retstart,$retend-$retstart+1);
+}
+//判断字符开始的位置
+function getOfFirstIndex($str,$start){
+ $char_aci = ord(substr($str,$start-1,1));
+ if(223<$char_aci && $char_aci<240)
+  return -1;
+ $char_aci = ord(substr($str,$start-2,1));
+ if(223<$char_aci && $char_aci<240)
+  return -2;
+ return 0;
+}
+/*$char必须为英文字符,全是返回1true，有中文返回0false*/
+function getChar($char) {
+    return (ctype_alpha($char));
+}
+/*匹配$QQ(5-12)位,是返回1,否返回0*/
+function getQQ($QQ) {
+   return preg_match("/^\b[0-9]{5,12}\b/",$QQ);
+}
+/*检查$str是否为数字,是返回true,否返回false*/
+function CheckIsNum($str){
+      return ereg("^[0-9]+$",$str) ? true : false;
+}
+/*若标题$str过长，显示前$len个字符，剩余字符用...代替*/
+function showShort($str,$len=0)
+{
+if(!$len)return $str;
+$tempstr = csubstr($str,0,$len);
+if ($str<>$tempstr)$tempstr .= "..."; //要以什么结尾,修改这里就可以.
+return $tempstr;
+}
+/*计算$str字符数并按$len数截取,两个中文或一个英文等于一字节*/
+function csubstr($str,$start=0,$len=0)
+{
+if(!$len)return $str;
+$tmpstr="";
+$start=0;
+$strlen=strlen($str);
+$clen=0;
+for($i=0;$i<$strlen;$i++,$clen++)
+{
+if ($clen>=$start+$len)
+break;
+if(ord(substr($str,$i,1))>0xa0)
+{
+if ($clen>=$start) $tmpstr.=substr($str,$i,2);
+$i++;
+} else {
+if ($clen>=$start) $tmpstr.=substr($str,$i,1);
+}
+}
+return $tmpstr;
+}
+/*用户输入内容过滤函数*/
+function getStr($str) {
+    $tmpstr = trim($str);
+    $tmpstr = strip_tags($tmpstr);
+    $tmpstr = htmlspecialchars($tmpstr);
+    $tmpstr = addslashes($tmpstr);
+    return $tmpstr;
+}
+/*容量大小计算函数*/
+function sizecount($filesize) {
+        if($filesize >= 1073741824) {
+                $filesize = round($filesize / 1073741824 * 100) / 100 . ' G';
+        } elseif($filesize >= 1048576) {
+                $filesize = round($filesize / 1048576 * 100) / 100 . ' M';
+        } elseif($filesize >= 1024) {
+                $filesize = round($filesize / 1024 * 100) / 100 . ' K';
+        } else {
+                $filesize = $filesize . ' bytes';
+        }
+        return $filesize;
+}
+/*简单防SQL注入函数*/
+function getSQL($feild) {
+    $tmpfeild = mysql_escape_string($feild);
+    return $tmpfeild;
+}
+/*$num必须为英文字符或数字0-9*/
+function getNums($num) {
+    return (ctype_alnum($num));
+}
+/*匹配电子邮件地址*/
+function getEmail($email) {
+    return strlen($email)>6 && preg_match("/^\w+@(\w+\.)+[com]|[cn]$/" , $email);
+}
+/*生成email连接*/
+function emailconv($email,$tolink=1) {
+        $email=str_replace(array('@','.'),array('@','.'),$email);
+        return $tolink ? '<a href="mailto: '.$email.'">'.$email.'</a>':$email;
+}
+/*检查ip是否被允许访问,$ip是正在访问的IP
+$accesslist是设定禁止访问的IP,多个设定用"|"分隔,如:127.0.0.1|245.235.12.23|125.14.23.1
+能访问返true,不能访问返false*/
+function CheckIPOk($ip,$accesslist) {
+$ip=CheckIsIP($ip) ? $ip : "127.0.0.1";//防假IP登陆
+$CheckIP=0;
+$Checknum=0;
+$list = explode( "|",$accesslist);//取得分割字符串值
+$listnum = substr_count($accesslist,"|");//取得分割切入点次数
+for($i=0;$i<$listnum+1;$i++){
+$CheckIP += preg_match("/^(".str_replace(array("\r\n",' '),array('|',''),preg_quote($accesslist[$i],'/')).")/",$ip);
+}
+return $ip ? false : true;
+}
+/*验证$ip地址函数,真IP返回true,假IP返回false*/
+function CheckIsIP($ip){
+return !strcmp(long2ip(sprintf('%u',ip2long($ip))),$ip) ? true : false;
+}
+/*获得客户端ip地址,调用方法getIP()*/
+function getIP() {
+        if(getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"),"unknown")) {
+                $ip = getenv("HTTP_CLIENT_IP");
+        }
+        else if(getenv("HTTP_X_FORWARDED_FOR") && strcasecmp(getenv("HTTP_X_FORWARDED_FOR"),"unknown")) {
+                $ip = getenv("HTTP_X_FORWARDED_FOR");
+        }
+        else if(getenv("REMOTE_ADDR") && strcasecmp(getenv("REMOTE_ADDR"),"unknown")) {
+                $ip = getenv("REMOTE_ADDR");
+        }
+        else if(isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'],"unknown")) {
+                $ip = $_SERVER['REMOTE_ADDR'];
+        }
+        else {
+                $ip = "unknown";
+        }
+        return CheckIsIP($ip) ? $ip : "unknown" ;
+}
+/* 判断action文件存在*/
+function is_action($actionModule){
+    if($actionModule !=''){
+        if(!file_exists(ACTION_DIR . $actionModule . '.class.php')){
+            if(isAjax())
+                ajaxReturn(C('Error:404'), 300);
+            header("Location: ".URL_INDEX."?action=public&opt=error404");
+        }
+        return true;
+    }
+    return false;
+}
+/* 判断是否ajax请求*/
+function isAjax() {
+    //jquery设定ajax请求的$_SERVER['HTTP_X_REQUESTED_WITH'] = XMLHttpRequest
+    if( isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 'xmlhttprequest' == strtolower($_SERVER['HTTP_X_REQUESTED_WITH']))
+        return true;
+    return false;
+}
+/* ajax异步返回*/
+function ajaxReturn($info='', $status=200){
+    $result  =  array();
+    $result['statusCode']  =  $status;
+    $result['message'] =  $info;
+    $result['navTabId']  =  $_REQUEST['navTabId'];
+    $result['rel'] =  $info;
+    $result['callbackType']  =  $_REQUEST['callbackType'];	// closeCurrent
+    $result['forwardUrl']  =  $_REQUEST['forwardUrl'];
+    // 返回JSON数据格式到客户端 包含状态信息
+    header("Content-Type:text/html; charset=utf-8");
+    exit(json_encode($result));
+}
+/*获取提示信息*/
+function C($var){
+    global $_GLOBALLANG;
+    return $_GLOBALLANG[$var];
+ }
+//数据检查过滤
+ function checkRData($data){
+    if(is_array($data)){
+        foreach($data as $key => $v){
+            $data[$key] = getStr($v);
+        }
+    }else{
+        $data = getStr($data);
+    }
+    return $data;
+}
+ //检查权限,待完善
+ function checkgrant($module, $option){
+     return true;
+ }
+ //获取密码加密后结果
+ function getPass($pass, $ext){
+    return md5(md5($pass).$ext); 
+ }
+ //页面跳转
+ function toUrl($url, $info =''){
+    switch ($url) {
+        case 'LOGIN':
+            header("Location: ".URL_INDEX."?action=public&opt=login&info=".$info);
+            break;
+        case 'INDEX':
+            header("Location: ".URL_INDEX);
+            break;
+        case 'ERROR:404':
+            header("Location: ".URL_INDEX."?action=public&opt=error404");
+            break;
+        default:
+            header("Location: ".$url);
+            break;
+    }
+ }
+
+//产生随机验证码
+function createExt($ext_len = 6){
+    $randext = '';
+    for ($i = 0; $i < $ext_len; $i++){
+        $randext .= chr(mt_rand(33, 126));
+    }
+    return $randext;
+}
+ //获取post返回
+ function getPostRes($url,$params){ //获取请求信息
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
+	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$getRes = curl_exec($ch);
+	curl_close($ch);
+	return $getRes;
+}
+//获取get数据
+function getGet(){
+/*
+	$arr = array();
+	foreach($_REQUEST as $k=>$v){
+		if(!is_array($v)){
+			if(is_numeric($v)){
+				$arr[$k] = $v + 0;
+			}else{
+				$arr[$k] = mysql_real_escape_string(strip_tags(trim($v)));
+			}
+		}else{
+			$arr[$k] = $v;
+		}
+	}
+*/
+	$arr = $_GET;
+    return $arr;
+}
+//获取post数据
+function getPost(){
+   /* $arr = array();
+	foreach($_REQUEST as $k=>$v){
+		if(!is_array($v)){
+			if(is_numeric($v)){
+				$arr[$k] = $v + 0;
+			}else{
+				$arr[$k] = mysql_real_escape_string(strip_tags(trim($v)));
+			}
+		}else{
+			$arr[$k] = $v;
+		}
+	}*/
+    $arr = $_POST;
+    return $arr;
+}
+function getRequest(){
+   /* $arr = array();
+	foreach($_REQUEST as $k=>$v){
+		if(!is_array($v)){
+			if(is_numeric($v)){
+				$arr[$k] = $v + 0;
+			}else{
+				$arr[$k] = mysql_real_escape_string(strip_tags(trim($v)));
+			}
+		}else{
+			$arr[$k] = $v;
+		}
+	}
+    */
+    $arr = $_REQUEST;
+    return $arr;
+}
+//用户表
+function usertab($uname,$s=true){
+	$uname=strtolower($uname);
+	$c1=substr($uname,0,1);
+	$c2=substr($uname,-1);
+	$n=ord($c1)+ord($c2);
+	$l=strlen($uname);
+	$n+=$l*$l;
+	return $n%40;
+}
+//获取用户信息
+function getUserInfo($user){
+    global $db;
+    $usertab = usertab($user);
+    $sql="SELECT user_name, `uid`,`email`,`integral`,`id_card`,`nick_name`,`true_name`,`sex`,`birthday`,`province`,`city`,`mobile` as `telephone`,`mobile`,`address`,`question`,`answer`,`qq`,`head_pic`,`login_ip`,`login_time`,`reg_time`,`defendboss`,`state`,userPayPw,money_plat,ptb_open FROM ".USERDB.".".REGCHILDTAB.$usertab." WHERE `user_name`='".$user."'";
+    $rs=$db ->get($sql);
+    if($rs['user_name'] ==''){
+        $sql="SELECT user_name FROM ".USERDB.".".USERS." WHERE `uid`=".intval($user);
+        $rs=$db ->get($sql);
+        if($rs['user_name']!=''){
+            $usertab = usertab($rs['user_name']);
+            $sql="SELECT user_name, `uid`,`uid` as `bbs_uid`,`email`,`integral`,`id_card`,`nick_name`,`true_name`,`sex`,`birthday`,`province`,`city`,`mobile` as `telephone`,`mobile`,`address`,`question`,`answer`,`qq`,`head_pic`,`login_ip`,`login_time`,`reg_time`,`defendboss`,`state`,userPayPw,money_plat,ptb_open FROM ".USERDB.".".REGCHILDTAB.$usertab." WHERE `user_name`='".$rs['user_name']."'";
+            $rs=$db ->get($sql);
+        }
+    }
+    return $rs;
+}
+//封禁、解封 用户
+function banUndo($user,$state){
+    global $db;
+    $usertab = usertab($user);
+    $sql="update ".USERDB.".".REGCHILDTAB.$usertab." set state='".$state."' where user_name='".$user."'";
+    $re=$db ->query($sql);
+    if($re){
+        return 1;
+    }else{
+        return 0;
+    }
+}
+
+function long_login_5a($info,$time,$act){
+    $ch = curl_init( );
+    curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );
+    curl_setopt( $ch, CURLOPT_URL, "http://api.demo.com/remote_login.php" );
+    curl_setopt( $ch, CURLOPT_POST, 1 );
+//    @_dq*3@DJl_5a_@
+    curl_setopt( $ch, CURLOPT_POSTFIELDS, "act=$act&".$info."&time=".$time."&sign=".md5($time."adsf"));
+    curl_setopt( $ch, CURLOPT_COOKIEJAR, COOKIEJAR );
+    curl_setopt( $ch, CURLOPT_TIMEOUT, TIMEOUT );
+    
+    ob_start( );
+    curl_exec( $ch );
+    $contents = ob_get_contents( );
+    ob_end_clean();
+    curl_close( $ch );
+    return $contents;
+}

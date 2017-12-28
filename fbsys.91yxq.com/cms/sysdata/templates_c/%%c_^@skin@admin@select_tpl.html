@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD> <META HTTP-EQUIV="Pragma" CONTENT="no-cache"> <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> <META HTTP-EQUIV="Expires" CONTENT="0"> 
+<TITLE><?php echo $_LANG_SKIN['topic'];?></TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->_tpl_vars["charset"];?>">
+</HEAD>
+<script type="text/javascript" src="../html/helptip.js"></script>
+<link type="text/css" rel="StyleSheet" href="../html/helptip.css" />
+<link type="text/css" rel="StyleSheet" href="../html/style.css" />
+<script language='JavaScript' src='../html/js-gui.js'></script>
+<script language='JavaScript' src='../html/js-form.js'></script>
+<LINK href="../html/xmenu.css" type=text/css rel=stylesheet>
+<SCRIPT src="../html/xmenu.js" type=text/javascript></SCRIPT>
+
+<script src="ui.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=functions.js" type="text/javascript" language="javascript"></script>
+<script language="javascript">
+function psn_backward()
+{	//alert('a')
+			window.history.go(-1);
+}
+
+function psn_updir()
+{
+	switch(selectMode) {
+		case 'global':
+			var PATH =  workFrame.PATH;
+			var PSNID = document.form1.psn.options[document.form1.psn.selectedIndex].value
+			//alert(PSNID)
+			workFrame.location = 'admin_select.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=tpl_list_file&extra=updir&PATH=' + PATH
+			break;
+		case 'cate':
+			workFrame.location = 'admin_select.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=cate_tpl_list_file&TCID=' + document.workFrame.ParentTCID;
+
+			break;
+	}
+
+}
+
+function psn_mkdir()
+{
+	var PATH =  document.workFrame.PATH;
+	var PSNID = document.form1.psn.options[document.form1.psn.selectedIndex].value
+
+ var dirname= prompt("<?php echo $_LANG_SKIN['dir_name'];?>", "") //showMeDialog("../html/input.php?Title=<?php echo $_LANG_SKIN['dir_name'];?>","color","dialogWidth:300px;dialogHeight:150px;help:0;status:0;scroll:no");
+ if(dirname != null && dirname != '') {
+ 	workFrame.location = 'admin_select.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=tpl_mkdir&dirname='+ dirname +'&PATH=' + PATH
+
+ }
+
+
+}
+var selectMode = 'global';
+function doSelect(action) {
+	switch(action) {
+		case 'global':
+			selectMode = 'global';
+			workFrame.location = 'admin_select.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=tpl_list_file';
+			break;
+		case 'cate':
+			selectMode = 'cate';
+			workFrame.location = 'admin_select.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=cate_tpl_list_file';
+			break;
+	}
+}
+</script>
+<body bgcolor="#D6D3CE" STYLE="margin:0pt;padding:0pt;border: 1px buttonhighlight;" onload="workFrameReload()">
+<table width="100%" border="0" cellspacing="5">
+  <form name="form1" method="post" action="">
+    <tr> 
+      <td colspan="3" align="right"><table width="100%" border="0" cellspacing="0">
+          <tr>
+            <td width="10%"></td>
+            <td  width="200">
+			<select name="psn" id="select" onchange="if(this.options[this.selectedIndex].value != ''){
+doSelect(this.options[this.selectedIndex].value)
+} ">
+
+                <option value="global"><?php echo $_LANG_SKIN['tpl_global_root'];?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+<?php if($this->_tpl_vars['TCID']!=''): ?>
+				 <option value="cate" selected><?php echo $_LANG_SKIN['tpl_cate_root'];?> </option>
+<?php else: ?>
+ 				 <option value="cate" ><?php echo $_LANG_SKIN['tpl_cate_root'];?> </option>
+<?php endif;?>
+             </select></td>
+            <td align=left ><script src="../html/psn_icon.js"></script></td>
+          </tr>
+        </table>
+        
+      </td>
+    </tr>
+    <tr> 
+      <td colspan="3" align="center">
+<Iframe name=workFrame  frameborder=1 class=button src="" style="width:100%;height:134;" > 
+                </Iframe> </td>
+    </tr>
+    <tr> 
+      <td width="18%"><?php echo $_LANG_SKIN['file_name'];?>:</td>
+      <td width="59%"><input name="fileName" type="text" size="36">
+        <input name="selectPSN" type="hidden" id="selectPSN"></td>
+      <td width="20%"><input type="button" name="Submit" value="  <?php echo $_LANG_SKIN_GLOBAL['ok'];?>  " onclick="window.returnValue =  fileName.value ;window.close();"></td>
+    </tr>
+    <tr> 
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td><input type="button" name="Submit2" value="  <?php echo $_LANG_SKIN_GLOBAL['cancel'];?>  " onclick='window.close();'></td>
+    </tr>
+  </form>
+</table>
+</body>
+</html>
+<script language="javascript">
+function workFrameReload() {
+	var PATH = '<?php echo $this->_tpl_vars["tpl_path"];?>';
+	var TCID = '<?php echo $this->_tpl_vars["TCID"];?>';
+	 
+	if(TCID != '') {
+			selectMode = 'cate';
+			workFrame.location = 'admin_select.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=cate_tpl_list_file&TCID=' + TCID;
+			document.form1.fileName.value = "{TID:<?php echo $this->_tpl_vars["TID"];?>}";
+		
+	} else if(PATH != '') {
+		//alert(PSNID);
+		if(PATH == '/') {
+			document.form1.fileName.value = PATH + '<?php echo $this->_tpl_vars["default_name"];?>';
+		
+		} else {
+			document.form1.fileName.value = PATH + '/<?php echo $this->_tpl_vars["default_name"];?>';
+		
+		}
+		workFrame.location = 'admin_select.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=tpl_list_file&default_name=<?php echo $this->_tpl_vars["default_name"];?>&PATH=' + PATH
+		//workFrame.location.reload()
+
+	} else {
+		workFrame.location = 'admin_select.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=tpl_list_file';
+	}
+}
+
+</script>

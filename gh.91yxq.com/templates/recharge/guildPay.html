@@ -1,0 +1,64 @@
+<form id="pagerForm" action="" method="post">
+    <input type="hidden" name="access" value="1"/>
+    <input type="hidden" name="agentid" value="<{$smarty.post.agentid}>"/>
+    <input type="hidden" name="start_date" value="<{$smarty.post.start_date}>"/>
+    <input type="hidden" name="end_date" value="<{$smarty.post.end_date}>"/>
+</form>
+<div class="pageHeader">
+    <form onsubmit="return navTabSearch(this);" action="" method="post">
+    <input type="hidden" name="access" value="1"/>    
+    <div class="searchBar">
+        <ul class="searchContent">
+            <li><label>公会：</label>
+                    
+                       <select class="combox" name="agentid" id="agentid">
+                           <option value="0">请选择</option>
+                           <{foreach item=v from =$guildlist}>
+                                <option value="<{$v.id}>" <{if $smarty.post.agentid==$v.id}> selected <{/if}> ><{$v.agentname}></option>
+                                <{/foreach}>
+                            </select>
+            </li>
+            <li>  
+                <label>注册起始日期：</label>
+                <input type="text" name="start_date" class="date" value="<{$smarty.post.start_date}>" readonly="true"/>
+                            <a class="inputDateButton" href="javascript:;">选择</a></li>
+            <li>
+                <label>注册结束日期：</label>
+                <input type="text" name="end_date" class="date" value="<{$smarty.post.end_date}>" readonly="true"/>
+                            <a class="inputDateButton" href="javascript:;">选择</a>
+            </li>
+        </ul>
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%"  layoutH="87">
+                    <thead>
+                        <tr>
+                            <th width="130">公会ID</th>
+                            <th width="200">公会名</th>
+                            <th>充值金额</th>
+                            <th>注册人数</th>
+                            <th width="240">统计周期</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <volist id="vo" name="list">
+                            <{foreach item=vo from=$data}>
+                            <tr target="sid" rel="1">
+                                <td><{$vo['id']}></td>
+                                <td><{$vo['agentname']}></td>
+                                <td><{$vo['pay_account']|default:"0"}></td>
+                                <td><{$vo['reg_count']|default:"0"}></td>
+                                <td><{$start_date}>----<{$end_date}></td>
+                            </tr>
+                            <{/foreach}>
+                        </volist>
+                    </tbody>
+    </table>
+</div>

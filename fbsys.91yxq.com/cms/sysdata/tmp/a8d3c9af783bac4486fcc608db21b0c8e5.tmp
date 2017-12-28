@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>[$91yxq_platform_title]-首页</title>
+<link type="text/css" rel="stylesheet" href="[$91yxq_image_url]/css/www/base.css" />
+<link type="text/css" rel="stylesheet" href="[$91yxq_image_url]/css/www/public.css" />
+<link type="text/css" rel="stylesheet" href="[$91yxq_image_url]/css/www/main_pq.css" />
+<script type="text/javascript" src="[$91yxq_image_url]/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="[$91yxq_image_url]/js/jq.foshow.js"></script>
+
+</head>
+
+<body>
+
+<!---头部-->
+<include file="../public/header.html" />
+
+<!--banner-->
+<div id="focus_box">
+    <ul class="focus_ad">
+		<cms action="SQL" return="list" query="select g.GameName,p.GameImg,g.GameWeb from 91yxq_publish_7 p left join 91yxq_publish_5 g on g.PlatformId=p.PlatformId and g.GameId=p.GameId where p.NodeID=32 and p.SortPriority>0 order by p.SortPriority desc " />
+		<loop name="list" key="key" var="var">
+        <li><a href="[$var.GameWeb]" target="_blank"><img src="[$var.GameImg]" alt="[$var.GameName]"/></a></li>
+		</loop>
+    </ul>
+    <ul class="focus_num">
+		<loop name="list" key="key" var="var">
+        <li <if test="$key==0">class="on"</if>></li>
+		</loop>
+    </ul>
+</div>
+<script>
+$("#focus_box").foShow({
+	mains:$("#focus_box .focus_ad li"),
+	navs:$("#focus_box .focus_num li"),
+	duration:500,
+	interval:3000,
+	curClass:"on",
+	hovering:true
+});
+</script>
+
+<!--主内容-->
+<div class="m1200 clearfix">
+	<!--左侧-->
+    <div class="fl w920">
+    	<!--热门游戏-->
+        <div class="m_box mb15">
+        	<div class="hd_title"><h2>热门游戏</h2><a href="[$91yxq_url]/games/index.html" class="more" target="_blank">更多 &gt;&gt;</a></div>
+            <div class="in_hot_game clearfix">
+            	<ul>
+					<cms action="SQL" return="list" query="select g.GameName,p.GameImg,g.GameWeb,g.ServerUrl,g.GiftUrl from 91yxq_publish_7 p left join 91yxq_publish_5 g on g.PlatformId=p.PlatformId and g.GameId=p.GameId where p.NodeID=33 and p.SortPriority>0 order by p.SortPriority desc " />
+					<loop name="list" key="key" var="var">
+					<li>
+                        <div class="pic">
+                            <img src="[$var.GameImg]" />
+                            <div class="into"><a href="[$var.ServerUrl]" target="_blank"><i class="imgpq"></i>进入游戏</a></div>
+                        </div>
+                        <div class="txt clearfix">
+                            <a href="[$var.GameWeb]" target="_blank" class="name fl">[$var.GameName]</a>
+                            <div class="fr"><a href="[$var.GameWeb]" target="_blank" class="btn1">官网</a>&nbsp;&nbsp;<a href="[$var.GiftUrl]" target="_blank" class="btn2">礼包</a></div>
+                        </div>
+                    </li>
+					</loop>
+				</ul>
+            </div>
+        </div>
+        
+        <div class="clearfix mb15">
+            <!--关于我们-->
+            <div class="fl w300">
+                <div class="m_box">
+					<cms action="CONTENT" IndexID="21" return="var" />
+                    <div class="hd_title">
+                        <h2>[$var.Title]</h2>
+                        <a href="[$var.URL]" class="more" target="_blank">更多 &gt;&gt;</a>
+                    </div>
+                    <div class="in_about">
+                        <img src="[$var.Photo]" />
+                        <p class="text">[@CsubStr(strip_tags(trim($var.Content)), 0, 98, '...')]</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!--新闻中心-->
+            <div class="fr w605">
+                <div class="m_box">
+                    <div class="hd_title">
+                        <h2>新闻中心</h2>
+                        <a href="[$91yxq_url]/news/index.html" class="more" target="_blank">更多 &gt;&gt;</a>
+                    </div>
+                    <div class="in_new">
+						<cms action="LIST" return="list" NodeID="all-8" Num="5"/>
+						
+                        <div class="in_new_one mb10 clearfix">
+                            <div class="fl pic"><img src="[$91yxq_image_url]/images/www/in_new_pic.gif" /></div>
+                            <div style="padding-left:168px">
+								<loop name="list" var="var" key="key">
+								<if test="$key==0">
+                                <h2><a href="[$var.URL]">[$var.TitlePrefix][$var.Title]</a></h2>
+                                <p class="time">时间：[@date("Y-m-d",$var.PublishDate)]</p>
+                                <p class="text">
+									[@CsubStr(strip_tags(trim($var.Content)), 0, 68, '...')]
+								</p>
+								</if>
+								</loop>
+                            </div>
+                        </div>
+                        <ul class="in_new_list">
+							<loop name="list" var="var" key="key">
+							<if test="$key>0">
+                            <li><span class="time">[@date("Y-m-d",$var.PublishDate)]</span><a href="[$var.URL]"><label>[$var.TitlePrefix]</label>[$var.Title]</a></li>
+							</if>
+							</loop>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!--友情链接-->
+        <div class="m_box" id="friend_links_box">
+            <script src="[$91yxq_url]/public/friend_links_box.js"></script>
+        </div>
+    </div>
+    
+    <!--右侧-->
+    <div class="fr w260">
+    	<!--开服列表-->
+		<div class="m_box" id="svr_list_box">
+			<script src="[$91yxq_url]/public/svr_list_box.js"></script>
+		</div>
+        
+		<div class="mt15" ></div>
+		
+		<!--客服中心-->
+        <div class="m_box" id="kefu_box">
+        	<script src="[$91yxq_url]/public/kefu_box.js"></script>
+        </div>
+    </div>
+</div>
+
+<!--页脚-->
+<div class="foot clearfix" id="footer_box">
+	<script src="[$91yxq_url]/public/footer.js"></script>
+</div>
+
+</body>
+</html>

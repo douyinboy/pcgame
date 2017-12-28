@@ -1,0 +1,22 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->_tpl_vars["charset"];?>">
+<title><?php echo $this->_tpl_vars["PATH"];?>/<?php echo $this->_tpl_vars["targetFile"];?> - <?php echo $_LANG_SKIN['topic'];?>
+(<?php if($this->_tpl_vars['o'] == 'add'): ?>
+<?php echo $_LANG_SKIN_GLOBAL['new'];?>
+<?php elseif($this->_tpl_vars['o'] == 'edit'): ?>
+<?php echo $_LANG_SKIN_GLOBAL['edit'];?>
+<?php endif;?>
+)</title>
+</head>
+
+<frameset rows="39,0,*" frameborder="NO" border="0" framespacing="0">
+  <frame src="<?php echo $this->_tpl_vars["base_url"];?>o=editor_header&PATH=<?php echo $this->_tpl_vars["PATH"];?>&targetFile=<?php echo $this->_tpl_vars["targetFile"];?>&NodeID=<?php echo $this->_tpl_vars["NodeID"];?>&TCID=<?php echo $this->_tpl_vars["TCID"];?>&TID=<?php echo $this->_tpl_vars["TID"];?>" name="topFrame" scrolling="no" noresize >
+  <frame src="" name="actionFrame" scrolling="no" noresize >
+  <frame src="<?php echo $this->_tpl_vars["base_url"];?>o=<?php echo $this->_tpl_vars["o"];?>&PATH=<?php echo $this->_tpl_vars["PATH"];?>&targetFile=<?php echo $this->_tpl_vars["targetFile"];?>&NodeID=<?php echo $this->_tpl_vars["NodeID"];?>&TCID=<?php echo $this->_tpl_vars["TCID"];?>&TID=<?php echo $this->_tpl_vars["TID"];?>" name="mainFrame" scrolling="no">
+</frameset>
+<noframes><body>
+
+</body></noframes>
+</html>

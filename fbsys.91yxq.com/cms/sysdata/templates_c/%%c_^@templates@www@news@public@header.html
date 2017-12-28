@@ -1,0 +1,22 @@
+<!---头部-->
+<div class="head">
+	<div id="platform_top_div" class="m1200">
+		
+        <a href="<?php echo $this->_tpl_vars["91yxq_url"];?>/index.html" class="logo"></a>
+        
+        <!--导航-->
+        <div class="nav">
+            <a href="<?php echo $this->_tpl_vars["91yxq_url"];?>/index.html" <?php if($this->_tpl_vars["NodeInfo"]["NodeID"] == 2 or $this->_tpl_vars["NodeInfo"]["NodeID"] == 6): ?>class="on"<?php endif;?>>首页<span class="line"></span></a>
+            <a href="<?php echo $this->_tpl_vars["91yxq_url"];?>/games/index.html" <?php if($this->_tpl_vars["NodeInfo"]["NodeID"] == 7): ?>class="on"<?php endif;?>>游戏大厅<span class="line"></span></a>
+            <a href="<?php echo $this->_tpl_vars["91yxq_url"];?>/user.php">用户中心<span class="line"></span></a>
+            <a href="<?php echo $this->_tpl_vars["91yxq_pay"];?>">充值中心<span class="line"></span></a>
+            <a href="<?php echo $this->_tpl_vars["91yxq_url"];?>/news/index.html" <?php if($this->_tpl_vars["NodeInfo"]["NodeID"] == 8 or $this->_tpl_vars["NodeInfo"]["NodeID"] == 11 or $this->_tpl_vars["NodeInfo"]["NodeID"] == 12 or $this->_tpl_vars["NodeInfo"]["NodeID"] == 13 ): ?>class="on"<?php endif;?>>新闻中心<span class="line"></span></a>
+            <a href="<?php echo $this->_tpl_vars["91yxq_url"];?>/help/index.html" <?php if($this->_tpl_vars["NodeInfo"]["NodeID"] == 9 or $this->_tpl_vars["NodeInfo"]["NodeID"] == 14 or $this->_tpl_vars["NodeInfo"]["NodeID"] == 15 or $this->_tpl_vars["NodeInfo"]["NodeID"] == 16 ): ?>class="on"<?php endif;?>>客服中心<span class="line"></span></a>
+        </div>
+        
+		<!--游戏列表;登录注册按钮或登录后用户名js-->
+		<script src="<?php echo $this->_tpl_vars["91yxq_url"];?>/public/www_top.js"></script>
+        
+    </div>
+	
+</div>

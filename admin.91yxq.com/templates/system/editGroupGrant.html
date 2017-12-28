@@ -1,0 +1,52 @@
+<form method="post" action="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=<{$smarty.get.api}>&callbackType=closeCurrent&navTabId=<{$smarty.get.navTabId}>" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+<div class="pageContent" style="overflow-y:auto; overflow-x:auto;height: 430px;width: 1000px"> <!-- layoutH="68" -->
+<input name="sub" type="hidden" value="1" />
+<input name="id" type="hidden" value="<{$smarty.get.id}>" />
+<{foreach item=vo from=$data}>
+<div style=" float:left;  margin:10px;  width:200px; height:300px;  border:solid 1px #CCC; background:#FFF;overflow-y:auto; overflow-x:auto;">
+
+<h5 style="text-align: center;"><{$vo.top.title}></h5>
+<ul class="tree treeFolder treeCheck expand" oncheck="kkk">
+ <{foreach key=key item=item from=$vo.son}>
+        <li>
+            <a tname="grantlist[]" tvalue="<{$item.key}>"><{$item.title}></a>
+		<ul>
+                    <{foreach key=key2 item=item2 from=$item.sondir}>
+            <li><a tname="grantlist[]" tvalue="<{$item2.key}>"><{$item2.title}></a>
+                <ul>
+                    <{foreach key=key3 item=item3 from=$item2.sonfunc}>
+                    <li><a tname="grantlist[]" tvalue="<{$item3.key}>" <{if $item3.checked==1}> checked="true" <{/if}>><{$item3.title}></a></li>
+                    <{/foreach}>
+                </ul>
+            </li>
+        <{/foreach}>
+       <{foreach key=key4 item=item4 from=$item.sonfunc}>
+            <li ><a tname="grantlist[]" tvalue="<{$item4.key}>" <{if $item4.checked==1}> checked="true" <{/if}>><{$item4.title}></a></li>
+       <{/foreach}>
+        
+                </ul>
+	</li>
+        <{/foreach}>
+	</ul>
+</div>
+<{/foreach}>
+</div>
+<div class="formBar">
+    <ul>
+        <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+        <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+    </ul>
+</div>
+</form>
+<script type="text/javascript">
+function kkk(){
+	var json = arguments[0], result="";
+//	alert(json.checked);
+
+	$(json.items).each(function(i){
+		result += "<p>name:"+this.name + " value:"+this.value+" text: "+this.text+"</p>";
+	});
+	//$("#resultBox").html(result);
+	
+}
+</script>

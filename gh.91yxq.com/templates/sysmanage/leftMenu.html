@@ -1,0 +1,24 @@
+<{config_load file="smarty.conf" section="setup"}>
+<div class="accordion" fillSpace="sidebar"><!-- 菜单容器 -->
+    <{foreach key=key item=item from=$leftMenu}>
+    <div class="accordionHeader">
+        <h2><span>Folder</span><{$item.title}></h2>
+    </div>
+    <div class="accordionContent">
+        <ul class="tree treeFolder">
+        <{foreach key=key2 item=item2 from=$item.sondir}>
+            <li><a><{$item2.title}></a>
+                <ul>
+                    <{foreach key=key3 item=item3 from=$item2.sonfunc}>
+                    <li><a href="?action=<{$item3.module}>&opt=<{$item3.option}>&navTabId=grant<{$item3.key}>" target="navTab" rel="grant<{$item3.key}>"><{$item3.title}></a></li>
+                    <{/foreach}>
+                </ul>
+            </li>
+        <{/foreach}>
+       <{foreach key=key4 item=item4 from=$item.sonfunc}>
+            <li ><a href="?action=<{$item4.module}>&opt=<{$item4.option}>&navTabId=grant<{$item4.key}>" target="navTab" rel="grant<{$item4.key}>"><{$item4.title}></a></li>
+       <{/foreach}>
+        </ul>
+    </div>
+    <{/foreach}>
+</div>

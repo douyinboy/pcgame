@@ -1,0 +1,83 @@
+<?php
+//CMS cache file, DO NOT modify me!
+//Created on December 29, 2016, 19:23
+
+$NodeInfo = array (
+  'NodeID' => '55',
+  'NodeGUID' => '91yxq.hazg',
+  'TableID' => '1',
+  'ParentID' => '3',
+  'RootID' => '0',
+  'InheritNodeID' => '0',
+  'NodeType' => '1',
+  'NodeSort' => '0',
+  'Name' => '黑暗之光',
+  'ContentPSN' => '{PSN:4}',
+  'ContentURL' => '{PSN-URL:4}',
+  'ResourcePSN' => '{PSN:2}/rsc/games/hazg',
+  'ResourceURL' => '{PSN-URL:2}/rsc/games/hazg',
+  'PublishMode' => '1',
+  'IndexTpl' => '/www/games/hazg/index.html',
+  'IndexName' => 'index.html',
+  'ContentTpl' => '',
+  'ImageTpl' => '',
+  'SubDir' => '',
+  'PublishFileFormat' => 'index.html',
+  'IsComment' => '0',
+  'CommentLength' => NULL,
+  'IsPrint' => '0',
+  'IsGrade' => '0',
+  'IsMail' => '0',
+  'Disabled' => '0',
+  'AutoPublish' => '2',
+  'IndexPortalURL' => 'http://91yxq.com/publish/index.php/{NodeID},{Page}.html',
+  'ContentPortalURL' => 'http://91yxq.com/publish/content.php/{IndexID},{Page}.html',
+  'Pager' => '#default.php',
+  'Editor' => 'default.php',
+  'WorkFlow' => '0',
+  'PermissionManageG' => '',
+  'PermissionManageU' => '',
+  'PermissionReadG' => '',
+  'PermissionReadU' => '',
+  'PermissionWriteG' => '',
+  'PermissionWriteU' => '',
+  'PermissionApproveG' => '',
+  'PermissionApproveU' => '',
+  'PermissionPublishG' => '',
+  'PermissionPublishU' => '',
+  'PermissionInherit' => '0',
+  'show' => '1',
+  'CreationUserID' => '1',
+  'SubNodeID' => '55%69%56%57%58%59%60%61%62%63%64%65%66%67%68',
+  'ParentNodeID' => '1%3%55',
+  'Nav' => 'a:3:{i:0;a:2:{s:6:"NodeID";s:1:"1";s:4:"Name";s:13:"91yxq游戏";}i:1;a:2:{s:6:"NodeID";s:1:"3";s:4:"Name";s:19:"91yxq游戏官网";}i:2;a:2:{s:6:"NodeID";s:2:"55";s:4:"Name";s:12:"黑暗之光";}}',
+  'URL' => 'http://www.91yxq.com/hazg/index.html',
+  'Navigation' => 
+  array (
+    0 => 
+    array (
+      'NodeID' => '1',
+      'Name' => '91yxq游戏',
+      'URL' => '/index.html',
+      'NodeName' => '91yxq游戏',
+      'NodeURL' => '/index.html',
+    ),
+    1 => 
+    array (
+      'NodeID' => '3',
+      'Name' => '91yxq游戏官网',
+      'URL' => NULL,
+      'NodeName' => '91yxq游戏官网',
+      'NodeURL' => NULL,
+    ),
+    2 => 
+    array (
+      'NodeID' => '55',
+      'Name' => '黑暗之光',
+      'URL' => 'http://www.91yxq.com/hazg/index.html',
+      'NodeName' => '黑暗之光',
+      'NodeURL' => 'http://www.91yxq.com/hazg/index.html',
+    ),
+  ),
+);
+?>

@@ -1,0 +1,77 @@
+<?php include("../sysdata/templates_c/%%c_^@skin@admin@header.html");?>
+
+<table border="0" cellspacing="1" cellpadding="4" width="95%"  align=center class="table_border">
+<form action='<?php echo $this->_tpl_vars["base_url"];?>o=fieldReplace_submit' method='post' enctype="multipart/form-data" name='clientform' id=clientform  >
+
+    <tr> 
+      <td colspan="2" class="table_header"><?php echo $_LANG_SKIN['topic'];?></td>
+    </tr>
+     <tr > 
+      <td class="table_td1" width=100> <?php echo $_LANG_SKIN['content_model'];?></td>
+      <td class="table_td2"> <select name="TableID" id="TableID"  class='flat' onchange="javascript:document.location ='<?php echo $this->_tpl_vars["base_url"];?>o=fieldReplace&TableID=' + this.value">
+          <?php if(!empty($this->_tpl_vars['tableInfo'] )): 
+ foreach ($this->_tpl_vars['tableInfo'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+		  <?php if($this->_tpl_vars['TableID'] == $this->_tpl_vars["var"]["TableID"] ): ?>
+          <option value="<?php echo $this->_tpl_vars["var"]["TableID"];?>" selected><?php echo $this->_tpl_vars["var"]["Name"];?></option>
+		  <?php else: ?>
+          <option value="<?php echo $this->_tpl_vars["var"]["TableID"];?>"><?php echo $this->_tpl_vars["var"]["Name"];?></option>
+		  <?php endif;?>
+		  
+ 		 
+          <?php endforeach; endif;?> </select>
+        </td>
+    </tr>
+
+     <tr > 
+      <td class="table_td1"> <?php echo $_LANG_SKIN['field'];?></td>
+      <td class="table_td2"> 
+	  <select name="Fields[]" id="Fields"  class='flat' size=8 multiple>
+ <?php if(!empty($this->_tpl_vars['fieldsInfo'] )): 
+   foreach ($this->_tpl_vars['fieldsInfo'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+ <?php if($this->_tpl_vars['key'] == 0): ?>
+ <option value="<?php echo $this->_tpl_vars["var"]["FieldName"];?>" selected><?php echo $this->_tpl_vars["var"]["FieldTitle"];?></option>
+ <?php else: ?>
+  <option value="<?php echo $this->_tpl_vars["var"]["FieldName"];?>"><?php echo $this->_tpl_vars["var"]["FieldTitle"];?></option>
+<?php endif;?>
+ <?php endforeach; endif;?>		
+
+</select>
+  </td>
+    </tr>
+
+
+
+
+  <tr>
+ <td class="table_td2" align="center"><?php echo $_LANG_SKIN['node'];?>
+  </td>
+
+<td class="table_td1">
+<select  name="NodeIDs[]" id = "NodeIDs"  size="10" multiple>
+<option value="" selected><?php echo $_LANG_SKIN['all_node'];?></option>
+ <?php if(!empty($this->_tpl_vars['NODE_LIST'] )): 
+ foreach ($this->_tpl_vars['NODE_LIST'] as  $this->_tpl_vars['var']): ?>
+ <?php if($this->_tpl_vars["var"]["TableID"] == $this->_tpl_vars['TableID']): ?>
+ <option value="<?php echo $this->_tpl_vars["var"]["NodeID"];?>"><?php echo str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $this->_tpl_vars["var"]["cHeader"]);?> - &nbsp;<?php echo $this->_tpl_vars["var"]["Name"];?></option>
+ <?php endif;?>
+ 
+ <?php endforeach; endif;?>
+ </select>
+ </td>
+ </tr>
+ 
+     <tr > 
+      <td class="table_td1"> <?php echo $_LANG_SKIN['op'];?></td>
+      <td class="table_td2"> 
+	  <?php echo $_LANG_SKIN['op_input'];?>
+  </td>
+    </tr>
+
+     <tr> 
+      <td colspan="2" class="table_td2" align=center><input type='submit' name='submit' value='<?php echo $_LANG_SKIN['submit_replace'];?>' tabindex='13'> 
+        &nbsp;&nbsp;&nbsp;&nbsp; <input type="reset" name="Submit" value="<?php echo $_LANG_SKIN_GLOBAL['reset_value'];?>"></td>
+    </tr>
+</form>
+</table>
+
+<?php include("../sysdata/templates_c/%%c_^@skin@admin@footer.html");?>

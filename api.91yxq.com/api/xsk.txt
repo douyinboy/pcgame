@@ -1,0 +1,35 @@
+[Err] 2006 - MySQL server has gone away
+[Err] /*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `zixun`
+--
+
+DROP TABLE IF EXISTS `zixun`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `zixun` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `gameid` int(11) NOT NULL DEFAULT '0',
+  `type` varchar(255) NOT NULL DEFAULT '',
+  `content` text NOT NULL,
+  `create_on` datetime DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `short_title` varchar(255) DEFAULT NULL,
+  `keywords` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `type` (`type`),
+  KEY `gameid` (`gameid`)
+) ENGINE=InnoDB AUTO_INCREMENT=780 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `zixun`
+--
+
+LOCK TABLES `zixun` WRITE;
+/*!40000 ALTER TABLE `zixun` DISABLE KEYS */;
+INSERT INTO `zixun` VALUES (1,12326,'游戏新闻','<p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: STHeiti; font-size: 14px; line-height: 24px; white-space: normal; background-color: rgb(255, 255, 255);\"><strong style=\"margin: 0px; padding: 0px;\">更新时间： </strong></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: STHeiti; font-size: 14px; line-height: 24px; white-space: normal; background-color: rgb(255, 255, 255);\">1月7日10:30-12:30进行更新维护，预计更新时间2小时</p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: STHeiti; font-size: 14px; line-height: 24px; white-space: normal; background-color: rgb(255, 255, 255);\">《西游神传》  Version：P8B-0107 版本内容如下：</p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: STHeiti; font-size: 14px; line-height: 24px; white-space: normal; background-color: rgb(255, 255, 255);\"><strong style=\"margin: 0px; padding: 0px;\">新增功能：</strong></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: STHeiti; font-size: 14px; line-height: 24px; white-space: normal; background-color: rgb(255, 255, 255);\">1、前10级进入游戏，新增新手欢迎页面</p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: STHeiti; font-size: 14px; line-height: 24px; white-space: normal; background-color: rgb(255, 255, 255);\">2、新增查看对方玩家符石的状态</p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: STHeiti; font-size: 14px; line-height: 24px; white-space: normal; background-color: rgb(255, 255, 255);\"><strong style=\"margin: 0px; padding: 0px;\">优化调整</strong>：</p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: STHeiti; font-size: 14px; line-height: 24px; white-space: normal; background-color: rgb(255, 255, 255);\">1、广播优化</p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: STHeiti; font-size: 14px; line-height: 24px; white-space: normal; background-color: rgb(255, 255, 255);\">2、新增魔神，竞技场相关成就</p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: STHeiti; font-size: 14px; line-height: 24px; white-space: normal; background-color: rgb(255, 255, 255);\"><strong style=\"margin: 0px; padding: 0px;\">活动：</strong></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: STHeiti; font-size: 14px; line-height: 24px; white-space: normal; background-color: rgb(255, 255, 255);\">1、新一轮元宝消耗活动。（1月7日更新后-1月13日23:50）</p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: STHeiti; font-size: 14px; line-height: 24px; white-space: normal; background-color: rgb(255, 255, 255);\">即将开放</p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(102, 102, 102); font-family: STHeiti; font-size: 14px; line-height: 24px; white-space: normal; background-color: rg
+[Msg] Finished - Unsuccessfully

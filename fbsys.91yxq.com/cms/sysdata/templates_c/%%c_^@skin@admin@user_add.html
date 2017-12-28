@@ -1,0 +1,73 @@
+<?php include("../sysdata/templates_c/%%c_^@skin@admin@header.html");?>
+<script type="text/javascript" language="javascript">
+function check(){
+	var theForm = document.clientform;
+	if(document.clientform.uName.value == ''){	
+			alert("<?php echo $_LANG_SKIN['error_username_null'];?>");
+			document.clientform.uName.focus();
+			return false;
+	}
+	
+	
+	if(document.clientform.uPass.value == ''){	
+		
+			alert("<?php echo $_LANG_SKIN['error_password_null'];?>");
+			document.clientform.uPass.focus();
+			return false;
+	} else if(document.clientform.uPass2.value!=document.clientform.uPass.value){	
+		
+			alert("<?php echo $_LANG_SKIN['error_password_not_match'];?>");
+			document.clientform.uPass.value = '';
+			document.clientform.uPass2.value = '';
+			document.clientform.uPass.focus();
+			return false;
+	} else if(theForm.uGId.options[theForm.uGId.selectedIndex].value == '0' || theForm.uGId.options[theForm.uGId.selectedIndex].value == '') {
+			alert("<?php echo $_LANG_SKIN['select_group'];?>");
+			return false;
+	
+	} else {
+		return true;
+	}
+	
+}
+</script>
+
+  <table border="0" cellspacing="1" cellpadding="4" width="95%"  align=center class="table_border">
+<form name='clientform' id=clientform method='post' action='<?php echo $this->_tpl_vars["base_url"];?>o=add_submit' >
+     <tr> 
+      <td colspan="2" class="table_header"><?php echo $_LANG_SKIN['topic'];?> </td>
+    </tr>
+
+    <tr> 
+      <td class="table_td1"><?php echo $_LANG_SKIN['username'];?>:</td>
+      <td class="table_td2"><input name='uName' type='text' class='flat' id="username" tabindex='8'   size='25' value="<?php echo $this->_tpl_vars["gInfo"]["gName"];?>"></td>
+    </tr>
+    <tr> 
+      <td class="table_td1"><?php echo $_LANG_SKIN['password'];?>:</td>
+      <td class="table_td2"><input name='uPass' type='password' class='flat'   tabindex='8'    size='25' value=""></td>
+    </tr>
+    <tr> 
+      <td class="table_td1"><?php echo $_LANG_SKIN['password2'];?>:</td>
+      <td class="table_td2"><input name='uPass2' type='password' class='flat'   tabindex='8'    size='25' value=""></td>
+    </tr>
+    <tr> 
+      <td class="table_td1"><?php echo $_LANG_SKIN['group'];?>:</td>
+      <td class="table_td2"> <select name="uGId" >
+          <?php if(!empty($this->_tpl_vars['gInfo'] )): 
+ foreach ($this->_tpl_vars['gInfo'] as  $this->_tpl_vars['var']): ?> 
+          <option value="<?php echo $this->_tpl_vars["var"]["gId"];?>"><?php echo $this->_tpl_vars["var"]["gName"];?></option>
+          <?php endforeach; endif;?> </select></td>
+    </tr>
+    <tr> 
+      <td class="table_td1"><?php echo $_LANG_SKIN['info'];?>:</td>
+      <td class="table_td2"><TEXTAREA NAME="uInfo" ROWS="8" COLS="45"><?php echo $this->_tpl_vars["var"]["uInfo"];?></TEXTAREA> </td>
+    </tr>
+
+    <tr> 
+      <td colspan="2" class="table_td2" align=center><input type='submit' name='submit' value='<?php echo $_LANG_SKIN_GLOBAL['submit_value'];?>' tabindex='13' onClick="return check();"> 
+        &nbsp;&nbsp;&nbsp;&nbsp; <input type="reset" name="Submit" value="<?php echo $_LANG_SKIN_GLOBAL['reset_value'];?>"></td>
+    </tr>
+</form>
+  </table>
+
+<?php include("../sysdata/templates_c/%%c_^@skin@admin@footer.html");?>

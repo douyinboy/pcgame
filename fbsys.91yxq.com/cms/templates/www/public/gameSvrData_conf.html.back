@@ -1,0 +1,33 @@
+<?php
+echo '<?php';
+?>
+ $data=array (
+ <CMS action="LIST" return="List" NodeID="4" where="c.GameId!='' and c.GameName!='' and c.AdUrl!=''" orderby="c.GameId" />
+<LOOP name="List" var="var" key="key">
+  [$var.GameId] => 
+  array (
+    'game_id' => [$var.GameId],
+    'game_name' => '[$var.GameName]',
+    'game_root' => '[$var.GameWeb]',
+    'game_url' => '[$var.AdUrl]',
+  ),
+  </LOOP>
+);
+
+$gameData= json_encode($data);
+
+ 
+ $data = array(
+ <CMS action="SQL" return="List" query="select c1.GameId,c1.ServerId,c1.ServerName,c1.OpenDate,c1.OpenTime,c2.GameName,c2.ShortName,c3.State from 91yxq_content_6 c1,91yxq_content_5 c2,91yxq_content_index c3  where c2.GameId=c1.GameId and c3.ContentID = c1.ContentID and c1.ServerShow in(2,3) and c1.PlatformId=1 and c2.PlatformId=1 and c3.TableID=6 and c3.State>0 order by c1.OpenDate desc,c1.OpenTime desc" />
+ <LOOP name="List" var="var" key="key">
+  [$var.GameId] => 
+  array (
+    [$var.ServerId] => array('svrStateID'=>[$var.State]),
+  ),
+  </LOOP>
+);
+
+$SvrData= json_encode($data);
+<?php
+echo '?>';
+?>

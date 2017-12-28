@@ -1,0 +1,58 @@
+<div class="pageContent">
+    <form method="post" action="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=add&callbackType=closeCurrent&navTabId=<{$smarty.get.navTabId}>" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+    <input name="sub" type="hidden" value="1" />
+    <div class="pageFormContent" layoutH="68"> 
+         <{foreach item=vo from=$inner}>
+           <input name="id" type="hidden" value="<{$vo.id}>" />
+           <input name="orderid" type="hidden" value="<{$vo.orderid}>" />
+           <input name="agent_id" type="hidden" value="<{$vo.agent_id}>" />
+           <input name="gold" type="hidden" value="<{$vo.gold}>" />
+           <input name="pay_time" type="hidden" value="<{$vo.pay_time}>" />
+           <input name="game_id" type="hidden" value="<{$vo.game_id}>" />
+           <input name="server_id" type="hidden" value="<{$vo.server_id}>" />
+           <input name="place_id" type="hidden" value="<{$vo.place_id}>" />
+        <div class="unit">
+                <label>账号列表：</label>
+                <input name="user_name" type="text" readonly=true   value="<{$vo.uAccount_name}>"/>
+        </div>
+        <div class="unit">
+                <label>内充金额：</label>
+                <input name="pay_money" type="text"  readonly=true  class="required digits" value="<{$vo.money}>"/>
+        </div>
+        <div class="unit">
+                <label>游戏：</label>
+                <input name="game" type="text"  readonly=true   value="<{$vo.gamename}>"/>
+                <input name="server" type="text"   readonly=true  value="双线<{$vo.server_id}>服"/>
+        </div>
+        <div class="unit" id="gamerole">
+                <label>角色名：</label>
+                <input name="user_role"  type="text"  readonly=true   value="<{$vo.user_role}>" />
+        </div>
+          <div class="unit">
+                <label>充值类型：</label>
+                    <select name="pay_type">
+                        <option value="2">公会赔付</option>
+                    </select>
+        </div>
+         <div class="unit">
+                <label>公会：</label>
+                <input name="guildname" type="text"  readonly=true   value="<{$vo.agentname}>"/>
+        </div>
+        <div class="unit">
+                <label>申请理由：</label>
+                    <textarea rows="3" cols="80" name="reason"   readonly=true  class="textInput"><{$vo.reason}></textarea>
+        </div>
+        <div class="unit">
+                <label>充值密码：</label>
+                <input name="pay_pass" type="password" size="30" value=""/>
+        </div>
+         <{/foreach}>
+    </div>
+    <div class="formBar">
+        <ul>
+            <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+            <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+        </ul>
+    </div>
+    </form>
+</div>

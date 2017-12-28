@@ -1,0 +1,35 @@
+<?php include("../sysdata/templates_c/%%c_^@plugins@base@templates@header.html");?>
+   <TABLE width="95%"  border=0 align="center" cellpadding="4" cellspacing="1" class="table_border">
+            <TBODY>
+              <TR class="table_header" >
+                <TD height=25 colspan="3" id=id2 ><strong><?php echo $_LANG_SKIN['topic'];?></strong></TD> 
+              </TR>
+              <TR class="table_td1">
+                <TD align=middle ><strong><?php echo $_LANG_SKIN['content_model'];?></strong></TD>
+                <TD align=middle ><strong><?php echo $_LANG_SKIN['isSetted'];?></strong></TD>
+                <TD height=30 align=middle ><strong><?php echo $_LANG_SKIN_GLOBAL['execute_op'];?></strong></TD>
+              </TR>
+			  <?php if(!empty($this->_tpl_vars['ContentModels'] )): 
+ foreach ($this->_tpl_vars['ContentModels'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+			   <TR class="table_td2">
+                <TD align=middle ><?php echo $this->_tpl_vars["var"]["Name"];?></TD>
+                <TD align=middle >
+				<?php if($this->_tpl_vars["var"]["CommentPageOffset"] != ''): ?>
+				<font color="green"><?php echo $_LANG_SKIN_GLOBAL['icon_right'];?></font>
+				
+				<?php else: ?>
+				<font color="red"><?php echo $_LANG_SKIN_GLOBAL['icon_error'];?></font>
+				<?php endif;?>
+				</TD>
+                <TD height=30 align=middle >
+				<?php if($this->_tpl_vars["var"]["CommentPageOffset"] != ''): ?>
+				<a href="<?php echo $this->_tpl_vars["base_url"];?>o=index::setting_edit&TableID=<?php echo $this->_tpl_vars["var"]["TableID"];?>"><?php echo $_LANG_SKIN['setting'];?></a>
+				<?php else: ?>
+				<a href="<?php echo $this->_tpl_vars["base_url"];?>o=index::setting_add&TableID=<?php echo $this->_tpl_vars["var"]["TableID"];?>"><?php echo $_LANG_SKIN['setting'];?></a>
+				<?php endif;?>
+				</TD>
+              </TR>
+			  <?php endforeach; endif;?>
+            </TBODY>
+   </TABLE>
+<?php include("../sysdata/templates_c/%%c_^@plugins@base@templates@footer.html");?>

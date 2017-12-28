@@ -1,0 +1,55 @@
+@charset "UTF-8";
+html{/*overflow:hidden;*/}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td,dl,dt,dd{padding: 0;margin: 0;}
+body{font:12px/1.5 "\5FAE\8F6F\96C5\9ED1",tahoma,Arial,"\5b8b\4f53",sans-serif;}
+*:focus {outline:none;}
+table {border-collapse:collapse;border-spacing: 0;}
+td{border-color:#000;}
+fieldset,img,button{border:0;}
+address,caption,cite,code,dfn,em,strong,th,var {font-weight: normal;font-style: normal;}
+strong{font-weight:bold;}
+ol,ul ,dl{list-style: none;}
+caption,th {text-align: left;}
+h1,h2,h3,h4,h5,h6 {font-weight: bold;font-size: 100%;}
+img {vertical-align:top;}
+input,button{vertical-align:middle;}
+input,button,select,textarea{outline:none}
+button{cursor:pointer;}
+abbr,acronym {border: 0px;}
+.clearfix:after {
+		content:".";
+		clear:both;
+		display:block;
+		height:0;		
+		visibility:hidden;
+}
+.clearfix{display:inline-block;}
+.clearfix {display:block;}
+/*--------------------*/
+a,a:link{color:#988b6F;text-decoration:none;}
+a{blr:expression(this.onFocus=this.blur());outline:none;}
+a:visited{}
+a:hover{color:#FFB400;text-decoration:underline;}
+a:active{}
+
+.fl{float:left;}
+.fr{float:right;}
+/* // ----alpha---- // */
+#alpha{position:absolute;z-index:1001;left:0;top:0;width:100%;height:1115px;background:none repeat scroll 0 0 #333333;filter:alpha(opacity=80);opacity: 0.8;-moz-opacity:0.8;}
+
+.gLogo{display:block;width:98px;height:32px;text-indent:-999em;background:url(../images/blank.gif) no-repeat scroll 0 0;position:absolute;bottom:10px;right:12px;}
+
+.nav,.nav ul,.nav ul li{height: 48px;}
+
+.nav a{width: 115px;height: 48px;margin-right: 65px;background: url(../images/blank.gif) no-repeat; float:left;_display: inline; text-indent: -999em;overflow: hidden;}
+
+.nav a.n1, .nav a.a1{}
+.nav a.n2, .nav a.a2{}
+.nav a.n3, .nav a.a3{}
+.nav a.n4, .nav a.a4{margin-right:0;}
+.nav a:hover{background: url(../images/navOn.jpg) no-repeat;}
+
+.nav a.n1:hover, .nav a.a1:hover{background-position:0 0;}
+.nav a.n2:hover, .nav a.a2:hover{background-position:-180px 0;}
+.nav a.n3:hover, .nav a.a3:hover{background-position:-360px 0;}
+.nav a.n4:hover, .nav a.a4:hover{background-position:-540px 0;}

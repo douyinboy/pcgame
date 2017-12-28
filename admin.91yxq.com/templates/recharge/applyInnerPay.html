@@ -1,0 +1,148 @@
+<form id="pagerForm" action="" method="post">
+     <input type="hidden" name="access" value="1"/>
+    <input type="hidden" name="pageNum" value="<{$currentpage}>"/>
+    <input type="hidden" name="numPerPage" value="<{$numperpage}>"/>
+    <input type="hidden" name="agentid" value="<{$smarty.post.agentid}>"/>
+    <input type="hidden" name="start_date" value="<{$start_date}>"/>
+    <input type="hidden" name="end_date" value="<{$end_date}>"/>
+    <input type="hidden" name="pay_type" value="<{$smarty.post.pay_type}>"/>
+    <input type="hidden" name="game_id" value="<{$smarty.post.game_id}>"/>
+    <input type="hidden" name="state" value="<{$smarty.post.state}>"/>
+    <input type="hidden" name="admin_uid" value="<{$smarty.post.admin_uid}>"/>
+    <input type="hidden" name="server_id" value="<{$smarty.post.server_id}>"/>
+</form>
+<div class="pageHeader">
+    <form onsubmit="return navTabSearch(this);" action="" method="post">
+    <input type="hidden" name="access" value="1"/>    
+    <div class="searchBar">
+        <ul class="searchContent">
+            <li><label>公会：</label>
+                       <select class="combox" name="agentid" id="agentid3011">
+                           <option value="0">请选择</option>
+                           <{foreach item=v from =$guildlist}>
+                                <option value="<{$v.id}>" <{if $smarty.post.agentid==$v.id}> selected <{/if}> ><{$v.agentname}></option>
+                            <{/foreach}>
+                            </select>
+                
+                     <input type="text" id="search_key3011" size="10" class="" value="输入关键字"/>
+                </li>
+                
+                <li><label>游戏服区：</label>
+            <select class="combox" name="game_id" id="game_id" ref="sd_ssan_4ddd432" refUrl="?action=sysmanage&opt=getServers&game_id={value}">
+                <option value="0">请选择</option>
+                <{foreach item=v from =$gamelist}>
+                     <option value="<{$v.id}>" <{if $smarty.post.game_id==$v.id}> selected <{/if}> ><{$v.name}></option>
+                     <{/foreach}>
+                 </select>
+                    
+                <select class="combox" name="server_id" id="sd_ssan_4ddd432">
+                <option value="0">请选择</option>
+                <{foreach item=v from =$serverlist}>
+                     <option value="<{$v.server_id}>" <{if $smarty.post.server_id==$v.server_id}> selected <{/if}> ><{$v.name}></option>
+                     <{/foreach}>
+                 </select>
+            </li>
+            <li><label>充值类型：</label>
+                <select class="combox" name="pay_type" >
+                    <option value="0">所有类型</option>
+                    <option value="1" <{if $smarty.post.pay_type==1}>selected<{/if}> >平台发放</option>
+                    <option value="2" <{if $smarty.post.pay_type==2}>selected<{/if}> >公会赔付</option>
+                </select>
+            </li>
+        </ul>
+        <ul class="searchContent">
+            <li>  
+                    <label>起始日期：</label>
+                    <input type="text" name="start_date" class="date" value="<{$start_date}>" readonly="true"/>
+				<a class="inputDateButton" href="javascript:;">选择</a></li>
+                <li>  
+                    <label>结束日期：</label>
+                    <input type="text" name="end_date" class="date" value="<{$end_date}>" readonly="true"/>
+				<a class="inputDateButton" href="javascript:;">选择</a>
+                </li>
+                <li><label>申请人：</label>
+                <select class="combox" name="admin_uid" id="admin_uid">
+                <option value="">所有</option>
+                 <{foreach item=v key=key from =$userslist}>
+                     <option value="<{$v.uid}>" <{if $smarty.post.admin_uid==$v.uid}> selected <{/if}> ><{$v.uName}></option>
+                <{/foreach}>
+                </select>
+            </li>
+                
+        </ul>
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+				
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="add" title="申请内充" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=add&navTabId=<{$smarty.get.navTabId}>" height="400" target="dialog" mask="true"><span>申请内充</span></a></li>
+            <li>
+            <a class="icon" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=export" target="dwzExport" targetType="navTab" title="确定要导出这些记录吗?"><span>导出EXCEL</span></a>
+            </li>
+        </ul>
+    </div>
+    <table class="table" width="100%"  layoutH="160">
+                    <thead>
+                        <tr>
+                            <th>订单号</th>
+                            <th>充值账号</th>
+                            <th>角色名</th>
+                            <th>充值游戏</th>
+                            <th>服区</th>
+                            <th>充值金额</th>
+                            <th>充值元宝</th>
+                            <th>充值公会</th>
+                            <th>充值时间</th>
+                            <th>充值类型</th>
+                            <th>申请人</th>
+                            <th>充值结果</th>
+                            <th>审核人</th>
+                            <th>备注</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <volist id="vo" name="list">
+                            <{foreach item=vo from=$data name=test}>
+                            <tr target="sid" rel="1" style="background-color: <{if $smarty.foreach.test.iteration%2==0}> #f6fcfc;<{/if}>">
+                                <td><{$vo['orderid']}></td>
+                                <td><{$vo['user_name']}></td>
+                                <td><{$vo['user_role']}></td>
+                                <td><{$vo['gamename']}></td>
+                                <td>S<{$vo['server_id']}></td>
+                                <td><{$vo['money']}></td>
+                                <td><{$vo['gold']}></td>
+                                <td><{$vo['agentname']}></td>
+                                <td><{$vo['pay_time']|date_format:"%m-%d %H:%I:%S"}></td>
+                                <td><{if $vo['pay_type']==2}>公会赔付<{else if $vo['pay_type']==3}>申请人买单<{else}>平台垫付<{/if}></td>
+                                <td><{if $vo['is_guild']==0}><{$vo['to_user']|default:"无记录"}><{else if $vo['is_guild']==1}><{$vo['agentname']}><{/if}></td>
+                                <td><{if $vo['state']==1}>已成功发放<{else if $vo['state']==2}>该申请被拒绝<{elseif $vo['is_guild']==1 && $vo['state']==0}>公会申请失败<{else}>待审核<{/if}></td>
+                                <td><{$vo['checkuser']}></td>
+                                <td title="<{$vo['reason']}>"><{$vo['reasonshot']}></td>
+                            </tr>
+                            <{/foreach}>
+                        </volist>
+                    </tbody>
+    </table>
+    <div class="panelBar">
+        <div class="pages"><span>显示</span>
+            <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                <option <{if $smarty.post.numPerPage==20}>selected<{/if}>  value="20">20</option>
+                <option <{if $smarty.post.numPerPage==50}>selected<{/if}> value="50">50</option>
+                <option <{if $smarty.post.numPerPage==100}>selected<{/if}> value="100">100</option>
+                <option <{if $smarty.post.numPerPage==200}>selected<{/if}> value="200">200</option>
+            </select><span>条，共<{$totalcount}>条</span> <span>&nbsp;&nbsp;合计：<{$tot}>&nbsp;元</span>
+        </div>
+        <div class="pagination" targetType="navTab" totalCount="<{$totalcount}>" numPerPage="<{$numperpage}>" pageNumShown="10" currentPage="<{$currentpage}>"></div>
+    </div>
+</div>
+<script>
+    var pro_str={ <{foreach item=v from =$guildlist}> "<{$v.id}>":"<{$v.agentname}>", <{/foreach}> };
+    search_pro('search_key3011','agentid3011');
+</script>

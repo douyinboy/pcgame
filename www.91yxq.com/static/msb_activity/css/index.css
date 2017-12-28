@@ -1,0 +1,101 @@
+	* {
+		padding: 0;
+		margin: 0;
+	}
+	
+	body {
+		height: 100%;
+		width: 100%;
+	}
+	
+	.wrap {
+		background: url(../images/bg.jpg) no-repeat;
+		background-size: 100% 100%;
+		margin: 0 auto;
+		width: 1440px;
+		height: 2168px;
+		overflow: hidden;
+	}
+	
+	a {
+		text-decoration: none;
+	}
+	
+	.wrap .login {
+		line-height: 43px;
+		overflow: hidden;
+	}
+	
+	.wrap .login a {
+		color: red;
+		margin-right: 30%;
+		float: right;
+		width: 60px;
+		text-align: center;
+	}
+	
+	.wrap .charge {
+		width: 311px;
+		height: 115px;
+		position: relative;
+		top: 26.2%;
+		left: 8%;
+	}
+	
+	.wrap .charge a {
+		width: 100%;
+		height: 100%;
+		display: inline-block;
+		background: url(../images/btn1.png) no-repeat;
+		background-size: 100% 100%;
+	}
+	
+	.wrap .qq_grounp {
+		width: 165px;
+		height: 52px;
+		float: right;
+		position: relative;
+		top: 23.5%;
+		right: 16%;
+	}
+	
+	.wrap .qq_grounp a {
+		width: 100%;
+		height: 100%;
+		display: inline-block;
+		background: url(../images/service1.png) no-repeat;
+		background-size: 100% 100%;
+	}
+	
+	.wrap .logo {
+		width: 13%;
+		height: 8%;
+		float: right;
+		position: relative;
+		top: -1%;
+		right: 3%;
+	}
+	
+	.wrap .logo a {
+		width: 100%;
+		height: 100%;
+		display: inline-block;
+	}
+	
+	.wrap .logo a img {
+		width: 100%;
+		height: 100%;
+	}
+	
+	.wrap .charge a:hover {
+		width: 100%;
+		height: 100%;
+		display: inline-block;
+		background: url(../images/btn2.png) no-repeat;
+		background-size: 100% 100%;
+	}
+	
+	.wrap .qq_grounp a:hover {
+		background: url(../images/service3.png) no-repeat;
+		background-size: 100% 100%;
+	}

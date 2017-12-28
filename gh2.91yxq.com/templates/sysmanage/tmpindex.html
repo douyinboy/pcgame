@@ -1,0 +1,166 @@
+
+
+
+	<div class="tabs">
+		<div class="tabsHeader">
+			<div class="tabsHeaderContent">
+				<ul>
+					<li><a href="javascript:;"><span>数据示意图</span></a></li>
+					<li><a href="javascript:;"><span>在线&充值</span></a></li>
+					<li><a href="javascript:;"><span>排行榜</span></a></li>
+					<li><a href="javascript:;"><span>游戏公告</span></a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="tabsContent" >
+                    <!--数据示意图-->
+			<div>
+	
+				<div layoutH="125" style="float:left; display:block; overflow:auto; width:240px; border:solid 1px #CCC; line-height:21px; background:#fff">
+				    <ul class="tree treeFolder">
+						<li><a href="javascript">以下点击浏览【请勿频繁操作】</a>
+							<ul>
+								<li><a href="?action=sysmanage&opt=index&show=online" target="ajax" rel="jbsxBox">当前在线</a></li>
+								<li><a href="?action=sysmanage&opt=index&show=pay" target="ajax" rel="jbsxBox">今日充值</a></li>
+								<li><a href="?action=sysmanage&opt=index&show=ph" target="ajax" rel="jbsxBox">排行榜</a></li>
+							</ul>
+						</li>
+	
+				     </ul>
+				</div>
+				
+				<div id="jbsxBox" class="unitBox" style="margin-left:246px;">
+					<!--#include virtual="list1.html" -->
+				</div>
+	
+			</div>
+                   <!--今日在线-->
+                    <div>
+                        <div layoutH="125">
+        
+             </div>
+                        </div>
+                    
+			<!--排行榜-->
+			<div>
+                           
+                        </div>
+                            
+                            
+			<!--最新公告-->
+			<div></div>
+			
+			
+			
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+		<div class="tabsContent" >
+                    <!--数据示意图-->
+			<div>
+	
+				<div layoutH="125" style="float:left; display:block; overflow:auto; width:240px; border:solid 1px #CCC; line-height:21px; background:#fff">
+				    <ul class="tree treeFolder">
+						<li><a href="javascript">以下点击浏览【请勿频繁操作】</a>
+							<ul>
+								<li><a href="?action=sysmanage&opt=index&show=online" target="ajax" rel="jbsxBox">当前在线</a></li>
+								<li><a href="?action=sysmanage&opt=index&show=pay" target="ajax" rel="jbsxBox">今日充值</a></li>
+								<li><a href="?action=sysmanage&opt=index&show=ph" target="ajax" rel="jbsxBox">排行榜</a></li>
+							</ul>
+						</li>
+	
+				     </ul>
+				</div>
+				
+				<div id="jbsxBox" class="unitBox" style="margin-left:246px;">
+					<!--#include virtual="list1.html" -->
+				</div>
+	
+			</div>
+                   <!--今日在线-->
+                    <div>
+                        <div layoutH="125">
+         <!--   <fieldset>
+                    <legend>在线&充值</legend>
+                    <dl class="nowrap">
+                        <dd>
+                            <div class="" style="width:24%;border:1px solid #e66;margin:5px;float:left;min-height:100px">
+                                <div style="border:1px solid #B8D0D6;padding:5px;margin:5px">今日最高在线：<{$toplevel}></div>
+                                <div style="border:1px solid #B8D0D6;padding:5px;margin:5px">今日平均在线：<{$avlevel}></div>
+                                <div style="border:1px solid #B8D0D6;padding:5px;margin:5px">昨日最高在线：<{$ytoplevel}></div>
+                                <div style="border:1px solid #B8D0D6;padding:5px;margin:5px">昨日平均在线：<{$yavlevel}></div>              
+                            </div>
+                            <div class="" style="width:24%;border:1px solid #e66;margin:5px;float:left;min-height:100px">
+                                <div style="border:1px solid #B8D0D6;padding:5px;margin:5px">今日充值总额：<{$totalpay}></div>
+                                <div style="border:1px solid #B8D0D6;padding:5px;margin:5px">今日平均充值：<{$avpay}></div>
+                                <div style="border:1px solid #B8D0D6;padding:5px;margin:5px">昨日充值总额：<{$ytotalpay}></div>
+                                <div style="border:1px solid #B8D0D6;padding:5px;margin:5px">昨日平均充值：<{$yavpay}></div>              
+                            </div>
+                            <div class="" style="width:98%;border:1px solid #e66;margin:5px;float:left;min-height:100px">
+                                
+                               <iframe border="0" width="100%" height="200" src="?action=sysmanage&opt=index&chart=1&show=online"/>
+                            </div>
+                        </dd>
+                    </dl>
+                </fieldset> -->
+             </div>
+                        </div>
+                    
+			<!--排行榜-->
+			<div>
+                            <div layoutH="125">      
+                             <!--   <fieldset>
+                                    <legend>排行榜</legend>
+                                    <dl class="nowrap">
+                                        <dd>
+                                            <div class="" style="width:35%;border:1px solid #e66;margin:5px;float:left;min-height:100px">
+                                                <{foreach item=v key=mykey from =$paytop}>
+                                                <div style="border:1px solid #B8D0D6;padding:5px;margin:5px">第<{$mykey +1}>名： <{$v.tmn}>元  From <{if $smarty.session.manager.plat == 0}><{$v.pName}>-<{/if}>双线<{$v.sId}>服 <{$v.uRoleName}></div>
+                                                <{/foreach}>    
+                                            </div>
+                                            <div class="" style="width:58%;border:1px solid #e66;margin:5px;float:left;min-height:205px">
+                                                <iframe border="0" width="100%" height="200" src="?action=sysmanage&opt=index&chart=1"/>
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                </fieldset> -->
+                            </div>
+                        </div>
+                            
+                            
+			<!--最新公告-->
+			<div><div layoutH="125">   
+           <!-- <fieldset>
+                    <legend>充值中心</legend>
+                    <dl class="nowrap">
+                        <dd>
+                            <div class="" style="width:28%;border:1px solid #e66;margin:5px;float:left;min-height:100px">
+                                <div style="border:1px solid #B8D0D6;padding:5px;margin:5px">今日充值总额：<{$totalpay}></div>
+                                <div style="border:1px solid #B8D0D6;padding:5px;margin:5px">今日平均充值：<{$avpay}></div>
+                                <div style="border:1px solid #B8D0D6;padding:5px;margin:5px">昨日充值总额：<{$ytotalpay}></div>
+                                <div style="border:1px solid #B8D0D6;padding:5px;margin:5px">昨日平均充值：<{$yavpay}></div>              
+                            </div>
+                            <div class="" style="width:68%;border:1px solid #e66;margin:5px;float:left;min-height:200px">
+                                <iframe border="0" width="100%" height="200" src="?action=sysmanage&opt=index&chart=1&show=pay"/>
+                            </div>
+                        </dd>
+                    </dl>
+                    
+                </fieldset> -->
+               
+                            
+                        </div></div>
+			
+			
+			
+		</div>

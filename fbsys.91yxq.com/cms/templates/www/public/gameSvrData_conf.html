@@ -1,0 +1,33 @@
+<?php
+echo '<?php';
+?>
+
+$data=array (
+<CMS action="LIST" return="List" NodeID="4" where="c.GameId!='' and c.GameName!='' and c.AdUrl!=''" orderby="c.GameId" />
+<LOOP name="List" var="var" key="key">
+	<if test="$key>0">,</if>[$var.GameId] => 
+	array (
+		'gameID' => [$var.GameId],
+		'nameEn' => '[$var.ShortName]',
+		'nameCn' => '[$var.GameName]',
+		'gameWeb' => '[$var.GameWeb]',
+		'stateID' => '[$var.ServiceStatus]'
+	)
+</LOOP>
+);
+
+$gameData= json_encode($data);
+
+$data = array(
+	<loop name="List" var="var" key="key"><cms action="SQL" return="svrList" query="SELECT s.GameId, s.ServerId, s.ServerName, s.MergeId, s.ServerStatus, s.URL FROM 91yxq_publish_6 s WHERE s.PlatformId={$var.PlatformId} and s.GameId={$var.GameId} and s.ServerStatus>0 ORDER BY s.GameId asc,s.ServerId desc,s.ContentID asc" />
+		<if test="$key>0">,</if>[$var.GameId] => array(
+			<loop name="svrList" var="svr" key="svrKey">
+			<if test="$svrKey>0">,</if><if test="$svr.MergeId>1000">[$svr.ServerId] => array('svrID'=>[$svr.ServerId],'HeFuSID'=>[$svr.MergeId],'svrName'=>'新'.([$svr.MergeId]-1000).'服','svrStateID'=>[$svr.ServerStatus],'svrGameUrl'=>[$svr.URL])<elseif  test="$svr.MergeId>0">[$svr.ServerId] => array('svrID'=>[$svr.ServerId],'HeFuSID'=>[$svr.MergeId],'svrName'=>'合服[$svr.MergeId]','svrStateID'=>[$svr.ServerStatus],'svrGameUrl'=>[$svr.URL])<else>[$svr.ServerId] => array('svrID'=>[$svr.ServerId],'HeFuSID'=>[$svr.MergeId],'svrName'=>'[$svr.ServerName]','svrStateID'=>[$svr.ServerStatus],'svrGameUrl'=>'[$svr.URL]')
+			</if></loop>
+		)
+	</loop>
+);
+
+$SvrData= json_encode($data);
+
+//echo "<pre>"; print_r( json_decode($gameData,true) ); print_r( json_decode($SvrData,true) ); echo "</pre>";

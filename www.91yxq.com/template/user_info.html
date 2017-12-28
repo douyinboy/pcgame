@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{%$chinese_title%}-用户中心-我的资料</title>
+<link type="text/css" rel="stylesheet" href="{%$image_url%}css/www/base.css" />
+<link type="text/css" rel="stylesheet" href="{%$image_url%}css/www/public.css" />
+<link type="text/css" rel="stylesheet" href="{%$image_url%}css/www/main_pq.css" />
+<script type="text/javascript" src="{%$js_url%}jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="{%$js_url%}function.js"></script>
+<script type="text/javascript" src="{%$js_url%}user.js"></script>
+</head>
+
+<body>
+
+<!--导入公共头部文件-->
+{%include file='header.html'%}
+
+<!--主内容-->
+<div class="m1200">
+	<div class="m_box2 mt40 clearfix">
+
+         <!--左侧导航-->
+        {%include file='user_link.html'%}
+
+        <!--右侧-->
+        <div class="fr w980">
+        	<div class="p50">
+                <div class="user_hd"><h2>我的资料</h2></div>
+                <ul class="fill_list">
+                    <form id="frm" name="frm" action="" method="post" onsubmit="return my_info_sumbit();">
+                    <input type="hidden" name="stage" value="yes">
+                    <li><label>昵称：</label><input type="text" name="nickname" id="nickname" class="input_t" style="width:258px" value="{%$users[2]%}" /></li>
+                    <li style="line-height:40px"><label>性别：</label><input name="sex" type="radio" id="sex" value="男" {%if $users[5]=="男" || $users[5]=="1"%}checked{%/if%} class="radio" />&nbsp;男&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="sex" {%if $users[5]=="女" || $users[5]=="0"%}checked{%/if%} id="sex" value="女" class="radio" />&nbsp;女</li>
+                    <li><label>生日：</label><input type="text" name="birthday" id="birthday" class="input_t" style="width:258px" value="{%$users[6]%}" /></li>
+                    <li>
+                        {%if $users[25]%}
+                            <label>邮箱</label>
+                            <input type="text" disabled class="input_t" style="width:258px" value='{%$users[1]|truncate:"8":"*****":true%}' />
+                            <input id="emailt" type="hidden" value="{%$users[1]%}" />
+                        {%else%}
+                            <label>邮箱：</label><input type="text" name="email" id="email" class="input_t" style="width:258px" />
+                        {%/if%}
+                    </li>
+                    <li><label>电话：</label><input type="text" name="telephone" id="telephone" class="input_t" style="width:258px" value="{%$users[9]%}" onKeyUp="value=value.replace(/[^0-9]/g,'')" /></li>
+                    <li><label>QQ：</label><input type="text" name="qq" id="qq" maxlength="12" class="input_t" style="width:258px" value="{%$users[13]%}" onKeyUp="value=value.replace(/[^0-9]/g,'')" /></li>
+                    <li><label>&nbsp;</label><a href="javascript:void(0)" class="game_btn2" onclick="$('#frm').submit();" style="width:290px">确 认</a></li>
+                    <li>
+                        <label>&nbsp;</label>
+                        <font color="red">{%$error%}</font>
+                    </li>
+                    </form>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--导入公共页脚文件-->
+{%include file='footer.html'%}
+</body>
+</html>

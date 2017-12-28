@@ -1,0 +1,91 @@
+<form id="pagerForm" action="" method="post">
+     <input type="hidden" name="access" value="1"/>
+    <input type="hidden" name="pageNum" value="<{$currentpage}>"/>
+    <input type="hidden" name="numPerPage" value="<{$numperpage}>"/>
+    <input type="hidden" name="game_id" value="<{$smarty.post.agent_id}>"/>
+    <input type="hidden" name="server_id" value="<{$smarty.post.server_id}>"/>
+</form>
+<div class="pageHeader">
+    <form onsubmit="return navTabSearch(this);" action="" method="post">
+    <input type="hidden" name="access" value="1"/>    
+    <div class="searchBar">
+        <ul class="searchContent">
+            <li>
+                <label>游戏：</label>
+                <select class="combox" name="game_id" id="game_id18" >
+                <option value="0">请选择</option>
+                <{foreach item=v from =$gamelist}>
+                     <option value="<{$v.id}>" <{if $smarty.post.game_id==$v.id}> selected <{/if}> ><{$v.name}></option>
+                     <{/foreach}>
+                 </select>
+                <input type="text" id="game_id_key30123" size="10" class="" value="输入关键字"/>
+            </li>
+            <li>  
+                <label>公会ID(aid)：</label>
+                <input type="text" name="agent_id" class="" value="<{$smarty.post.agent_id}>"/>
+            </li> 
+            
+            <li>
+                <label>区服ID(sid)：</label>
+                  <input type="text" name="server_id" class="" value="<{$smarty.post.server_id}>"/>
+            </li>
+        </ul>
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="add" title="添加封禁链接" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=add&navTabId=<{$smarty.get.navTabId}>" height="200" target="dialog" mask="true"><span>新增封禁链接</span></a></li>
+        </ul>
+    </div>
+    <table class="table" width="100%"  layoutH="137">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>游戏</th>
+                    <th>公会ID(aid)</th>
+                    <th>区服ID(sid)</th>
+                    <th>操作人</th>
+                    <th>操作时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <{foreach item=vo from=$data name=test}>
+                    <tr target="sid" rel="1" style="background-color: <{if $smarty.foreach.test.iteration%2==0}> #e2edf4;<{/if}>">
+                        <td><{$vo['id']}></td>
+                        <td><{$vo['name']}>(<{$vo['game_id']}>)</td>
+                        <td><{$vo['agent_id']}></td>
+                        <td><{$vo['server_id']|default:"-- --"}></td>
+                        <td><{$vo['uName']|default:" "}></td>
+                        <td><{$vo['atime']|default:"0"}></td>
+                        <td>
+                              <a title="编辑" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=add&id=<{$vo.id}>&navTabId=<{$smarty.get.navTabId}>" class="btnEdit"  height="200" target="dialog" mask="true">编辑</a>
+                            <a title="确定要解封该链接吗？" target="ajaxTodo" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=jie&id=<{$vo.id}>&navTabId=<{$smarty.get.navTabId}>" class="" style="color: #F00;">解封</a>
+                        </td>
+                    </tr>
+                    <{/foreach}>
+            </tbody>
+    </table>
+     <div class="panelBar">
+        <div class="pages"><span>显示</span>
+            <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                <option <{if $smarty.post.numPerPage==20}>selected<{/if}>  value="20">20</option>
+                <option <{if $smarty.post.numPerPage==50}>selected<{/if}> value="50">50</option>
+                <option <{if $smarty.post.numPerPage==100}>selected<{/if}> value="100">100</option>
+                <option <{if $smarty.post.numPerPage==200}>selected<{/if}> value="200">200</option>
+            </select><span>条，共<{$totalcount}>条</span>
+        </div>
+        <div class="pagination" targetType="navTab" totalCount="<{$totalcount}>" numPerPage="<{$numperpage}>" pageNumShown="10" currentPage="<{$currentpage}>"></div>
+    </div>
+</div>
+<script>
+    var pro_str={ <{foreach item=v from =$gamelist}> "<{$v.id}>":"<{$v.name}>", <{/foreach}> };
+    search_pro('game_id_key30123','game_id18');
+</script>

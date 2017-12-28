@@ -1,0 +1,53 @@
+<form id="pagerForm" action="" method="post">
+     <input type="hidden" name="access" value="1"/>
+    <input type="hidden" name="pageNum" value="<{$currentpage}>"/>
+    <input type="hidden" name="numPerPage" value="<{$numperpage}>"/>
+</form>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="add" title="添加屏蔽链接" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=add&navTabId=<{$smarty.get.navTabId}>" height="180" target="dialog" mask="true"><span>添加屏蔽链接</span></a></li>
+        </ul>
+    </div>
+    <table class="table" width="100%"  layoutH="75">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>操作公会(成员ID)</th>
+                            <th>操作游戏</th>
+                            <th>操作人</th>
+                            <th>操作时间</th>
+                            <th>相差金额</th>
+                            <th>操作状态</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <volist id="vo" name="list">
+                            <{foreach item=vo from=$data}>                       
+                            <tr target="sid" rel="1">
+                                <td><{$vo['id']}></td>
+                                <td><{$vo['agentname']}>(<{$vo['placeid']}>)</td>
+                                <td><{$vo['game']}><{$vo['server_id']}>服</td>
+                                <td><{$vo['addUser']}></td>
+                                <td><{$vo['addTime']|date_format:"%Y-%m-%d %H:%I:%S"}></td>                                
+                                <td><{if $vo['last_money'] > 0}><{$vo['last_money']}><{else}>0<{/if}></td>                               
+                                <td><{if $vo['ifback'] ==1}>已还原<{else}>已切断<{/if}></td>
+                                <td><{if $vo['ifback'] !=1}><a title="确定要还原该链接并还原期间玩家充值记录吗？" target="ajaxTodo" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=forback&id=<{$vo.id}>&navTabId=<{$smarty.get.navTabId}>" class="">链接还原</a><{/if}></td>
+                            </tr>                           
+                            <{/foreach}>
+                        </volist>
+                    </tbody>
+    </table>
+    <div class="panelBar">
+        <div class="pages"><span>显示</span>
+            <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                <option <{if $smarty.post.numPerPage==20}>selected<{/if}>  value="20">20</option>
+                <option <{if $smarty.post.numPerPage==50}>selected<{/if}> value="50">50</option>
+                <option <{if $smarty.post.numPerPage==100}>selected<{/if}> value="100">100</option>
+                <option <{if $smarty.post.numPerPage==200}>selected<{/if}> value="200">200</option>
+            </select><span>条，共<{$totalcount}>条</span>
+        </div>
+        <div class="pagination" targetType="navTab" totalCount="<{$totalcount}>" numPerPage="<{$numperpage}>" pageNumShown="10" currentPage="<{$currentpage}>"></div>
+    </div>
+</div>

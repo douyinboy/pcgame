@@ -1,0 +1,154 @@
+<?php include("../sysdata/templates_c/%%c_^@plugins@base@templates@header.html");?>
+<TABLE width="95%" border=0 align=center cellSpacing=0 cellPadding=0  >
+  <form name="default" method="post" action="<?php echo $this->_tpl_vars["base_url"];?>o=index::comment_setting_submit" >
+    <TBODY>
+<TR>
+        <TD vAlign=top align=middle width="50%">
+		<TABLE cellspacing="1" cellpadding="4" width="100%"  border=0 class="table_border">
+            <TBODY>
+              <TR class="table_header" >
+                <TD height=25 colSpan=2 id=id2 ><strong><?php echo $_LANG_SKIN['title'];?></strong></TD>
+              </TR> 
+              <TR class="table_td1" > 
+                <TD width="60%"> <strong><?php echo $_LANG_SKIN['form_input_enableComment_title'];?>:</strong>
+								 
+				<br><span style="font-size: 11px; font-family: Tahoma, Verdana, Arial"><?php echo $_LANG_SKIN['form_input_enableComment_description'];?></span>
+				
+				</TD>
+                <TD>
+			<?php if(!isset($this->_tpl_vars["setting"]["enableComment"])): ?>
+			<?php
+
+$select_value = "${_LANG_SKIN['form_input_enableComment_value']}";
+ $select_value = 'enableComment'.$select_value; 
+$$select_value = 'checked';?><input type="radio" name="enableComment" value="1" id="enableComment0" <?php echo $enableComment1 ;?>><label for="enableComment0"  ><?php echo $_LANG_SKIN_GLOBAL['yes'];?></label>&nbsp;<input type="radio" name="enableComment" value="0" id="enableComment1" <?php echo $enableComment0 ;?>><label for="enableComment1"  ><?php echo $_LANG_SKIN_GLOBAL['no'];?></label>&nbsp;
+
+		<?php else: ?>
+			<?php
+
+$select_value = "{$this->_tpl_vars["setting"]["enableComment"]}";
+ $select_value = 'enableComment'.$select_value; 
+$$select_value = 'checked';?><input type="radio" name="enableComment" value="1" id="enableComment0" <?php echo $enableComment1 ;?>><label for="enableComment0"  ><?php echo $_LANG_SKIN_GLOBAL['yes'];?></label>&nbsp;<input type="radio" name="enableComment" value="0" id="enableComment1" <?php echo $enableComment0 ;?>><label for="enableComment1"  ><?php echo $_LANG_SKIN_GLOBAL['no'];?></label>&nbsp;
+
+		<?php endif;?>
+	 		</TD>
+              </TR>
+              <TR class="table_td1" > 
+                <TD width="60%"> <strong><?php echo $_LANG_SKIN['form_input_enableCommentApprove_title'];?>:</strong>
+				
+				</TD>
+                <TD>
+			<?php if(!isset($this->_tpl_vars["setting"]["enableCommentApprove"])): ?>
+			<?php
+
+$select_value = "${_LANG_SKIN['form_input_enableCommentApprove_value']}";
+ $select_value = 'enableCommentApprove'.$select_value; 
+$$select_value = 'checked';?><input type="radio" name="enableCommentApprove" value="1" id="enableCommentApprove0" <?php echo $enableCommentApprove1 ;?>><label for="enableCommentApprove0"  ><?php echo $_LANG_SKIN_GLOBAL['yes'];?></label>&nbsp;<input type="radio" name="enableCommentApprove" value="0" id="enableCommentApprove1" <?php echo $enableCommentApprove0 ;?>><label for="enableCommentApprove1"  ><?php echo $_LANG_SKIN_GLOBAL['no'];?></label>&nbsp;
+
+		<?php else: ?>
+			<?php
+
+$select_value = "{$this->_tpl_vars["setting"]["enableCommentApprove"]}";
+ $select_value = 'enableCommentApprove'.$select_value; 
+$$select_value = 'checked';?><input type="radio" name="enableCommentApprove" value="1" id="enableCommentApprove0" <?php echo $enableCommentApprove1 ;?>><label for="enableCommentApprove0"  ><?php echo $_LANG_SKIN_GLOBAL['yes'];?></label>&nbsp;<input type="radio" name="enableCommentApprove" value="0" id="enableCommentApprove1" <?php echo $enableCommentApprove0 ;?>><label for="enableCommentApprove1"  ><?php echo $_LANG_SKIN_GLOBAL['no'];?></label>&nbsp;
+
+		<?php endif;?>
+	 		</TD>
+              </TR>
+              <TR class="table_td1" > 
+                <TD width="60%"> <strong><?php echo $_LANG_SKIN['form_input_usernameMaxLength_title'];?>:</strong>
+				
+				</TD>
+                <TD>
+			<?php if(!isset($this->_tpl_vars["setting"]["usernameMaxLength"])): ?>
+			<input name="usernameMaxLength" type="text" class="button" id="usernameMaxLength" value="${_LANG_SKIN['form_input_usernameMaxLength_value']}" size="40">
+		<?php else: ?>
+			<input name="usernameMaxLength" type="text" class="button" id="usernameMaxLength" value="<?php echo htmlspecialchars($this->_tpl_vars["setting"]["usernameMaxLength"]);?>" size="40">
+		<?php endif;?>
+ 	 		</TD>
+              </TR>
+              <TR class="table_td1" > 
+                <TD width="60%"> <strong><?php echo $_LANG_SKIN['form_input_contentMinLength_title'];?>:</strong>
+				
+				</TD>
+                <TD>
+			<?php if(!isset($this->_tpl_vars["setting"]["contentMinLength"])): ?>
+			<input name="contentMinLength" type="text" class="button" id="contentMinLength" value="${_LANG_SKIN['form_input_contentMinLength_value']}" size="40">
+		<?php else: ?>
+			<input name="contentMinLength" type="text" class="button" id="contentMinLength" value="<?php echo htmlspecialchars($this->_tpl_vars["setting"]["contentMinLength"]);?>" size="40">
+		<?php endif;?>
+ 	 		</TD>
+              </TR>
+              <TR class="table_td1" > 
+                <TD width="60%"> <strong><?php echo $_LANG_SKIN['form_input_contentMaxLength_title'];?>:</strong>
+				
+				</TD>
+                <TD>
+			<?php if(!isset($this->_tpl_vars["setting"]["contentMaxLength"])): ?>
+			<input name="contentMaxLength" type="text" class="button" id="contentMaxLength" value="${_LANG_SKIN['form_input_contentMaxLength_value']}" size="40">
+		<?php else: ?>
+			<input name="contentMaxLength" type="text" class="button" id="contentMaxLength" value="<?php echo htmlspecialchars($this->_tpl_vars["setting"]["contentMaxLength"]);?>" size="40">
+		<?php endif;?>
+ 	 		</TD>
+              </TR>
+              <TR class="table_td1" > 
+                <TD width="60%"> <strong><?php echo $_LANG_SKIN['form_input_filterMode_title'];?>:</strong>
+				
+				</TD>
+                <TD>
+			<?php if(!isset($this->_tpl_vars["setting"]["filterMode"])): ?>
+			<?php
+
+$select_value = "${_LANG_SKIN['form_input_filterMode_value']}";
+ $select_value = 'filterMode'.$select_value; 
+$$select_value = 'checked';?><input type="radio" name="filterMode" value="0" id="filterMode0" <?php echo $filterMode0 ;?>><label for="filterMode0"  ><?php echo $_LANG_SKIN['form_input_filterMode_option_1'];?></label>&nbsp;<input type="radio" name="filterMode" value="1" id="filterMode1" <?php echo $filterMode1 ;?>><label for="filterMode1"  ><?php echo $_LANG_SKIN['form_input_filterMode_option_2'];?></label>&nbsp;<input type="radio" name="filterMode" value="2" id="filterMode2" <?php echo $filterMode2 ;?>><label for="filterMode2"  ><?php echo $_LANG_SKIN['form_input_filterMode_option_3'];?></label>&nbsp;
+
+		<?php else: ?>
+			<?php
+
+$select_value = "{$this->_tpl_vars["setting"]["filterMode"]}";
+ $select_value = 'filterMode'.$select_value; 
+$$select_value = 'checked';?><input type="radio" name="filterMode" value="0" id="filterMode0" <?php echo $filterMode0 ;?>><label for="filterMode0"  ><?php echo $_LANG_SKIN['form_input_filterMode_option_1'];?></label>&nbsp;<input type="radio" name="filterMode" value="1" id="filterMode1" <?php echo $filterMode1 ;?>><label for="filterMode1"  ><?php echo $_LANG_SKIN['form_input_filterMode_option_2'];?></label>&nbsp;<input type="radio" name="filterMode" value="2" id="filterMode2" <?php echo $filterMode2 ;?>><label for="filterMode2"  ><?php echo $_LANG_SKIN['form_input_filterMode_option_3'];?></label>&nbsp;
+
+		<?php endif;?>
+	 		</TD>
+              </TR>
+              <TR class="table_td1" > 
+                <TD width="60%"> <strong><?php echo $_LANG_SKIN['form_input_replaceWord_title'];?>:</strong>
+				
+				</TD>
+                <TD>
+			<?php if(!isset($this->_tpl_vars["setting"]["replaceWord"])): ?>
+			<input name="replaceWord" type="text" class="button" id="replaceWord" value="${_LANG_SKIN['form_input_replaceWord_value']}" size="40">
+		<?php else: ?>
+			<input name="replaceWord" type="text" class="button" id="replaceWord" value="<?php echo htmlspecialchars($this->_tpl_vars["setting"]["replaceWord"]);?>" size="40">
+		<?php endif;?>
+ 	 		</TD>
+              </TR>
+              <TR class="table_td1" > 
+                <TD width="60%"> <strong><?php echo $_LANG_SKIN['form_input_filterWords_title'];?>:</strong>
+								 
+				<br><span style="font-size: 11px; font-family: Tahoma, Verdana, Arial"><?php echo $_LANG_SKIN['form_input_filterWords_description'];?></span>
+				
+				</TD>
+                <TD>
+			<?php if(!isset($this->_tpl_vars["setting"]["filterWords"])): ?>
+			<input name="filterWords" type="text" class="button" id="filterWords" value="${_LANG_SKIN['form_input_filterWords_value']}" size="40">
+		<?php else: ?>
+			<input name="filterWords" type="text" class="button" id="filterWords" value="<?php echo htmlspecialchars($this->_tpl_vars["setting"]["filterWords"]);?>" size="40">
+		<?php endif;?>
+ 	 		</TD>
+              </TR>
+ 
+					   
+		       
+ 
+              <TR class="table_td1"    > 
+                <TD height=30 colSpan=2 align=middle > <INPUT name="submit" type=submit value="<?php echo $_LANG_SKIN_GLOBAL['submit_value'];?>" class="button"> 
+                  &nbsp;&nbsp; <INPUT name="reset" type=reset value="<?php echo $_LANG_SKIN_GLOBAL['reset_value'];?>"  class="button"> 
+                </TD>
+              </TR>
+            </TBODY>
+          </TABLE></TD>
+      </TR></TBODY></form></TABLE>
+<?php include("../sysdata/templates_c/%%c_^@plugins@base@templates@footer.html");?><!--Auto Generated By kTplBuilder 1.0 2006-03-18 17:20:18-->

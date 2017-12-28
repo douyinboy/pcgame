@@ -1,0 +1,328 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<HTML>
+<HEAD>
+<title><?php echo $_LANG_SKIN['chakanxinxi'];?></title>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->_tpl_vars["charset"];?>" />
+<meta name="robots" content="noindex">		
+<link rel='stylesheet' type='text/css' href='../html/style.css' />
+<STYLE type=text/css>
+TD {
+	FONT-SIZE: 12px; COLOR: #000000; FONT-FAMILY: "MS Shell Dlg"
+}
+.tab {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; FONT-SIZE: 12px; PADDING-BOTTOM: 1px; CURSOR: hand; PADDING-TOP: 5px; LETTER-SPACING: 1px
+}
+</STYLE>
+<SCRIPT language=JavaScript>
+
+function tabClick(idx) 
+{
+
+  
+	for (i = 0; i < 4; i++) {
+    
+
+		if (i == idx) {
+
+			var tabImgLeft = eval("document.all.tabImgLeft__" + idx);
+
+			var tabImgRight = eval("document.all.tabImgRight__" + idx);
+      
+			var tabLabel = eval("document.all.tabLabel__" + idx);
+      
+			var tabContent = eval("document.all.tabContent__" + idx);
+
+      
+			tabImgLeft.src = "../html/images/mpc/tab_active_left.gif";
+      
+			tabImgRight.src = "../html/images/mpc/tab_active_right.gif";
+      
+			tabLabel.background = "../html/images/mpc/tab_active_bg.gif";
+      
+			tabContent.style.visibility = "visible";
+      
+			tabContent.style.display = "block";
+     
+		}
+  else {
+			var tabImgLeft = eval("document.all.tabImgLeft__" + i);
+		
+			var tabImgRight = eval("document.all.tabImgRight__" + i);
+		
+			var tabLabel = eval("document.all.tabLabel__" + i);
+		
+			var tabContent = eval("document.all.tabContent__" + i);
+
+		
+			tabImgLeft.src = "../html/images/mpc/tab_unactive_left.gif";
+		
+			tabImgRight.src = "../html/images/mpc/tab_unactive_right.gif";
+		
+			tabLabel.background = "../html/images/mpc/tab_unactive_bg.gif";
+		
+			tabContent.style.visibility = "hidden";
+		
+			tabContent.style.display = "none";
+  
+		
+		}  
+
+	}
+
+
+}
+</script>
+<style type="text/css">
+<!--
+.bigborder {
+	border-top: 0px #FFFFFF;
+	border-right: 1px outset #999999;
+	border-bottom: 1px outset #999999;
+	border-left: 1px solid #FFFFFF;
+}
+-->
+</style>
+
+<TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+
+<TBODY>
+  <TR>
+    <TD style="PADDING-LEFT: 2px; HEIGHT: 22px" 
+    background="../html/images/mpc/tab_top_bg.gif">
+      <TABLE cellSpacing=0 cellPadding=0 border=0>
+        <TBODY>
+        <TR>
+          <TD>
+            <TABLE height=22 cellSpacing=0 cellPadding=0 border=0>
+              <TBODY>
+              <TR>
+                <TD width=3><IMG id=tabImgLeft__0 height=22 
+                  src="../html/images/mpc/tab_active_left.gif" 
+                  width=3></TD>
+                <TD class=tab id=tabLabel__0 onclick=tabClick(0) 
+                background="../html/images/mpc/tab_active_bg.gif" 
+                UNSELECTABLE="on" title="<?php echo $_LANG_SKIN_GLOBAL['yes'];?>ÄÚÈÝ"><label><?php echo $_LANG_SKIN['jiedian'];?>ID</label></TD>
+                <TD width=3><IMG id=tabImgRight__0 height=22 
+                  src="../html/images/mpc/tab_active_right.gif" 
+                  width=3></TD></TR></TBODY></TABLE></TD>
+          <TD>
+            <TABLE height=22 cellSpacing=0 cellPadding=0 border=0>
+              <TBODY>
+              <TR>
+                <TD width=3><IMG id=tabImgLeft__1 height=22 
+                  src="../html/images/mpc/tab_unactive_left.gif" 
+                  width=3></TD>
+                <TD class=tab id=tabLabel__1 onclick=tabClick(1) 
+                background="../html/images/mpc/tab_unactive_bg.gif" 
+                UNSELECTABLE="on"><label><?php echo $_LANG_SKIN['neirongmoxing'];?></label></TD>
+                <TD width=3><IMG id=tabImgRight__1 height=22 
+                  src="../html/images/mpc/tab_unactive_right.gif" 
+                  width=3></TD></TR></TBODY></TABLE></TD>
+           
+				  
+ 	  <TD>
+            <TABLE height=22 cellSpacing=0 cellPadding=0 border=0>
+              <TBODY>
+              <TR>
+                <TD width=3><IMG id=tabImgLeft__2 height=22 
+                  src="../html/images/mpc/tab_unactive_left.gif" 
+                  width=3></TD>
+                <TD class=tab id=tabLabel__2 onclick=tabClick(2) 
+                background="../html/images/mpc/tab_unactive_bg.gif" 
+                UNSELECTABLE="on"><label><?php echo $_LANG_SKIN['mobanbianliang'];?></label></TD>
+                <TD width=3><IMG id=tabImgRight__2 height=22 
+                  src="../html/images/mpc/tab_unactive_right.gif" 
+                  width=3></TD></TR></TBODY></TABLE></TD>
+           
+				  	  
+				  
+		<TD> 
+            <TABLE height=22 cellSpacing=0 cellPadding=0 border=0>
+              <TBODY>
+              <TR>
+                <TD width=3><IMG id=tabImgLeft__3 height=22 
+                  src="../html/images/mpc/tab_unactive_left.gif" 
+                  width=3></TD>
+                <TD class=tab id=tabLabel__3 onclick=tabClick(3)  background="../html/images/mpc/tab_unactive_bg.gif" UNSELECTABLE="on" TITLE="<?php echo $_LANG_SKIN['display_setting_help'];?>"><?php echo $_LANG_SKIN['fabudian'];?></TD>
+                <TD width=3><IMG id=tabImgRight__3 height=22 
+                  src="../html/images/mpc/tab_unactive_right.gif" 
+                  width=3></TD></TR></TBODY></TABLE></TD>
+				  
+				  
+				  </TR></TBODY></TABLE></TD>					  
+				  </TR>
+  <TR>
+    <TD bgcolor="#D6D3CE">
+      <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD 
+          style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; " 
+          vAlign=top class="bigborder" >
+		  
+<!--1-->
+<DIV id=tabContent__0 style="DISPLAY: block; VISIBILITY: visible">
+
+  <table border="0" cellspacing="1" cellpadding="3" width="100%"  align=center class="table_border">
+   
+    <tr > 
+      <td width="50" align="center" class="table_td1">NodeID</td>
+      <td width="50" align="center" class="table_td1"><?php echo $_LANG_SKIN['weiyibiaoshi'];?></td>
+      <td   align="center" class="table_td1"><?php echo $_LANG_SKIN['jiedianmingcheng'];?></td>
+      <td   align="center" class="table_td1"><?php echo $_LANG_SKIN['leixing'];?></td>
+       <td   align="center" class="table_td1"><?php echo $_LANG_SKIN['fabumoshi'];?></td>
+      <td   align="center" class="table_td1">TableID</td>
+     <td  align="center" class="table_td1"> <?php echo $_LANG_SKIN['caozuo'];?></td>
+    </tr>
+   <?php if(!empty($this->_tpl_vars['NODE_LIST'] )): 
+ foreach ($this->_tpl_vars['NODE_LIST'] as  $this->_tpl_vars['var']): ?>
+
+   <tr class="table_td1" onmouseover='this.style.backgroundColor="#FFFFFF"'  onmouseout='this.style.backgroundColor=""' > 
+      <td   align="center"  ><?php echo $this->_tpl_vars["var"]["NodeID"];?></td>
+      <td     ><?php echo $this->_tpl_vars["var"]["NodeGUID"];?></td>
+      <td     >
+	  <?php if(empty($this->_tpl_vars["var"]["ParentID"])): ?>
+	  &nbsp;&nbsp;<?php echo str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;", $this->_tpl_vars["var"]["cHeader"]);?>  - &nbsp;<B><?php echo $this->_tpl_vars["var"]["Name"];?></B>
+	  <?php else: ?>
+	  &nbsp;&nbsp;<?php echo str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;", $this->_tpl_vars["var"]["cHeader"]);?>  - &nbsp;<?php echo $this->_tpl_vars["var"]["Name"];?>
+	  <?php endif;?>
+	  
+	  </td>
+      <td   align="center"  >
+	  	  <?php if($this->_tpl_vars["var"]["NodeType"] == 1): ?>
+	  <?php echo $_LANG_SKIN['shi'];?>
+	  <?php elseif($this->_tpl_vars["var"]["NodeType"] == 2): ?>
+	  <?php echo $_LANG_SKIN['xu'];?>
+	  <?php elseif($this->_tpl_vars["var"]["NodeType"] == 3): ?>
+	  <?php echo $_LANG_SKIN['yingyong'];?>
+ 	  <?php endif;?>
+ </td>
+      <td   align="center"  >
+	  <?php if($this->_tpl_vars["var"]["PublishMode"] == 0): ?>
+	  <?php echo $_LANG_SKIN['bufabu'];?>
+	  <?php elseif($this->_tpl_vars["var"]["PublishMode"] == 1): ?>
+	  <?php echo $_LANG_SKIN['jingtai'];?>
+	  <?php elseif($this->_tpl_vars["var"]["PublishMode"] == 2): ?>
+	  <?php echo $_LANG_SKIN['dongtai'];?>
+ 	  <?php endif;?>
+	  </td>
+      <td   align="center"  ><?php echo $this->_tpl_vars["var"]["TableID"];?></td>
+      <td  align="center"  > <A HREF="admin_extrapublish.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=viewIndex&NodeID=<?php echo $this->_tpl_vars["var"]["NodeID"];?>" target="_blank"><?php echo $_LANG_SKIN['liulan'];?></A></td>
+    </tr>
+
+ 
+
+ <?php endforeach; endif;?>
+     
+  </table>
+
+
+
+
+ 
+</DIV>
+
+
+
+
+
+<!--1-->
+<DIV id=tabContent__1 style="DISPLAY: none; VISIBILITY: hidden">
+  <table border="0" cellspacing="1" cellpadding="3" width="100%"  align=center class="table_border">
+   
+    <tr > 
+      <td width="50" align="center" class="table_td1">TableID</td>
+      <td   align="center" class="table_td1"><?php echo $_LANG_SKIN['neirongmoxingmingchen'];?></td>
+     </tr>
+   <?php if(!empty($this->_tpl_vars['tableInfo'] )): 
+ foreach ($this->_tpl_vars['tableInfo'] as  $this->_tpl_vars['var']): ?>
+
+   <tr class="table_td1" onmouseover='this.style.backgroundColor="#FFFFFF"'  onmouseout='this.style.backgroundColor=""' > 
+      <td   align="center"  ><?php echo $this->_tpl_vars["var"]["TableID"];?></td>
+       <td   align="center"  ><?php echo $this->_tpl_vars["var"]["Name"];?></td>
+     </tr>
+
+ 
+
+ <?php endforeach; endif;?>
+    
+  </table>
+ 
+</DIV>
+
+<!--2-->
+<DIV id=tabContent__2 style="DISPLAY: none; VISIBILITY: hidden">
+  <table border="0" cellspacing="1" cellpadding="3" width="100%"  align=center class="table_border">
+   
+    <tr > 
+      <td width="50" align="center" class="table_td1"><?php echo $_LANG_SKIN['bianliangming'];?></td>
+      <td   align="center" class="table_td1"><?php echo $_LANG_SKIN['bianliangshuoming'];?></td>
+      <td   align="center" class="table_td1"><?php echo $_LANG_SKIN['quanjubianliang'];?></td>
+     </tr>
+   <?php if(!empty($this->_tpl_vars['tplVars'] )): 
+ foreach ($this->_tpl_vars['tplVars'] as  $this->_tpl_vars['var']): ?>
+
+   <tr class="table_td1" onmouseover='this.style.backgroundColor="#FFFFFF"'  onmouseout='this.style.backgroundColor=""' > 
+      <td ><span onclick="prompt('<?php echo $this->_tpl_vars["var"]["VarTitle"];?>','$<?php echo $this->_tpl_vars["var"]["VarName"];?>');" style="cursor:hand" >$<?php echo $this->_tpl_vars["var"]["VarName"];?></a></td>
+       <td><?php echo $this->_tpl_vars["var"]["VarTitle"];?></td>
+       <td align="center">
+<?php if($this->_tpl_vars["var"]["IsGlobal"] == 1): ?>
+	<?php echo $_LANG_SKIN_GLOBAL['yes'];?>
+	<?php else: ?>
+	-
+	<?php endif;?>
+</td>
+     </tr>
+
+ 
+
+ <?php endforeach; endif;?>
+    
+  </table>
+ 
+</DIV>
+
+<DIV id=tabContent__3 style="DISPLAY: none; VISIBILITY: hidden">
+
+  <table border="0" cellspacing="1" cellpadding="3" width="100%"  align=center class="table_border">
+   
+    <tr > 
+      <td width="50" align="center" class="table_td1">PSNID</td>
+      <td   align="center" class="table_td1">PSN<?php echo $_LANG_SKIN['mingchen'];?></td>
+      <td   align="center" class="table_td1"><?php echo $_LANG_SKIN['fabuleixing'];?></td>
+      <td   align="center" class="table_td1">PSN-URL</td>
+     </tr>
+   <?php if(!empty($this->_tpl_vars['psnInfo'] )): 
+ foreach ($this->_tpl_vars['psnInfo'] as  $this->_tpl_vars['var']): ?>
+
+   <tr class="table_td1" onmouseover='this.style.backgroundColor="#FFFFFF"'  onmouseout='this.style.backgroundColor=""' > 
+      <td   align="center"  ><?php echo $this->_tpl_vars["var"]["PSNID"];?></td>
+       <td   align="center"  ><?php echo $this->_tpl_vars["var"]["Name"];?></td>
+
+       <td   align="center"  > 
+
+	   	  <?php if($this->_tpl_vars["var"]["publish_type"] == 'ftp'): ?>
+	   <?php echo $_LANG_SKIN['yuancheng'];?>
+	  <?php else: ?>
+	 <?php echo $_LANG_SKIN['bendi'];?>
+ 	  <?php endif;?>
+</td>
+
+       <td   align="center"  ><?php echo $this->_tpl_vars["var"]["URL"];?></td>
+
+     </tr>
+
+ 
+
+ <?php endforeach; endif;?>
+    
+  </table>
+
+</DIV>
+ </TD>
+       </TR></TBODY></TABLE></TD></TR>
+ </TBODY></TABLE>
+ 
+ 		
+</BODY>
+<?php include("../sysdata/templates_c/%%c_^@skin@admin@footer.html");?>

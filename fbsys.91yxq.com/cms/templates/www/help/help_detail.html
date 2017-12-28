@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="[$91yxq_platform_keywords]" />
+<meta name="description" content="[$91yxq_platform_desc]" />
+<title>[$91yxq_platform_title]-[$NodeInfo.Name]详细</title>
+<link type="text/css" rel="stylesheet" href="[$91yxq_image_url]/css/www/base.css" />
+<link type="text/css" rel="stylesheet" href="[$91yxq_image_url]/css/www/public.css" />
+<link type="text/css" rel="stylesheet" href="[$91yxq_image_url]/css/www/main_pq.css" />
+<script type="text/javascript" src="[$91yxq_image_url]/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="[$91yxq_image_url]/js/jq.foshow.js"></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?40046e537679c6fcc02004afff9e4d2d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+
+<body>
+
+<!---头部-->
+<include file="../public/header.html" />
+
+<!--主内容-->
+<div class="m1200 clearfix">
+	<!--左侧-->
+    <div class="fl w920 mt40">
+    	<div class="m_box2 p50">
+            
+			<div class="list_detail">
+                <h1>[$Title]</h1>
+                <p>作者：[$Author]&nbsp;&nbsp;&nbsp;&nbsp;发布时间：[@date("Y-m-d", $PublishDate)]</p>
+                <a href="[$NodeInfo.URL]" class="return_btn">返回</a>
+            </div>
+            <div class="m_text">
+                [$Content]
+            </div>
+            <div class="page_updown clearfix">
+				
+				<CMS action="LIST" return="list" NodeID="{$NodeID}" Num="1" where="i.PublishDate < {$PublishDate}" orderby="i.PublishDate DESC"/>
+				<if empty($list)>
+                <p class="fl">上一条：<a href="javascript:void(0)">没有了</a></p>
+				<else>
+				<loop name="list" var="var" key="key">
+				<p class="fl">上一条：<a href="[$var.URL]" title="[$var.Title]">[$var.Title]</a></p>
+				</loop>
+				</if>
+				
+				<CMS action="LIST" return="list" NodeID="{$NodeID}" Num="1" where="i.PublishDate > {$PublishDate}" orderby="i.PublishDate ASC"/>
+				<if empty($list)>
+                <p class="fr">下一条：<a href="javascript:void(0)">没有了</a></p>
+				<else>
+				<loop name="list" var="var" key="key">
+				<p class="fr">下一条：<a href="[$var.URL]" title="[$var.Title]">[$var.Title]</a></p>
+				</loop>
+				</if>
+				
+            </div>
+        </div>
+    </div>
+    
+    <!--右侧-->
+    <div class="fr w260 mt40">
+    	<!--推荐活动-->
+        <div class="m_box" id="activity_box">
+        	<script src="[$91yxq_url]/public/activity_box.js"></script>
+        </div>
+        
+        <div class=" mt15"></div>
+		
+        <!--开服列表-->
+        <div class="m_box" id="svr_list_box">
+        	<script src="[$91yxq_url]/public/svr_list_box.js"></script>
+        </div>
+    </div>
+</div>
+
+<!--页脚-->
+<div class="foot clearfix" id="footer_box">
+	<script src="[$91yxq_url]/public/footer.js"></script>
+</div>
+
+</body>
+</html>

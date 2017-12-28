@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{%$chinese_title%}-用户中心-安全中心</title>
+<link type="text/css" rel="stylesheet" href="{%$image_url%}css/www/base.css" />
+<link type="text/css" rel="stylesheet" href="{%$image_url%}css/www/public.css" />
+<link type="text/css" rel="stylesheet" href="{%$image_url%}css/www/main_pq.css" />
+<script type="text/javascript" src="{%$js_url%}jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="{%$js_url%}function.js"></script>
+<script type="text/javascript" src="{%$js_url%}user.js"></script>
+<script type="text/javascript" src="{%$js_url%}reg_check.js"></script>
+<script>
+
+</script>
+</head>
+
+<body>
+   
+<!--导入公共头部文件-->
+{%include file='header.html'%}
+
+<!--主内容-->
+<div class="m1200">
+	<div class="m_box2 mt40 clearfix">
+        <!--左侧导航-->
+        {%include file='user_link.html'%}
+        <!--右侧-->
+        <div class="fr w980">
+        	<div class="p50">
+                <div class="user_hd">
+                	<h2>安全中心</h2>
+                	<div id="myTab1" class="fl user_menu clearfix">
+                        <div class="li_o" href="javascript:void(0);"  onclick="window.location.href='{%$root_url%}user.php?act=passwd'">修改密码</div>
+                        <div class="li_o" href="javascript:void(0);"  onclick="window.location.href='{%$root_url%}user.php?act=security_question'">修改密保</div>
+                        <div class="li_a" href="javascript:void(0);">支付密码</div>
+                    </div>
+                </div>
+
+                <div id="myTab1_Content2">
+                    <div class="user_msg"><i class="user_img icon_prompt"></i>请设置支付密码及验证身份，如未填写身份信息也可在此页面填写！</div>
+                    <form action="" method="post" name="platform" id="platform" onSubmit="return my_platform_submit();">
+                    <ul class="fill_list">
+                        
+                        <input type="hidden" name="stage" value="yes" />
+                        <input type="hidden" id="tn_chk" name="tn_chk" value="0" /><!--真实姓名验证状态值-->
+                        <input type="hidden" id="id_chk" name="id_chk" value="0" /><!--身份证验证状态值-->    
+                        <li><label>真实姓名：</label><input onBlur="reg_check(this,'&amp;action=chk_truename&amp;truename='+this.value,'n_info','真实姓名不能为空！');" type="text" name="truename" id="truename" class="input_t" style="width:258px" /><span class="msg_text" id="n_info">请输入真实姓名</span></li>
+                        <li><label>身份证号码：</label><input onBlur="reg_check(this,'&amp;action=chk_idcard&amp;idcard='+this.value,'id_info','身份证号码不能为空！');" type="text" name="idcard" id="idcard" class="input_t" style="width:258px" /><span class="msg_text" id="id_info">请输入身份证号码</span></li>
+                        {%if $users[29]!=""%}
+                        <li>
+                            <label>原支付密码：</label>
+                            <input id="oldpwd" type="password" name="oldpwd" maxlength="20" onblur="my_passwd_1();" class="input_t" style="width:258px" />
+                            <span class="msg_text" id="o_info">您已经设置支付密码，修改时需要验证原支付密码</span>
+                        </li>
+                        {%/if%}
+                        <li><label>支付密码：</label><input type="text" name="login_pwd" id="login_pwd" class="input_t" style="width:258px" maxlength="20" onblur="my_passwd_2();" /><span class="msg_text" id="p_info">请输入新支付密码</span></li>
+                        <li><label>确认密码：</label><input type="text" name="relogin_pwd" id="relogin_pwd" class="input_t" style="width:258px" maxlength="20" onblur="my_passwd_3();" /><span class="msg_text" id="p_info2">重复新支付密码</span></li>
+                        <li><label>&nbsp;</label><a href="javascript:void(0)" onclick="$('#platform').submit();" class="game_btn2" style="width:290px">确 认</a></li>
+                        
+                    </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--导入公共页脚文件-->
+{%include file='footer.html'%}
+</body>
+</html>

@@ -1,0 +1,30 @@
+<div class="pageContent">
+    <form method="post" action="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=add&callbackType=closeCurrent&navTabId=<{$smarty.get.navTabId}>" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+    <input name="sub" type="hidden" value="1" />
+    <input name="id" type="hidden" value="<{$smarty.get.id}>" />
+    <div class="pageFormContent" layoutH="68">     
+        <div class="unit">
+                <label>组名称：</label>
+                <input type="text" class="required textInput error" value="<{$gInfo.gName}>" name="gName">
+                <span class="info"></span>
+        </div>
+        <div class="unit">
+            <label>组状态：</label>
+                    <select  class="combox" name="gState">
+                        <option value="0" >禁止使用</option>
+                        <option value="1" <{if $gInfo.gState==1}>selected<{/if}>>正常启用</option>
+                    </select>                       
+        </div>
+        <div class="unit">
+                <label>显示权重：</label>
+                <input type="text" class="textInput digits" value="<{$gInfo.px|default:100}>" name="px">
+        </div>
+    </div>
+    <div class="formBar">
+        <ul>
+            <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+            <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+        </ul>
+    </div>
+    </form>
+</div>

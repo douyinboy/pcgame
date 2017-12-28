@@ -1,0 +1,36 @@
+
+<table class="table" width="125%" layoutH="167">
+        <thead>
+            <tr>
+                <th>公会ID</th>
+                <th>公会名</th>
+                <th>充值金额</th>
+                <th>注册人数</th>
+                <th>昨天充值金额</th>
+                <th>昨天注册人数</th>
+                <th>排行日期</th>
+            </tr>
+        </thead>
+        <tbody>
+            <{foreach item=vo from=$data}>
+            <tr target="sid" rel="1">
+                <td><{$vo['agent_id']|default:"--"}></td>
+                <td><{$vo['agentname']|default:"---"}></td>
+                <td><{$vo['paydata']|default:"0"}></td>
+                <td><{$vo['regdata']|default:"0"}></td>
+                <td><{$vo['paydatay']|default:"0"}></td>
+                <td><{$vo['regdatay']|default:"0"}></td>
+                <td><{$date}></td>
+            </tr>
+            <{/foreach}>
+            <tr target="sid" rel="1">
+                <td>合计：</td>
+                <td>--</td>
+                <td><{$hj['paydata']|default:"0"}></td>
+                <td><{$hj['regdata']|default:"0"}></td>
+                <td><{$hj['paydatay']|default:"0"}></td>
+                <td><{$hj['regdatay']|default:"0"}></td>
+                <td>--</td>
+            </tr>
+        </tbody>
+    </table>

@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>91yxq - 登录</title>
+	<link type="text/css" rel="stylesheet" href="http://image.demo.com/css/www/base.css" />
+	<link type="text/css" rel="stylesheet" href="http://image.demo.com/css/www/public.css" />
+	<script type="text/javascript" src="http://image.demo.com/js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="http://www.demo.com/jsLib/login_tips.js"></script>
+	
+	
+	<script type="text/javascript">
+	
+	document.domain = 'demo.com';
+	
+	//写cookie
+	function setCookie(cookieName, cookieValue, seconds) {
+		var expires = new Date();
+		expires.setTime(expires.getTime() + parseInt(seconds)*1000);
+		document.cookie = escape(cookieName) + '=' + escape(cookieValue) + (seconds ? ('; expires=' + expires.toGMTString()) : "") + '; path=/; domain=demo.com;';
+	}
+
+	//获取cookie
+	function getCookie(cname) {
+		var cookie_start = document.cookie.indexOf(cname);
+		var cookie_end = document.cookie.indexOf(";", cookie_start);
+		return cookie_start == -1 ? '' : decodeURI(document.cookie.substring(cookie_start + cname.length + 1, (cookie_end > cookie_start ? cookie_end : document.cookie.length)));
+	}
+	
+	//获取本页面url地址附加的query参数
+	function self_query(arg)
+	{
+		var url = window.location.href;
+		var pos=url.indexOf("?");
+		if(pos==-1){
+			return "";
+		}
+		var query = url.substr(pos+1);  //location.search;
+		if (query != '')
+		{
+			var str,arr,strpos;
+			arr=query.split('&');
+			var i;
+			for (i=0;i<=arr.length-1;i++)
+			{
+				str = arr[i];
+				strpos = str.indexOf(arg);
+				if (strpos==0)
+				return str.replace(arg+"=","");
+			}
+		}
+		return "";
+	}
+	
+	//未登录时，初始化登录表单显示样式
+	function CheckInput(){
+		var save_login = getCookie('save_login')=='1';
+		if(getCookie('last_name') && save_login){
+			$("#SaveLogin").attr("checked","checked");
+			setCookie('save_login',1,86400*365);
+			$('#login_user').val(unescape(getCookie('last_name')).replace("+"," "));
+			$('#login_user').next().removeClass('icon_on').addClass('icon_yes2');
+			//if(getCookie('last_pass')){var tbd = getCookie('last_pass');$('#login_pwd').val(tbd);}
+		}else{
+			$("#SaveLogin").removeAttr("checked");
+			setCookie('save_login',0,86400*365);
+			
+			$('#login_user').val('请输入账号');		
+			$('#login_user').focus(function(){
+				if($(this).val() == '请输入账号'){
+					$(this).val('');
+				}
+				
+			}).blur(function(){
+				if($(this).val() == ''){
+					$(this).val('请输入账号');
+				}
+			}).bind('change keyup',function(){
+				if( $(this).val().length>0 ){
+					$(this).next().hide();
+				}
+				else{
+					$(this).next().show().removeClass('icon_yes2').addClass('icon_on');
+				}
+			});
+			$('#login_pwd').val('');
+			$('#login_pwd').bind('change keyup',function(){
+				if( $(this).val().length>0 ){
+					$(this).next().hide();
+				}
+				else{
+					$(this).next().show().removeClass('icon_yes2').addClass('icon_on');
+				}
+			});
+			
+		}
+	}
+	
+	//登录按钮事件
+	function Login(){
+		
+		var login_user=$("#login_user").val();
+		var login_pwd=$("#login_pwd").val();
+		if( login_user == '' || login_user == '请输入帐号'){
+			login_tips.show_msg('请输入账号！');
+			$("#login_user").focus();
+			return false;
+		}
+		if(login_pwd == ''){
+			login_tips.show_msg('请输入密码！');
+			$("#login_pwd").focus();
+			return false;
+		}
+
+		var url="http://www.demo.com/api/check_login_user.php?act=login";
+		var paras={'login_user':login_user,'login_pwd':login_pwd};
+		$.ajax({
+			type:"POST",
+			url:url,
+			data:paras,
+			dataType : 'json',
+			success: function(data)
+			{
+				switch(data.code){
+					case '01':
+						login_tips.show_msg(data.msg);
+						break;
+					case '02':
+						login_tips.show_verify();
+						break;
+					case '11':
+						login_tips.show_msg('已经登录,请勿重复登录');
+						setTimeout(function(){
+							var forward = decodeURIComponent( self_query('forward') ) ;
+							if( forward ){
+								window.location.href = forward;
+							}
+							else{
+								var topObj = window.top || window.parent ;
+								if( topObj && topObj.popup_login && topObj.popup_login.top_check_login ){
+									topObj.popup_login.top_check_login();
+									topObj.popup_login.close();
+								}
+								else if( topObj ){
+									topObj.location.reload();
+								}
+								else{
+									window.history.back();
+								}
+							}
+						},500);
+						break;
+					case '10':
+						var save_login = $('#SaveLogin').is(':checked');
+						if( save_login ){
+							setCookie('save_login',1,86400*365);
+							setCookie('last_name',login_user,86400*365);
+						}
+						else{
+							setCookie('save_login',0,86400*365);
+							setCookie('last_name','',86400*365);
+						}
+						$('#login_user').next().show().removeClass('icon_on').addClass('icon_yes2');
+						$('#login_pwd').next().show().removeClass('icon_on').addClass('icon_yes2');
+						login_tips.show_msg(data.msg);
+						setTimeout(function(){
+							var forward = decodeURIComponent( self_query('forward') ) ;
+							if( forward ){
+								window.location.href = forward;
+							}
+							else{
+								var topObj = window.top || window.parent ;
+								if( topObj && topObj.popup_login && topObj.popup_login.top_check_login ){
+									topObj.popup_login.top_check_login();
+									topObj.popup_login.close();
+								}
+								else if( topObj ){
+									topObj.location.reload();
+								}
+								else{
+									window.history.back();
+								}
+							}
+						},500);
+						
+						break;
+				}
+			},
+			error:function()
+			{
+				login_tips.show_msg('网络故障，验证失败！');
+				return false;
+			}
+		});
+		return false;
+	}
+	
+	$(function(){
+		//初始化输入框
+		CheckInput();
+		
+		//保存账号按钮绑定事件
+		$('#SaveLogin').click(function(){
+			var SaveLogin = $(this).is(':checked');
+			if( SaveLogin ){
+				setCookie('save_login',1,86400*30);
+			}
+			else{
+				setCookie('save_login',0,86400*30);
+				setCookie('last_name','',86400*30);
+			}
+		});
+		
+		//如果当前页面是iframe嵌套的子页面，则绑定关闭按钮事件
+		if( window.top != window ){
+			$('.popup_close').click(function(){
+				var popup_login,parentObj; 
+				parentObj = window.parent;
+				while( parentObj ){
+					if( parentObj.popup_login ){
+						popup_login = parentObj.popup_login;
+						break;
+					}
+					else{
+						parentObj = parentObj.parent;
+					}
+				}
+				if( popup_login ){
+					popup_login.close();
+				}
+				return false;
+			});
+		}
+		
+		//页面加载，用户名表单获取焦点
+		$('#login_user').focus();
+		
+		//回车立即提交登录
+		$('body').keyup(function(e){
+			if(e.keyCode == 13){
+				Login();
+			}
+		});
+	});
+	</script>
+</head>
+
+<body>
+	
+	<!--用户登录-->
+	<div id="popup_box" class="popup_box login_box" style="display:block;">
+		<!--<a href="javascript:void(0);" class="popup_close" ></a>-->
+		<div class="hd_title"><h2>用户登录</h2></div>
+		<div class="login_m" id="loginform">
+			<ul>
+				<li>
+					<div class="input_box">
+						<label class="imgpq user"></label>
+						<input name="login_user" type="text" id="login_user" value="请输入账号" placeholder="请输入账号" class="text" />
+						<i class="imgpq icon_on" style="display:none;"></i>
+					</div>
+				</li>
+				<li>
+					<div class="input_box">
+						<label class="imgpq cipher"></label>
+						<input name="login_pwd" type="password" id="login_pwd" value="" placeholder="请输入密码" class="text" />
+						<i class="imgpq icon_on" style="display:none;"></i>
+					</div>
+				</li>
+				<li class="pt10 pb10">
+					<a href="http://www.demo.com/help.php?act=getpwd_email" target="_blank" class="fr red">忘记密码</a>
+					<span style="padding:0 10px"><input name="SaveLogin" type="checkbox" id="SaveLogin" ></span>记住账号
+				</li>
+				<li><input name="" type="button" value="登 录" class="game_btn1" style="width:350px" onclick="Login()"></li>
+				<li class="f14 pt20">还没有账号？&nbsp;<a href="http://www.demo.com/turn.php?act=reg" target="_blank" class="red" >立即注册</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="popup_bg" style="display:block;"></div>
+
+</body>
+
+</html>

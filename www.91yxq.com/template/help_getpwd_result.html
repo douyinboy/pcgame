@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>找回密码</title>
+<link type="text/css" rel="stylesheet" href="{%$image_url%}/css/www/base.css" />
+<link type="text/css" rel="stylesheet" href="{%$image_url%}/css/www/public.css" />
+<link type="text/css" rel="stylesheet" href="{%$image_url%}/css/www/main_pq.css" />
+<script type="text/javascript" src="{%$js_url%}jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+	function email_new_pwd_submit()
+	{
+		if( chk_new_pwd() && chk_re_pwd() )
+		$('#FormNewPwd').submit();
+	}
+	
+	function chk_new_pwd(){
+		var $new_pwd = $("#new_pwd");
+		var new_pwd = $.trim($new_pwd.val());
+		$new_pwd.val(new_pwd);
+		
+		var $new_info = $("#new_info");
+		if( new_pwd.length<6 || new_pwd.length>18 ){
+			$new_pwd.addClass("input_error").focus();
+			$new_info.removeClass("msg_text").addClass("msg_warn").html('<i class="imgpq icon_on mr10"></i>确保新密码长度为6-18个字符');
+			return false;
+		}
+		else{
+			$new_pwd.removeClass("input_error");
+			$new_info.removeClass("msg_warn").addClass("msg_text").html('<i class="imgpq icon_yes2 mr10"></i>新密码长度正确');
+			return true;
+		}
+		
+	}
+	
+	function chk_re_pwd(){
+		var $new_pwd = $("#new_pwd");
+		var new_pwd = $.trim($new_pwd.val());
+		$new_pwd.val(new_pwd);
+		
+		var $re_pwd = $("#re_pwd");
+		var re_pwd = $.trim($re_pwd.val());
+		$re_pwd.val(re_pwd);
+		
+		var $re_info = $("#re_info");
+		if( !re_pwd ){
+			$re_pwd.addClass("input_error").focus();
+			$re_info.removeClass("msg_text").addClass("msg_warn").html('<i class="imgpq icon_on mr10"></i>确认密码不能为空');
+			return false;
+		}
+		else if( new_pwd != re_pwd ){
+			$re_pwd.addClass("input_error").focus();
+			$re_info.removeClass("msg_text").addClass("msg_warn").html('<i class="imgpq icon_on mr10"></i>确认密码与新密码不一致');
+			return false;
+		}
+		else{
+			$re_pwd.removeClass("input_error");
+			$re_info.removeClass("msg_warn").addClass("msg_text").html('<i class="imgpq icon_yes2 mr10"></i>确认密码与新密码一致');
+			return true;
+		}
+		
+	}
+	
+</script>
+</head>
+
+<body>
+
+<!--导入公共头部文件-->
+{%include file='header.html'%}
+
+<!--主内容-->
+<div class="m1200">
+	<div class="m_box2 p40 mt40 clearfix" style="min-height:450px">
+        <div class="inner_title">请填写新密码</div>
+		<form action="" method="post" id="FormNewPwd" name="FormNewPwd">
+			<input type="hidden" name="stage" value="yes" />
+			<ul class="fill_list">
+				<li>
+					<label>用户账号：</label>
+					<input type="text" name="user_name" id="user_name" class="input_t" style="width:258px" value="{%$username%}" disabled />
+					<span id="name_info" class="msg_text"></span>
+				</li>
+				<li>
+					<label>新密码：</label>
+					<input type="text" name="new_pwd" id="new_pwd" class="input_t" style="width:258px" onblur="chk_new_pwd()"/>
+					<span id="new_info" class="msg_text">请输入新密码,6-18个字符</span>
+				</li>
+				<li>
+					<label>确认密码：</label>
+					<input type="text" name="re_pwd" id="re_pwd" class="input_t" style="width:258px" onblur="chk_re_pwd()"/>
+					<span id="re_info" class="msg_text">再次输入新密码</span>
+				</li>
+				<li>
+					<label>&nbsp;</label>
+					<a href="javascript:void(0)" class="game_btn2" style="width:290px" onclick="email_new_pwd_submit()">确 认</a>
+				</li>
+			</ul>
+		</form>
+    </div>
+</div>
+
+<!--导入公共页脚文件-->
+{%include file='footer.html'%}
+
+</body>
+</html>

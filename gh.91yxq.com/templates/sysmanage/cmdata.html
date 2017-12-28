@@ -1,0 +1,29 @@
+<div class="pageContent">
+        <form method="post" action="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&callbackType=closeCurrent&navTabId=<{$smarty.get.navTabId}>" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone)">
+        <input name="sub" type="hidden" value="1" />
+        <div class="pageFormContent" layoutH="68">
+			<div class="unit">
+				<label>登录账号：</label>
+				<input class="required" name="account" type="text" size="30" value="<{$data.user_name}>" readonly ="readonly"/>
+			</div>
+                        <div class="unit">
+				<label>原密码：</label>
+                                <input name="oldpass" type="text" size="30" value="" class="required"/>
+			</div>
+                        <div class="unit">
+				<label>新密码：</label>
+				<input name="newpass" type="password" size="30" value="" class="required"/>
+			</div>
+                        <div class="unit">
+				<label>确认新密码：</label>
+				<input name="newpassagain" type="password" size="30" value="" class="required"/>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>

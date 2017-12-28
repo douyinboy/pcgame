@@ -1,0 +1,13 @@
+<?php echo base64_decode("PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0i");?><?php echo $this->_tpl_vars["charset"];?><?php echo base64_decode("Ij8+");?>
+<tree>
+<?php if(!empty($this->_tpl_vars['NodeInfo'] )): 
+ foreach ($this->_tpl_vars['NodeInfo'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+ <?php if($this->_tpl_vars["var"]["haveSon"] == 1 && $this->_tpl_vars["var"]["WorkFlow"] != 0): ?>
+	<tree text="<?php echo htmlspecialchars($this->_tpl_vars["var"]["Name"]);?>" action="admin_contribution.php?op=sId::<?php echo $this->_tpl_vars["sId"];?>;o::list;NodeID::<?php echo $this->_tpl_vars["var"]["NodeID"];?>;type::main"  src="admin_tree.php?op=sId::<?php echo $this->_tpl_vars["sId"];?>;o::contribution_xml;NodeID::<?php echo $this->_tpl_vars["var"]["NodeID"];?>"  target="panelWork" cId="<?php echo $this->_tpl_vars["var"]["NodeID"];?>"  />
+<?php elseif($this->_tpl_vars["var"]["haveSon"] == 1 && $this->_tpl_vars["var"]["WorkFlow"] == 0): ?>
+	<tree text="&lt;FONT COLOR=#CCCCCC&gt;<?php echo htmlspecialchars($this->_tpl_vars["var"]["Name"]);?>&lt;/font&gt;" action=""  src="admin_tree.php?op=sId::<?php echo $this->_tpl_vars["sId"];?>;o::contribution_xml;NodeID::<?php echo $this->_tpl_vars["var"]["NodeID"];?>"  target="panelWork" cId="<?php echo $this->_tpl_vars["var"]["NodeID"];?>"  />
+<?php elseif($this->_tpl_vars["var"]["WorkFlow"] != 0): ?>
+	<tree text="<?php echo htmlspecialchars($this->_tpl_vars["var"]["Name"]);?>" action="admin_contribution.php?op=sId::<?php echo $this->_tpl_vars["sId"];?>;o::list;NodeID::<?php echo $this->_tpl_vars["var"]["NodeID"];?>;type::main"  target="panelWork"  cId="<?php echo $this->_tpl_vars["var"]["NodeID"];?>"  />
+<?php endif;?>
+ <?php endforeach; endif;?>
+</tree>

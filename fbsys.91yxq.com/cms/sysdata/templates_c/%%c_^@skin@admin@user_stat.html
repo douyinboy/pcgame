@@ -1,0 +1,33 @@
+<?php include("../sysdata/templates_c/%%c_^@skin@admin@header.html");?>
+
+  <table border="0" cellspacing="1" cellpadding="4" width="80%"  align=center class="table_border">
+    <tr> 
+      <td colspan="7" class="table_header"><?php echo $_LANG_SKIN['topic'];?> </td>
+    </tr>
+    <tr > 
+      <td align="center" class="table_td1"><?php echo $_LANG_SKIN['username'];?></td>
+      <td align="center" class="table_td1"><?php echo $_LANG_SKIN['group'];?></td>
+      <td width="50" align="center" class="table_td2"><?php echo $_LANG_SKIN['approved'];?></td>
+      <td width="50" align="center" class="table_td2"><?php echo $_LANG_SKIN['throw'];?></td>
+      <td width="50" align="center" class="table_td2"><?php echo $_LANG_SKIN['callback'];?></td>
+      <td width="50" align="center" class="table_td2"><?php echo $_LANG_SKIN['unthrow'];?></td>
+      <td width="50" align="center" class="table_td2"><?php echo $_LANG_SKIN['total'];?></td>
+    </tr>
+<?php if(!empty($this->_tpl_vars['uInfo'] )): 
+ foreach ($this->_tpl_vars['uInfo'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+    <tr > 
+      <td class="table_td1" align="center"><?php echo $this->_tpl_vars["var"]["uName"];?></td>
+        <td class="table_td1" align="center"><?php echo $this->_tpl_vars["var"]["gName"];?></td>
+        <td class="table_td2" align="center"><?php echo $this->_tpl_vars["var"]["ApproveNum"];?></td>
+        <td class="table_td2" align="center"><?php echo $this->_tpl_vars["var"]["ContributionNum"];?></td>
+        <td class="table_td2" align="center"><?php echo $this->_tpl_vars["var"]["CallBackNum"];?></td>
+        <td class="table_td2" align="center"><?php echo $this->_tpl_vars["var"]["NoContributionNum"];?></td>
+        <td class="table_td2" align="center"><?php echo $this->_tpl_vars["var"]["TotalNum"];?></td>
+</tr>
+<?php endforeach; endif;?>
+
+   
+  </table>
+		
+</BODY>
+<?php include("../sysdata/templates_c/%%c_^@skin@admin@footer.html");?>

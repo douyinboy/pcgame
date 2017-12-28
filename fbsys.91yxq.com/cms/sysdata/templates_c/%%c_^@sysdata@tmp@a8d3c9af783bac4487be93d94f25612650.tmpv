@@ -1,0 +1,34 @@
+<?php
+echo '<?php';
+// 优踢哎符八
+?>
+
+$ad_gameurl=array (
+<?php
+ global $PageInfo,$params; 
+ $params = array ( 
+	'action' => "LIST",
+	'return' => "List",
+	'nodeid' => "4",
+	'where' => "c.GameId!='' and c.GameName!='' and c.AdUrl!=''",
+	'orderby' => "c.GameId",
+ ); 
+;
+$this->_tpl_vars['List'] = CMS_LIST($params); 
+    $this->_tpl_vars['PageInfo'] = &$PageInfo;  
+?>
+<?php if(!empty($this->_tpl_vars['List'] )): 
+   foreach ($this->_tpl_vars['List'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+  <?php echo $this->_tpl_vars["var"]["GameId"];?> => 
+  array (
+    'game_id' => <?php echo $this->_tpl_vars["var"]["GameId"];?>,
+    'game_name' => '<?php echo $this->_tpl_vars["var"]["GameName"];?>',
+    'game_root' => '<?php echo $this->_tpl_vars["var"]["GameWeb"];?>',
+    'game_url' => '<?php echo $this->_tpl_vars["var"]["AdUrl"];?>',
+  ),
+<?php endforeach; endif;?>
+);
+
+<?php
+echo '?>';
+?>

@@ -1,0 +1,45 @@
+	<!--{%$act%}-->
+	<div class="location">您当前的位置：<a href="/index.html">首页</a><span class="arrow"> &gt; </span><span class="orange">客服中心</span></div>
+	
+    <!--左块-->
+	<div class="fl w250">
+        <!--用户信息-->
+        <div class="user_img user_info">
+            <div class="avatar"><img id="user_pic" src="http://image.6qwan.com/index2/images/pic01.gif" /></div>
+            <div class="name">{%$username%}</div>
+            <div class="time">上次登录: &nbsp;{%$last_logintime%}</div>
+            <div class="user_btn"><a href="http://pay.6qwan.com" class="btn_cz" target="_blank">游戏充值</a><a href="/my.php?act=info" class="btn_zl">资料完善</a></div>
+        </div>
+		<script>
+			//用户头像
+			(function(){
+				var user_info = unescape(getCookie('userinfo'));
+				var a = user_info.split('|');
+				//var userid = a[0];
+				//$('#user_pic').attr('src','http://bbs.777wan.com/uc_server/avatar.php?uid='+a[0]+'&size=middle');
+				$('#user_pic').attr('src',a[4]);
+			})();
+		</script>
+		
+		
+        <!--用户中心导航-->
+        <ul class="m_box user_nav">
+            <li><a href="/my.php" >个人中心</a></li>
+            <li><a href="/my.php?act=info" >我的资料</a></li>
+            <li><a href="/my.php?act=passwd" >安全中心</a></li>
+            <li><a href="/my.php?act=indulge" >防沉迷设置</a></li>
+            <li style="border-bottom:none"><a href="/help.php?act=question" class="on">问题提交及查询</a></li>
+        </ul>
+        <div class="blank15"></div>
+        
+        <!--客服-->
+        <div class="m_box in_kf">
+        	<div class="img6qwan tpic"></div>
+            <div class="img6qwan time"></div>
+            <div class="text">
+                客服时间（10:00-20:00）<br />
+				客服邮箱：kefu@6qwan.com
+            </div>
+            <a href="http://www15.53kf.com/webCompany.php?arg=10110769&style=1" target="_blank" class="btn_kf">在线咨询</a>
+        </div>
+    </div>

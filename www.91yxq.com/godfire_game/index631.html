@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>魔神变</title>
+		<link rel="stylesheet" type="text/css" href="css/style_common.css"/>
+		<link rel="stylesheet" type="text/css" href="layer/mobile/need/layer.css"/>
+	</head>
+	<body>
+		<!--swf文件背景-->
+		<div class="MainBoxForFlash flashClickEvent" style="z-index:20;">
+        <!--请将flash的高宽设定到行内样式-->
+        <div class="flash_box " style="z-index:10;">
+            <object width="100%" height="100%">
+                <param name="movie" value="flash/hys0306.swf">
+                <param name="quality" value="high">
+                <param name="wmode" value="transparent">
+                <param name="allowScriptAccess" value="always">
+                <embed src="flash/hys0306.swf" width="100%" height="100%" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" wmode="transparent" allowscriptaccess="always">
+            </object>
+        </div>
+    </div>
+      <!--用户名账号登陆-->
+    <div class="pq_yxbox UserRegBox content_wrap" style="z-index: 999;">
+            <div class="pq_fill clearfix content_box">
+                <form style="margin: 0px" action="http://www.91yxq.com/main.php?act=other_reg" method="post">
+                    <input type="hidden" id="other_act" name="action" value="1" />
+                    <input type="hidden" name="game_id" value="1" />
+                    <input type="hidden" name="server_id" value="6" />
+                    <input type="hidden" name="agent_id" value="10009" />
+                    <input type="hidden" name="placeid" value="10055" />
+                    <ul>
+                        <li>
+                            <label>注册账号：</label>
+                            <div class="input_box">
+                                <input name="login_name" type="text" id="login_name" value="" class="input_login" onblur="getHits(this,&#39;n_info&#39;);">
+                                <div id="n_info" class="msg_t">用户名在6-20位之内</div>
+                            </div>
+                        </li>
+                        <li>
+                            <label>密码：</label>
+                            <div class="input_box">
+                                <input name="login_pwd" type="password" id="login_pwd" value="" class="input_login" onblur="checkPwd(this,&#39;pw_info&#39;)">
+                                <div id="pw_info" class="msg_t">请确保密码在6-18个字符</div>
+                            </div>
+                        </li>
+                        <li>
+                            <label>确认密码：</label>
+                            <div class="input_box">
+                                <input name="repeat_pwd" type="password" id="repeat_pwd" value="" class="input_login" onblur="checkRePwd(this,&#39;login_pwd&#39;,&#39;re_info&#39;)">
+                                <div id="re_info" class="msg_t">请再次输入密码</div>
+                            </div>
+                        </li>
+                        <li class="pt10"><label>&nbsp;</label><div class="input_box"><input name="" type="submit" value="" class="game_btn" id="login_login"></div></li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+        <!--<div class="popup_bg"></div>-->
+	</body>
+	
+	<script src="js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+	<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+        $(function () {
+            $('.flashClickEvent').mousedown(function () {
+                $('.UserRegBox').fadeIn(400);
+            });
+            
+        })
+        
+    </script>
+</html>

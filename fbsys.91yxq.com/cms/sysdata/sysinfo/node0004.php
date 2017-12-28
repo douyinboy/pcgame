@@ -1,0 +1,91 @@
+<?php
+//CMS cache file, DO NOT modify me!
+//Created on March 31, 2017, 16:58
+
+$NodeInfo = array (
+  'NodeID' => '4',
+  'NodeGUID' => '91yxq.www.gamelist',
+  'TableID' => '5',
+  'ParentID' => '5',
+  'RootID' => '0',
+  'InheritNodeID' => '0',
+  'NodeType' => '1',
+  'NodeSort' => '0',
+  'Name' => '游戏列表',
+  'ContentPSN' => '{PSN:1}/config',
+  'ContentURL' => '{PSN-URL:1}/config',
+  'ResourcePSN' => '{PSN:2}/rsc',
+  'ResourceURL' => '{PSN-URL:2}/rsc',
+  'PublishMode' => '1',
+  'IndexTpl' => '/www/public/gameSvrData_conf.html',
+  'IndexName' => 'gameSvrData.php',
+  'ContentTpl' => '/www/public/ad_gameurl_conf.html',
+  'ImageTpl' => '',
+  'SubDir' => '',
+  'PublishFileFormat' => 'ad_gameurl.php',
+  'IsComment' => '0',
+  'CommentLength' => NULL,
+  'IsPrint' => '0',
+  'IsGrade' => '0',
+  'IsMail' => '0',
+  'Disabled' => '0',
+  'AutoPublish' => '2',
+  'IndexPortalURL' => 'http://manage.test.com/publish/index.php/{NodeID},{Page}.html',
+  'ContentPortalURL' => 'http://manage.test.com/publish/content.php/{IndexID},{Page}.html',
+  'Pager' => '#default.php',
+  'Editor' => 'default.php',
+  'WorkFlow' => '0',
+  'PermissionManageG' => '',
+  'PermissionManageU' => '',
+  'PermissionReadG' => '',
+  'PermissionReadU' => '',
+  'PermissionWriteG' => '',
+  'PermissionWriteU' => '',
+  'PermissionApproveG' => '',
+  'PermissionApproveU' => '',
+  'PermissionPublishG' => '',
+  'PermissionPublishU' => '',
+  'PermissionInherit' => '0',
+  'show' => '1',
+  'CreationUserID' => '1',
+  'SubNodeID' => '4',
+  'ParentNodeID' => '1%2%5%4',
+  'Nav' => 'a:4:{i:0;a:2:{s:6:"NodeID";s:1:"1";s:4:"Name";s:11:"91yxq游戏";}i:1;a:2:{s:6:"NodeID";s:1:"2";s:4:"Name";s:11:"91yxq平台";}i:2;a:2:{s:6:"NodeID";s:1:"5";s:4:"Name";s:12:"公共部分";}i:3;a:2:{s:6:"NodeID";s:1:"4";s:4:"Name";s:12:"游戏列表";}}',
+  'URL' => 'http://www.demo.com/config/gameSvrData.php',
+  'Navigation' => 
+  array (
+    0 => 
+    array (
+      'NodeID' => '1',
+      'Name' => '91yxq游戏',
+      'URL' => '/index.html',
+      'NodeName' => '91yxq游戏',
+      'NodeURL' => '/index.html',
+    ),
+    1 => 
+    array (
+      'NodeID' => '2',
+      'Name' => '91yxq平台',
+      'URL' => 'http://www.demo.com/index.html',
+      'NodeName' => '91yxq平台',
+      'NodeURL' => 'http://www.demo.com/index.html',
+    ),
+    2 => 
+    array (
+      'NodeID' => '5',
+      'Name' => '公共部分',
+      'URL' => NULL,
+      'NodeName' => '公共部分',
+      'NodeURL' => NULL,
+    ),
+    3 => 
+    array (
+      'NodeID' => '4',
+      'Name' => '游戏列表',
+      'URL' => 'http://www.demo.com/config/gameSvrData.php',
+      'NodeName' => '游戏列表',
+      'NodeURL' => 'http://www.demo.com/config/gameSvrData.php',
+    ),
+  ),
+);
+?>

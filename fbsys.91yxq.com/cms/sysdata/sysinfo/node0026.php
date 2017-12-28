@@ -1,0 +1,91 @@
+<?php
+//CMS cache file, DO NOT modify me!
+//Created on March 31, 2017, 16:58
+
+$NodeInfo = array (
+  'NodeID' => '26',
+  'NodeGUID' => '91yxq.www.public.svrlistbox',
+  'TableID' => '1',
+  'ParentID' => '5',
+  'RootID' => '0',
+  'InheritNodeID' => '0',
+  'NodeType' => '1',
+  'NodeSort' => '0',
+  'Name' => '开服列表框-js',
+  'ContentPSN' => '{PSN:1}/public',
+  'ContentURL' => '{PSN-URL:1}/public',
+  'ResourcePSN' => '',
+  'ResourceURL' => '',
+  'PublishMode' => '1',
+  'IndexTpl' => '/www/public/svr_list_box.js',
+  'IndexName' => 'svr_list_box.js',
+  'ContentTpl' => '',
+  'ImageTpl' => '',
+  'SubDir' => '',
+  'PublishFileFormat' => '',
+  'IsComment' => '0',
+  'CommentLength' => NULL,
+  'IsPrint' => '0',
+  'IsGrade' => '0',
+  'IsMail' => '0',
+  'Disabled' => '0',
+  'AutoPublish' => '2',
+  'IndexPortalURL' => 'http://manage.test.com/publish/index.php/{NodeID},{Page}.html',
+  'ContentPortalURL' => 'http://manage.test.com/publish/content.php/{IndexID},{Page}.html',
+  'Pager' => '#default.php',
+  'Editor' => 'default.php',
+  'WorkFlow' => '0',
+  'PermissionManageG' => '',
+  'PermissionManageU' => '',
+  'PermissionReadG' => '',
+  'PermissionReadU' => '',
+  'PermissionWriteG' => '',
+  'PermissionWriteU' => '',
+  'PermissionApproveG' => '',
+  'PermissionApproveU' => '',
+  'PermissionPublishG' => '',
+  'PermissionPublishU' => '',
+  'PermissionInherit' => '0',
+  'show' => '1',
+  'CreationUserID' => '1',
+  'SubNodeID' => '26',
+  'ParentNodeID' => '1%2%5%26',
+  'Nav' => 'a:4:{i:0;a:2:{s:6:"NodeID";s:1:"1";s:4:"Name";s:11:"91yxq游戏";}i:1;a:2:{s:6:"NodeID";s:1:"2";s:4:"Name";s:11:"91yxq平台";}i:2;a:2:{s:6:"NodeID";s:1:"5";s:4:"Name";s:12:"公共部分";}i:3;a:2:{s:6:"NodeID";s:2:"26";s:4:"Name";s:18:"开服列表框-js";}}',
+  'URL' => 'http://www.demo.com/public/svr_list_box.js',
+  'Navigation' => 
+  array (
+    0 => 
+    array (
+      'NodeID' => '1',
+      'Name' => '91yxq游戏',
+      'URL' => '/index.html',
+      'NodeName' => '91yxq游戏',
+      'NodeURL' => '/index.html',
+    ),
+    1 => 
+    array (
+      'NodeID' => '2',
+      'Name' => '91yxq平台',
+      'URL' => 'http://www.demo.com/index.html',
+      'NodeName' => '91yxq平台',
+      'NodeURL' => 'http://www.demo.com/index.html',
+    ),
+    2 => 
+    array (
+      'NodeID' => '5',
+      'Name' => '公共部分',
+      'URL' => NULL,
+      'NodeName' => '公共部分',
+      'NodeURL' => NULL,
+    ),
+    3 => 
+    array (
+      'NodeID' => '26',
+      'Name' => '开服列表框-js',
+      'URL' => 'http://www.demo.com/public/svr_list_box.js',
+      'NodeName' => '开服列表框-js',
+      'NodeURL' => 'http://www.demo.com/public/svr_list_box.js',
+    ),
+  ),
+);
+?>

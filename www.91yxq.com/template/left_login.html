@@ -1,0 +1,33 @@
+ <!--登录前-->
+ <div class="login" id="login">
+ <p class="login1"><a href="/main.php?act=reg" title="注册游戏帐号">注册游戏帐号</a></p>
+ <form id="loginform" name="loginform" onSubmit="return false;" action="" method="post">
+ <input name="act" type="hidden" id="act" value="1" />
+  <p class="login2"><input type="text" name="login_user" id="login_user" tabindex="1" class="login1a" title="请输入账号" value=" - 请输入账号" onmouseover=this.focus();this.select(); onclick="if(value==defaultValue){value='';this.style.color='#000'}" onBlur="if(!value){value=defaultValue;this.style.color='#999'}" style="color:#999" maxlength="30"/></p>
+ <p class="login3">
+    <input type="text" name="login_pwdTxt" id="login_pwdTxt" tabindex="2" style="color:#999;" class="login1b" value="- 请输入密码" title="- 请输入密码" maxlength="30" onfocus="if(this.value == '- 请输入密码'){document.getElementById('login_pwd').style.display = 'block';document.getElementById('login_pwd').focus();document.getElementById('login_pwdTxt').style.display = 'none';}"/>
+    <input type="password" name="login_pwd" id="login_pwd" tabindex="2" class="login1b" title="- 请输入密码" style="color:#999;display:none" maxlength="30" onblur="if(this.value == ''){document.getElementById('login_pwd').style.display = 'none';document.getElementById('login_pwdTxt').style.display = 'block'; document.getElementById('login_pwdTxt').className='login1b';}"/></p>
+ <div class="login4">
+ <p class="jzname f_l"><label for="denglu"><input type="checkbox" checked="checked" name="denglu" id="denglu" class="jzname1"  value="1" /><span class="f_l">记住用户名</span></label></p>
+  <p class="wjmm f_r"><a href="/help.php?act=getpwd_email">忘记密码?</a></p>
+  <div class="clear"></div>
+  </div>
+ <div class="login5"><input onclick="Login();return false;" name="go" type="submit" value=" " class="login5x" /></div>
+ </form>
+ <div class="clear"></div>
+ </div>
+<!--登录后-->
+ <div class="login_h" id="loginin" style="display:none">
+ <div class="login_h1 f_l"><a href="#"><img id="user_pic" src="/images/touxiang.gif" width="53" height="55" /></a></div>
+ <div class="login_h2 f_l"><p class="login_h2a" id="username">尊敬的,<a href="#">hhr2013</a></p><p>上次登录<br /><label id="login_time"></label></p></div>
+ <div class="login_h3 f_l">
+ 	<p class="login_h3a"><a href="/my.php?act=passwd" title="修改密码"> 修改密码</a></p>
+ 	<p class="login_h3b"><a href="http://pay.6qwan.com" title="游戏充值">游戏充值</a></p>
+ 	<p class="login_h3a"><a href="/my.php" title="用户中心"> 用户中心</a></p>
+ 	<p class="login_h3b"><a href="http://www.6qwan.com/kfzx" title="帮助中心">帮助中心</a></p>
+ 	<div class="clear"></div>
+ </div>
+ <div class="login_h4 f_l"><p class="b5" id="lastgame">暂未登录过游戏,推荐几款给您吧:<br/> <a href="http://www.6qwan.com/fyws" target="_blank">风云无双</a><a href="http://pay.6qwan.com/?game_id=2" target="_blank" style="color:#FFF45C">[充值]</a></p></div>
+ <div class="clear"></div>
+ </div>
+<script type="text/javascript">CheckLogined();</script>

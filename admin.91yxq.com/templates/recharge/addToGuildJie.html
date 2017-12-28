@@ -1,0 +1,79 @@
+<{config_load file="smarty.conf" section="setup"}>
+<div class="pageContent">
+    <div class="pageHeader">
+        <form onsubmit="return dialogSearch(this);" action="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=add&navTabId=<{$smarty.get.navTabId}>" method="post">
+    <input type="hidden" name="access" value="1"/>    
+    <div class="searchBar">
+        <ul class="searchContent">
+            <li><label>选择公会：</label>
+                <select class="combox" name="agentid" id="agentid7">
+                    <option value="0">请选择</option>
+                    <{foreach item=v from =$guildlist}>
+                     <option value="<{$v.id}>" <{if $smarty.post.agentid==$v.id}> selected <{/if}> ><{$v.agentname}></option>
+                     <{/foreach}>
+                 </select>
+                <input type="text" id="search_key7" size="10" class="" value="输入关键字"/>
+             </li>
+             
+            <li>  
+                <label>起始日期：</label>
+                <input type="text" name="start_date" class="date" value="<{$smarty.post.start_date}>" readonly="true"/>
+            </li>
+            <li>  
+                <label>结束日期：</label>
+                <input type="text" name="end_date" class="date" value="<{$smarty.post.end_date}>" readonly="true"/>
+            </li>
+        </ul>
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">开始结算</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+    <form method="post" action="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=add&callbackType=closeCurrent&navTabId=<{$smarty.get.navTabId}>" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <input name="sub" type="hidden" value="1" />
+        <input name="agentid" type="hidden" value="<{$smarty.post.agentid}>" />
+        <input name="start_date" type="hidden" value="<{$smarty.post.start_date}>" />
+        <input name="end_date" type="hidden" value="<{$smarty.post.end_date}>" />
+        <table class="table" width="100%"  layoutH="137">
+            <thead>
+                <tr>
+                    <th width="100">游戏名称</th>
+                    <th width="100">收入（元）</th>
+                    <th width="100">内充(元)</th>
+                    <th width="100">结算金额</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <{foreach item=vo from=$data}>
+                    <tr target="sid" rel="1">
+                    <{if $vo['totalMoney'] !=0 || $vo['innerpay'] !=0}>
+                        <td><{$vo['gamename']}></td>
+                        <td><input name="paymoney[<{$vo['game_id']}>]" class="required readonly" size="14" type="text" value="<{$vo['totalMoney']|default:"0"}>" readonly="true" /> * <{$vo['fanliv']}>% =<{$vo['fanli']}></td>
+                        <td><input name="payinner[<{$vo['game_id']}>]" class="required readonly" size="14" type="text" value="<{$vo['innerpay']|default:"0"}>" readonly="true"/>* 35% =<{$vo['innerpayfl']}></td>
+                        <td><input name="payjie[<{$vo['game_id']}>]" class="required" size="14" type="text" value="<{$vo['jie']|default:"0"}>" /></td>
+                    <{/if}>
+                    </tr>
+                    <{/foreach}>
+                    <tr target="sid" rel="1">
+                        <td>合计：</td>
+                        <td>(流水)<{$hj['totalMoneyAll']}></td>
+                        <td><{$hj['innerpay']}></td>
+                        <td><{floor($hj['jie'])}></td>
+                    </tr>
+            </tbody>
+        </table>
+    <div class="formBar">
+        <ul>
+            <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+            <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+        </ul>
+    </div>
+    </form>
+</div>
+<script >
+var pro_str={ <{foreach item=v from =$guildlist}> "<{$v.id}>":"<{$v.agentname}>", <{/foreach}> };
+search_pro('search_key7','agentid7');
+</script>

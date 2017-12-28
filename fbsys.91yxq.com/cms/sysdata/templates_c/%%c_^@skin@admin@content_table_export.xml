@@ -1,0 +1,33 @@
+<?php echo base64_decode("PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0i");?><?php echo $this->_tpl_vars["charset"];?><?php echo base64_decode("Ij8+");?>
+<ContentTable>
+<version>1.1</version>
+<Name><?php echo htmlspecialchars($this->_tpl_vars["TableInfo"]["Name"]);?></Name>
+<TableID><?php echo $this->_tpl_vars["TableInfo"]["TableID"];?></TableID>
+<Fields>
+<?php if(!empty($this->_tpl_vars['FieldsInfo'] )): 
+   foreach ($this->_tpl_vars['FieldsInfo'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+
+	<Field>
+		<FieldTitle><?php echo htmlspecialchars($this->_tpl_vars["var"]["FieldTitle"]);?></FieldTitle>
+		<FieldName><?php echo htmlspecialchars($this->_tpl_vars["var"]["FieldName"]);?></FieldName>
+		<FieldType><?php echo htmlspecialchars($this->_tpl_vars["var"]["FieldType"]);?></FieldType>
+		<FieldSize><?php echo htmlspecialchars($this->_tpl_vars["var"]["FieldSize"]);?></FieldSize>
+		<FieldInput><?php echo htmlspecialchars($this->_tpl_vars["var"]["FieldInput"]);?></FieldInput>
+		<FieldDefaultValue><?php echo htmlspecialchars($this->_tpl_vars["var"]["FieldDefaultValue"]);?></FieldDefaultValue>
+		<FieldInputFilter><?php echo htmlspecialchars($this->_tpl_vars["var"]["FieldInputFilter"]);?></FieldInputFilter>
+		<FieldInputPicker><?php echo htmlspecialchars($this->_tpl_vars["var"]["FieldInputPicker"]);?></FieldInputPicker>
+		<FieldInputTpl><?php echo htmlspecialchars($this->_tpl_vars["var"]["FieldInputTpl"]);?></FieldInputTpl> 
+		<FieldDescription><?php echo htmlspecialchars($this->_tpl_vars["var"]["FieldDescription"]);?></FieldDescription>
+		<FieldOrder><?php echo htmlspecialchars($this->_tpl_vars["var"]["FieldOrder"]);?></FieldOrder>
+		<FieldListDisplay><?php echo htmlspecialchars($this->_tpl_vars["var"]["FieldListDisplay"]);?></FieldListDisplay>
+		<IsMainField><?php echo htmlspecialchars($this->_tpl_vars["var"]["IsMainField"]);?></IsMainField>
+		<IsTitleField><?php echo htmlspecialchars($this->_tpl_vars["var"]["IsTitleField"]);?></IsTitleField>
+		<FieldSearchable><?php echo htmlspecialchars($this->_tpl_vars["var"]["FieldSearchable"]);?></FieldSearchable>
+		<EnableContribution><?php echo htmlspecialchars($this->_tpl_vars["var"]["EnableContribution"]);?></EnableContribution>
+		<EnableCollection><?php echo htmlspecialchars($this->_tpl_vars["var"]["EnableCollection"]);?></EnableCollection>
+		<EnablePublish><?php echo htmlspecialchars($this->_tpl_vars["var"]["EnablePublish"]);?></EnablePublish> 
+	</Field>
+<?php endforeach; endif;?>
+
+</Fields>
+</ContentTable>

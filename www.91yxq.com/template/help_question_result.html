@@ -1,0 +1,282 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>{%$chinese_title%}-用户中心-问题反馈及查询</title>
+	<link type="text/css" rel="stylesheet" href="{%$image_url%}css/www/base.css" />
+	<link type="text/css" rel="stylesheet" href="{%$image_url%}css/www/public.css" />
+	<link type="text/css" rel="stylesheet" href="{%$image_url%}css/www/main_pq.css" />
+	<script type="text/javascript" src="{%$js_url%}/jquery-1.11.1.min.js"></script>
+	<script src="{%$js_url%}/help.js" type="text/javascript"></script>
+
+	
+	<script>
+		function getDetail(url){
+			
+			$.ajax({
+				url:url,
+				async:false,
+				type:'post',
+				dataType:'json',
+				success:function(data){
+					if( data.status == -1 ){
+						alert(data.info);
+						window.location.href = data.location;
+					}
+					else if( data.status == 0 ){
+						alert(data.info);
+					}else{
+						var html = 
+							'<li>'+
+								'<div class="title"><h3>'+data.qre.title+'</h3><span class="mark_'+(data.qre.state==3?'yes':'no')+'">'+data.qre.qstate+'</span><span class="time fr">时间:'+data.qre.qtime+'</span></div>'+
+								'<div class="text">'+data.qre.content+'</div>'+
+							'</li>';
+						var i;
+						for( var i in data.are){
+							if( data.are[i].rstype ==0 ){
+								html +=
+									'<li class="reply">'+
+										'<div class="title"><h3>客服回复</h3><span class="time fr">时间:'+data.are[i].qtime+'</span></div>'+
+										'<div class="text">'+data.are[i].content+'</div>'+
+									'</li>';
+							}else{
+								html +=
+									'<li >'+
+										'<div class="title"><h3>追加问题</h3><span class="mark_'+(data.are[i].state==3?'yes':'no')+'">'+data.are[i].qstate+'</span><span class="time fr">时间:'+data.are[i].qtime+'</span></div>'+
+										'<div class="text">'+data.are[i].content+'</div>'+
+									'</li>';
+							}
+						}
+						var box = $('#qre_detail_box').show().children('.issue_list');
+						var ul = box.children('ul');
+						ul.html(html);
+						$('#qre_detail_bg').show();
+						$('#qid').val(data.qid);
+						$('#qtitle').val(data.qre.title);
+						//alert(ul.height() + ' ' + box.height() + ' ' + box.scrollTop() +' '+ box.css('padding-top'))
+						box.scrollTop(ul.height() - box.height() - parseInt( box.css('padding-top') ))
+						//alert(ul.height() + ' ' + box.height() + ' ' + box.scrollTop() )
+						//alert(data.info);
+					}
+				},
+				error:function(){
+					alert('请求超时');
+				}
+			});
+			return false;
+		}
+		
+		function closePopup(){
+			$('#qre_detail_box').hide();
+			$('#qre_detail_bg').hide();
+		}
+		
+		function reAsk(){
+			$.ajax({
+				url:'help.php?act=question_result',
+				async:false,
+				type:'post',
+				dataType:'json',
+				data:{qid:$('#qid').val(),stage:'yes',content:$('#qcontent').val(),title:$('#qtitle').val()},
+				success:function(data){
+					if( data.status == -1 ){
+						alert(data.info);
+						window.location.href = data.location;
+					}
+					else if( data.status == 0 ){
+						alert(data.info);
+					}else{
+						var html = 
+							'<li>'+
+								'<div class="title"><h3>'+data.qre.title+'</h3><span class="mark_'+(data.qre.state==3?'yes':'no')+'">'+data.qre.qstate+'</span><span class="time fr">时间:'+data.qre.qtime+'</span></div>'+
+								'<div class="text">'+data.qre.content+'</div>'+
+							'</li>';
+						var i;
+						for( var i in data.are){
+							if( data.are[i].rstype ==0 ){
+								html +=
+									'<li class="reply">'+
+										'<div class="title"><h3>客服回复</h3><span class="time fr">时间:'+data.are[i].qtime+'</span></div>'+
+										'<div class="text">'+data.are[i].content+'</div>'+
+									'</li>';
+							}else{
+								html +=
+									'<li >'+
+										'<div class="title"><h3>追加问题</h3><span class="mark_'+(data.are[i].state==3?'yes':'no')+'">'+data.are[i].qstate+'</span><span class="time fr">时间:'+data.are[i].qtime+'</span></div>'+
+										'<div class="text">'+data.are[i].content+'</div>'+
+									'</li>';
+							}
+						}
+						var box = $('#qre_detail_box').show().children('.issue_list');
+						var ul = box.children('ul');
+						ul.html(html);
+						$('#qre_detail_bg').show();
+						$('#qid').val(data.qid);
+						$('#qtitle').val(data.qre.title);
+						//alert(ul.height() + ' ' + box.height() + ' ' + box.scrollTop() +' '+ box.css('padding-top'))
+						box.scrollTop(ul.height() - box.height() - parseInt( box.css('padding-top') ))
+						//alert(ul.height() + ' ' + box.height() + ' ' + box.scrollTop() )
+						//alert(data.info);
+						$('#qcontent').val('');
+					}
+				},
+				error:function(){
+					alert('请求超时');
+				}
+			});
+			return false;
+		}
+	</script>
+</head>
+
+<body>
+
+<!--反馈详情 弹出层-->
+<div class="popup_box issue_box" id="qre_detail_box" style="display:none;" >
+	<a href="javascript:void(0);" class="popup_close" onclick="closePopup();return false;"></a>
+	<div class="hd_title"><h2>反馈详情</h2></div>
+    <div class="issue_list">
+        <ul>
+            <li>
+                <div class="title"><h3>反馈标题测试测试测试测试测试</h3><span class="mark_yes">已解答</span><span class="time fr">时间:2015-05-19</span></div>
+                <div class="text">详细内容测试详细内容测试详细内容测试详细内容测试详细内容测试详细内容测试详细内容测试详细内容测试详细内容测试详细内容测试</div>
+            </li>
+            <li class="reply">
+                <div class="title"><h3>客服回复</h3><span class="time fr">时间:2015-05-19</span></div>
+                <div class="text">详细内容测试详细内容测试详细内容测试详细内容测试详细内容测试详细内容测试详细内容测试详细内容测试详细内容测试详细内容测试</div>
+            </li>
+            <li>
+                <div class="title"><h3>追加问题</h3><span class="mark_no">未解答</span><span class="time fr">时间:2015-05-19</span></div>
+                <div class="text">详细内容测试详细内容测试详细内容测试详细内容测试详细内容测试详细内容测试详细内容测试详细内容测试详细内容测试详细内容测试</div>
+            </li>
+        </ul>
+    </div>
+    <ul class="issue_fill">
+		<input type="hidden" name="qid" id="qid" />
+		<input type="hidden" name="qtitle" id="qtitle" />
+        <li><span class="f14">追加问题</span></li>
+        <li><textarea name="qcontent" id="qcontent" cols="85" rows="4" class="input_t"></textarea></li>
+        <li><a href="javascript:void(0)" class="game_btn1" onclick="reAsk();return false;">确 认</a></li>
+    </ul>
+</div>
+<div class="popup_bg"  id="qre_detail_bg" style="display:none;"></div>
+<!--弹出遮罩层-->
+
+
+<!--导入公共头部文件-->
+{%include file='header.html'%}
+
+<!--主内容-->
+<div class="m1200">
+	<div class="m_box2 mt40 clearfix">
+		
+		<!--左侧导航-->
+        {%include file='user_link.html'%}
+
+		<!--右块-->
+		<div class="fr w980">
+			<div class="p50">
+				<div class="user_hd">
+                    <h2>问题反馈及查询</h2>
+                    <div id="myTab1" class="fl user_menu">
+                        <a class="li_o" href="./help.php?act=question">问题反馈</a>
+                        <a class="li_a" >我的反馈</a>
+                    </div>
+                </div>
+				
+				
+				{%if 0 and $flage==0%}  
+					{%if $qlist%}       
+						<div class="wclwt">
+						<div class="wclwt1"><p class="wclwt1a">编号</p><p class="wclwt1b">我提出的问题</p><p class="wclwt1c">处理状态</p><p class="wclwt1d">提交时间</p><p class="clear"></p></div>
+						{%section name=i loop=$qlist%}
+						<div class="wclwt2"><p class="wclwt1a">{%$qlist[i].xid%}</p><p class="wclwt1b"><a style="text-decoration:underline;" href="/help.php?act=question_result&qid={%$qlist[i].id%}">{%$qlist[i].title|truncate:10:"……"%}</a></p><p class="wclwt1c">{%$qlist[i].result%}</p><p class="wclwt1d">{%$qlist[i].qtime%}</p><p class="clear"></p></div>
+						{%/section%}
+						<div class="clear"></div>
+						<ul>
+						<li class="new_list_3">
+						<p class="list_3_iput">
+						<select name="" size="1" class="list_3_iput_1">
+						{%section name=loop loop=$pagecount%}
+						<option value="{%$smarty.section.loop.iteration%}" {%if $page eq $smarty.section.loop.iteration%}selected{%/if%}>第{%$smarty.section.loop.iteration%}页</option>
+						{%/section%}
+						</select></p>
+						{%if $page lt $pagecount%}<a href="/help.php?act=question_result&page={%math equation="x+y" x=$page y=1%}">下一页</a>{%/if%}
+						{%if $page gt 1%}<a href="/help.php?act=question_result&page={%math equation="x-y" x=$page y=1%}">上一页</a>{%/if%}
+						<a href="/help.php?act=question_result&page={%$pagecount%}">尾页</a>
+						<a href="/help.php?act=question_result">首页</a>
+						<span>{%$page%}/{%$pagecount%}</span><span>共{%$total%}条记录</span>
+						<div class="clear"></div>
+						</li>
+						</ul>
+						</div>
+					{%else%}
+						<div class="zlts2">您还没有需要处理的问题，<a href="/help.php?act=question">马上提交问题！</a></div>
+					{%/if%}
+				{%/if%}
+				
+
+				
+		{%if $flage==0%}  
+			{%if $qlist%} 
+				<div >
+					<table width="100%" cellspacing="0" cellpadding="0" border="0" class="tab1">
+						<tr>
+							<th width="80">编号</th>
+							<th>标题</th>
+							<th>问题类型</th>
+							<th>处理状态</th>
+							<th>日期</th>
+							<th width="110">操作</th>
+						</tr>
+						{%section name=i loop=$qlist%}
+						<tr>
+							<td>{%$qlist[i].xid%}</td>
+							<td>
+								<a style="text-decoration:underline;" href="javascript:;" onclick="getDetail('./help.php?act=question_result&qid={%$qlist[i].id%}');return false;">{%$qlist[i].title|truncate:10:"……"%}</a>
+							</td>
+							<td>{%$qlist[i].qtype%}</td>
+							<td>
+								<span class="{%if $qlist[i].state==1%}red{%elseif $qlist[i].state==2%}blue{%elseif $qlist[i].state==3%}green{%/if%}">
+									{%$qlist[i].qstate%}
+								</span>
+							</td>
+							<td>{%$qlist[i].qtime%}</td>
+							<td><a href="javascript:;" class="btn1 popup_pq" onclick="getDetail('./help.php?act=question_result&qid={%$qlist[i].id%}');return false;">查看详情</a></td>
+						</tr>
+						{%/section%}
+						
+					</table>
+					
+					<!--翻页-->
+					<div class="page pt20">
+						<a href="{%$prevPage.pageUrl%}" class="updow">&lt;</a>
+						{%foreach from=$pagingList item=page%}
+							{%if $page.pageNo=='...'%}
+								<span>...</span>
+							{%elseif $page.current==1%}
+								<span class="on">{%$page.pageNo%}</span>
+							{%else%}
+								<a href="{%$page.pageUrl%}">{%$page.pageNo%}</a>
+							{%/if%}
+						{%/foreach%}
+						<a href="{%$nextPage.pageUrl%}" class="updow">&gt;</a>
+					</div>
+					
+				</div>
+				
+			{%else%}
+				<div style="padding:20px;font-size:14px;">您还没有需要处理的问题，<a href="./help.php?act=question">马上提交问题！</a></div>
+			{%/if%}
+		{%/if%}
+		
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--导入公共页脚文件-->
+{%include file='footer.html'%}
+
+</body>
+</html>

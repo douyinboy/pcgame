@@ -1,0 +1,10 @@
+#
+# robots.txt for www.demo.com
+#
+
+User-agent: *
+Disallow: /api/
+Disallow: /source/
+Disallow: /template/
+Disallow: /config/
+Disallow: /smarty/

@@ -1,0 +1,85 @@
+<form id="pagerForm" action="" method="post">
+    <input type="hidden" name="access" value="1"/>
+    <input type="hidden" name="pageNum" value="<{$currentpage}>"/>
+    <input type="hidden" name="numPerPage" value="<{$numperpage}>"/>
+    <input type="hidden" name="name" value="<{$smarty.post.name}>"/>
+    <input type="hidden" name="orderField" value="<{$orderField}>" class="orderField_input"/>
+    <input type="hidden" name="orderDesc" value="<{$orderDesc}>" class="orderDesc_input"/>
+</form>
+<div class="pageHeader">
+    <form onsubmit="return navTabSearch(this);" action="" method="post">
+    <input type="hidden" name="access" value="1"/>    
+    <div class="searchBar">
+        <ul class="searchContent">
+            <li>  
+                <label>组名称：</label>
+                <input type="text" name="name" value="<{$smarty.post.name}>"/>
+            </li>
+        </ul>
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="add" title="添加权限组" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=add&navTabId=<{$smarty.get.navTabId}>" height="300" target="dialog" mask="true"><span>新增</span></a></li>
+            <li><a class="edit" title ="编辑权限组" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=add&id={group_id}&navTabId=<{$smarty.get.navTabId}>" height="300" target="dialog" mask="true" warn="您尚未选择要编辑的权限组噢！"><span>编辑</span></a></li>
+            <li><a class="delete" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=del&id={group_id}&navTabId=<{$smarty.get.navTabId}>" target="ajaxTodo" title="您确定要删除该权限组吗？" warn="您尚未选择要删除的组噢！"><span>删除</span></a></li>
+            <li><a title="您确定要删除所选组吗?" target="selectedTodo" rel="ids" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=mult_del&navTabId=<{$smarty.get.navTabId}>" postType="string" warn="您尚未选择要删除的组噢！" class="delete"><span>批量删除</span></a></li>
+        </ul>
+    </div>
+    <table class="table" width="100%"  layoutH="137">
+        <thead>
+        <tr>
+            <th width="22"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
+            <th style="background:#cde;" onclick="sortBy('gId',this)">用户组ID</th>
+            <th>组名称</th>
+            <th style="background:#cde;" onclick="sortBy('cTime',this)">创建时间</th>
+            <th>创建者</th>
+            <th style="background:#cde;" onclick="sortBy('updTime',this)">最后修改时间</th>
+            <th>修改者</th>
+            <th>组&nbsp;状&nbsp;态</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist id="vo" name="list">
+            <{foreach item=vo from=$data name=test}>
+            <tr target="sid" rel="1" style="background-color: <{if $smarty.foreach.test.iteration%2==0}> #eceded;<{/if}>">
+                <td><{if $vo.gId!=1}><input name="ids" value="<{$vo.gId}>" type="checkbox"><{/if}></td>
+                <td><{$vo.gId}></td>
+                <td><{$vo.gName}></td>
+                <td><{$vo['cTime']|date_format:"%Y-%m-%d %H:%I:%S"}></td>
+                <td><{$username[$vo['cUser']]['uName']|default:"--"}></td>
+                <td><{if $vo.updTime >0}><{$vo['updTime']|date_format:"%Y-%m-%d %H:%I:%S"}><{else}>--<{/if}></td>
+                <td><{$username[$vo['updUser']]['uName']|default:"--"}></td>
+                <td><{if $vo.gState==1}>正常开启<{else}>已禁用<{/if}></td>
+                <td>
+                    <a title="编辑用户组信息" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=add&id=<{$vo.gId}>&navTabId=<{$smarty.get.navTabId}>" class="btnEdit"  height="300" target="dialog" mask="true">编辑</a>
+               <{if $vo.gId !=1}>
+                    <a title="编辑组权限" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=editGroupGrant&id=<{$vo.gId}>" height="470" width="905" target="dialog" mask="true" class="btnView">设置组权限</a>
+                    <a title="确定要删除该组吗？" target="ajaxTodo" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=del&id=<{$vo.gId}>&navTabId=<{$smarty.get.navTabId}>" class="btnDel">删除</a>
+                <{/if}>
+                </td>
+            </tr>
+            <{/foreach}>
+        </volist>
+        </tbody>
+    </table>
+    <div class="panelBar">
+        <div class="pages"><span>显示</span>
+            <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                <option <{if $smarty.post.numPerPage==20}>selected<{/if}>  value="20">20</option>
+                <option <{if $smarty.post.numPerPage==50}>selected<{/if}> value="50">50</option>
+                <option <{if $smarty.post.numPerPage==100}>selected<{/if}> value="100">100</option>
+                <option <{if $smarty.post.numPerPage==200}>selected<{/if}> value="200">200</option>
+            </select><span>条，共<{$totalcount}>条</span>
+        </div>
+        <div class="pagination" targetType="navTab" totalCount="<{$totalcount}>" numPerPage="<{$numperpage}>" pageNumShown="10" currentPage="<{$currentpage}>"></div>
+    </div>
+</div>

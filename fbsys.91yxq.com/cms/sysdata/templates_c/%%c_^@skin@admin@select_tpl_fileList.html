@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD> <META HTTP-EQUIV="Pragma" CONTENT="no-cache"> <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> <META HTTP-EQUIV="Expires" CONTENT="0"> 
+<TITLE><?php echo $_LANG_SKIN['topic'];?></TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->_tpl_vars["charset"];?>">
+
+
+</HEAD>
+<style>
+body,tr,td,select {
+	color: #000000;
+	font-size: 12px; font-family: Tahoma, Arial;
+	
+}
+
+div.imagespacer {
+	width: <?php echo $this->_tpl_vars["width"];?>px;
+	height: 20px;
+	text-align: left;			
+	float: left;
+	font: 10pt verdana;
+	margin: 0px;
+	padding:1px;
+	overflow: hidden;
+}
+div.imageholder {
+	margin: 0px;
+	padding: 0px;
+	cursor: default;
+}
+
+div.titleholder {
+	font-family: ms sans serif, arial;
+	font-size: 8pt;
+	width: 100;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;			
+}		
+
+</style>
+<script language="javascript">
+lastDiv = null;
+if('<?php echo $this->_tpl_vars["PATH"];?>' == '/') {
+	var PATH = '';
+
+} else {
+	var PATH = '<?php echo $this->_tpl_vars["PATH"];?>';
+
+}
+function divClick(theDiv,filename) 
+{
+	if (lastDiv) {
+		//lastDiv.style.border = "1 solid #CCCCCC";
+		lastDiv.style.background = "#FFFFFF";
+		lastDiv.style.color = "#000000"
+	}
+	lastDiv = theDiv;
+	//theDiv.style.border = "2 solid #316AC5";
+	theDiv.style.background = "#000066";
+	lastDiv.style.color = "#FFFFFF"
+	parent.document.form1.fileName.value= PATH + '/' + filename
+	//document.getElementById("FileToDelete").value = filename;
+
+}
+
+function opendir(dirname)
+{	
+	PATH = PATH + '/' + dirname;
+	window.location = 'admin_select.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=tpl_list_file&PATH=' + PATH
+}
+
+var message = '<?php echo $this->_tpl_vars["message"];?>'
+switch(message) {
+	case '1':
+		alert("<?php echo $_LANG_SKIN['mkdir_ok'];?>");
+		break;
+	case '2':
+		alert("<?php echo $_LANG_SKIN['mkdir_fail'];?>");
+		break;
+
+}
+</script>	
+
+<body leftmargin="0" topmargin="0" bgColor="#ffffff">
+
+<?php if(!empty($this->_tpl_vars['fileList'] )): 
+ foreach ($this->_tpl_vars['fileList'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+	
+	<?php if($this->_tpl_vars["var"]["type"] == 'dir'): ?>
+	<div class="imagespacer" >
+			<TABLE border="0" cellpadding="0" cellspacing="2">
+			<TR>
+				<TD width=16 height=16><img src="../html/images/icon/<?php echo $this->_tpl_vars["var"]["type"];?>.gif" width="16" height="16" ></TD>
+				<TD>
+				<div   class="imageholder" ondblclick="opendir('<?php echo $this->_tpl_vars["var"]["name"];?>')"  onclick="divClick(this,'<?php echo $this->_tpl_vars["var"]["name"];?>')" ><?php echo $this->_tpl_vars["var"]["name"];?></div>
+				</TD>
+			</TR>
+			</TABLE>	
+	</div>
+	<?php else: ?>
+	<div class="imagespacer" >
+			<TABLE border="0" cellpadding="0" cellspacing="2">
+			<TR>
+				<TD width=16 height=16><img src="../html/images/icon/<?php echo $this->_tpl_vars["var"]["type"];?>.gif" width="16" height="16" ></TD>
+				<TD>
+				<div class="imageholder" ondblclick=""  onclick="divClick(this,'<?php echo $this->_tpl_vars["var"]["name"];?>')" ><?php echo $this->_tpl_vars["var"]["name"];?></div>
+				</TD>
+			</TR>
+			</TABLE>	
+	</div>
+	<?php endif;?>
+
+<?php endforeach; endif;?>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+<div class="user_nav">
+            <div class="imgpq title">用户中心</div>
+            <ul>
+                <li><a href="{%$root_url%}user.php" {%if $act=='index'%}class="on"{%/if%}><i class="dot"></i>个人中心</a></li>
+                <li><a href="{%$root_url%}user.php?act=info" {%if $act=='info'%}class="on"{%/if%}><i class="dot"></i>我的资料</a></li>
+                <li><a href="{%$root_url%}user.php?act=passwd" {%if $act=='passwd' || $act=='security_question'|| $act=='payment_cipher'%}class="on"{%/if%}><i class="dot"></i>安全中心</a></li>
+                <li><a href="{%$root_url%}user.php?act=indulge" {%if $act=='indulge'%}class="on"{%/if%}><i class="dot"></i>防沉迷设置</a></li>
+                <li><a href="{%$root_url%}help.php?act=recharge" {%if $act=='recharge'%}class="on"{%/if%}><i class="dot"></i>充值列表</a></li>
+                <li><a href="{%$root_url%}help.php?act=question" {%if $act=='question' || $act=='question_result'%}class="on"{%/if%}><i class="dot"></i>问题反馈及查询</a></li>
+            </ul>
+        </div>

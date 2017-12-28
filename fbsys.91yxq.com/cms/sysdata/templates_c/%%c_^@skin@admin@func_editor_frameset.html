@@ -1,0 +1,22 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->_tpl_vars["charset"];?>">
+<title><?php echo $_LANG_SKIN['topic'];?>
+(<?php if($this->_tpl_vars['o'] == 'cms_func'): ?>
+<?php echo $_LANG_SKIN['cms_func'];?>
+<?php elseif($this->_tpl_vars['o'] == 'crawler_func'): ?>
+<?php echo $_LANG_SKIN['crawler_func'];?>
+<?php endif;?>
+)</title>
+</head>
+
+<frameset rows="39,0,*" frameborder="NO" border="0" framespacing="0">
+  <frame src="<?php echo $this->_tpl_vars["base_url"];?>o=editor_header" name="topFrame" scrolling="no" noresize >
+  <frame src="" name="actionFrame" scrolling="no" noresize >
+  <frame src="<?php echo $this->_tpl_vars["base_url"];?>o=<?php echo $this->_tpl_vars["o"];?>" name="mainFrame" scrolling="no">
+</frameset>
+<noframes><body>
+
+</body></noframes>
+</html>

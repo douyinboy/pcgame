@@ -1,0 +1,236 @@
+<?php include("../sysdata/templates_c/%%c_^@skin@admin@header_init.html");?>
+<script>
+function returnImg(url)
+{
+
+parent.mainFrame.location = parent.mainFrame.location;
+}
+
+function returnInfo(a, b,c,d) {
+	parent.mainFrame.location = parent.mainFrame.location;
+
+}
+
+function loadBarUnDisplay() {
+	parent.mainFrame.loadBarUnDisplay();
+}
+</script>
+<SCRIPT language=JavaScript>
+var TCID="<?php echo $this->_tpl_vars["CateInfo"]["TCID"];?>";
+function mhHover(tbl, idx, cls)
+{
+	var t, d;
+	if (document.getElementById)
+		t = document.getElementById(tbl);
+	else
+		t = document.all(tbl);
+	if (t == null) return;
+	if (t.getElementsByTagName)
+		d = t.getElementsByTagName("TD");
+	else
+		d = t.all.tags("TD");
+	if (d == null) return;
+	if (d.length <= idx) return;
+	d[idx].className = cls;
+}
+
+function viewQuoteContents(ResourceID)
+{
+	var leftPos = (screen.availWidth-800) / 2
+	var topPos = (screen.availHeight-600) / 2 
+	window.open('<?php echo $this->_tpl_vars["base_url"];?>o=viewQuoteContents&ResourceID='+ ResourceID  ,'','width=500,height=300,scrollbars=yes,resizable=yes,titlebar=0,top=' + topPos + ',left=' + leftPos);
+}
+
+
+ 
+function CheckAll(form)  {
+  for (var i=0;i<form.elements.length;i++)    {
+    var e = form.elements[i];
+    if (e.name != 'chkall' && e.name !='copy')       e.checked = form.chkall.checked; 
+   }
+}
+
+function going(form, o)
+{
+	//document.documentlist.referer.value = document.location;
+
+	with(form) {
+		switch(o) {
+			case 'del':
+				if(confirm("<?php echo $_LANG_SKIN['confirm_multi_del'];?>")) {
+					action = action + '&o=del&multi=1';
+					
+					submit();
+				}
+				break;
+		}
+	}
+}
+
+</script>
+<style>
+body,tr,td,select {
+	color: #000000;
+	font-size: 11px; font-family: Tahoma, Arial;
+	
+}
+
+div.imagespacer {
+	width: <?php echo $this->_tpl_vars["width"];?>;
+	height: 18;
+	text-align: left;			
+	float: left;
+	font: 10pt verdana;
+	margin: 0px;
+	overflow: hidden;
+}
+div.imageholder {
+	margin: 0px;
+	height: 16;
+	padding: 0px;
+	cursor: default;
+}
+
+div.titleholder {
+	font-family: ms sans serif, arial;
+	font-size: 8pt;
+	width: 100;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;			
+}		
+.3d {
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #FFFFFF;
+	border-right-color: #808080;
+	border-bottom-color: #808080;
+	border-left-color: #FFFFFF;
+	background-color: #D4D0C8;
+}
+</style>
+<body   topmargin="0" leftmargin="0"   >
+<script>
+function loadBarDisplay()
+{
+  var x,y;
+   x = document.body.clientWidth;
+   y = document.body.clientHeight;
+
+		var top = (y/2) - 50;
+		var left = (x/2) - 150;
+		if( left<=0 ) left = 10;
+
+	
+	loader.style.left = left + "px"
+	loader.style.top = top + "px";
+
+	loader.style.display='';
+	
+	return;
+
+}
+
+function loadBarUnDisplay()
+{
+	loader.style.display='none';
+
+}
+</script>
+
+<DIV id=loader style="DISPLAY: none; Z-INDEX: 2; LEFT: 0px; POSITION: absolute; TOP: 0px">
+<TABLE class=loader style="FILTER: Alpha(opacity=75)" cellSpacing=1 cellPadding=5 bgColor=#bbbbb summary="Loader Layout" border=0>
+  <TBODY><TR><TD align=left bgColor=#ffffff>
+      <P><IMG style="MARGIN: 3px" height=32   src="../html/images/clocks.gif" width=32 align=left><STRONG><?php echo $_LANG_SKIN_GLOBAL['uploading'];?></STRONG><BR>
+	  <SPAN style="FONT-SIZE: 8pt"><?php echo $_LANG_SKIN_GLOBAL['please_wait_uploading'];?></SPAN></P></TD></TR></TBODY></TABLE>
+</DIV>
+<TABLE border="0" cellpadding="1" cellspacing="0" width=100% >
+  <form method="post" action="<?php echo $this->_tpl_vars["base_url"];?>&TCID=<?php echo $this->_tpl_vars["CateInfo"]["TCID"];?>" name="documentlist" >
+  <tr>
+<td colspan="3"  class="3d" height=15>&nbsp;&nbsp;<?php echo $_LANG_SKIN_GLOBAL['name'];?></td>
+<td class="3d" align=center><?php echo $_LANG_SKIN['attach_size'];?>&nbsp;&nbsp;</td>
+<td class="3d">&nbsp;&nbsp;<?php echo $_LANG_SKIN['creation_time'];?></td>
+<td class="3d">&nbsp;&nbsp;<?php echo $_LANG_SKIN['creation_user'];?></td>
+<td class="3d">&nbsp;&nbsp;<?php echo $_LANG_SKIN_GLOBAL['execute_op'];?></td>
+</tr>
+
+<?php if(!empty($this->_tpl_vars['List'] )): 
+   foreach ($this->_tpl_vars['List'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+		<?php if($this->_tpl_vars['haveLinks'] == 0 && empty($this->_tpl_vars["var"]["IndexID"]) ): ?>
+		<?php elseif($this->_tpl_vars['haveLinks'] == 1 && $this->_tpl_vars["var"]["IndexID"]!=''): ?>
+		<?php elseif($this->_tpl_vars['haveLinks'] == 2 ): ?>
+		<?php else: ?>
+		<?php continue;?>
+		<?php endif;?>
+		<TR onmouseover='this.style.backgroundColor="#F1F1F1"' 
+                    onmouseout='this.style.backgroundColor=""'>
+      <td width=10 >
+<?php if(!empty($this->_tpl_vars["var"]["IndexID"])): ?>
+			<INPUT TYPE="checkbox" NAME="ResourceID[]" value="<?php echo $this->_tpl_vars["var"]["ResourceID"];?>" id="p_<?php echo $this->_tpl_vars["var"]["ResourceID"];?>" disabled>
+			<?php else: ?>
+			 <INPUT TYPE="checkbox" NAME="ResourceID[]" value="<?php echo $this->_tpl_vars["var"]["ResourceID"];?>" id="p_<?php echo $this->_tpl_vars["var"]["ResourceID"];?>">
+			<?php endif;?>
+
+</td>
+				<TD width=16 height=16>
+<?php preg_match("/\.([a-zA-Z0-9]+)$/isU" ,$this->_tpl_vars['var']['Path'], $match); ?>
+ <IMG src="../html/images/icon/<?=$match[1]?>.gif" border=0  width="16" height="16">				
+ 				
+				</TD>
+				<TD>
+
+				 <A HREF="<?php echo $this->_tpl_vars["SYS_ENV"]["ResourcePath"];?>/<?php echo $this->_tpl_vars["var"]["Path"];?>">
+<?php if($this->_tpl_vars["var"]["Title"] == ''): ?>
+			<?php echo $this->_tpl_vars["var"]["Name"];?>
+			<?php else: ?>
+			<?php echo $this->_tpl_vars["var"]["Title"];?>
+			<?php endif;?>
+</a>	<?php if(!empty($this->_tpl_vars["var"]["IndexID"])): ?>
+			<A HREF="javascript:viewQuoteContents('<?php echo $this->_tpl_vars["var"]["ResourceID"];?>')" title="<?php echo $_LANG_SKIN['view_quote_contents'];?>"><img src="../html/images/icon-zone-linked.gif" border="0"  /></A>
+			<?php endif;?>
+
+				</TD>
+				<td align=right>
+			<?php $this->_tpl_vars['size'] = ceil($this->_tpl_vars["var"]["Size"]/1024) ; ?>
+
+<?php echo $this->_tpl_vars["size"];?>KB
+ 
+ 				
+				</td>
+<td>&nbsp;&nbsp;<?php echo date('Y-m-d H:i', $this->_tpl_vars["var"]["ModifiedDate"]);?></td>
+<td>&nbsp;&nbsp;<?php echo $this->_tpl_vars["var"]["CreationUser"];?></td>
+<td>&nbsp;&nbsp;
+<?php if(empty($this->_tpl_vars["var"]["IndexID"])): ?>
+<A HREF="<?php echo $this->_tpl_vars["base_url"];?>o=del&ResourceID=<?php echo $this->_tpl_vars["var"]["ResourceID"];?>" onclick="return confirm('<?php echo $_LANG_SKIN_GLOBAL['confirm_del'];?>');"><?php echo $_LANG_SKIN_GLOBAL['del'];?></A>
+<?php endif;?>
+</td>
+</TR>
+ 
+
+
+<?php endforeach; endif;?>
+   <TR >
+      <td colspan="5" ><input type="checkbox" name="chkall" value="on" onclick="CheckAll(this.form)" id="chkall"  >
+<label for="chkall"><?php echo $_LANG_SKIN_GLOBAL['select_all'];?></label>
+&nbsp;&nbsp;&nbsp;&nbsp;<select name="actionMap" id="actionMap" > 
+  
+
+          <option value="del"><?php echo $_LANG_SKIN_GLOBAL['del'];?></option>
+       
+
+			  </select>
+<INPUT TYPE="hidden" name="referer">
+			  <input type="button" value="<?php echo $_LANG_SKIN_GLOBAL['go'];?>" class=button onclick="going(this.form,actionMap.options[actionMap.selectedIndex].value)"> </td><td align=center><?php echo sprintf($_LANG_SKIN['record'], $this->_tpl_vars["recordInfo"]["currentPage"]  , $this->_tpl_vars["recordInfo"]["pageNum"], $this->_tpl_vars["recordInfo"]["offset"], $this->_tpl_vars["recordInfo"]["from"], $this->_tpl_vars["recordInfo"]["to"], $this->_tpl_vars["recordInfo"]["recordNum"] );?><?php echo $this->_tpl_vars["pagelist"];?>
+</td>
+			</TR>
+ </form>			
+ </table>
+		
+</BODY>
+<?php include("../sysdata/templates_c/%%c_^@skin@admin@footer.html");?>

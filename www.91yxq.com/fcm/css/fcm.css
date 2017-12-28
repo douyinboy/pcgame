@@ -1,0 +1,43 @@
+﻿*{margin:0px; padding:0px;}
+body{font-size:12px;}
+ul,ol,li,p,span,a,h1,h2,h3,h4,h5,h6,img{list-style-type:none; border:none;}
+a{text-decoration:none;}
+
+
+
+/*防沉迷系统*/
+#content{width:100%; background:url(../images/fcm/fcm_head_bg.jpg) top center no-repeat;}
+#head{width:980px; height:346px; overflow:hidden; text-align:center; background:url(../images/fcm/fcm_head.jpg) top center no-repeat; margin:0px auto; position:relative;}
+#main{width:980px; margin:0px auto 10px auto;}
+
+.h_logo{width:220px; height:80px; display:block; position:absolute; top:26px; left:46px;}
+
+.m_left{width:704px; float:left; display:inline;}
+.tips{width:704px;}
+.tips_tit1{height:35px; background:url(../images/fcm/tips_tit01.jpg) no-repeat; padding:15px 0 0 13px;}
+.tips_tit2{height:35px; background:url(../images/fcm/tips_tit02.jpg) no-repeat; padding:15px 0 0 13px;}
+.tips_tit3{height:35px; background:url(../images/fcm/tips_tit03.jpg) no-repeat; padding:15px 0 0 13px;}
+.tips_tit1 a,.tips_tit2 a,.tips_tit3 a{width:119px; height:35px; margin-right:5px; float:left; display:block;}
+.tips_txt{color:#666; padding-top:10px;}
+.tips_txt p{line-height:26px; margin-bottom:10px;}
+.eve{height:163px; line-height:26px; border-bottom:1px solid #ccc; background:url(../images/fcm/dun.jpg) 10px center no-repeat; text-indent:2em; padding:0 20px 0 160px;}
+.strong{color:#333; font-weight:bold; padding:0 10px;}
+.line{border-bottom:1px solid #ccc; padding:0 10px 10px 10px;}
+
+.m_right{width:260px; float:right;}
+.news{width:260px; margin-top:10px;}
+.news_tit{height:29px; line-height:29px; font-size:14px; font-weight:bold; background:url(../images/fcm/tit_bg.jpg) no-repeat; padding:0 10px;}
+.news_txt{border:1px solid #c9ced2; border-top:none; padding:5px 0;}
+.news_txt li{line-height:30px; padding:0 10px;}
+.news_txt li img{vertical-align:middle; margin-right:5px;}
+.news_txt p{line-height:22px; padding:0 10px; margin:0 5px 5px 5px;}
+.news_txt p a{color:#666;}
+.news_txt p a:hover{text-decoration:underline;}
+.news_txt .line{border-bottom:1px dashed #ccc; padding-bottom:5px;}
+
+.f_cp{width:980px; line-height:26px; color:#666; text-align:center; margin:15px auto;}
+.f_cp a{color:#666;}
+
+
+
+

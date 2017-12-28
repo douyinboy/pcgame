@@ -1,0 +1,79 @@
+<form id="pagerForm" action="" method="post">
+    <input type="hidden" name="access" value="1"/>
+    <input type="hidden" name="pageNum" value="<{$currentpage}>"/>
+    <input type="hidden" name="numPerPage" value="<{$numperpage}>"/>
+    <input type="hidden" name="name" value="<{$smarty.post.name}>"/>
+    <input type="hidden" name="aid" value="<{$smarty.post.aid}>"/>
+</form>
+<div class="pageHeader">
+    <form onsubmit="return navTabSearch(this);" action="" method="post">
+    <input type="hidden" name="access" value="1"/>    
+    <div class="searchBar">
+         <ul class="searchContent">
+            
+         </ul>
+        <ul class="searchContent">
+            <li>  
+                <label>起始日期：</label>
+                <input type="text" name="start_date" class="date" value="<{$smarty.post.start_date}>" readonly="true"/>
+                <a class="inputDateButton" href="javascript:;">选择</a>
+            </li>
+            <li>  
+                <label>结束日期：</label>
+                <input type="text" name="end_date" class="date" value="<{$smarty.post.end_date}>" readonly="true"/>
+	        <a class="inputDateButton" href="javascript:;">选择</a>
+            </li>
+           
+        </ul>
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+<div class="pageContent">
+    
+    <table class="table" width="100%"  layoutH="137">
+        <thead>
+        <tr>
+            <th width="80">公会ID</th>
+            <th width="120">公会名称</th>
+            <th width="120">联系QQ</th>
+            <th width="150">开户银行</th>
+            <th width="150">开户人</th>
+            <th width="150">银行账户</th>
+            <th width ="80">注册人数</th>
+            <th width ="80">充值金额</th>
+            <th width="110">入注天数</th>
+        </tr>
+        </thead>
+        <tbody>
+            <{foreach item=vo from=$data}>
+            <tr target="id" rel="<{$vo.id}>">
+                <td><{$vo.id}></td>
+                <td><{$vo.agentname}></td>
+                <td><{$vo.qq|default:"--- ---"}></td>
+                <td><{$vo.bank|default:"--- ---"}></td>
+                <td><{$vo.account_name|default:"--- ---"}></td>
+                <td><{$vo.account|default:"--- ---"}></td>
+                <td><{if $vo.reg_count >0}><{$vo.reg_count}><{else}>0<{/if}></td>
+                <td><{if $vo.pay_total >0}><{$vo.pay_total}><{else}>0<{/if}></td>
+                <td><{if $vo.reg_date >0}><{$vo.reg_date}>天<{else}>0<{/if}></td>
+            </tr>
+            <{/foreach}>
+        </tbody>
+    </table>
+    <div class="panelBar">
+        <div class="pages"><span>显示</span>
+            <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                <option <{if $smarty.post.numPerPage==20}>selected<{/if}>  value="20">20</option>
+                <option <{if $smarty.post.numPerPage==50}>selected<{/if}> value="50">50</option>
+                <option <{if $smarty.post.numPerPage==100}>selected<{/if}> value="100">100</option>
+                <option <{if $smarty.post.numPerPage==200}>selected<{/if}> value="200">200</option>
+            </select><span>条，共<{$totalcount}>条</span>
+        </div>
+        <div class="pagination" targetType="navTab" totalCount="<{$totalcount}>" numPerPage="<{$numperpage}>" pageNumShown="10" currentPage="<{$currentpage}>"></div>
+    </div>
+</div>

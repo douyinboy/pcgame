@@ -1,0 +1,270 @@
+@import url(../css/list.css);
+@import url(../css/product.css);
+body {
+	font-family:verdana, arial, helvetica, sans-serif;
+	color:#666;
+	font-size:9pt;
+	padding:0;
+	margin: 0;
+}
+a{
+	color:#333;
+	text-decoration: none;
+}
+a:hover{
+	color:#999;
+	text-decoration: underline;
+}
+.top{	
+    width:1000px;
+	margin-left:auto;
+	margin-right:auto;
+	overflow:hidden;
+}
+.logo{	
+    width:1000px;
+	height:60px;
+	float:left;
+}
+.navbar{	
+    width:1000px;
+	background: url(../img/product_02.gif);
+	float:left;
+}
+.navbar span{	
+	float:right;
+	padding:3px 50px 0 0;
+}
+.input{
+    border:1px #ccc solid;
+    height:16px;
+	margin:0 10px 0 0;
+}
+.nav{	
+    width:1000px;
+	height:28px;
+	background: url(../img/product_03.gif);
+	float:left;
+}
+.nav ul{
+    margin:0;
+    padding:8px 0 0 22px;
+	list-style-type: none;
+}
+.nav ul li{
+    float:left;
+}
+.nav a{
+    color:#666;
+	text-decoration: none;
+	padding:0 10px 0 0;
+}
+.nav a:hover{
+	color:#000;
+	text-decoration: underline;
+}
+.nav-foot{	
+    width:1000px;
+	height:15px;
+	background: url(../img/product_04.gif);
+	overflow:hidden;
+	float:left;
+}
+.new-nav{	
+    width:1000px;
+	height:35px;
+	background: url(../img/product_05.gif);
+	float:left;
+}
+.new-nav ul{
+    margin:10px 0 0 0;
+	float:right;
+	padding:0 20px 0 0;
+	list-style-type: none;
+}
+.new-nav ul li{
+    float:left;
+	font-size:14px;
+}
+.new-nav a{
+    color:#666;
+	text-decoration: none;
+	padding:0 10px 0 10px;
+	border-right:#666 1px solid;
+}
+.new-nav a:hover{
+    color:#000;
+	text-decoration: underline;
+}
+
+.content {
+	width:1000px;
+	margin:10px auto 10px auto;
+}
+.left {
+	width:676px;
+	float:left;
+}
+.topside01{	
+    width:636px;
+	height:19px;
+	padding:17px 0 0 40px;
+	background: url(../img/product_07.gif);
+	float:left;
+	color:#000;
+}
+.center01{	
+    width:626px;
+	padding:0 20px 0 30px;
+	background: url(../img/product_09.gif);
+	float:left;
+	overflow:hidden;
+}
+.bottomside01{	
+    width:676px;
+	height:21px;
+	background: url(../img/product_13.gif);
+	overflow:hidden;
+	float:left;
+}
+.ad,.ad1{	
+	padding:0 0 0 5px;
+	float:left;
+}
+.ad img{
+    padding:10px 0 10px 5px;
+}
+.ad1 img{
+    padding:0 0 10px 5px;
+}
+.topside02{	
+    width:636px;
+	height:19px;
+	padding:17px 0 0 40px;
+	background: url(../img/product_15.gif);
+	float:left;
+	color:#000;
+}
+.center02{	
+    width:626px;
+	padding:0 20px 0 30px;
+	background: url(../img/product_16.gif);
+	float:left;
+	overflow:hidden;
+}
+.imgages{	
+	float:left;
+}
+.imgages span{
+    display:block;
+	text-align:center;
+}
+.imgages img{
+    border:1px #d2d2d2 dotted;
+	padding:4px;
+	margin:0 0 5px 0;
+}
+.imgages ul{
+    padding:0;
+    margin:0;
+}
+.imgages ul li{
+	float:left;
+	margin:10px 11px 0 0;
+	list-style-type: none;
+}
+.bottomside02{	
+    width:676px;
+	height:24px;
+	background: url(../img/product_17.gif);
+	overflow:hidden;
+	float:left;
+	margin:0 0 10px 0;
+}
+.right {
+	width:320px;
+	float:left;
+	overflow:hidden;
+}
+.right-topside{	
+    width:320px;
+	height:10px;
+	background: url(../img/product_06.gif);
+	overflow:hidden;
+	float:left;
+}
+.right-center{	
+    width:290px;
+	padding:0 15px 0 15px;
+	background: url(../img/product_08.gif);
+	float:left;
+}
+.right-center ul{
+    padding:0;
+    margin:0;
+}
+.right-center ul li{
+	float:left;
+	margin:10px 7px 0 1px;
+	list-style-type: none;
+	white-space: nowrap;
+}
+.title{
+	color:#000;
+	font-size:14px;
+	font-weight: bold;
+	text-decoration: underline;
+    border-top:1px #666 dotted;
+	clear:both;
+	padding:7px 0 8px 0;
+	margin:5px 0 0 0;
+}
+.title1{
+	color:#00a1e7;
+	font-size:14px;
+	font-weight: bold;
+	text-decoration: underline;
+	border-bottom:1px #666 dotted;
+	height:25px;
+}
+.title2{
+	color:#fe9903;
+	font-size:14px;
+	font-weight: bold;
+	text-decoration: underline;
+	border-bottom:1px #666 dotted;
+	height:25px;
+}
+.title3{
+	color:#e6007f;
+	font-size:14px;
+	font-weight: bold;
+	text-decoration: underline;
+	border-bottom:1px #666 dotted;
+	height:25px;
+}
+.title4{
+	color:#1b7e20;
+	font-size:14px;
+	font-weight: bold;
+	text-decoration: underline;
+	border-bottom:1px #666 dotted;
+	height:25px;
+}
+.right-bottomside{	
+    width:320px;
+	height:10px;
+	margin:0 0 10px 0;
+	background: url(../img/product_10.gif);
+	overflow:hidden;
+	float:left;
+}
+.footer {
+	clear: both;
+	margin:10px auto 0 auto;
+	padding:20px;
+	width: 1000px;
+	border-top: 3px solid #ccc;
+	text-align: center;
+	font-size:11px;
+}

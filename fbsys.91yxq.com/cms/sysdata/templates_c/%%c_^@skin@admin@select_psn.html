@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD> <META HTTP-EQUIV="Pragma" CONTENT="no-cache"> <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> <META HTTP-EQUIV="Expires" CONTENT="0"> 
+<TITLE><?php echo $_LANG_SKIN['topic'];?></TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+
+</HEAD>
+<script type="text/javascript" src="../html/helptip.js"></script>
+<link type="text/css" rel="StyleSheet" href="../html/helptip.css" />
+<link type="text/css" rel="StyleSheet" href="../html/style.css" />
+<script language='JavaScript' src='../html/js-gui.js'></script>
+<script language='JavaScript' src='../html/js-form.js'></script>
+<LINK href="../html/xmenu.css" type=text/css rel=stylesheet>
+<SCRIPT src="../html/xmenu.js" type=text/javascript></SCRIPT>
+
+<script src="ui.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=functions.js" type="text/javascript" language="javascript"></script>
+<script language="javascript">
+function psn_backward()
+{	//alert('a')
+			window.history.go(-1);
+}
+
+function psn_updir()
+{
+	var PATH =  workFrame.PATH;
+	var PSNID = document.form1.psn.options[document.form1.psn.selectedIndex].value
+	//alert(PSNID)
+	workFrame.location = 'admin_select.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=psn_list_file&extra=updir&PSNID=' + PSNID + '&PATH=' + PATH
+
+}
+
+function psn_mkdir()
+{
+	var PATH =  document.workFrame.PATH;
+	var PSNID = document.form1.psn.options[document.form1.psn.selectedIndex].value
+
+	var dirname= prompt("<?php echo $_LANG_SKIN['dir_name'];?> ", ""); //showMeDialog("../html/input.php?Title="+encodeURI("<?php echo $_LANG_SKIN['dir_name'];?>"),"color","dialogWidth:300px;dialogHeight:150px;help:0;status:0;scroll:no");
+
+	if(dirname != null && dirname != '') {
+		workFrame.location = 'admin_select.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=psn_mkdir&dirname='+ dirname +'&PSNID=' + PSNID + '&PATH=' + PATH
+	}
+
+
+}
+
+
+</script>
+<body bgcolor="#D6D3CE" STYLE="margin:0pt;padding:0pt;border: 1px buttonhighlight;" onload="workFrameReload()">
+<table width="100%" border="0" cellspacing="5">
+  <form name="form1" method="post" action="">
+    <tr> 
+      <td colspan="3" align="right"><table width="100%" border="0" cellspacing="0">
+          <tr>
+            <td width="10%"><?php echo $_LANG_SKIN['search'];?>:</td>
+            <td  width="200"><select name="psn" id="select" onchange="if(this.options[this.selectedIndex].value != ''){
+workFrame.location=('admin_select.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=psn_list_file&PSNID='+this.options[this.selectedIndex].value);
+} ">                 <option value=""><?php echo $_LANG_SKIN['please_select_psn'];?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+
+			<?php if(!empty($this->_tpl_vars['psnList'] )): 
+ foreach ($this->_tpl_vars['psnList'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+				<?php if($this->_tpl_vars['PSNID'] == $this->_tpl_vars["var"]["PSNID"]): ?>
+			   <option value="<?php echo $this->_tpl_vars["var"]["PSNID"];?>" selected>[ <?php echo $this->_tpl_vars["var"]["Name"];?> ]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+				<?php else: ?>
+			   <option value="<?php echo $this->_tpl_vars["var"]["PSNID"];?>">[ <?php echo $this->_tpl_vars["var"]["Name"];?> ]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+				<?php endif;?>
+			<?php endforeach; endif;?>
+              </select></td>
+            <td align=left ><script src="../html/psn_icon.js"></script></td>
+          </tr>
+        </table>
+        
+      </td>
+    </tr>
+    <tr> 
+      <td colspan="3" align="center">
+<Iframe name=workFrame  frameborder=1 class=button style="width:100%;height:134;" src="" > 
+                </Iframe> </td>
+    </tr>
+    <tr> 
+      <td width="18%"><?php echo $_LANG_SKIN['path_name'];?>:</td>
+      <td width="59%"><input name="fileName" type="text" size="36">
+        <input name="selectPSN" type="hidden" id="selectPSN"></td>
+      <td width="20%"><input type="button" name="Submit" value="  <?php echo $_LANG_SKIN_GLOBAL['ok'];?>  " onclick="window.returnValue = document.form1.psn.options[document.form1.psn.selectedIndex].value + '}' + fileName.value ;window.close();"></td>
+    </tr>
+    <tr> 
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td><input type="button" name="Submit2" value="  <?php echo $_LANG_SKIN_GLOBAL['cancel'];?>  " onclick='window.close();'></td>
+    </tr>
+  </form>
+</table>
+
+</body>
+</html>
+<script language="javascript">
+function workFrameReload() {
+	var PSNID = '<?php echo $this->_tpl_vars["PSNID"];?>';
+	var PATH = '<?php echo $this->_tpl_vars["psn_path"];?>';
+	if(PSNID != '') {
+		//alert(PSNID);
+		document.form1.fileName.value = PATH + '/<?php echo $this->_tpl_vars["default_name"];?>';
+		workFrame.location = 'admin_select.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=psn_list_file&default_name=<?php echo $this->_tpl_vars["default_name"];?>&PSNID=' + PSNID + '&PATH=' + PATH
+		//workFrame.location.reload()
+
+	}
+}
+
+</script>

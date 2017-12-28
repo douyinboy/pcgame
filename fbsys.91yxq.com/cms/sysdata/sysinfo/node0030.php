@@ -1,0 +1,91 @@
+<?php
+//CMS cache file, DO NOT modify me!
+//Created on March 31, 2017, 16:58
+
+$NodeInfo = array (
+  'NodeID' => '30',
+  'NodeGUID' => '91yxq.www.public.gametheme',
+  'TableID' => '4',
+  'ParentID' => '5',
+  'RootID' => '0',
+  'InheritNodeID' => '0',
+  'NodeType' => '1',
+  'NodeSort' => '0',
+  'Name' => '数据字典-游戏题材',
+  'ContentPSN' => '',
+  'ContentURL' => '',
+  'ResourcePSN' => '',
+  'ResourceURL' => '',
+  'PublishMode' => '1',
+  'IndexTpl' => NULL,
+  'IndexName' => NULL,
+  'ContentTpl' => NULL,
+  'ImageTpl' => NULL,
+  'SubDir' => NULL,
+  'PublishFileFormat' => NULL,
+  'IsComment' => '0',
+  'CommentLength' => NULL,
+  'IsPrint' => '0',
+  'IsGrade' => '0',
+  'IsMail' => '0',
+  'Disabled' => '0',
+  'AutoPublish' => '2',
+  'IndexPortalURL' => 'http://manage.test.com/publish/index.php/{NodeID},{Page}.html',
+  'ContentPortalURL' => 'http://manage.test.com/publish/content.php/{IndexID},{Page}.html',
+  'Pager' => '#default.php',
+  'Editor' => 'default.php',
+  'WorkFlow' => '0',
+  'PermissionManageG' => NULL,
+  'PermissionManageU' => NULL,
+  'PermissionReadG' => NULL,
+  'PermissionReadU' => NULL,
+  'PermissionWriteG' => NULL,
+  'PermissionWriteU' => NULL,
+  'PermissionApproveG' => NULL,
+  'PermissionApproveU' => NULL,
+  'PermissionPublishG' => NULL,
+  'PermissionPublishU' => NULL,
+  'PermissionInherit' => NULL,
+  'show' => '1',
+  'CreationUserID' => '1',
+  'SubNodeID' => '30',
+  'ParentNodeID' => '1%2%5%30',
+  'Nav' => 'a:4:{i:0;a:2:{s:6:"NodeID";s:1:"1";s:4:"Name";s:11:"91yxq游戏";}i:1;a:2:{s:6:"NodeID";s:1:"2";s:4:"Name";s:11:"91yxq平台";}i:2;a:2:{s:6:"NodeID";s:1:"5";s:4:"Name";s:12:"公共部分";}i:3;a:2:{s:6:"NodeID";s:2:"30";s:4:"Name";s:25:"数据字典-游戏题材";}}',
+  'URL' => '/',
+  'Navigation' => 
+  array (
+    0 => 
+    array (
+      'NodeID' => '1',
+      'Name' => '91yxq游戏',
+      'URL' => '/index.html',
+      'NodeName' => '91yxq游戏',
+      'NodeURL' => '/index.html',
+    ),
+    1 => 
+    array (
+      'NodeID' => '2',
+      'Name' => '91yxq平台',
+      'URL' => 'http://www.demo.com/index.html',
+      'NodeName' => '91yxq平台',
+      'NodeURL' => 'http://www.demo.com/index.html',
+    ),
+    2 => 
+    array (
+      'NodeID' => '5',
+      'Name' => '公共部分',
+      'URL' => NULL,
+      'NodeName' => '公共部分',
+      'NodeURL' => NULL,
+    ),
+    3 => 
+    array (
+      'NodeID' => '30',
+      'Name' => '数据字典-游戏题材',
+      'URL' => '/',
+      'NodeName' => '数据字典-游戏题材',
+      'NodeURL' => '/',
+    ),
+  ),
+);
+?>

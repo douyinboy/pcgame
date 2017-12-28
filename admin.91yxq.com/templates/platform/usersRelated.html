@@ -1,0 +1,99 @@
+<form id="pagerForm" action="" method="post">
+    <input type="hidden" name="access" value="1"/>
+    <input type="hidden" name="pageNum" value="<{$currentpage}>"/>
+    <input type="hidden" name="numPerPage" value="<{$numperpage}>"/>
+    
+    <input type="hidden" name="name" value="<{$smarty.post.name}>"/>
+    <input type="hidden" name="agentid" value="<{$smarty.post.agentid}>"/>
+    <input type="hidden" name="placeid" value="<{$smarty.post.placeid}>"/>
+    <input type="hidden" name="start_date" value="<{$smarty.post.start_date}>"/>
+    <input type="hidden" name="end_date" value="<{$smarty.post.end_date}>"/>
+</form>
+<div class="pageHeader">
+    <form onsubmit="return navTabSearch(this);" action="" method="post">
+    <input type="hidden" name="access" value="1"/>    
+    <div class="searchBar">
+        <ul class="searchContent">
+            <li><label>公会：</label>
+                       <select class="combox" name="agentid" id="agentid22" ref="w_combox_hesid2143" refUrl="?action=sysmanage&opt=getMembers&agentid={value}">
+                           <option value="0">请选择</option>
+                           <{foreach item=v from =$guildlist}>
+                                <option value="<{$v.id}>" <{if $smarty.post.agentid==$v.id}> selected <{/if}> ><{$v.agentname}></option>
+                                <{/foreach}>
+                            </select>
+                <input type="text" id="search_key22" size="10" class="" value="输入关键字"/>
+                   
+                </li>
+                <li>  
+                    <label>工会成员：</label>
+                     <select class="combox" name="placeid" id="w_combox_hesid2143">
+                            <option value ="0" selected>请选择</option>
+                             <{foreach item=v from =$guildmembers}>
+                            <option value="<{$v.site_id}>" <{if $smarty.post.placeid==$v.site_id}>selected<{/if}> ><{$v.sitename}></option>
+                            <{/foreach}>
+                            </select>
+                </li>
+                
+		</ul>
+        <ul class="searchContent">
+            <li>  
+                    <label>注册起始日期：</label>
+                    <input type="text" name="start_date" class="date" value="<{$smarty.post.state_date}>" readonly="true"/>
+				<a class="inputDateButton" href="javascript:;">选择</a></li>
+                <li>  
+                    <label>注册结束日期：</label>
+                    <input type="text" name="end_date" class="date" value="<{$smarty.post.end_date}>" readonly="true"/>
+                </li>
+            <li><label>玩家账号：</label>  <input type="text" name="name" value="<{$smarty.post.name}>">	</li>
+            </ul>
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%"  layoutH="137">
+        <thead>
+            <tr>
+                <th>用户ID</th>
+                <th>玩家账号</th>
+                <th>所属公会</th>
+                <th>公会成员ID</th>
+                <th>注册时间</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <volist id="vo" name="list">
+                <{foreach item=vo from=$data}>
+                <tr target="sid" rel="1">
+                    <td><{$vo['uid']}></td>
+                    <td><{$vo['user_name']}></td>
+                    <td><{$vo['agentname']|default:"---"}></td>
+                    <td><{$vo['place_id']}></td>
+                    <td><{$vo['reg_time']|date_format:"%Y-%m-%d %H:%I:%S"}></td>
+                    <td><{if $vo['agent_id'] ==100}><a title="确定要将该用户还原到原来的渠道吗？" target="ajaxTodo" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=jie&id=<{$vo.uid}>&navTabId=<{$smarty.get.navTabId}>" class="">还原来源</a><{else}><a title="确定要将该用户绑定到平台吗？" target="ajaxTodo" href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=qie&id=<{$vo.uid}>&navTabId=<{$smarty.get.navTabId}>" class="">绑到平台</a><{/if}></td>
+                </tr>
+                <{/foreach}>
+            </volist>
+        </tbody>
+    </table>
+    <div class="panelBar">
+        <div class="pages"><span>显示</span>
+            <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                <option <{if $smarty.post.numPerPage==20}>selected<{/if}>  value="20">20</option>
+                <option <{if $smarty.post.numPerPage==50}>selected<{/if}> value="50">50</option>
+                <option <{if $smarty.post.numPerPage==100}>selected<{/if}> value="100">100</option>
+                <option <{if $smarty.post.numPerPage==200}>selected<{/if}> value="200">200</option>
+            </select><span>条，共<{$totalcount}>条</span>
+        </div>
+        <div class="pagination" targetType="navTab" totalCount="<{$totalcount}>" numPerPage="<{$numperpage}>" pageNumShown="10" currentPage="<{$currentpage}>"></div>
+    </div>
+</div>
+<script>
+    var pro_str={ <{foreach item=v from =$guildlist}> "<{$v.id}>":"<{$v.agentname}>", <{/foreach}> };
+    search_pro('search_key22','agentid22');
+</script>

@@ -1,0 +1,95 @@
+@charset "utf-8";
+*{ margin:0px; padding:0px;}
+.turn_reg_log{
+	font-size:20px;
+	color:#ff0000;
+	text-decoration:underline;
+}
+a:link,a:visited,a:hover{
+	color:#ff0000;
+	text-decoration:underline;
+}
+body {
+	background-color: #000;
+  font-size:12px; color:#fff;
+  margin:0px auto;
+}
+.white {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #FFFFFF;
+}
+.a { padding:0 0 0 16px;}
+.mine{ height:700px; left:0px; top:0px; position:absolute; width:1400px; z-index:0;}
+
+#STYLE3 {
+	color: #fff;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.Layer2 {
+	position:relative;
+	width:1400px;
+	height:700px;
+	margin:0px auto;
+
+}
+.Layer1 {
+    background-image:url(adImages/image.png);
+	background-position:0px 0px;
+	position:absolute;
+    z-index:103;
+	width:511px;
+	height:280px;
+	padding-top:35px;
+	display:block;
+	 font-size:14px;
+	color:#fff;
+	top:190px;
+	left:470px;
+	font-weight:bold;
+	line-height:24px;
+
+}
+.Layer1 table{ line-height:51px;}
+.Layer1 span{ color:#fff; font-size:12px; font-weight:normal;}
+.Layer1 table td{ margin:0px; padding:0px;}
+.Layer1 table td .i1{ width:150px; height:24px;border:1px solid #fff}
+.dm_input{ width:167px; height:58px; border:0px; background-image:url(adImages/button.jpg); margin-left:113px; display:block;}
+.dm_input2{ width:167px; height:58px; border:0px; background-image:url(adImages/button2.jpg); margin-left:113px; display:block;}
+.Layer3 {
+    background-image:url(adImages/image_log.png);
+	background-position:0px 0px;
+	position:absolute;
+    z-index:103;
+	width:511px;
+	height:280px;
+	padding-top:35px;
+	display:block;
+	 font-size:14px;
+	color:#fff;
+	top:190px;
+	left:470px;
+	font-weight:bold;
+	line-height:24px;
+
+}
+#btn_click{
+	border:0;
+	color: #fff;
+    display: block;
+    height: 40px;
+    left: 540px;
+    line-height: 54px;
+    padding-top: 30px;
+    position: absolute;
+    top: 200px;
+    width: 140px;
+    z-index: 104;
+}
+
+.Layer3 table{ line-height:51px;}
+.Layer3 span{ color:#fff; font-size:12px; font-weight:normal;}
+.Layer3 table td{ margin:0px; padding:0px;}
+.Layer3 table td .i1{ width:150px; height:24px;border:1px solid #fff}

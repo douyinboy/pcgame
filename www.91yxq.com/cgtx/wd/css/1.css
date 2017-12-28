@@ -1,0 +1,61 @@
+@charset "gb2312";
+/*°ó¶¨ÕËºÅµ¯¿òÑùÊ½*/
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	font:12px "Î¢ÈíÑÅºÚ";
+	overflow-x:hidden;
+}
+.bg {
+	width: 100%;
+}
+h4, h5, h6 {
+	font-size: 14px;
+}
+ul, ol {
+	list-style: none;
+	display: block;
+}
+input, select, textarea {
+	font-size: 12px;
+	font-family: "microsoft yahei";
+	color: #555;
+}
+em, i, address {
+	font-style: normal;
+}
+a img {
+	border: 0;
+}
+  
+/*ÐÂÔö¼ÓÕËºÅµÇÂ¼ÑùÊ½*/
+
+.userbox-third {
+	display: none;
+	height: 24px;
+	line-height: 24px;
+	padding-top: 5px;
+}
+.userbox-third span {
+	display: block;
+	float: left;
+	font-family: "Î¢ÈíÑÅºÚ";
+}
+.third-logo-qq {
+	background-position: 0 0;
+}
+.third-logo {
+	background-image: url("./third-logo-24.png");
+	display: inline;
+	height: 24px;
+	width: 24px;
+}
+.third-logo-wechat {
+	background-position: 0 -40px;
+}
+.userbox-third a {
+	float: left;
+	margin: 0 10px;
+}

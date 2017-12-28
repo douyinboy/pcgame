@@ -1,0 +1,195 @@
+<?php include("../sysdata/templates_c/%%c_^@skin@admin@header_init.html");?>
+<style>
+ 
+div.imagespacer {
+	width: 110;
+	height: 156;
+	text-align: center;			
+	float: left;
+	font: 10pt verdana;
+	margin: 5px;
+	overflow: hidden;
+}
+div.imageholder {
+	margin: 0px;
+	padding: 0px;
+	border: 1 solid #CCCCCC;
+ 	width: 100;
+	height: 100;
+}
+
+div.titleholder {
+	font-family: ms sans serif, arial;
+	font-size: 8pt;
+	width: 110;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;			
+}		
+
+</style>
+<script language=javascript src="../html/mouse_up.js"></script>
+
+<script language="javascript">
+<!--
+function CheckAll(form)  {
+  for (var i=0;i<form.elements.length;i++)    {
+    var e = form.elements[i];
+    if (e.name != 'chkall' && e.name !='copy')       e.checked = form.chkall.checked; 
+   }
+  }
+
+//-->
+
+function viewQuoteContents(ResourceID)
+{
+	var leftPos = (screen.availWidth-800) / 2
+	var topPos = (screen.availHeight-600) / 2 
+	window.open('<?php echo $this->_tpl_vars["base_url"];?>o=viewQuoteContents&ResourceID='+ ResourceID  ,'','width=500,height=300,scrollbars=yes,resizable=yes,titlebar=0,top=' + topPos + ',left=' + leftPos);
+}
+
+
+function going(form, o)
+{
+	//document.documentlist.referer.value = document.location;
+
+	with(form) {
+		switch(o) {
+			case 'del':
+				if(confirm("<?php echo $_LANG_SKIN['confirm_multi_del'];?>")) {
+					action = action + '&o=del&multi=1';
+					
+					submit();
+				}
+				break;
+		}
+	}
+}
+
+lastDiv = null;
+function divClick(theDiv,filename) {
+	if (lastDiv) {
+		lastDiv.style.border = "1 solid #CCCCCC";
+	}
+	lastDiv = theDiv;
+	theDiv.style.border = "2 solid #316AC5";
+	
+	document.getElementById("FileToDelete").value = filename;
+
+}
+function gotoFolder(rootfolder,newfolder) {
+	window.navigate("ftb.imagegallery.aspx?frame=1&rif=" + rootfolder + "&cif=" + newfolder);
+}		
+function returnImage(imagename,width,height) {
+	var arr = new Array();
+	arr["filename"] = imagename;  
+	arr["width"] = width;  
+	arr["height"] = height;			 
+	window.parent.returnValue = arr;
+	window.parent.close();	
+}	
+function openwin(targeturl) {
+		
+		window.open(targeturl, '', 'width=300,height=170,resizable=1,scrollbars=yes');
+		//showMeDialog(targeturl,"color1","dialogWidth:400pt;dialogHeight:300pt;help:0;status:0;resizable:1");
+			
+}
+</script>
+<BODY  topmargin=0 leftmargin=0 >
+
+<script>
+function loadBarDisplay()
+{
+  var x,y;
+   x = document.body.clientWidth;
+   y = document.body.clientHeight;
+
+		var top = (y/2) - 50;
+		var left = (x/2) - 150;
+		if( left<=0 ) left = 10;
+
+	
+	loader.style.left = left + "px"
+	loader.style.top = top + "px";
+
+	loader.style.display='';
+	
+	return;
+
+}
+
+function loadBarUnDisplay()
+{
+	loader.style.display='none';
+
+}
+</script>
+
+<DIV id=loader style="DISPLAY: none; Z-INDEX: 2; LEFT: 0px; POSITION: absolute; TOP: 0px">
+<TABLE class=loader style="FILTER: Alpha(opacity=75)" cellSpacing=1 cellPadding=5 bgColor=#bbbbb summary="Loader Layout" border=0>
+  <TBODY><TR><TD align=left bgColor=#ffffff>
+      <P><IMG style="MARGIN: 3px" height=32   src="../html/images/clocks.gif" width=32 align=left><STRONG><?php echo $_LANG_SKIN_GLOBAL['uploading'];?></STRONG><BR>
+	  <SPAN style="FONT-SIZE: 8pt"><?php echo $_LANG_SKIN_GLOBAL['please_wait_uploading'];?></SPAN></P></TD></TR></TBODY></TABLE>
+</DIV>
+<table width=100% height=100% cellpadding=0 cellspacing=0 border=0>
+	<form name="form" method="post"   action="<?php echo $this->_tpl_vars["base_url"];?>"  enctype="multipart/form-data">
+<tr><td valign="top"><input name="FileToDelete" id="FileToDelete" type="hidden" />
+	<input name="RootImagesFolder" id="RootImagesFolder" type="hidden" value="images" />
+	<input name="CurrentImagesFolder" id="CurrentImagesFolder" type="hidden" value="images" />
+		<?php if(!empty($this->_tpl_vars['List'] )): 
+   foreach ($this->_tpl_vars['List'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>	 
+		<?php if($this->_tpl_vars['haveLinks'] == 0 && $this->_tpl_vars["var"]["IndexID"]==''): ?>
+		<?php elseif($this->_tpl_vars['haveLinks'] == 1 && $this->_tpl_vars["var"]["IndexID"]!=''): ?>
+		<?php elseif($this->_tpl_vars['haveLinks'] == 2 ): ?>
+		<?php else: ?>
+		<?php continue;?>
+		<?php endif;?>
+		<div class="imagespacer" >
+			<div class="imageholder" unselectable="on"  ondblclick="openwin('<?php echo $this->_tpl_vars["SYS_ENV"]["ResourcePath"];?>/<?php echo $this->_tpl_vars["var"]["Path"];?>')"  onclick="divClick(this);if(document.form.p_<?php echo $this->_tpl_vars["var"]["ResourceID"];?>.checked == true) {document.form.p_<?php echo $this->_tpl_vars["var"]["ResourceID"];?>.checked = false;} else {document.form.p_<?php echo $this->_tpl_vars["var"]["ResourceID"];?>.checked = true;}" >
+			<?php $this->_tpl_vars['size'] = ceil($this->_tpl_vars["var"]["Size"]/1024) ; ?>
+
+				<img src="automini.php?sId=<?php echo $this->_tpl_vars["sId"];?>&src=<?php echo urlencode( $this->_tpl_vars["SYS_ENV"]["ResourcePath"] . '/'.  $this->_tpl_vars["var"]["Path"]);?>&pixel=100*100&cache=1&cacheTime=1000000&cacheKey=<?php echo $this->_tpl_vars["var"]["ResourceID"];?>" unselectable="on" align="absmiddle"   border=0  alt="<?php echo $_LANG_SKIN['filename'];?>:<?php echo $this->_tpl_vars["var"]["Name"];?><br><?php echo $_LANG_SKIN['file_pixel'];?>:<?php echo $this->_tpl_vars["var"]["Info"];?><br><?php echo $_LANG_SKIN['filesize'];?>:<?php echo $this->_tpl_vars["size"];?>KB<br><?php echo $_LANG_SKIN['createtime'];?>:<?php echo date('Y-m-d H:i', $this->_tpl_vars["var"]["ModifiedDate"]);?><br><?php echo $_LANG_SKIN['creator'];?>:<?php echo $this->_tpl_vars["var"]["CreationUser"];?><br><?php echo $_LANG_SKIN['fromsrc'];?>:<?php echo $this->_tpl_vars["var"]["Src"];?>" />
+			</div>
+			<div class="titleHolder">
+			<?php if($this->_tpl_vars["var"]["Title"] == ''): ?>
+			<?php echo $this->_tpl_vars["var"]["Name"];?>
+			<?php else: ?>
+			<?php echo $this->_tpl_vars["var"]["Title"];?>
+			<?php endif;?><BR>
+			<?php if(!empty($this->_tpl_vars["var"]["IndexID"])): ?>
+			<A HREF="javascript:viewQuoteContents('<?php echo $this->_tpl_vars["var"]["ResourceID"];?>')" title="<?php echo $_LANG_SKIN['view_quote_contents'];?>"><img src="../html/images/icon-zone-linked.gif" border="0"  /></A>
+			<INPUT TYPE="checkbox" NAME="ResourceID[]" value="<?php echo $this->_tpl_vars["var"]["ResourceID"];?>" id="p_<?php echo $this->_tpl_vars["var"]["ResourceID"];?>" disabled>
+			<?php else: ?>
+			 <INPUT TYPE="checkbox" NAME="ResourceID[]" value="<?php echo $this->_tpl_vars["var"]["ResourceID"];?>" id="p_<?php echo $this->_tpl_vars["var"]["ResourceID"];?>">
+			<?php endif;?>
+			
+				
+			</div>
+		</div>	
+		<?php endforeach; endif;?>  	
+</td></tr>
+<tr><td>
+<div id="msviLocalToolbar">
+<table width=100% height=30 cellpadding=0 cellspacing=0 border=0>
+<tr><td  >
+ <input type="checkbox" name="chkall" value="on" onclick="CheckAll(this.form)" id="chkall"  > 
+              <label for="chkall" ><?php echo $_LANG_SKIN_GLOBAL['select_all'];?></label>&nbsp;&nbsp;
+			               
+			 <select name="actionMap" id="actionMap" > 
+           <option value="del"><?php echo $_LANG_SKIN_GLOBAL['del'];?></option>
+			  </select>
+
+			  <input type="button" value="<?php echo $_LANG_SKIN_GLOBAL['go'];?>" class=button onclick="going(this.form,actionMap.options[actionMap.selectedIndex].value)"> 
+</td>
+<td><?php echo sprintf($_LANG_SKIN['record'], $this->_tpl_vars["recordInfo"]["currentPage"]  , $this->_tpl_vars["recordInfo"]["pageNum"], $this->_tpl_vars["recordInfo"]["offset"], $this->_tpl_vars["recordInfo"]["from"], $this->_tpl_vars["recordInfo"]["to"], $this->_tpl_vars["recordInfo"]["recordNum"] );?><?php echo $this->_tpl_vars["pagelist"];?></td>
+</tr></table>
+
+</div>
+</td></tr>
+		
+</form>
+</table>
+
+<?php include("../sysdata/templates_c/%%c_^@skin@admin@footer.html");?>
+
+

@@ -1,0 +1,40 @@
+<div class="pageContent">
+    <form method="post" onsubmit="return navTabSearch(this)" action="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=geturl" class="pageForm required-validate">
+    <input name="sub" type="hidden" value="1" />
+    <input name="id" type="hidden" value="<{$smarty.get.id}>" />
+    <div class="pageFormContent" layoutH="68">  
+        <div class="unit">
+                <label>游戏：</label>
+            <select class="combox" name="game_id" id="game_id" ref="server_91yxq_23333324" refUrl="?action=sysmanage&opt=getServers&game_id={value}">
+                <option value="0">请选择</option>
+                <{foreach item=v from =$gamelist}>
+                     <option value="<{$v.id}>" <{if $smarty.post.game_id==$v.id}> selected <{/if}> ><{$v.name}></option>
+                     <{/foreach}>
+                 </select>    
+        </div>
+        <div class="unit">
+            <label>服区：</label>
+                   <select class="combox" name="server_id" id="server_91yxq_23333324">
+                <option value="0">请选择</option>
+                <{foreach item=v from =$serverlist}>
+                     <option value="<{$v.server_id}>" <{if $smarty.post.server_id==$v.server_id}> selected <{/if}> ><{$v.name}></option>
+                     <{/foreach}>
+                 </select>                       
+        </div>
+        <div class="unit">
+                <label>注册链接地址：</label>
+                <textarea rows="3" cols="60" readonly="true" name=""  class="textInput readonly"><{$regurl}></textarea>
+        </div>
+		<div class="unit">
+                <label>短链接地址：</label>
+                <textarea rows="3" cols="60" readonly="true" name=""  class="textInput readonly"><{$dregurl}></textarea>
+        </div>
+    </div>
+    <div class="formBar">
+        <ul>
+            <li><div class="buttonActive"><div class="buttonContent"><button type="submit">生成链接</button></div></div></li>
+            <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+        </ul>
+    </div>
+    </form>
+</div>

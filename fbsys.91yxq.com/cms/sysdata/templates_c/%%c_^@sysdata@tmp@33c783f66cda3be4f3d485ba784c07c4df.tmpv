@@ -1,0 +1,118 @@
+
+<!DOCTYPE html PUBliC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<title><?php echo $this->_tpl_vars["Title"];?> - <?php echo $this->_tpl_vars["NodeInfo"]["Name"];?> - <?php echo $this->_tpl_vars["91yxq_platform_title"];?>传奇霸业官网 - <?php echo $this->_tpl_vars["91yxq_platform_title"];?>游戏</title> 
+<meta name="keywords" content="<?php echo $this->_tpl_vars["Title"];?>,<?php echo $this->_tpl_vars["NodeInfo"]["Name"];?>,<?php echo $this->_tpl_vars["91yxq_platform_title"];?>传奇霸业官网,<?php echo $this->_tpl_vars["91yxq_platform_title"];?>游戏" /> 
+<meta name="description" content="<?php echo $this->_tpl_vars["91yxq_platform_title"];?>传奇霸业官网，更多资料尽在<?php echo $this->_tpl_vars["91yxq_platform_title"];?>传奇霸业官网。" /> 
+<link type="text/css" rel="stylesheet" href="<?php echo $this->_tpl_vars["91yxq_resource"];?>/games/cqby/css/main.css" /> 
+<script type="text/javascript" src="<?php echo $this->_tpl_vars["91yxq_resource"];?>/newvossion/js/jquery-1.4.4.min.js"></script> 
+
+</head>
+
+<body>
+
+<!-- 公用顶部通栏 --> 
+<script type="text/javascript" src="<?php echo $this->_tpl_vars["91yxq_resource"];?>/gameTop/js/gameTop.js?login=1"></script> 
+<div style="background:url(<?php echo $this->_tpl_vars["91yxq_resource"];?>/games/cqby/img/m_bg.jpg) no-repeat top center; overflow:hidden">
+
+	
+
+	<!--主内容-->
+	<div class="w980">
+		<div class="inside_tit">
+			<h2><?php echo $this->_tpl_vars["NodeInfo"]["Name"];?></h2>
+			<div class="location fr">
+				您当前的位置：<a href="<?php echo $this->_tpl_vars["91yxq_url"];?>/cqby/index.html">传奇霸业</a> 
+				<span class="arrow"> &gt; </span><?php echo $this->_tpl_vars["NodeInfo"]["Name"];?>
+			</div>
+		</div>
+		<div class="inner_box pt30 pb30 pl50 pr50">
+			<?php if($this->_tpl_vars["NodeInfo"]["NodeID"] >= 47 and $this->_tpl_vars["NodeInfo"]["NodeID"] <= 51 ): ?>
+			<!--游戏资料-->
+			<div class="show_tab clearfix">
+				<a <?php if($this->_tpl_vars["NodeInfo"]["NodeID"] == 47 or $this->_tpl_vars["NodeInfo"]["NodeID"] == 48): ?>class='on'<?php else: ?> href="<?php echo $this->_tpl_vars["91yxq_url"];?>/cqby/yxzl/xszn.html"<?php endif;?> ><i class="arrow"></i>新手指南</a>
+				<a <?php if($this->_tpl_vars["NodeInfo"]["NodeID"] == 49): ?>class='on'<?php else: ?> href="<?php echo $this->_tpl_vars["91yxq_url"];?>/cqby/yxzl/gsjj.html"<?php endif;?> ><i class="arrow"></i>高手进阶</a>
+				<a <?php if($this->_tpl_vars["NodeInfo"]["NodeID"] == 50): ?>class='on'<?php else: ?> href="<?php echo $this->_tpl_vars["91yxq_url"];?>/cqby/yxzl/yxxt.html"<?php endif;?> ><i class="arrow"></i>游戏系统</a>
+				<a <?php if($this->_tpl_vars["NodeInfo"]["NodeID"] == 51): ?>class='on'<?php else: ?> href="<?php echo $this->_tpl_vars["91yxq_url"];?>/cqby/yxzl/tswf.html"<?php endif;?> ><i class="arrow"></i>特色玩法</a>
+			</div>
+			<?php elseif($this->_tpl_vars["NodeInfo"]["NodeID"] >= 42 and $this->_tpl_vars["NodeInfo"]["NodeID"] <= 45): ?>
+			<!--新闻中心-->
+			<div class="show_tab clearfix">
+				<a <?php if($this->_tpl_vars["NodeInfo"]["NodeID"] == 42): ?>class='on'<?php else: ?> href="<?php echo $this->_tpl_vars["91yxq_url"];?>/cqby/xwzx/index.html"<?php endif;?> ><i class="arrow"></i>最新</a>
+				<a <?php if($this->_tpl_vars["NodeInfo"]["NodeID"] == 43): ?>class='on'<?php else: ?> href="<?php echo $this->_tpl_vars["91yxq_url"];?>/cqby/xwzx/news.html"<?php endif;?> ><i class="arrow"></i>新闻</a>
+				<a <?php if($this->_tpl_vars["NodeInfo"]["NodeID"] == 44): ?>class='on'<?php else: ?> href="<?php echo $this->_tpl_vars["91yxq_url"];?>/cqby/xwzx/notice.html"<?php endif;?> ><i class="arrow"></i>公告</a>
+				<a <?php if($this->_tpl_vars["NodeInfo"]["NodeID"] == 45): ?>class='on'<?php else: ?> href="<?php echo $this->_tpl_vars["91yxq_url"];?>/cqby/xwzx/activity.html"<?php endif;?> ><i class="arrow"></i>活动</a>
+			</div>
+			<?php endif;?>
+			<div >
+				<div class="news_list">
+					<ul>
+						<?php if($this->_tpl_vars["NodeInfo"]["NodeID"] == 47 ): ?>
+							<!--游戏资料节点 转 新手指南-->
+							<?php
+ global $PageInfo,$params; 
+ $params = array ( 
+	'action' => "LIST",
+	'return' => "List",
+	'nodeid' => "48",
+	'num' => "page-15",
+ ); 
+;
+$this->_tpl_vars['List'] = CMS_LIST($params); 
+    $this->_tpl_vars['PageInfo'] = &$PageInfo;  
+?>
+						<?php elseif($this->_tpl_vars["NodeInfo"]["NodeID"] == 42 ): ?>
+							<!--新闻中心节点-->
+							<?php
+ global $PageInfo,$params; 
+ $params = array ( 
+	'action' => "LIST",
+	'return' => "List",
+	'nodeid' => "all-42",
+	'num' => "page-15",
+ ); 
+;
+$this->_tpl_vars['List'] = CMS_LIST($params); 
+    $this->_tpl_vars['PageInfo'] = &$PageInfo;  
+?>
+						<?php else: ?>
+							<!--其他节点-->
+							<?php
+ global $PageInfo,$params; 
+ $params = array ( 
+	'action' => "LIST",
+	'return' => "List",
+	'nodeid' => "self",
+	'num' => "page-15",
+ ); 
+;
+$this->_tpl_vars['List'] = CMS_LIST($params); 
+    $this->_tpl_vars['PageInfo'] = &$PageInfo;  
+?>
+						<?php endif;?>
+						<?php if(!empty($this->_tpl_vars['List'] )): 
+   foreach ($this->_tpl_vars['List'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+							<li>
+								<span class="time">[<?php echo date('Y-m-d', $this->_tpl_vars["var"]["PublishDate"]);?>]</span>
+								<a href="<?php echo $this->_tpl_vars["var"]["URL"];?>" target="_blank"><i></i><?php echo $this->_tpl_vars["var"]["Title"];?></a>
+							</li>
+						<?php endforeach; endif;?>
+					</ul>
+				</div>
+
+				<!--翻页-->
+				<div class="page">
+					<?php echo list_page($this->_tpl_vars["PageInfo"]["TotalPage"],$this->_tpl_vars["PageInfo"]["CurrentPage"],$this->_tpl_vars["PageInfo"]["URL"]);?>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!--页脚-->
+	
+</div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<?php include("../sysdata/templates_c/%%c_^@skin@admin@header.html");?>
+   
+<form name='clientform' id=clientform method='post' action='<?php echo $this->_tpl_vars["base_url"];?>o=search&TableID=<?php echo $this->_tpl_vars["IN"]["TableID"];?>' >
+  <table border="0" cellspacing="1" cellpadding="4" width="95%"  align=center class="table_border">
+    <tr> 
+      <td colspan="2" class="table_header"><?php echo $_LANG_SKIN['gaojisousuo'];?></td>
+    </tr>
+    <tr> 
+      <td class="table_td1" width="20%"><?php echo $_LANG_SKIN['sousuoguanjianzi'];?>:</td>
+      <td class="table_td2" width="80%"><input name='Keywords' type='text' class='flat'   tabindex='8'   size='25'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<INPUT TYPE="checkbox" NAME="Exact" id="Exact" value="1"><label for="Exact"><?php echo $_LANG_SKIN['Exact'];?></label></td>
+    </tr>
+    <tr> 
+      <td class="table_td1"><?php echo $_LANG_SKIN['sousuoziduan'];?>:<br/><?php echo $_LANG_SKIN['keduoxuan'];?></td>
+      <td class="table_td2"><select name="Field[]" size="10" multiple id="select">
+          <?php if(!empty($this->_tpl_vars['searchFields'] )): 
+ foreach ($this->_tpl_vars['searchFields'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?> 
+            <option value='<?php echo $this->_tpl_vars["var"]["FieldName"];?>'  ><?php echo $this->_tpl_vars["var"]["FieldTitle"];?></option>
+  		 <?php endforeach; endif;?>  
+        </select></td>
+   
+ </tr>
+
+    <tr> 
+      <td class="table_td1"><?php echo $_LANG_SKIN['sousuoleixing'];?>:</td>
+      <td class="table_td2"> <INPUT TYPE="radio" NAME="Published" value="0" checked><?php echo $_LANG_SKIN['weifabuwendang'];?> <INPUT TYPE="radio" NAME="Published" value="1"><?php echo $_LANG_SKIN['yifabuwendang'];?>  <INPUT TYPE="radio" NAME="Published" value="2"><?php echo $_LANG_SKIN['suoyouweidang'];?>
+        </select></td>
+   
+ </tr>
+    <tr> 
+      <td class="table_td1"><?php echo $_LANG_SKIN['sousuofenlei'];?>:<br/><?php echo $_LANG_SKIN['keduoxuanbuxianfenlei'];?></td>
+      <td class="table_td2"><select name="NodeID[]" size="15" multiple id="select">
+          <?php if(!empty($this->_tpl_vars['node_list'] )): 
+ foreach ($this->_tpl_vars['node_list'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?> 
+		  <?php if($this->_tpl_vars["var"]["TableID"] == $this->_tpl_vars["IN"]["TableID"]): ?>
+          <option value='<?php echo $this->_tpl_vars["var"]["NodeID"];?>'  ><?php echo str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $this->_tpl_vars['var']['cHeader']);?> - &nbsp;<?php echo $this->_tpl_vars["var"]["Name"];?></option>
+		  <?php endif;?>
+		 <?php endforeach; endif;?>  
+        </select><INPUT TYPE="checkbox" NAME="Sub" id="Sub" value="1" checked><label for="Sub"><?php echo $_LANG_SKIN['baohanzifenlei'];?></label></td>
+   
+ </tr>
+     <tr> 
+      <td class="table_td1"><?php echo $_LANG_SKIN['riqixianzhi'];?>:</td>
+      <td class="table_td2"><SELECT name="Time" id="Time">
+                     <option value="1"><?php echo $_LANG_SKIN['zuijinyitianneidewenzhang'];?></option>
+                   <option value="7"><?php echo $_LANG_SKIN['zuijinyigexingqineidewenzhang'];?></option>
+                    <option value="30"><?php echo $_LANG_SKIN['zuijinyigeyueneidewenzhang'];?></option>
+                    <option value="60"><?php echo $_LANG_SKIN['zailianggeyueneidewenzhang'];?></option>
+                    <option value="90"><?php echo $_LANG_SKIN['zaisangeyueneidewenzhang'];?></option>
+                    <option value="180"><?php echo $_LANG_SKIN['zaibannianeidewenzhang'];?></option>
+                    <option value="360"><?php echo $_LANG_SKIN['yinianneidewenzhang'];?></option>
+                    <option value="0" selected><?php echo $_LANG_SKIN['renheshijiandewenzhang'];?></option>
+                  </SELECT><INPUT TYPE="hidden" name="Tpl" value="<?php echo $this->_tpl_vars["IN"]["Tpl"];?>"></td>
+   
+ </tr>    <tr> 
+      <td colspan="2" class="table_td2" align=center><input type='submit' name='submit' value=' <?php echo $_LANG_SKIN['kaishisousuo'];?> ' tabindex='13'> 
+        &nbsp;&nbsp;&nbsp;&nbsp; <input type="reset" name="Submit" value=" <?php echo $_LANG_SKIN['chongzhi'];?> "></td>
+    </tr>
+  </table>
+</form>
+
+<?php include("../sysdata/templates_c/%%c_^@skin@admin@footer.html");?>

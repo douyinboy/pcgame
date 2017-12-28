@@ -1,0 +1,91 @@
+<?php
+//CMS cache file, DO NOT modify me!
+//Created on March 31, 2017, 16:58
+
+$NodeInfo = array (
+  'NodeID' => '23',
+  'NodeGUID' => '91yxq.www.public.login_html',
+  'TableID' => '1',
+  'ParentID' => '5',
+  'RootID' => '0',
+  'InheritNodeID' => '0',
+  'NodeType' => '1',
+  'NodeSort' => '0',
+  'Name' => '弹出层登陆框-html',
+  'ContentPSN' => '{PSN:1}/public',
+  'ContentURL' => '{PSN-URL:1}/public',
+  'ResourcePSN' => '{PSN:2}/rsc',
+  'ResourceURL' => '{PSN-URL:2}/rsc',
+  'PublishMode' => '1',
+  'IndexTpl' => '/www/public/popup_login.html',
+  'IndexName' => 'popup_login.html',
+  'ContentTpl' => '',
+  'ImageTpl' => '',
+  'SubDir' => '',
+  'PublishFileFormat' => '',
+  'IsComment' => '0',
+  'CommentLength' => NULL,
+  'IsPrint' => '0',
+  'IsGrade' => '0',
+  'IsMail' => '0',
+  'Disabled' => '0',
+  'AutoPublish' => '2',
+  'IndexPortalURL' => 'http://manage.test.com/publish/index.php/{NodeID},{Page}.html',
+  'ContentPortalURL' => 'http://manage.test.com/publish/content.php/{IndexID},{Page}.html',
+  'Pager' => '#default.php',
+  'Editor' => 'default.php',
+  'WorkFlow' => '0',
+  'PermissionManageG' => '',
+  'PermissionManageU' => '',
+  'PermissionReadG' => '',
+  'PermissionReadU' => '',
+  'PermissionWriteG' => '',
+  'PermissionWriteU' => '',
+  'PermissionApproveG' => '',
+  'PermissionApproveU' => '',
+  'PermissionPublishG' => '',
+  'PermissionPublishU' => '',
+  'PermissionInherit' => '0',
+  'show' => '1',
+  'CreationUserID' => '1',
+  'SubNodeID' => '23',
+  'ParentNodeID' => '1%2%5%23',
+  'Nav' => 'a:4:{i:0;a:2:{s:6:"NodeID";s:1:"1";s:4:"Name";s:11:"91yxq游戏";}i:1;a:2:{s:6:"NodeID";s:1:"2";s:4:"Name";s:11:"91yxq平台";}i:2;a:2:{s:6:"NodeID";s:1:"5";s:4:"Name";s:12:"公共部分";}i:3;a:2:{s:6:"NodeID";s:2:"23";s:4:"Name";s:23:"弹出层登陆框-html";}}',
+  'URL' => 'http://www.demo.com/public/popup_login.html',
+  'Navigation' => 
+  array (
+    0 => 
+    array (
+      'NodeID' => '1',
+      'Name' => '91yxq游戏',
+      'URL' => '/index.html',
+      'NodeName' => '91yxq游戏',
+      'NodeURL' => '/index.html',
+    ),
+    1 => 
+    array (
+      'NodeID' => '2',
+      'Name' => '91yxq平台',
+      'URL' => 'http://www.demo.com/index.html',
+      'NodeName' => '91yxq平台',
+      'NodeURL' => 'http://www.demo.com/index.html',
+    ),
+    2 => 
+    array (
+      'NodeID' => '5',
+      'Name' => '公共部分',
+      'URL' => NULL,
+      'NodeName' => '公共部分',
+      'NodeURL' => NULL,
+    ),
+    3 => 
+    array (
+      'NodeID' => '23',
+      'Name' => '弹出层登陆框-html',
+      'URL' => 'http://www.demo.com/public/popup_login.html',
+      'NodeName' => '弹出层登陆框-html',
+      'NodeURL' => 'http://www.demo.com/public/popup_login.html',
+    ),
+  ),
+);
+?>

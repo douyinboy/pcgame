@@ -1,0 +1,175 @@
+@charset "utf-8";
+/*
+
+------------------------------------------------------
+Copyright Laoliu LanMV.COM, www.lanmv.com
+some rights reserved
+
+    你可以使用本程序通过简单的设置,生成 CMSware 系统
+后台的模版.
+------------------------------------------------------
+
+*/
+
+body {
+font-size: small;
+font-family: Verdana, Arial;
+margin: 0;
+}
+
+#presentation-title {
+border-bottom: 1px white dotted;
+font-size: 1.8em;
+font-weight: bold;
+padding-top: 12px;
+padding-bottom: 12px;
+background-color: #999999;
+color: #d7d7d7;
+text-align: right;
+padding-right: 5%;
+}
+
+#slide-number {
+border-bottom: 1px white dotted;
+font-size: 1.4em;
+font-weight: bold;
+padding-top: 8px;
+padding-bottom: 8px;
+background-color: #999999;
+color: #d7d7d7;
+text-align: right;
+padding-right: 5%;
+}
+
+#slide-number  a:link, #slide-number a:visited{
+	text-decoration: none;
+	color: #d7d7d7;
+}
+
+/* Styles for all the elements inside the slide-content element. */
+
+#slide-content {
+padding-bottom: 20px;
+padding-top: 20px;
+width: 90%;
+padding-left: 5%;
+padding-right: 5%;
+}
+
+h1 {
+font-size: 2em;
+margin-bottom: 20px;
+color: #7d7d7d;
+font-weight: bold;
+}
+
+h2 {
+font-size: 1.5em;
+margin-bottom: 12px;
+color: #7d7d7d;
+font-weight: bold;
+}
+
+p, ol, ul {
+color: #585858;
+line-height: 1.6em;
+font-size: 1em;
+}
+
+/* Styles for the links in the footer. */
+
+#footer {
+border-top: 1px white dotted;
+font-weight: bold;
+padding-top: 8px;
+padding-bottom: 8px;
+text-align: center;
+background-color: #999999;
+color: #d7d7d7;
+font-size: 1.4em;
+}
+
+#footer a:link, #footer a:visited {
+text-decoration: none;
+color: #d7d7d7;
+padding: 15px;
+}
+
+#footer a:hover {
+text-decoration: none;
+color: #8f8f8f;
+background-color: #f2f2f2;
+padding: 15px;
+}
+
+/* Styles to be used only when the page is printed. */
+
+@media print {
+
+html {
+padding: 15mm;
+}
+
+body {
+font-family: Times, "Times New Roman", serif;
+font-size: 12pt;
+height: 29.7cm;
+width: 20.99cm;
+border: 1px gray solid;
+padding: 10mm;
+}
+
+#presentation-title {
+font-size: 15pt;
+font-family: Verdana, Helvetica, Arial, sans-serif;
+border-bottom: 1px gray solid;
+font-weight: bold;
+background-color: white;
+color: black;
+padding-right: 10mm;
+}
+
+#slide-number {
+text-align: right;
+border-top: 1px #000 dotted;
+padding-top: 5mm;
+border-bottom: none;
+font-weight: normal;
+padding-bottom: 0;
+background-color: white;
+color: black;
+padding-right: 10mm;
+}
+
+#slide-content {
+margin-left: 20mm;
+margin-right: 20mm;
+padding-left: 0;
+padding-right: 0;
+}
+
+h1 {
+font-size: 16pt;
+border-bottom: 1px gray solid;
+margin-bottom: 7mm;
+color: black;
+font-weight: bold;
+}
+
+h2 {
+font-size: 14pt;
+margin-bottom: 5mm;
+color: black;
+}
+
+p, ol, ul {
+font-size: 12pt;
+margin-top: 10mm;
+margin-bottom: 10mm;
+line-height: 7mm; }
+
+/* The following ensures that footer is not actually printed on the page. */
+
+div#footer {
+display: none;
+}

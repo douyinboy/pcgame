@@ -1,0 +1,26 @@
+<{config_load file="smarty.conf" section="setup"}>
+<div class="pageContent">
+    
+    <table class="table" width="100%"  layoutH="50">
+            <thead>
+                <tr>
+                    <th>结算起止日期</th>
+                    <th>游戏名称</th>
+                    <th>收入（元）</th>
+                    <th>内充(元)</th>
+                    <th>最终结算金额</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <{foreach item=vo from=$data}>
+                    <tr target="sid" rel="1">
+                        <td><{$start}> 截止至 <{$end}></td>
+                        <td><{$vo['game']}></td>
+                        <td><{$vo['paymoney']}></td>
+                        <td><{$vo['payinner']}></td>
+                        <td><{$vo['payjie']}></td>
+                    </tr>
+                    <{/foreach}>
+            </tbody>
+        </table>
+</div>

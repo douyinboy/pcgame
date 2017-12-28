@@ -1,0 +1,52 @@
+<?php include("../sysdata/templates_c/%%c_^@skin@admin@header_init.html");?>
+<script>
+function gogo(action, NodeID,IndexID)
+{
+	switch(action) {
+		case 'search':
+			window.opener.location='admin_publish.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=list&NodeID=' + NodeID + '&IndexID=' + IndexID;
+			break;
+		case 'node':
+			window.opener.location='admin_publish.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=list&NodeID=' + NodeID ;
+			break;
+	}
+	 
+}
+</script>
+  <table border="0" cellspacing="1" cellpadding="4" width="98%"  align=center class="table_border">
+    <tr> 
+      <td colspan="4" class="table_header"><?php echo $_LANG_SKIN['quote_content_list'];?></td>
+    </tr>
+
+    <tr> 
+      <td  class="table_td1"><?php echo $_LANG_SKIN['node'];?>ID</td><td class="table_td1">ID</td><td class="table_td1"></td><td class="table_td1"></td>
+    </tr>
+<?php if(!empty($this->_tpl_vars['List'] )): 
+ foreach ($this->_tpl_vars['List'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+<tr>
+              <td class="table_td2" align="center">	<A HREF="javascript:gogo('node','<?php echo $this->_tpl_vars["var"]["NodeID"];?>');">[ <?php echo $this->_tpl_vars["var"]["NodeID"];?> ]	</A>  </td>
+              <td class="table_td2">	<A HREF="javascript:gogo('search','<?php echo $this->_tpl_vars["var"]["NodeID"];?>','<?php echo $this->_tpl_vars["var"]["IndexID"];?>');">[ <?php echo $this->_tpl_vars["var"]["IndexID"];?> ]</A>	  </td>
+
+              <td class="table_td2">
+
+			  <?php $this->_tpl_vars['info'] = $this->_tpl_vars['CONTENT_MODEL_INFO'][ $this->_tpl_vars['var']['TableID'] ]['TitleField'];?>
+
+			  <A HREF="admin_publish.php?sId=<?php echo $this->_tpl_vars["sId"];?>&type=main&o=view&NodeID=<?php echo $this->_tpl_vars["var"]["NodeID"];?>&IndexID=<?php echo $this->_tpl_vars["var"]["IndexID"];?>" target="_blank"><?php echo $this->_tpl_vars['var']["{$this->_tpl_vars['info']}"];?></A>
+			  
+			  </td>
+ 			  <td class="table_td2">
+
+ 			  <A HREF="<?php echo $this->_tpl_vars["var"]["URL"];?>" target="_blank"><?php echo $_LANG_SKIN['view_publish'];?></A>
+			  
+ 			  
+			  </td>
+</tr>
+
+<?php endforeach; endif;?>
+
+
+
+
+  </table>
+	
+<?php include("../sysdata/templates_c/%%c_^@skin@admin@footer.html");?>

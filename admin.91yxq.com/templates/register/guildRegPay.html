@@ -1,0 +1,92 @@
+<form id="pagerForm" action="" method="post">
+    <input type="hidden" name="access" value="1"/>
+    <input type="hidden" name="pageNum" value="<{$currentpage}>"/>
+    <input type="hidden" name="numPerPage" value="<{$numperpage}>"/>
+    <input type="hidden" name="agentid" value="<{$smarty.post.agentid}>"/>
+    <input type="hidden" name="placeid" value="<{$smarty.post.placeid}>"/>
+    <input type="hidden" name="start_date" value="<{$start_date}>"/>
+    <input type="hidden" name="end_date" value="<{$end_date}>"/>
+    <input type="hidden" name="game_id" value="<{$smarty.post.game_id}>"/>
+    <input type="hidden" name="user_role" value="<{$smarty.post.user_role}>"/>
+    <input type="hidden" name="server_id" value="<{$smarty.post.server_id}>"/>
+</form>
+<div class="pageHeader">
+    <form onsubmit="return navTabSearch(this);" action="" method="post">
+    <input type="hidden" name="access" value="1"/>    
+    <div class="searchBar">
+        <ul class="searchContent">
+            <li><label>公会：</label>
+                <select class="combox" name="agentid" id="agentid2" ref="w_combox_hesid221" refUrl="?action=sysmanage&opt=getMembers&agentid={value}">
+                    <option value="0">请选择</option>
+                    <{foreach item=v from =$guildlist}>
+                         <option value="<{$v.id}>" <{if $smarty.post.agentid==$v.id}> selected <{/if}> ><{$v.agentname}></option>
+                         <{/foreach}>
+                </select>
+                <input type="text" id="search_key2" size="10" class="" value="输入关键字"/>
+                </li> 
+                <li>  
+                    <label>起始日期：</label>
+                    <input type="text" name="start_date" class="date" value="<{$start_date}>" readonly="true"/>
+				<a class="inputDateButton" href="javascript:;">选择</a></li>
+                <li>  
+                    <label>结束日期：</label>
+                    <input type="text" name="end_date" class="date" value="<{$end_date}>" readonly="true"/>
+				<a class="inputDateButton" href="javascript:;">选择</a></li>
+            </ul>
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%"  layoutH="107">
+        <thead>
+            <tr>
+                <th width="80">公会ID</th>
+                <th width="120">公会名</th>
+                <th width="100">充值金额</th>
+                <th width="100">首充金额</th>
+                <th width="100">平台垫付金额</th>
+                <th width="100">公会赔付金额</th>
+                <th width="100">注册人数</th>
+                <th width="100">注册IP数</th>
+                <th width="200">统计周期</th>
+            </tr>
+        </thead>
+        <tbody>
+            <{foreach item=vo from=$data name=test}>
+            <tr target="sid" rel="1" style="background-color: <{if $smarty.foreach.test.iteration%2==0}> #f6fcfc;<{/if}>">
+                <td><{$vo['id']}></td>
+                <td><{$vo['agentname']}></td>
+                <td><{$vo['pay_total']|default:"0"}></td>
+                <td><{$vo['pay_first']|default:"0"}></td>
+                <td><{$vo['pay_pt']|default:"0"}></td>
+                <td><{$vo['pay_gh']|default:"0"}></td>
+                <td><{$vo['reg_count']|default:"0"}></td>
+                <td><{$vo['reg_ips']|default:"0"}></td>
+                <td><{$start_date}>----<{$end_date}></td>
+            </tr>
+            <{/foreach}>
+        </tbody>
+    </table>
+    <div class="panelBar">
+        <div class="pages">
+            <table>
+                <tr>
+                    <td width="200">累计充值：<{$hj['pay']}>元</td>
+                    <td width="200">首充共：<{$hj['first']}>元</td>
+                    <td width="200">平台垫付共：<{$hj['innerpay1']}>元</td>
+                    <td width="200">公会赔付共：<{$hj['innerpay2']}>元</td>
+                </tr>
+            </table>     
+        </div>
+        
+    </div>
+</div>
+<script>
+    var pro_str={ <{foreach item=v from =$guildlist}> "<{$v.id}>":"<{$v.agentname}>", <{/foreach}> };
+    search_pro('search_key2','agentid2');
+</script>

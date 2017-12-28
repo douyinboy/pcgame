@@ -1,0 +1,54 @@
+<form id="pagerForm" action="" method="post">
+     <input type="hidden" name="access" value="1"/>
+    <input type="hidden" name="pageNum" value="<{$currentpage}>"/>
+    <input type="hidden" name="numPerPage" value="<{$numperpage}>"/>
+    <input type="hidden" name="agentid" value="<{$smarty.post.agentid}>"/>
+    <input type="hidden" name="admin_uid" value="<{$smarty.post.admin_uid}>"/>
+    <input type="hidden" name="start_date" value="<{$smarty.post.start_date}>"/>
+</form>
+<div class="pageHeader">
+    <form onsubmit="return navTabSearch(this);" action="" method="post">
+    <input type="hidden" name="access" value="1"/>    
+    <div class="searchBar">
+        <ul class="searchContent">
+        </ul>
+    </div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%"  layoutH="85">
+        <thead>
+        <tr>
+            <th width="300">结算周期</th>
+            <th >平台充值总额</th>
+            <th>内充总额</th>
+            <th>结算金额</th>
+            <th width="140">结算时间</th>
+            <th width="180">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+            <{foreach item=vo from=$data}>
+            <tr target="id" rel="<{$vo.id}>">
+                <td><{$vo.sDate}> 截止至：<{$vo.eDate}></td>
+                <td><{$vo.payMoney}></td>
+                <td><{$vo.innerMoney}></td>
+                <td><{$vo.jieMoney}></td>
+                <td><{$vo.jieTime|date_format:"%Y-%m-%d %H:%I:%S"}></td>
+                <td> <a href="?action=<{$smarty.get.action}>&opt=<{$smarty.get.opt}>&api=detail&id=<{$vo['id']}>"  height="360" width="780" target="dialog" >查看明细</a></td>
+            </tr>
+            <{/foreach}>
+        </tbody>
+    </table>
+    <div class="panelBar">
+        <div class="pages"><span>显示</span>
+            <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                <option <{if $smarty.post.numPerPage==20}>selected<{/if}>  value="20">20</option>
+                <option <{if $smarty.post.numPerPage==50}>selected<{/if}> value="50">50</option>
+                <option <{if $smarty.post.numPerPage==100}>selected<{/if}> value="100">100</option>
+                <option <{if $smarty.post.numPerPage==200}>selected<{/if}> value="200">200</option>
+            </select><span>条，共<{$totalcount}>条</span>
+        </div>
+        <div class="pagination" targetType="navTab" totalCount="<{$totalcount}>" numPerPage="<{$numperpage}>" pageNumShown="10" currentPage="<{$currentpage}>"></div>
+    </div>
+</div>

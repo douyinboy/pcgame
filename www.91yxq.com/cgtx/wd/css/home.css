@@ -1,0 +1,192 @@
+@charset "utf-8";
+/* CSS Document */
+/* 图片调用 */
+.wrap{background-image:url(../images/bgs.jpg);background-repeat:no-repeat;}
+
+.wrap{position:relative;width:655px;height:420px;overflow:hidden;color:#988b6F;background-position:0 0;}
+.uc p.chk a, .uc p.btn button, .otherLogin .icon3, .newsList li a,
+.regMain p.pCheck label, .regMain button,
+.divTab a, .quick input, .quick button, .serList li a, .newSer li a, .newSer p span,
+.scrollBar, .scrollBar .bar, .scrollBar .barT, .scrollBar .barB{background-image:url(../images/btns.gif);background-repeat:no-repeat;background-color:transparent;}
+input{background:url(../images/blank.gif);color:#888;border:none;}
+
+/**/
+.uc p.chk, .uc p.pReg, .uc .pWarn, .otherLogin span,
+.newsBox h3, .newsList li,
+.regMain p.pCheck label, .regMain p.pWarn, .regMain p.pReg,
+.logon p, .quick label, .newSer .t,
+.divTab a, .newSer li a, .serList li a,
+.letter h3, .letter p, .comGame h3,
+.gInfo{text-shadow:1px 1px 0 #181010,-1px 1px 0 #181010,1px -1px 0 #181010,-1px -1px 0 #181010;}
+
+
+.slideDiv, .newsBox{}
+/* 首页.新闻&焦点区.基本 */
+.newsDiv, .slideDiv, .imgShow{overflow:hidden;width: 379px;}
+.newsBox, .newsList{width:341px;}
+.newsDiv{padding-left:11px;padding-right:4px;float:left;}
+/* 首页.新闻&焦点区.焦点图 */
+.slideDiv, .imgShow{height:192px;}
+.slideDiv{padding:9px 0 0;}
+.imgShow, .imgBox{position:relative;}
+.imgBox a{position:absolute;left: 16px;top: 8px;/* margin-top: 11px; */}
+/* 首页.新闻&焦点区.焦点图.焦点 */
+.imgList, .imgList a{height:6px;line-height:0;font-size:0;}
+.imgList{position:absolute;bottom:6px;left:0;width:98%;text-align:right;}
+.imgList a{display:inline-block;*zoom:1;*display:inline;width:6px;overflow:hidden;margin:0 3px;cursor:pointer;background-color:#D89b50;color:#D89b50;}
+.imgList a.on{background-color:#FFF;color:#FFF;}
+
+/* 首页.新闻&焦点区.新闻 */
+.newsBox, .newsBox h3, .newsList, .newsList li{}
+.newsBox{padding:13px 10px 0;height:145px;}
+/* 首页.新闻&焦点区.新闻.标题 */
+.newsBox h3, .newsBox h3 span, .newsBox h3 a{height:36px;line-height:35px;overflow:hidden;}
+.newsBox h3{}
+.newsBox h3 span, .newsBox h3 a{_display:inline;}
+/*.newsBox h3 span{float:left;text-indent:-99em;}*/
+.newsBox h3 a{float:right;}
+.newsBox h3 a:hover{}
+/* 首页.新闻&焦点区.新闻.新闻列表 */
+.newsList{height:101px;overflow:hidden;position:relative;}
+.newsList li, .newsList li a, .newsList li span{height:34px;line-height:34px;overflow:hidden;vertical-align:top;}
+.newsList li{position:relative;border-bottom:dashed 1px #29221D;}
+.newsList li a{padding-left:23px;float:left;width:270px;white-space:nowrap;text-overflow:ellipsis; background-position:-500px -39px;}
+.newsList li span{margin-right:3px;float:right;*display:inline;}
+.newsList li a:hover, .newsList li:hover span{text-decoration:none;color:#FFB400;}
+
+
+.uc{float:left;width:272px;}
+/* 首页.登录区 */
+.uc .login{position:relative;padding:48px 0 0;height:316px;overflow:hidden;}
+.uc .login .pWarn{position:absolute;top:15px;left:70px;height:38px;line-height:38px;overflow:hidden;white-space:nowrap;color:#F20;}
+/* 首页.登录区.表单 */
+.uc p, .uc p label{height:25px;line-height:25px;overflow:hidden;}
+.uc p.p1, .uc p.p2{padding-bottom:16px;}
+.uc p label, .uc p input.i{float:left;overflow:hidden;}
+.uc p label{width:70px;text-indent:-99em;}
+.uc p input.i{width:185px;height:19px;line-height:19px;padding:3px 7px;font-size:12px;}
+/* 首页.登录区.表单.验证码 */
+.uc p.validate{padding-bottom:10px;}
+.uc p.validate input{width:107px;}
+.uc p.validate img{float:left;width:65px;height:23px;margin-top:1px;margin-left:12px;cursor:pointer;}
+.uc p.pOn input, .uc p.validateOn input{color:#666;}
+/* ******* ？？？ ******* */
+.uc p input.focus{}
+.uc p a{}
+.uc p a,.uc p span{line-height:20px;}
+/* 首页.登录区.表单.记住密码&找回密码 */
+.uc p.chk, .uc p.chk a, .uc p.chk span{height:20px;line-height:20px;}
+.uc p.chk{padding:0 0 12px 71px;}
+.uc p.chk a, .uc p.chk a span{float:left;width:50px;cursor:pointer;white-space:nowrap;}
+.uc p.chk a, .regMain p.pCheck label{padding-left:22px;_display:inline;overflow:hidden;vertical-align:top;background-position:-502px 0;}
+.uc p.chk a.on, .regMain p.pCheck label.checked{background-position:-502px -20px;}
+.uc p.chk a:hover, .uc p.chk a:hover span{}
+.uc p.chk .forget{margin-left:75px;padding-left:0;text-align:right;background:none;text-decoration:underline;}
+.uc p.chk input{display:none;}/* 程序套用时会产生一个input */
+
+.uc p.btn, .uc p.btn button, .uc p.pReg, .uc p.pReg a{}
+.uc p.btn, .uc p.btn button{width:209px;height:50px;overflow:hidden;}
+.uc p.btn{padding-left:65px;background-position:0 0;}
+.uc p.btn button{display:block;text-indent:-99em;border:none;background-position:0 0;}
+.uc p.btn button:hover,.uc p.btn button.bOn{background-position:0 -50px;outline:none;}
+.uc p.pReg, .uc p.pReg a{height:24px;line-height:24px;color:#F8AA2A;}
+.uc p.pReg{padding:8px 0 12px 108px;font-size:14px;}
+.uc p.pReg a:hover{color:#FC3;}
+/*.uc p.btn button:hover:active{-ms-background-position-x:1px;-ms-background-position-y:-75px;}*/
+.uc p.btn button.reg{}
+.uc p.btn button.reg:hover,.uc p.btn button.reg.rOn{}
+
+
+/* 2016.11.22 第三方登录 */
+.otherLogin, .otherLogin .third, .otherLogin .third a, .otherLogin .icon3{height:20px;}
+.otherLogin{padding-left:84px;width:190px;line-height:20px;}
+.otherLogin span, .otherLogin .third{float:left;}
+.otherLogin span{font-size:12px;}
+.otherLogin .third{width:104px;}
+.otherLogin .third a{display:block;_zoom:1;_display:inline;overflow:hidden;text-indent:-99em;}
+.otherLogin .icon3{margin:0 2px 0 1px;float:left;width:20px;}
+.otherLogin .weixin{background-position:0 -201px;}
+.otherLogin .weixin:hover{background-position:0 -221px;}
+.otherLogin .qq{background-position:-22px -201px;}
+.otherLogin .qq:hover{background-position:-22px -221px;}
+.otherLogin .weibo{background-position:-44px -201px;}
+.otherLogin .weibo:hover{background-position:-44px -221px;}
+.otherLogin .alipay{background-position:-66px -201px;}
+.otherLogin .alipay:hover{background-position:-66px -221px;}
+
+
+/*==========注册============*/
+/* 注册页 */
+.reg{background-position:-655px 0;}
+.reg .main{overflow:hidden;}
+.reg .regMain{position:relative;padding:56px 0 0;overflow:hidden;}
+/* 注册页.表单 */
+.regMain p, .regMain p label{height:30px;line-height:30px;}
+.regMain p{position:relative;padding-bottom:23px;}
+.reg2 .regMain p{}
+.regMain p.pWarn{/**/position:absolute;left:221px;top:20px;padding:0;height:28px;line-height:28px;color:#F20;}
+.regMain p.p1,.regMain p.p2,.regMain p.p3,.regMain p.p4{}
+/* 注册页.表单 */
+.regMain p label, .regMain p input{float:left;overflow:hidden;}
+.regMain p label{width:221px;text-indent:-99em;}
+.regMain p input{padding:6px 6px;margin:0;width:248px;height:18px;line-height:18px;outline:none;font-size:12px;}
+.regMain p input.iErr{color:#666;}
+.regMain p.validate{padding-bottom:18px;}
+.regMain p.validate input{width:170px;}
+.regMain p.validate input.iErr{}
+.regMain p.validate img{width:65px;height:28px;margin-top:1px;margin-left:12px;cursor:pointer;}
+.regMain p span{display:none;}
+/* 注册页.表单.条款 */
+.regMain p.pCheck, .regMain p.pCheck input, .regMain p.pCheck label{height:20px;line-height:20px;}
+.regMain p.pCheck{overflow:hidden;padding:0 0 15px 222px;}
+.regMain p.pCheck input{float:left;display:none;}
+.regMain p.pCheck, .regMain p.pCheck a{}
+.regMain p.pCheck label{float:left;width:200px;text-indent:0;text-align:left;cursor:pointer;}
+.regMain p.pCheck label.checked, .regMain p.pCheck label.checked a{}
+.regMain p.pCheck label a:hover{text-decoration:underline;}
+/* 注册页.表单.按钮&结尾 */
+.regMain p.btn, .regMain p.btn button{float:left;width:209px;height:50px;overflow:hidden;}
+.regMain p.btn{margin-left:221px;_display:inline;_zoom:1;}
+.regMain p.btn button{display:block;text-indent:-99em;border:none;background-position:0 -100px;}
+.regMain p.btn button:hover, .regMain p.btn button.bOn{background-position:0 -150px;outline:none;}
+
+/*.regMain button:hover:active{-ms-background-position-x:1px;-ms-background-position-y:-209px;}*/
+.regMain .pReg, .regMain .pReg a{float:left;height:30px;line-height:30px;color:#F8AA2A;}
+.regMain .pReg{padding:10px 0 0 8px;}
+.regMain .pReg a:hover{color:#FC3;}
+
+/*==========关服============ B*/
+.serClose .nav{}
+.serClose{background-position:-655px -420px;}
+.serClose .logo2{display:none;}
+.serClose .main, .serClose .letter, .serClose .comGame{}
+.serClose .main{padding:0 10px;margin:0 auto;}
+.letter{padding:7px 0 1px;height:175px;line-height:23px;overflow:hidden;color:#988b6f;}
+.letter h3{padding:6px 0 0;height:32px;line-height:32px;font-size:16px;color:#ffb400;}
+.letter p{text-indent:2em;}
+
+.comGame{height:187px;padding:0;margin:0 auto;}
+.comGame h3{padding:4px 0 5px;height:30px;line-height:30px;font-size:16px;color:#F7EEC0;}
+.comGame h3 span{width:100px; text-indent: -999em; float:left;}
+.comGame h3 a{float:right;font-weight:normal;color:#ffb400;}
+.comGame h3 a:hover{color:#F8AA3A;}
+.comGame ul{}
+.comGame ul li, .comGame ul li img{width:304px;height:146px;}
+.comGame ul li{position:relative;float:left;_display:inline;overflow:hidden;}
+.comGame ul li img{}
+.comGame ul li.lLast{margin-left:25px;}
+
+.gInfo{position:absolute;left:-100%;top:0;padding:30px 15px 0;width:272px;height:114px;color:#FFF7BA;background:url(../images/cPng.png) no-repeat;border:1px solid #AFA985;}
+.gInfo h4{height:26px;line-height:26px;font-size:16px;}
+.gInfo h4 span{float:left;}
+.gInfo h4 var{margin-left:4px;float:left;display:block;width:24px;height:26px;background:url(../images/cPng.png) -453px 1px no-repeat;}
+.gInfo p{padding-bottom:25px;height:22px;line-height:22px;color:#AFA985;}
+
+.gBtn, .gBtn a{height:24px;line-height:24px;}
+.gBtn{padding-top:5px;border-top:1px solid #AFA985;}
+.gBtn a{padding-left:24px;font-size:14px;font-weight:bold;color:#FE6;background-image:url(../images/cPng.png);background-repeat:no-repeat;}
+.gBtn a:hover{color:#FC3}
+.gBtn a.a1{float:left;background-position:-452px -24px;}
+.gBtn a.a1:hover{background-position:-452px -72px;}
+.gBtn a.a2{float:right;background-position:-452px -48px;}
+.gBtn a.a2:hover{background-position:-452px -96px;}

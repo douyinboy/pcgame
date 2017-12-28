@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/top.css">
+</head>
+<body>
+	<div id="i_top">
+	    <a href="###" target="_blank" class="logo"><img src="images/slideup-logo.png"></a>
+	    <!-- end logo -->
+	    <div class="i_qufu"><p><b id="game_name"></b>-当前服务器：<b id="server_id"></b>服: <b id="server_name"></b></p></div>
+	    <!-- end 区服名 -->
+	    <!--<div class="i_top_notice">-->
+	        <!--<a href="###" target="_blank">萝卜玩平台充值领取超高返利，戳这里！</a>-->
+	    <!--</div>-->
+	    <dl id="i_top_right">
+			<dd><a target="_blank" href="###" id="xsk_url">新手礼包</a></dd>
+			<dd><a target="_blank" href="http://www.91yxq.com" id="game_url">官网</a></dd>
+	        <dd><a target="_blank" href="###" id="pay_url">充值</a></dd>
+	        <dd><a target="_blank" href="###" onclick="return addFavorite(this)">收藏</a></dd>
+	        <dd>用户：<em id="my_username">tianfan03</em></dd>
+	        <dd><a href="http://wpa.qq.com/msgrd?v=3&amp;uin=2355520282&amp;site=qq&amp;menu=yes" target="_blank">客服QQ：2355520282</a></dd>
+	        <dd>
+	            <a class="btn_all_game" href="http://www.91yxq.com/games/index.html" target="_blank">热门游戏</a>
+	            <!-- end 所有游戏 -->
+	        </dd><dd><a id="i_slideup_top"></a></dd>
+	    </dl>
+	    <!-- end 顶部右边 -->
+	</div>
+	<div id="i_slidedown_top"></div>
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script>
+		$(function(){
+            $('#i_slideup_top').on('click',function(){
+                $('#i_top').css('top','-30px');
+                $('#i_slidedown_top').show();
+
+            })
+            $('#i_slidedown_top').on('click',function(){
+                $('#i_top').css('top','0');
+                $('#i_slidedown_top').hide();
+
+            })
+		})
+	</script>
+
+	<script type="text/javascript">
+        function addFavorite(thisElm) {
+            var url = window.top.location.href;
+            var title = window.top.document.title;
+            if (window.external && ("addFavorite" in window.external)){
+                window.external.addFavorite(url,title);
+                return false;
+            }
+            else if(window.sidebar ){
+                if("addPanel" in window.sidebar){
+                    window.sidebar.addPanel(title, url, "customizeURL");
+                    return false;
+                }
+                else{
+                    thisElm.href = url;
+                    thisElm.title = title;
+                    return true;
+                }
+            }
+            else{
+                alert("抱歉，您所使用的浏览器无法完成此操作，请使用Ctrl+D进行添加");
+                return false;
+            }
+
+        }
+        function getParameter(param)
+        {
+            var query = window.location.search;//获取URL地址中？后的所有字符
+            if(query.length<4){
+                return false
+            }
+            var new_query = query.substr(1);
+            var query_array = new_query.split('&');
+            var return_arr = new Array();
+            for(v in query_array){
+                var fen_arr = query_array[v].split('=');
+                return_arr[fen_arr[0]] = fen_arr[1];
+            }
+            if(return_arr[param]){
+                return return_arr[param];
+            }
+        }
+        var game_name = decodeURIComponent(getParameter('game_name'));
+        var game_short_name = decodeURIComponent(getParameter('game_short_name'));
+        var game_id = decodeURIComponent(getParameter('game_id'));
+        var server_id = decodeURIComponent(getParameter('server_id'));
+        var server_name = decodeURIComponent(getParameter('server_name'));
+        var wd = decodeURIComponent(getParameter('wd'));
+        var user = decodeURIComponent(getParameter('user'));
+        $('#game_name').html(game_name);
+        $('#server_id').html(server_id);
+        $('#server_name').html(server_name);
+        $('#my_username').html(user);
+        if(wd==1){
+            $('#dlq_url').attr('href','http://www.91yxq.com/'+game_short_name+'/dlq/91yxq_'+game_short_name+'.exe');
+            $('#dlq').show();
+        }
+        $('#xsk_url').attr('href','http://www.91yxq.com/'+game_short_name+'/xsk/index.html');
+        $('#game_url').attr('href','http://www.91yxq.com/'+game_short_name+'/index.html');
+        $('#pay_url').attr('href','http://pay.91yxq.com/?game_id='+game_id+'&server_id='+server_id);
+	</script>
+</body>
+</html>

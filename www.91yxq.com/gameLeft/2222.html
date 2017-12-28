@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    	html,body,div,a,p,h3,img,span{margin: 0;padding: 0;list-style: none;}
+
+    	html, body {
+		    font-size: 12px;
+		    color: #CCC;
+		    font-family: '微软雅黑','宋体';
+		}
+
+	    body {
+		    font-family: "微软雅黑",Arial, Verdana, sans-serif;
+		    color: #FFF;
+		    font-size: 14px;
+
+		    line-height: 1;
+		}
+
+		/* html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+		    margin: 0;
+		    padding: 0;
+		    border: 0;
+		    font-size: 100%;
+		    font: inherit;
+		        font-weight: inherit;
+		    vertical-align: baseline;
+		}
+		 */
+		h3{
+		    margin: 0;
+		    padding: 0;
+		    border: 0;
+		    font-size: 100%;
+		    font: inherit;
+		    vertical-align: baseline;
+		}
+
+    	#i_left {
+		    left: 0;
+		    width: 176px;
+		    background: url("http://www.43u.com/Tpl/Template_www1/game/jtfs/images/left_bg.jpg") no-repeat 0 0 #06091a;
+		}
+		#i_left{
+		    position: absolute;
+		    top: 0;
+		}
+
+		#i_left.i_left_drawbank {
+		    left: -176px;
+		}
+
+		#i_left.i_left_drawbank #i_left_open_btn {
+		    display: block;
+		}
+
+		.i_btn_download {
+		    display: block;
+		    width: 153px;
+		    height: 83px;
+		    margin: 230px 0 10px 3px;
+		    background: url("http://www.43u.com/Tpl/Template_www1/game/jtfs/images/btn_download.png");
+		}
+		.i_left_item {
+		    position: relative;
+		    line-height: 24px;
+		    padding: 0 14px 5px 5px;
+		}
+
+		.i_left_item h3 {
+		    text-align: center;
+		    color: #ffd839;
+		}
+
+		.i_left_item p {
+		    text-align: center;
+		}
+
+		.i_left_item img {
+		    display: block;
+		    margin: 0 auto 10px;
+		}
+
+		.i_btn_link {
+		    display: block;
+		    width: 147px;
+		    height: 38px;
+		    line-height: 38px;
+		    text-align: center;
+		    color: #FFF;
+		    font-size: 18px;
+		    background: url("http://www.43u.com/Tpl/Template_www1/game/jtfs/images/btn1.png");
+		}
+
+		#i_left_drawbank_btn {
+		    width: 13px;
+		    height: 100%;
+		    cursor: pointer;
+		    position: absolute;
+		    top: 0;
+		    right: 0;
+		    border: #151515 solid;
+		        border-top-width: medium;
+		        border-right-width: medium;
+		        border-bottom-width: medium;
+		        border-left-width: medium;
+		    border-width: 0 0 0 1px;
+		    background: url("http://www.43u.com/Tpl/Template_www1/game/jtfs/images/left_on_bg.png") repeat-y;
+		}
+
+		#i_left_drawbank_btn span {
+		    display: block;
+		    width: 13px;
+		    height: 114px;
+		    background: url("http://www.43u.com/Tpl/Template_www1/game/jtfs/images/left_on_control.png") no-repeat;
+		    position: absolute;
+		    top: 38%;
+		    left: 0;
+		}
+
+		#i_left_open_btn {
+		    width: 15px;
+		    height: 100%;
+		    cursor: pointer;
+		    position: absolute;
+		    top: 0;
+		    right: -15px;
+		    background-color: #000;
+		    display: none;
+		}
+
+		#i_left_open_btn span {
+		    display: block;
+		    width: 13px;
+		    height: 59px;
+		    color: #ffde55;
+		    font-weight: bold;
+		    background: url("http://www.43u.com/Tpl/Template_www1/game/jtfs/images/left_on_control.png") no-repeat 0 bottom;
+		    padding: 0 0 80px;
+		    position: absolute;
+		    top: 38%;
+		    left: 0;
+		    transform: rotate(180deg)
+		}
+
+		a {
+		    color: #FFF;
+		    text-decoration: none;
+		    outline: none;
+		    border: 0;
+		}
+
+		a:hover {
+		    color: #F60;
+		    text-decoration: none;
+		}
+
+    </style>
+</head>
+<body>
+    
+
+<div id="i_left"class="">
+
+    <a href="http://jtfs.43u.com/Tpl/Template_jtfs/down/jtfs_43u.exe" target="_blank" class="i_btn_download" title="下载微端"></a>
+
+    <!-- <div class="i_left_item"> -->
+    <!-- <a href="http://jtfs.43u.com/article/aid/15743.html" target="_blank"> -->
+    <!-- <img class="ad_img" src="/Tpl/Template_www1/game/jtfs/images/jtfs_227.jpg"> -->
+    <!-- </a> -->
+    <!-- <div class="hands"></div> -->
+    <!-- </div> -->
+    <!-- 广告 --> 
+
+    <div class="i_left_item">
+        <a href="http://www.43u.com/pay/?act=pay&amp;game=jtfs&amp;server=2&amp;username=153510" target="_blank" class="i_btn_link">在线充值</a>
+    </div>
+    <!-- end item -->
+
+    <div class="i_left_item">
+        <h3>客服QQ：</h3>
+        <p><a href="http://wpa.qq.com/msgrd?v=3&amp;uin=3281786686&amp;site=qq&amp;menu=yes" target="_blank">3281786686</a></p>
+    </div>
+    <!-- end item -->
+
+    <div class="i_left_item">
+        <h3>官网地址：</h3>
+        <p><a href="http://jtfs.43u.com" target="_blank">jtfs.43u.com</a></p>
+    </div>
+    <!-- end item -->
+
+    <div class="i_left_item">
+        <img src="http://www.43u.com/Tpl/Template_www1/game/jtfs/images/qrcode.png">
+        <p>扫描官方二维码<br>更多惊喜等你拿</p>
+    </div>
+    <!-- end 二维码 -->
+
+    <div id="i_left_drawbank_btn"><span></span></div>
+    <!-- end 左栏收缩 -->
+
+    <div id="i_left_open_btn"><span></span></div>
+    <!-- end 左栏展开 -->
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+	$(function () {
+
+    var screenWidth = $(window).width();    //屏幕宽度
+    var screenHeight = $(window).height();  //屏幕高度
+    var body = $('body');                   //body
+    var left = $('#i_left');                //左边
+    var right = $('#i_right');              //右边
+    var iframes = $('#url_mainframe');      //游戏嵌套iframe
+    var topCss;
+
+    if(screenWidth <= 1366){
+        $('.i_top_gonggao a').css('width','200px');
+    }else{
+        $('.i_top_gonggao a').css('width', 'auto');
+    }
+
+    //自适应屏幕变化
+    $(window).resize(function () {
+        screenWidth = $(window).width();        //屏幕宽度
+        screenHeight = $(window).height();      //屏幕高度
+        var leftTop = $('#i_left').css('top');  //左栏top值
+        _initialization(screenWidth, screenHeight, leftTop);
+
+        if(screenWidth <= 1366){
+            $('.i_top_gonggao a').css('width','200px');
+        }else{
+            $('.i_top_gonggao a').css('width', 'auto');
+        }
+    });
+
+    _initialization(screenWidth, screenHeight);
+
+    // //顶部收缩按钮触发 隐藏
+    // $('#i_slideup_top').click(function(){
+    //     body.toggleClass('i_hideTop');
+    //     _initialization(screenWidth, screenHeight);
+    // });
+
+    // //顶部下拉按钮触发 显示
+    // $('#i_slidedown_top').click(function(){
+    //     body.toggleClass('i_hideTop');
+    //     _initialization(screenWidth, screenHeight);
+    // });
+
+    //左栏收缩触发
+    $('#i_left_drawbank_btn').click(function(){
+        left.toggleClass('i_left_drawbank');
+        _initialization(screenWidth, screenHeight);
+    });
+
+    //左栏展开触发
+    $('#i_left_open_btn').click(function(){
+        left.toggleClass('i_left_drawbank');
+        _initialization(screenWidth, screenHeight);
+    });
+
+    //初始化函数
+    function _initialization(screenWidth, screenHeight, leftTop){
+
+        // if(leftTop && leftTop == '332px'){
+        //     topCss = '332px';
+        // }else{
+            
+        // }
+
+        topCss = '0'
+
+        //---------------------- 各元素高度判断 ---------------------------
+        // if(body.hasClass('i_hideTop')){ //判断顶部是否收起 有class表示收起
+        //     screenHeight -= 12; //匹配顶部高度
+        //     left.css('top', '12px');
+        //     right.css('top', '12px');
+        // }else{
+            /*screenHeight -= 32;*/ //匹配顶部高度
+            left.css('top', topCss);
+
+        // }
+
+        //---------------------- 各元素宽度判断 ---------------------------
+        if(left.hasClass('i_left_drawbank')){ //判断左栏是否收起，有class表示收起
+            right.css('left', '0');
+            right.css('width', screenWidth + 'px');
+        }else{
+            right.css('left', '176px');
+            right.css('width', screenWidth - 176 + 'px');
+        }
+
+        //赋予左栏和右栏同样高度
+        left.css('height', screenHeight + 'px');
+       
+
+        iframes.css('height', screenHeight + 'px');
+    }
+
+    // //所有游戏
+    // var cols = 3; //游戏列数
+    // var len = $('#game_list li').length; //获取游戏个数
+    // var itemWidth = 180; //w=122 border-right=1
+    // var itemHeight = 41; //h=40 border-bottom=1
+    // var borders = 12; //边框w=6px 双边x2=12
+    // var boxWidth = itemWidth * cols;
+    // var boxHeight = Math.ceil(len/cols) * itemHeight;
+    // $('#mask').css('width',boxWidth + borders + 'px').css('height',boxHeight + borders + 'px');
+    // $('#game_list').css('height',boxHeight);
+
+    // $('.btn_all_game').click(function () {
+    //     $('#mask').show();
+    // });
+
+    // $('.game_list_close').click(function () {
+    //     $(this).parents('#mask').hide();
+    // });
+
+    // $("#url_mainframe").hover(function(){
+    //     $('#mask').hide();
+    // });
+
+    // //激活账号触发--展开时--top:300--收缩时--top:32
+    // $('.btn_jh').click(function(){
+    //     if(left.css('top') == '332px'){
+    //         $('#i_slideup_top').css('visibility','visible');
+    //         slideUpRegBox();
+    //     }else{
+    //         $('#i_slideup_top').css('visibility','hidden');
+    //         slideDownRegBox();
+    //     }
+    // });
+
+    // $('.i_btn_nobind').click(function () {
+    //     slideUpRegBox();
+    // });
+});
+
+//展开激活账号层
+	// function slideDownRegBox(){
+	//     $('#i_jihuo').show();
+	//     $('#i_left').stop().animate({'top':'332px'});
+	//     $('#i_right').stop().animate({'top':'332px'});
+	// }
+
+	// //收缩激活账号层
+	// function slideUpRegBox(){
+	//     $('#i_left').stop().animate({'top':'32px'});
+	//     $('#i_right').stop().animate({'top':'32px'});
+	//     if(!$('#i_left').is(':animated')){
+	//         $('#i_jihuo').hide();
+	//     }
+	// }
+
+</script>
+</body>
+</html>

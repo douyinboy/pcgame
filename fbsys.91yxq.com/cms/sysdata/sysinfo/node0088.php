@@ -1,0 +1,91 @@
+<?php
+//CMS cache file, DO NOT modify me!
+//Created on December 29, 2016, 19:23
+
+$NodeInfo = array (
+  'NodeID' => '88',
+  'NodeGUID' => '91yxq.cqby3.server',
+  'TableID' => '6',
+  'ParentID' => '87',
+  'RootID' => '0',
+  'InheritNodeID' => '0',
+  'NodeType' => '1',
+  'NodeSort' => '0',
+  'Name' => '开服列表',
+  'ContentPSN' => '{PSN:7}/list',
+  'ContentURL' => '{PSN-URL:7}/list',
+  'ResourcePSN' => '{PSN:7}/rsc/games/cqby',
+  'ResourceURL' => '{PSN-URL:7}/rsc/games/cqby',
+  'PublishMode' => '1',
+  'IndexTpl' => '/www/games/cqby3/server_list.html',
+  'IndexName' => 'index.html',
+  'ContentTpl' => '/www/games/cqby3/server_list.html',
+  'ImageTpl' => NULL,
+  'SubDir' => NULL,
+  'PublishFileFormat' => 'index.html',
+  'IsComment' => '0',
+  'CommentLength' => NULL,
+  'IsPrint' => '0',
+  'IsGrade' => '0',
+  'IsMail' => '0',
+  'Disabled' => '0',
+  'AutoPublish' => '2',
+  'IndexPortalURL' => 'http://91yxq.com/publish/index.php/{NodeID},{Page}.html',
+  'ContentPortalURL' => 'http://91yxq.com/publish/content.php/{IndexID},{Page}.html',
+  'Pager' => '#default.php',
+  'Editor' => 'default.php',
+  'WorkFlow' => '0',
+  'PermissionManageG' => NULL,
+  'PermissionManageU' => NULL,
+  'PermissionReadG' => NULL,
+  'PermissionReadU' => NULL,
+  'PermissionWriteG' => NULL,
+  'PermissionWriteU' => NULL,
+  'PermissionApproveG' => NULL,
+  'PermissionApproveU' => NULL,
+  'PermissionPublishG' => NULL,
+  'PermissionPublishU' => NULL,
+  'PermissionInherit' => NULL,
+  'show' => '1',
+  'CreationUserID' => '1',
+  'SubNodeID' => '88',
+  'ParentNodeID' => '1%3%87%88',
+  'Nav' => 'a:4:{i:0;a:2:{s:6:"NodeID";s:1:"1";s:4:"Name";s:13:"91yxq游戏";}i:1;a:2:{s:6:"NodeID";s:1:"3";s:4:"Name";s:19:"91yxq游戏官网";}i:2;a:2:{s:6:"NodeID";s:2:"87";s:4:"Name";s:13:"传奇霸业3";}i:3;a:2:{s:6:"NodeID";s:2:"88";s:4:"Name";s:12:"开服列表";}}',
+  'URL' => 'http://www.91yxq.com/cqby3/list/index.html',
+  'Navigation' => 
+  array (
+    0 => 
+    array (
+      'NodeID' => '1',
+      'Name' => '91yxq游戏',
+      'URL' => '/index.html',
+      'NodeName' => '91yxq游戏',
+      'NodeURL' => '/index.html',
+    ),
+    1 => 
+    array (
+      'NodeID' => '3',
+      'Name' => '91yxq游戏官网',
+      'URL' => NULL,
+      'NodeName' => '91yxq游戏官网',
+      'NodeURL' => NULL,
+    ),
+    2 => 
+    array (
+      'NodeID' => '87',
+      'Name' => '传奇霸业3',
+      'URL' => 'http://www.91yxq.com/cqby3/index.html',
+      'NodeName' => '传奇霸业3',
+      'NodeURL' => 'http://www.91yxq.com/cqby3/index.html',
+    ),
+    3 => 
+    array (
+      'NodeID' => '88',
+      'Name' => '开服列表',
+      'URL' => 'http://www.91yxq.com/cqby3/list/index.html',
+      'NodeName' => '开服列表',
+      'NodeURL' => 'http://www.91yxq.com/cqby3/list/index.html',
+    ),
+  ),
+);
+?>

@@ -1,0 +1,72 @@
+<form id="pagerForm" action="" method="post">
+     <input type="hidden" name="access" value="1"/>
+    <input type="hidden" name="pageNum" value="<{$currentpage}>"/>
+    <input type="hidden" name="numPerPage" value="<{$numperpage}>"/>
+    <input type="hidden" name="game_id" value="<{$smarty.post.game_id}>"/>
+    <input type="hidden" name="server_id" value="<{$smarty.post.server_id}>"/>
+</form>
+<div class="pageHeader">
+    <form onsubmit="return navTabSearch(this);" action="" method="post">
+    <input type="hidden" name="access" value="1"/>    
+    <div class="searchBar">
+        <ul class="searchContent">
+            <li><label>游戏：</label>
+            <select class="combox" name="game_id" id="game_id" ref="server_777wan_212334" refUrl="?action=sysmanage&opt=getServers&game_id={value}">
+                <option value="0">请选择</option>
+                <{foreach item=v from =$gamelist}>
+                     <option value="<{$v.id}>" <{if $smarty.post.game_id==$v.id}> selected <{/if}> ><{$v.name}></option>
+                     <{/foreach}>
+                 </select>
+            </li>
+            <li>  
+                <label>区服：</label>
+               <select class="combox" name="server_id" id="server_777wan_212334">
+                <option value="0">请选择</option>
+                <{foreach item=v from =$serverlist}>
+                     <option value="<{$v.server_id}>" <{if $smarty.post.server_id==$v.server_id}> selected <{/if}> ><{$v.name}></option>
+                     <{/foreach}>
+                 </select>
+            </li>
+        </ul>
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%"  layoutH="90">
+            <thead>
+                <tr>
+                    <th>开服日期</th>
+                    <th>游戏</th>
+                    <th>服区</th>
+                    <th>开服人数</th>
+                    <th>次日留存率(%)</th>
+                    <th>3日活跃人数</th>
+                    <th>7日活跃人数</th>
+                    <th>付费人数</th>
+                    <th>付费率(%)</th>
+                    <th>付费金额(元)</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <{foreach item=vo from=$data}>
+                    <tr target="sid" rel="1">
+                        <td><{$vo['serverdate']}></td>
+                        <td><{$vo['game_name']}></td>
+                        <td>S<{$vo['server_id']}></td>
+                        <td><{$vo['reg_num']}></td>
+                        <td><{$vo['crlcl']}></td>
+                        <td><{$vo['crlcl3']}></td>
+                        <td><{$vo['crlcl7']}></td>
+                        <td><{$vo['payusers']|default:"0"}></td>
+                        <td><{$vo['paypersent']}></td>
+                        <td><{$vo['paymoney']|default:"0"}></td>
+                    </tr>
+                    <{/foreach}>
+            </tbody>
+    </table>
+</div>

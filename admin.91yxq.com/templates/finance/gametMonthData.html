@@ -1,0 +1,84 @@
+<form id="pagerForm" action="" method="post">
+    <input type="hidden" name="access" value="1"/>
+    <input type="hidden" name="game_id" value="<{$smarty.post.game_id}>"/>
+    <input type="hidden" name="start_date" value="<{$smarty.post.start_date}>"/>
+</form>
+<div class="pageHeader">
+    <form onsubmit="return navTabSearch(this);" action="" method="post">
+    <input type="hidden" name="access" value="1"/>    
+    <div class="searchBar">
+        <ul class="searchContent">
+            <li>  
+                <label>游戏：</label>
+                    <select class="combox" name="game_id" id="game_id" >
+                        <option value="0">请选择</option>
+                        <{foreach item=v from =$gamelist}>
+                        <option value="<{$v.id}>" <{if $smarty.post.game_id==$v.id}> selected <{/if}> ><{$v.name}></option>
+                        <{/foreach}>
+                    </select>
+            </li>
+            <li>  
+                <label>统计月份：</label>
+                <input type="text" name="start_date" class="date" dateFmt="yyyy-MM" minDate="2014-05" maxDate="<{$maxmonth}>" value="<{$tmonth}>" readonly="true"/>
+                <a class="inputDateButton" href="javascript:;">选择</a>
+            </li>
+        </ul>
+        <div class="subBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+            </ul>
+        </div>
+    </div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+          
+        </ul>
+    </div>
+    <table class="table" width="100%"  layoutH="107">
+        <thead>
+        <tr>
+            <th>游戏</th>
+            <th>平台充值</th>
+            <th>首充金额</th>
+            <th>内充金额</th>
+            <th>公会赔付</th>
+            <th>充v金额</th>
+            <th>充值总流水(订单数)</th>
+            <th>研发接口总流水(订单数)</th>
+            <th>研发分成</th>
+            <th title="毛利：平台当月实际收到玩家总额-当月给研发那边的分成金额">平台毛利</th>
+        </tr>
+        </thead>
+        <tbody>
+            <{foreach item=vo from=$data}>
+            <tr target="id" rel="<{$vo.id}>">
+                <td><{$vo.gamename}></td>
+                <td><{$vo.pay_account}></td>
+                <td><{$vo.first_money}></td>
+                <td><{$vo.inner_money}></td>
+                <td><{$vo.inner_pay_money}></td>
+                <td><{$vo.vip_money}></td>
+                <td><{$vo.game_api_money}>(<{$vo.plat_order_count}>)</td>
+                <td><{$vo.api_success_money}>(<{$vo.api_order_count}>)</td>
+                <td><{$vo.game_pay}></td>
+                <td><{$vo.maoli}></td>
+            </tr>
+            <{/foreach}>
+            <tr target="id" rel="hj">
+                <td>合计：</td>
+                <td><{$hj.pay_account}></td>
+                <td><{$hj.first_money}></td>
+                <td><{$hj.inner_money}></td>
+                <td><{$hj.inner_money2}></td>
+                <td><{$hj.vip_money}></td>
+                <td><{$hj.game_api_money}></td>
+                <td><{$hj.api_success_money}>(<{$hj.api_order_count}>)</td>
+                <td><{$hj.game_pay}></td>
+                <td><{$hj.maoli}></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

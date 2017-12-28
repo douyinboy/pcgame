@@ -1,0 +1,58 @@
+<?php
+echo '<?php';
+?>
+
+$data=array (
+<?php
+ global $PageInfo,$params; 
+ $params = array ( 
+	'action' => "LIST",
+	'return' => "List",
+	'nodeid' => "4",
+	'where' => "c.GameId!='' and c.GameName!='' and c.AdUrl!=''",
+	'orderby' => "c.GameId",
+ ); 
+;
+$this->_tpl_vars['List'] = CMS_LIST($params); 
+    $this->_tpl_vars['PageInfo'] = &$PageInfo;  
+?>
+<?php if(!empty($this->_tpl_vars['List'] )): 
+   foreach ($this->_tpl_vars['List'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+	<?php if($this->_tpl_vars['key']>0): ?>,<?php endif;?><?php echo $this->_tpl_vars["var"]["GameId"];?> => 
+	array (
+		'gameID' => <?php echo $this->_tpl_vars["var"]["GameId"];?>,
+		'nameEn' => '<?php echo $this->_tpl_vars["var"]["ShortName"];?>',
+		'nameCn' => '<?php echo $this->_tpl_vars["var"]["GameName"];?>',
+		'gameWeb' => '<?php echo $this->_tpl_vars["var"]["GameWeb"];?>',
+		'stateID' => '<?php echo $this->_tpl_vars["var"]["ServiceStatus"];?>'
+	)
+<?php endforeach; endif;?>
+);
+
+$gameData= json_encode($data);
+
+$data = array(
+	<?php if(!empty($this->_tpl_vars['List'] )): 
+   foreach ($this->_tpl_vars['List'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?><?php
+ global $PageInfo,$params; 
+ $params = array ( 
+	'action' => "SQL",
+	'return' => "svrList",
+	'query' => "SELECT s.GameId, s.ServerId, s.ServerName, s.MergeId, s.ServerStatus, s.URL FROM 91yxq_publish_6 s WHERE s.PlatformId={$this->_tpl_vars["var"]["PlatformId"]} and s.GameId={$this->_tpl_vars["var"]["GameId"]} and s.ServerStatus>0 ORDER BY s.GameId asc,s.ServerId desc,s.ContentID asc",
+ ); 
+;
+$this->_tpl_vars['svrList'] = CMS_SQL($params); 
+    $this->_tpl_vars['PageInfo'] = &$PageInfo;  
+?>
+		<?php if($this->_tpl_vars['key']>0): ?>,<?php endif;?><?php echo $this->_tpl_vars["var"]["GameId"];?> => array(
+			<?php if(!empty($this->_tpl_vars['svrList'] )): 
+   foreach ($this->_tpl_vars['svrList'] as  $this->_tpl_vars['svrKey']=>$this->_tpl_vars['svr']): ?>
+			<?php if($this->_tpl_vars['svrKey']>0): ?>,<?php endif;?><?php if($this->_tpl_vars["svr"]["MergeId"]>1000): ?><?php echo $this->_tpl_vars["svr"]["ServerId"];?> => array('svrID'=><?php echo $this->_tpl_vars["svr"]["ServerId"];?>,'HeFuSID'=><?php echo $this->_tpl_vars["svr"]["MergeId"];?>,'svrName'=>'新'.(<?php echo $this->_tpl_vars["svr"]["MergeId"];?>-1000).'服','svrStateID'=><?php echo $this->_tpl_vars["svr"]["ServerStatus"];?>,'svrGameUrl'=><?php echo $this->_tpl_vars["svr"]["URL"];?>)<?php elseif($this->_tpl_vars["svr"]["MergeId"]>0): ?><?php echo $this->_tpl_vars["svr"]["ServerId"];?> => array('svrID'=><?php echo $this->_tpl_vars["svr"]["ServerId"];?>,'HeFuSID'=><?php echo $this->_tpl_vars["svr"]["MergeId"];?>,'svrName'=>'合服<?php echo $this->_tpl_vars["svr"]["MergeId"];?>','svrStateID'=><?php echo $this->_tpl_vars["svr"]["ServerStatus"];?>,'svrGameUrl'=><?php echo $this->_tpl_vars["svr"]["URL"];?>)<?php else: ?><?php echo $this->_tpl_vars["svr"]["ServerId"];?> => array('svrID'=><?php echo $this->_tpl_vars["svr"]["ServerId"];?>,'HeFuSID'=><?php echo $this->_tpl_vars["svr"]["MergeId"];?>,'svrName'=>'<?php echo $this->_tpl_vars["svr"]["ServerName"];?>','svrStateID'=><?php echo $this->_tpl_vars["svr"]["ServerStatus"];?>,'svrGameUrl'=>'<?php echo $this->_tpl_vars["svr"]["URL"];?>')
+			<?php endif;?><?php endforeach; endif;?>
+		)
+	<?php endforeach; endif;?>
+);
+
+$SvrData= json_encode($data);
+
+//echo "<pre>"; print_r( json_decode($gameData,true) ); print_r( json_decode($SvrData,true) ); echo "</pre>";

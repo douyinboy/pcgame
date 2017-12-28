@@ -1,0 +1,64 @@
+<?php include("../sysdata/templates_c/%%c_^@skin@admin@header.html");?>
+<br>
+  <table width="98%" border="0" cellpadding="5" align="center" cellspacing="1" class="table_border">
+
+	<tr > 
+      <td colspan="2" class="table_header"><?php echo $_LANG_SKIN['title'];?></td>
+    </tr>
+    <tr > 
+      <td width="60%" class="table_td1"><?php echo $_LANG_SKIN['node_id'];?>:</td>
+      <td class="table_td2">
+	   <?php echo $this->_tpl_vars["NodeInfo"]["NodeID"];?>
+  </td>
+    </tr>
+	    <tr > 
+      <td class="table_td1"><?php echo $_LANG_SKIN['nodeguid'];?>:</td>
+      <td class="table_td2">
+	   <?php echo $this->_tpl_vars["NodeInfo"]["NodeGUID"];?>  
+  </td>
+    </tr>	
+
+    <tr > 
+      <td class="table_td1"><?php echo $_LANG_SKIN['node_name'];?>:</td>
+      <td class="table_td2">
+	   <?php echo $this->_tpl_vars["NodeInfo"]["Name"];?>
+  </td>
+    </tr>
+
+    <tr > 
+      <td class="table_td1"><?php echo $_LANG_SKIN['parent_id'];?>:</td>
+      <td class="table_td2">
+	  <?php if(empty($this->_tpl_vars["NodeInfo"]["ParentID"])): ?>
+	  <?php echo $_LANG_SKIN['root_node'];?>
+	  <?php else: ?>
+	  <?php echo $this->_tpl_vars["NodeInfo"]["ParentID"];?> <A HREF="admin_site.php?sId=<?php echo $this->_tpl_vars["sId"];?>&NodeID=<?php echo $this->_tpl_vars["NodeInfo"]["ParentID"];?>&o=view">[<?php echo $_LANG_SKIN_GLOBAL['view'];?>]</A>
+	  <?php endif;?>
+	   
+  </td>
+    </tr>
+    <tr > 
+      <td class="table_td1"><?php echo $_LANG_SKIN['table_id'];?>:</td>
+      <td class="table_td2">
+	   <?php echo $this->_tpl_vars["NodeInfo"]["TableID"];?>  
+  </td>
+    </tr>	
+    <tr > 
+      <td class="table_td1"><?php echo $_LANG_SKIN['node_type'];?>:</td>
+      <td class="table_td2">
+	  <?php if($this->_tpl_vars["NodeInfo"]["NodeType"] == 1): ?>
+	  <?php echo $_LANG_SKIN['node_solid'];?>
+	  <?php elseif($this->_tpl_vars["NodeInfo"]["NodeType"] == 2): ?>
+	  <?php echo $_LANG_SKIN['node_void'];?>
+	  <?php endif;?>
+  </td>
+    </tr>	
+
+  
+    </tr>		
+     
+ 
+  </table>
+ 
+
+
+<?php include("../sysdata/templates_c/%%c_^@skin@admin@footer.html");?>

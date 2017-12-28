@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+<head>
+<title><?php echo $this->_tpl_vars["cms_version"];?></title>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->_tpl_vars["charset"];?>" />
+<script type="text/javascript" src="../html/tree/xtree.js"></script>
+<script type="text/javascript" src="../html/tree/xmlextras.js"></script>
+<script type="text/javascript" src="../html/tree/xloadtree.js"></script>
+<link type="text/css" rel="stylesheet" href="../html/tree/xtree.css" />
+<LINK href="../html/xmenu.css" type=text/css rel=stylesheet>
+<SCRIPT src="../html/xmenu.js" type=text/javascript></SCRIPT>
+<SCRIPT src="ui.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=functions.js" type=text/javascript></SCRIPT>
+
+<style type="text/css">
+
+body {
+	background:	white;
+	color:		black;
+}
+
+</style>
+
+<SCRIPT language=JavaScript>
+window.ActiveXObject=window.ActiveXObject||function(n){
+	if(n=='Microsoft.XMLHTTP'){
+		return new XMLHttpRequest(); 
+	}else{
+		return function(){return false;}
+	}
+}
+var elo;
+var loadmenuok=false;
+var type = 'main';
+var sId = '<?php echo $this->_tpl_vars["sId"];?>';
+function going(action, cId) {
+	switch(action) {
+		case 'setting':
+			top.panelWork.location = 'admin_collection_cate.php?op=sId::' + sId +';o::edit;CateID::' + cId;
+			
+
+			break;
+
+		case 'list':
+			top.panelWork.location = 'admin_collection.php?op=sId::' + sId +';o::list;CateID::' + cId ;
+			
+			break;
+
+		case 'create_Cate':
+			top.panelWork.location = 'admin_collection_cate.php?op=sId::' + sId +';o::add;ParentID::' + cId;
+			
+			break;
+		case 'del_Cate':
+			if(confirm("<?php echo $_LANG_SKIN['confirm_del_dir'];?>")) {
+				top.actionFrame.location = 'admin_collection_cate.php?op=sId::' + sId +';o::del;CateID::' + cId;
+			
+			}
+			break;
+		case 'move_Cate':
+			var targetNodeID = showMeDialog("admin_select.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=targetCateWindow","color","dialogWidth:324px;dialogHeight:331px;help:0;status:0;scroll:no");
+			
+			if(targetNodeID != null && targetNodeID != '') {
+				top.actionFrame.location = 'admin_collection_cate.php?op=sId::' + sId +';o::move;CateID::' + cId + ';targetCateID::' + targetNodeID;
+			
+			}
+			break;
+
+		case 'collection_start':
+			if(confirm("<?php echo $_LANG_SKIN['is_collection_start_submit'];?>")) {
+				var oBao = new ActiveXObject("Microsoft.XMLHTTP");
+				var returnValue;
+				oBao.open("POST","admin_collection.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=Crawlering&CateID="+cId ,false);
+				oBao.send();
+				returnValue = unescape(oBao.responseText);
+				//alert(returnValue);
+				top.CrawlerTaskFrame.addThread("admin_collection.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=Crawlering&mode=running&TaskID="+ returnValue +"&CateID="+cId , returnValue)
+				top.TaskInfoFrame.addInfo('<?php echo $this->_tpl_vars["CateInfo"]["Name"];?>:<?php echo $_LANG_SKIN['collection_start'];?>[<a href=# onclick=\"top.CrawlerTaskFrame.endThread(\'' + returnValue + '\')\">STOP</a>]', returnValue)
+		
+			}
+
+
+			break;
+
+		case 'collection_all_start':
+			if(confirm("<?php echo $_LANG_SKIN['is_collection_all_start_submit'];?>")) {
+				var oBao = new ActiveXObject("Microsoft.XMLHTTP");
+				var returnValue;
+				oBao.open("POST","admin_collection.php?sId=<?php echo $this->_tpl_vars["sId"];?>&o=CrawleringAll&MultiCollectionOffset=0&CateID="+cId ,false);
+				oBao.send();
+				returnValue = unescape(oBao.responseText);
+				//alert(returnValue);
+				top.CrawlerTaskFrame.addThread("admin_collection.php?sId=<?php echo $this->_tpl_vars["sId"];?>&MultiCollectionOffset=0&o=CrawleringAll&mode=running&TaskID="+ returnValue +"&CateID="+cId , returnValue)
+				top.TaskInfoFrame.addInfo('<?php echo $this->_tpl_vars["CateInfo"]["Name"];?>:<?php echo $_LANG_SKIN['collection_start'];?>[<a href=# onclick=\"top.CrawlerTaskFrame.endThread(\'' + returnValue + '\')\">STOP</a>]', returnValue)
+		
+			}
+			break;
+
+
+	}
+}
+
+
+function rightMenu(cId) {
+	//alert(cId)
+	if(cId == 'root') {
+		var toolMenu = new WebFXMenu;
+		toolMenu.width = 100;
+		toolMenu.add(new WebFXMenuItem('<?php echo $_LANG_SKIN['mk_root_dir'];?>','javascript:going("create_Cate","0")','<?php echo $_LANG_SKIN['mk_root_dir'];?>'));
+
+		document.getElementById("menudata").innerHTML = toolMenu 
+
+		elo=window.event.srcElement;
+		toolMenu.left = window.event.clientX;
+		toolMenu.top = window.event.clientY+document.body.scrollTop;
+		toolMenu.show();
+	} else {
+		var toolMenu = new WebFXMenu;
+		toolMenu.width = 90;
+		toolMenu.add(new WebFXMenuItem('<?php echo $_LANG_SKIN['collection_start'];?>','javascript:going("collection_start","'+ cId +'")', '<?php echo $_LANG_SKIN['collection_start'];?>'));
+		toolMenu.add(new WebFXMenuItem('<?php echo $_LANG_SKIN['collection_all_start'];?>','javascript:going("collection_all_start","'+ cId +'")', '<?php echo $_LANG_SKIN['collection_all_start'];?>'));
+		toolMenu.add(new WebFXMenuItem('<?php echo $_LANG_SKIN['collection_admin'];?>','javascript:going("list","'+ cId +'")', '<?php echo $_LANG_SKIN['collection_admin'];?>'));
+		toolMenu.add(new WebFXMenuItem('<?php echo $_LANG_SKIN['setting'];?>','javascript:going("setting","'+ cId +'")', '<?php echo $_LANG_SKIN['setting'];?>'));
+		toolMenu.add(new WebFXMenuItem('<?php echo $_LANG_SKIN['mk_sub_dir'];?>','javascript:going("create_Cate","'+ cId +'")','<?php echo $_LANG_SKIN['mk_sub_dir'];?>'));
+		toolMenu.add(new WebFXMenuItem('<?php echo $_LANG_SKIN['move'];?>','javascript:going("move_Cate","'+ cId +'")','<?php echo $_LANG_SKIN['move_help'];?>'));
+		toolMenu.add(new WebFXMenuItem('<?php echo $_LANG_SKIN['del'];?>','javascript:going("del_Cate","'+ cId +'")','<?php echo $_LANG_SKIN['del_help'];?>'));
+
+		document.getElementById("menudata").innerHTML = toolMenu 
+
+		elo=window.event.srcElement;
+		toolMenu.left = window.event.clientX;
+		toolMenu.top = window.event.clientY+document.body.scrollTop;
+		toolMenu.show();
+
+	
+	}
+
+}
+</SCRIPT>
+
+</head>
+<body>
+<script type="text/javascript">
+
+/// XP Look
+webFXTreeConfig.rootIcon		= "../html/tree/images/xp/folder.png";
+webFXTreeConfig.openRootIcon	= "../html/tree/images/xp/openfolder.png";
+webFXTreeConfig.folderIcon		= "../html/tree/images/xp/folder.png";
+webFXTreeConfig.openFolderIcon	= "../html/tree/images/xp/openfolder.png";
+webFXTreeConfig.fileIcon		= "../html/tree/images/xp/file.png";
+webFXTreeConfig.lMinusIcon		= "../html/tree/images/xp/Lminus.png";
+webFXTreeConfig.lPlusIcon		= "../html/tree/images/xp/Lplus.png";
+webFXTreeConfig.tMinusIcon		= "../html/tree/images/xp/Tminus.png";
+webFXTreeConfig.tPlusIcon		= "../html/tree/images/xp/Tplus.png";
+webFXTreeConfig.iIcon			= "../html/tree/images/xp/I.png";
+webFXTreeConfig.lIcon			= "../html/tree/images/xp/L.png";
+webFXTreeConfig.tIcon			= "../html/tree/images/xp/T.png";
+webFXTreeConfig.blankIcon		= "../html/tree/images/blank.png";
+
+var rti;
+var tree = new WebFXTree("<?php echo $_LANG_SKIN['Root'];?>");
+<?php if(!empty($this->_tpl_vars['CateInfo'] )): 
+ foreach ($this->_tpl_vars['CateInfo'] as  $this->_tpl_vars['key']=>$this->_tpl_vars['var']): ?>
+<?php if($this->_tpl_vars["var"]["haveSon"] == 1): ?>
+tree.add(new WebFXLoadTreeItem("<?php echo htmlspecialchars($this->_tpl_vars["var"]["Name"]);?>", "admin_tree.php?op=sId::<?php echo $this->_tpl_vars["sId"];?>;o::collection_cate_xml;CateID::<?php echo $this->_tpl_vars["var"]["CateID"];?>", "admin_collection.php?op=sId::<?php echo $this->_tpl_vars["sId"];?>;o::list;CateID::<?php echo $this->_tpl_vars["var"]["CateID"];?>", "panelWork", "<?php echo $this->_tpl_vars["var"]["CateID"];?>"));
+<?php else: ?>
+tree.add(new WebFXTreeItem("<?php echo htmlspecialchars($this->_tpl_vars["var"]["Name"]);?>","admin_collection.php?op=sId::<?php echo $this->_tpl_vars["sId"];?>;o::list;CateID::<?php echo $this->_tpl_vars["var"]["CateID"];?>", "panelWork", "<?php echo $this->_tpl_vars["var"]["CateID"];?>"));
+<?php endif;?>
+<?php endforeach; endif;?>
+
+document.write(tree);
+
+</script>
+<div id="menudata"></div>
+
+</body>
+</html>
